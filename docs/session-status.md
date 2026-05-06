@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-06
-- Bereich: Research-/Blindspot-Runde nach erstem GitHub-Stand
+- Bereich: Baseline-Robustheit, Trusted-Refresh-Domainlogik und naechste Spike-Dokumente
 
 ## Zuletzt abgeschlossen
 
@@ -31,33 +31,36 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - MVP-Strategie fuer macOS-Permissions und Entitlements dokumentiert
 - bestehendes GitHub-Repository verbunden, Historien zusammengefuehrt und auf `origin/main` gepusht
 - kritische Research-/Blindspot-Runde dokumentiert
+- Baseline-Store validiert jetzt erwartete `sensorID`
+- Baseline-Refresh fuer den aktuellen Startup-Zustand als explizite Domain-Funktion gebaut
+- LaunchAgent-Sensor macht Baseline-Probleme als ruhige Sensor-Note sichtbar und behaelt Inventar-Findings bei
+- LaunchAgent-Sensor liest einfache `.plist`-Details wie `Label`, `ProgramArguments`, `RunAtLoad` und `KeepAlive`
+- Dashboard zeigt bei Startup-Aenderungen eine Aktion zum bewussten Merken des aktuellen Startup-Zustands
+- UI-/Policy-Sprache fuer Safe Validation ruhiger gefasst als "Gather More Evidence"
+- Doku-Spikes fuer Background Task Management, naechste Sensorwahl und Packaging/Signing angelegt
 
 ## Aktueller Stand in einem Satz
 
-Die App hat ein solides lokales Fundament und ist auf GitHub gesichert; die Research-Runde bestaetigt die Richtung, zeigt aber vor dem Baseline-Refresh einen kleinen Sauberkeitsschnitt fuer Baseline-Fehler und Sensor-ID-Validierung.
+Die App kann Startup-Aenderungen robuster vergleichen, Baseline-Probleme sichtbar machen, den aktuellen Startup-Zustand bewusst neu merken und einfache Startup-`plist`-Details als Evidence anzeigen.
 
 ## Naechster konkreter Schritt
 
-Vor dem "trusted baseline refresh" die Baseline-Robustheit verbessern: erwartete `sensorID` validieren und Baseline-Load-/Save-Fehler sichtbar machen, statt Change-Detection still auf Inventar-Findings zurueckfallen zu lassen.
+Die neue "Remember as Expected"-UI gegen einen echten lokalen App-Lauf pruefen und danach entscheiden, ob als naechstes tiefere Startup-Detail-UI oder der Background-Task-Management-Spike priorisiert wird.
 
 ## Danach sinnvoll
 
-- danach einen expliziten "trusted baseline refresh"-Flow fuer erwartete Langzeit-Aenderungen entwerfen
 - spaeter weitere Sensoren wie Privacy Permissions auf denselben Vertrag setzen
-- danach die UI fuer Baseline-Diff-Findings so erweitern, dass erwartete Aenderungen ruhig bestaetigt werden koennen
 - spaeter modernen macOS-Background-Task-Management-Status als eigenen Research-Spike oder Sensor pruefen
+- Packaging-/Signing-/Sandbox-Spike vor echter Distribution durchfuehren
 
 ## Offene Punkte
 
-- Die Baseline-Diff-Logik arbeitet jetzt, aber es gibt noch keinen eigenen "trusted baseline refresh"-Flow zum bewussten Erneuern des gemerkten Ausgangszustands.
-- Verschwundene Items bleiben im Vergleich sichtbar, bis spaeter ein ausdruecklicher Baseline-Refresh oder eine ruhigere Review-Logik dazukommt.
 - Die aktuellen empfohlenen Aktionen speichern nur Policy-Entscheidungen und fuehren noch keine echten Guided Actions aus.
 - E2E ist momentan Smoke-Level, noch keine echte UI-Automation.
-- Der erste Sensor nutzt nur sichtbare Dateisystem-Belege und liest noch keine `plist`-Inhalte aus.
 - Fuer den aktuellen SwiftPM-Stand gibt es noch kein eigenes Signing-/Entitlements-Profil im Repo.
 - Full Disk Access, Administratorrechte, Accessibility, Screen Recording, Network Client Access und privilegierte Helper sind fuer den aktuellen MVP bewusst nicht noetig.
 - Der aktuelle Startup-Sensor deckt nur sichtbare `plist`-Dateien ab; moderne Login-/Background-Items und tatsaechlich geladener Zustand sind noch nicht abgedeckt.
-- Baseline-Fehler sind im aktuellen Sensorverhalten noch zu still.
+- Die UI-Aktion zum Merken des aktuellen Startup-Zustands ist vorhanden, aber noch nicht mit echter macOS-UI-Automation getestet.
 
 ## Letzte Validierung
 
@@ -74,6 +77,13 @@ Zusaetzlich am 2026-05-06 erneut ausgefuehrt:
 
 Der Lauf war erfolgreich.
 
+Zusaetzlich nach der Baseline-/Refresh-Implementierung:
+
+- `swift test`
+- `./scripts/checks.sh`
+
+Die Laeufe waren erfolgreich; `swift test` umfasst jetzt 20 Tests.
+
 ## Letzte externe Recherche
 
 - `docs/research-and-blindspots.md`
@@ -81,6 +91,9 @@ Der Lauf war erfolgreich.
 - Apple Developer: Creating Launch Daemons and Agents
 - Apple Support: Manage login items and background tasks on Mac
 - Apple Developer: App Sandbox und Hardened Runtime
+- `docs/background-task-management-spike.md`
+- `docs/next-sensor-selection.md`
+- `docs/packaging-signing-plan.md`
 
 ## Wenn du hier weitermachst
 

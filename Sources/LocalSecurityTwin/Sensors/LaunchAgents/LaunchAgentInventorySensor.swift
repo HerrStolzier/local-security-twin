@@ -1,6 +1,6 @@
 import Foundation
 
-struct LaunchAgentInventorySensor: FindingSensor {
+struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
     let descriptor = SensorDescriptor(
         id: "launch-agent-inventory",
         title: "Launch Agent Inventory",
@@ -25,17 +25,9 @@ struct LaunchAgentInventorySensor: FindingSensor {
     }
 
     func run(in context: SensorContext) -> SensorRun {
-        let directories = [
-            context.homeDirectoryURL
-                .appendingPathComponent("Library", isDirectory: true)
-                .appendingPathComponent("LaunchAgents", isDirectory: true),
-        ] + sharedDirectories
+        let directories = startupDirectories(in: context)
 
-        let items = directories
-            .flatMap(scanDirectory)
-            .sorted { lhs, rhs in
-                lhs.id < rhs.id
-            }
+        let items = scanStartupItems(in: directories)
 
         do {
             let baselineState = try baselineStore.initializeIfNeeded(
@@ -58,7 +50,7 @@ struct LaunchAgentInventorySensor: FindingSensor {
             )
         } catch {
             let findings = items.map(makeInventoryFinding)
-            let notes = makeFallbackNotes(for: items, directories: directories)
+            let notes = makeFallbackNotes(for: items, directories: directories, error: error)
 
             return SensorRun(
                 sensor: descriptor,
@@ -67,6 +59,32 @@ struct LaunchAgentInventorySensor: FindingSensor {
                 completedAt: context.now
             )
         }
+    }
+
+    func refreshRememberedStartupState(in context: SensorContext) throws {
+        let directories = startupDirectories(in: context)
+        let items = scanStartupItems(in: directories)
+        try baselineStore.refresh(
+            sensorID: descriptor.id,
+            items: items,
+            capturedAt: context.now
+        )
+    }
+
+    private func startupDirectories(in context: SensorContext) -> [URL] {
+        [
+            context.homeDirectoryURL
+                .appendingPathComponent("Library", isDirectory: true)
+                .appendingPathComponent("LaunchAgents", isDirectory: true),
+        ] + sharedDirectories
+    }
+
+    private func scanStartupItems(in directories: [URL]) -> [LaunchAgentItem] {
+        directories
+            .flatMap(scanDirectory)
+            .sorted { lhs, rhs in
+                lhs.id < rhs.id
+            }
     }
 
     private func scanDirectory(_ directoryURL: URL) -> [LaunchAgentItem] {
@@ -87,9 +105,47 @@ struct LaunchAgentInventorySensor: FindingSensor {
             .map { itemURL in
                 LaunchAgentItem(
                     path: itemURL.path,
-                    scope: scope
+                    scope: scope,
+                    details: readDetails(from: itemURL)
                 )
             }
+    }
+
+    private func readDetails(from itemURL: URL) -> StartupItemDetails? {
+        guard
+            let data = try? Data(contentsOf: itemURL),
+            let propertyList = try? PropertyListSerialization.propertyList(
+                from: data,
+                options: [],
+                format: nil
+            ),
+            let dictionary = propertyList as? [String: Any]
+        else {
+            return nil
+        }
+
+        return StartupItemDetails(
+            label: dictionary["Label"] as? String,
+            program: dictionary["Program"] as? String,
+            programArguments: dictionary["ProgramArguments"] as? [String] ?? [],
+            runAtLoad: dictionary["RunAtLoad"] as? Bool,
+            keepAliveSummary: keepAliveSummary(from: dictionary["KeepAlive"])
+        )
+    }
+
+    private func keepAliveSummary(from value: Any?) -> String? {
+        switch value {
+        case let bool as Bool:
+            return bool ? "Always tries to stay available" : "Does not request constant launchd keep-alive"
+        case let dictionary as [String: Any]:
+            if dictionary.isEmpty {
+                return nil
+            }
+
+            return "Uses conditional keep-alive rules: \(dictionary.keys.sorted().joined(separator: ", "))"
+        default:
+            return nil
+        }
     }
 
     private func scope(forDirectory directoryURL: URL) -> StartupItemScope {
@@ -126,23 +182,23 @@ struct LaunchAgentInventorySensor: FindingSensor {
 
         return Finding(
             id: "launch-item::\(item.id)",
-            title: "\(scopeTitle) startup item visible",
+            title: "\(scopeTitle) background startup hint is visible",
             source: FindingSource(
                 kind: .launchAgentInventory,
-                title: descriptor.title,
-                detail: descriptor.summary
+                title: "Visible Startup Hints",
+                detail: "Looks for visible startup item plist files in user and shared launch-agent folders."
             ),
             severity: item.scope.defaultSeverity,
             confidence: .supported,
-            summary: "\(fileName) is currently visible in a startup location that launches software automatically.",
-            userImpact: "Startup items matter because they can keep software running in the background every time the Mac starts. That is not automatically bad, but it deserves a clear review path.",
-            nextStep: "Check whether this startup item belongs to software you expected. If yes, you can trust it. If not, keep investigating before treating it as normal.",
-            evidence: [
+            summary: "\(fileName) is visible in a location macOS can use for automatic background startup.",
+            userImpact: "This is a startup hint, not proof that the software is running or dangerous. It matters because items in these locations can make software available in the background after login or boot.",
+            nextStep: "Check whether this item belongs to software you expected. If yes, you can mark it as expected. If not, keep it under review before treating it as normal.",
+            evidence: startupEvidence(for: item, scopeTitle: scopeTitle) + [
                 FindingEvidence(
                     id: "path",
                     title: "Observed file",
                     summary: "A plist file was found at \(item.path).",
-                    detail: "This first sensor only reports visible filesystem evidence. It does not yet inspect plist contents or launch state."
+                    detail: "This sensor reports visible filesystem evidence. It does not prove the item is currently loaded or running."
                 ),
                 FindingEvidence(
                     id: "scope",
@@ -168,6 +224,54 @@ struct LaunchAgentInventorySensor: FindingSensor {
         )
     }
 
+    private func startupEvidence(for item: LaunchAgentItem, scopeTitle: String) -> [FindingEvidence] {
+        guard let details = item.details else {
+            return [
+                FindingEvidence(
+                    id: "plist-details",
+                    title: "Startup file details",
+                    summary: "The plist file was visible, but the app could not read simple launch details from it.",
+                    detail: "This can happen when the file is empty, malformed, or uses a shape this first reader does not understand yet. The file path evidence is still preserved."
+                ),
+            ]
+        }
+
+        var lines: [String] = []
+
+        if let label = details.label {
+            lines.append("Label: \(label)")
+        }
+
+        if let program = details.program {
+            lines.append("Program: \(program)")
+        }
+
+        if !details.programArguments.isEmpty {
+            lines.append("Program arguments: \(details.programArguments.joined(separator: " "))")
+        }
+
+        if let runAtLoad = details.runAtLoad {
+            lines.append("Run at load: \(runAtLoad ? "yes" : "no")")
+        }
+
+        if let keepAliveSummary = details.keepAliveSummary {
+            lines.append("Keep alive: \(keepAliveSummary)")
+        }
+
+        if lines.isEmpty {
+            lines.append("No simple Label, Program, ProgramArguments, RunAtLoad, or KeepAlive values were present.")
+        }
+
+        return [
+            FindingEvidence(
+                id: "plist-details",
+                title: "Startup file details",
+                summary: "The plist file contains readable launch details for this \(scopeTitle.lowercased()) startup hint.",
+                detail: lines.joined(separator: "\n")
+            ),
+        ]
+    }
+
     private func makeAddedSinceBaselineFinding(
         for item: LaunchAgentItem,
         baseline: StartupItemBaselineSnapshot
@@ -177,23 +281,23 @@ struct LaunchAgentInventorySensor: FindingSensor {
 
         return Finding(
             id: "baseline-diff::added::\(item.id)",
-            title: "\(scopeTitle) startup item is new since baseline",
+            title: "\(scopeTitle) startup hint is new since the remembered state",
             source: FindingSource(
                 kind: .baselineDiff,
-                title: "Startup baseline comparison",
-                detail: "Compared the latest startup snapshot with the stored local baseline."
+                title: "Startup change since remembered state",
+                detail: "Compared the latest visible startup hints with the stored local known state."
             ),
             severity: item.scope.defaultSeverity,
             confidence: .supported,
-            summary: "\(item.fileName) was not present in the stored startup baseline and is now visible in an automatic startup location.",
-            userImpact: "A newly added startup item is often normal after an install or update, but it deserves a calm review because it now launches on its own when the Mac starts.",
-            nextStep: "Check whether you expected this software change. If yes, you can mark it as expected. If not, keep it under review before treating it as normal.",
-            evidence: [
+            summary: "\(item.fileName) was not part of the remembered startup state and is now visible in an automatic startup location.",
+            userImpact: "A newly visible startup hint is often normal after an install or update. It still deserves a calm review because it may affect what can start in the background.",
+            nextStep: "Check whether you expected this software change. If yes, you can mark the current startup state as expected. If not, keep it under review before treating it as normal.",
+            evidence: startupEvidence(for: item, scopeTitle: scopeTitle) + [
                 FindingEvidence(
                     id: "baseline-comparison",
-                    title: "Baseline difference",
-                    summary: "The stored baseline from \(baselineTimestamp) did not include this startup item.",
-                    detail: "The app compared the current visible startup set against a local baseline snapshot saved earlier on this Mac."
+                    title: "Change since remembered state",
+                    summary: "The remembered state from \(baselineTimestamp) did not include this startup hint.",
+                    detail: "The app compared the current visible startup set against a local known state saved earlier on this Mac."
                 ),
                 FindingEvidence(
                     id: "current-path",
@@ -234,23 +338,23 @@ struct LaunchAgentInventorySensor: FindingSensor {
 
         return Finding(
             id: "baseline-diff::removed::\(item.id)",
-            title: "\(scopeTitle) startup item disappeared since baseline",
+            title: "\(scopeTitle) startup hint disappeared since the remembered state",
             source: FindingSource(
                 kind: .baselineDiff,
-                title: "Startup baseline comparison",
-                detail: "Compared the latest startup snapshot with the stored local baseline."
+                title: "Startup change since remembered state",
+                detail: "Compared the latest visible startup hints with the stored local known state."
             ),
             severity: item.scope.removalSeverity,
             confidence: .supported,
-            summary: "\(item.fileName) was present in the stored startup baseline but is no longer visible in its previous startup location.",
-            userImpact: "A disappeared startup item is often harmless after an uninstall or update, but it still tells you that the machine's automatic startup behavior changed since the remembered baseline.",
+            summary: "\(item.fileName) was present in the remembered startup state but is no longer visible in its previous startup location.",
+            userImpact: "A disappeared startup hint is often harmless after an uninstall or update. It simply means the visible startup set changed since the app last remembered it.",
             nextStep: "If you recently removed or updated the related software, this is likely expected. If not, keep an eye on whether the item returns or whether other startup behavior changes around it.",
             evidence: [
                 FindingEvidence(
                     id: "baseline-comparison",
-                    title: "Baseline difference",
-                    summary: "The stored baseline from \(baselineTimestamp) included this startup item, but the current snapshot does not.",
-                    detail: "This is a disappearance relative to the remembered local baseline, not proof of malicious behavior on its own."
+                    title: "Change since remembered state",
+                    summary: "The remembered state from \(baselineTimestamp) included this startup hint, but the current snapshot does not.",
+                    detail: "This is a disappearance relative to the remembered local state, not proof of malicious behavior on its own."
                 ),
                 FindingEvidence(
                     id: "previous-path",
@@ -303,7 +407,8 @@ struct LaunchAgentInventorySensor: FindingSensor {
 
     private func makeFallbackNotes(
         for items: [LaunchAgentItem],
-        directories: [URL]
+        directories: [URL],
+        error: Error
     ) -> [String] {
         var notes: [String] = []
 
@@ -314,7 +419,7 @@ struct LaunchAgentInventorySensor: FindingSensor {
             notes.append("Detected \(items.count) visible startup plist file(s).")
         }
 
-        notes.append("The local startup baseline could not be prepared for later change detection.")
+        notes.append("Startup change detection is limited in this run because the remembered local state could not be loaded or saved: \(error.localizedDescription)")
         return notes
     }
 

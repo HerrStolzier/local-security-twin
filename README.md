@@ -84,12 +84,15 @@ More detail lives in:
 - `docs/project-learnings.md`
 - `docs/macos-permissions-entitlements.md`
 - `docs/research-and-blindspots.md`
+- `docs/background-task-management-spike.md`
+- `docs/next-sensor-selection.md`
+- `docs/packaging-signing-plan.md`
 
 ## Near-Term Next Steps
 
-1. Make baseline failures visible and validate that stored baselines belong to the expected sensor.
-2. Add an explicit trusted-baseline refresh flow so expected long-term changes can be re-anchored calmly.
-3. Add the next calm, local-first sensor or a focused Background Task Management research spike.
+1. Exercise the new "remember current startup state" UI against a real local app run.
+2. Decide whether the next product step should be deeper startup-item detail UI or a Background Task Management spike.
+3. Prepare the packaging/signing spike before adding broader system visibility.
 
 ## License
 

@@ -69,7 +69,7 @@ enum FindingSourceKind: String, Codable, CaseIterable, Sendable {
     var title: String {
         switch self {
         case .baselineDiff:
-            return "Baseline Diff"
+            return "Changed Since Remembered State"
         case .launchAgentInventory:
             return "Launch Agent Inventory"
         case .privacyPermissions:

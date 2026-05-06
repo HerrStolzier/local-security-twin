@@ -36,3 +36,7 @@ protocol FindingSensor {
     var descriptor: SensorDescriptor { get }
     func run(in context: SensorContext) -> SensorRun
 }
+
+protocol StartupBaselineRefreshingSensor: FindingSensor {
+    func refreshRememberedStartupState(in context: SensorContext) throws
+}

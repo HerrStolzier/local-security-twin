@@ -12,7 +12,13 @@ struct LocalSecurityTwinApp: App {
 
     var body: some Scene {
         WindowGroup("Local Security Twin") {
-            ContentView(findings: findingStore.findings)
+            ContentView(
+                findings: findingStore.findings,
+                lastBaselineRefreshError: findingStore.lastBaselineRefreshError,
+                rememberCurrentStartupState: {
+                    findingStore.rememberCurrentStartupState()
+                }
+            )
                 .environmentObject(policyStore)
                 .task {
                     await findingStore.refreshIfNeeded()

@@ -42,7 +42,7 @@ struct PolicyStoreTests {
         let store = makeStore()
         let request = makeRequest(risk: .high, action: .runSafeValidation)
 
-        #expect(throws: PolicyStoreError.explicitConfirmationRequired(actionTitle: "Run Safe Validation")) {
+        #expect(throws: PolicyStoreError.explicitConfirmationRequired(actionTitle: "Gather More Evidence")) {
             try store.record(decision: .allow, for: request, scope: .remembered)
         }
 

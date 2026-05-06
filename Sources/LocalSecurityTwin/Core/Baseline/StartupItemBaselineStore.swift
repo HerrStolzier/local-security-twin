@@ -3,10 +3,12 @@ import Foundation
 struct StartupItemRecord: Identifiable, Hashable, Codable, Sendable {
     let path: String
     let scope: StartupItemScope
+    let details: StartupItemDetails?
 
-    init(path: String, scope: StartupItemScope) {
+    init(path: String, scope: StartupItemScope, details: StartupItemDetails? = nil) {
         self.path = StartupItemRecord.normalizedPath(path)
         self.scope = scope
+        self.details = details
     }
 
     var id: String {
@@ -29,6 +31,14 @@ struct StartupItemRecord: Identifiable, Hashable, Codable, Sendable {
     }
 }
 
+struct StartupItemDetails: Hashable, Codable, Sendable {
+    let label: String?
+    let program: String?
+    let programArguments: [String]
+    let runAtLoad: Bool?
+    let keepAliveSummary: String?
+}
+
 enum StartupItemScope: String, Hashable, Codable, Sendable {
     case userAgent
     case sharedAgent
@@ -49,6 +59,17 @@ enum StartupItemBaselineStatus: String, Hashable, Sendable {
 struct StartupItemBaselineState: Hashable, Sendable {
     let snapshot: StartupItemBaselineSnapshot
     let status: StartupItemBaselineStatus
+}
+
+enum StartupItemBaselineStoreError: Error, Equatable, LocalizedError {
+    case sensorMismatch(expected: String, actual: String)
+
+    var errorDescription: String? {
+        switch self {
+        case let .sensorMismatch(expected, actual):
+            return "Stored baseline belongs to \(actual), but \(expected) was expected."
+        }
+    }
 }
 
 struct StartupItemBaselineStore {
@@ -79,12 +100,27 @@ struct StartupItemBaselineStore {
         )
     }
 
+    func load(expectedSensorID: String) throws -> StartupItemBaselineSnapshot? {
+        guard let snapshot = try load() else {
+            return nil
+        }
+
+        guard snapshot.sensorID == expectedSensorID else {
+            throw StartupItemBaselineStoreError.sensorMismatch(
+                expected: expectedSensorID,
+                actual: snapshot.sensorID
+            )
+        }
+
+        return snapshot
+    }
+
     func initializeIfNeeded(
         sensorID: String,
         items: [StartupItemRecord],
         capturedAt: Date
     ) throws -> StartupItemBaselineState {
-        if let snapshot = try load() {
+        if let snapshot = try load(expectedSensorID: sensorID) {
             return StartupItemBaselineState(
                 snapshot: snapshot,
                 status: .loadedExistingSnapshot
@@ -102,6 +138,30 @@ struct StartupItemBaselineStore {
             snapshot: snapshot,
             status: .createdInitialSnapshot
         )
+    }
+
+    @discardableResult
+    func refresh(
+        sensorID: String,
+        items: [StartupItemRecord],
+        capturedAt: Date
+    ) throws -> StartupItemBaselineSnapshot {
+        if let snapshot = try load() {
+            guard snapshot.sensorID == sensorID else {
+                throw StartupItemBaselineStoreError.sensorMismatch(
+                    expected: sensorID,
+                    actual: snapshot.sensorID
+                )
+            }
+        }
+
+        let snapshot = StartupItemBaselineSnapshot(
+            sensorID: sensorID,
+            capturedAt: capturedAt,
+            items: normalized(items)
+        )
+        try save(snapshot)
+        return snapshot
     }
 
     func save(_ snapshot: StartupItemBaselineSnapshot) throws {
@@ -123,7 +183,7 @@ struct StartupItemBaselineStore {
 
     private func normalized(_ items: [StartupItemRecord]) -> [StartupItemRecord] {
         items
-            .map { StartupItemRecord(path: $0.path, scope: $0.scope) }
+            .map { StartupItemRecord(path: $0.path, scope: $0.scope, details: $0.details) }
             .sorted { lhs, rhs in
             lhs.id < rhs.id
         }

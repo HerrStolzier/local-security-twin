@@ -13,6 +13,16 @@ struct SensorPipeline {
 
         return runs
     }
+
+    func refreshRememberedStartupState(in context: SensorContext = .live()) throws {
+        for sensor in sensors {
+            guard let refreshableSensor = sensor as? any StartupBaselineRefreshingSensor else {
+                continue
+            }
+
+            try refreshableSensor.refreshRememberedStartupState(in: context)
+        }
+    }
 }
 
 extension SensorPipeline {

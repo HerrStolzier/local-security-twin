@@ -105,8 +105,8 @@ extension PolicyAction {
 
     static let runSafeValidation = PolicyAction(
         id: "run-safe-validation",
-        title: "Run Safe Validation",
-        explanation: "Run a tightly bounded validation step that checks whether a concern is real.",
+        title: "Gather More Evidence",
+        explanation: "Run a tightly bounded check that gathers more evidence without changing system settings.",
         minimumConfirmation: .explicitApproval
     )
 }

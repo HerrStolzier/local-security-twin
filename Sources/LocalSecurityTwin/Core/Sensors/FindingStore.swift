@@ -5,6 +5,7 @@ final class FindingStore: ObservableObject {
     @Published private(set) var findings: [Finding]
     @Published private(set) var sensorRuns: [SensorRun]
     @Published private(set) var lastRefreshAt: Date?
+    @Published private(set) var lastBaselineRefreshError: String?
 
     private let pipeline: SensorPipeline
     private var hasLoaded = false
@@ -33,6 +34,16 @@ final class FindingStore: ObservableObject {
             .flatMap(\.findings)
             .sorted(by: FindingStore.sortFindings)
         lastRefreshAt = runs.map(\.completedAt).max()
+    }
+
+    func rememberCurrentStartupState() {
+        do {
+            try pipeline.refreshRememberedStartupState()
+            lastBaselineRefreshError = nil
+            refresh()
+        } catch {
+            lastBaselineRefreshError = error.localizedDescription
+        }
     }
 
     private static func sortFindings(lhs: Finding, rhs: Finding) -> Bool {
