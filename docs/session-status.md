@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-06
-- Bereich: macOS-Permissions-/Entitlements-Strategie fuer MVP und Git-Initialisierung
+- Bereich: Research-/Blindspot-Runde nach erstem GitHub-Stand
 
 ## Zuletzt abgeschlossen
 
@@ -29,19 +29,23 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Pfade fuer Startup-Item-IDs werden normalisiert, damit derselbe Dateipfad nicht wegen macOS-Pfadaliasen doppelt oder falsch verglichen wird
 - lokales Git-Repository fuer den Projektordner initialisiert
 - MVP-Strategie fuer macOS-Permissions und Entitlements dokumentiert
+- bestehendes GitHub-Repository verbunden, Historien zusammengefuehrt und auf `origin/main` gepusht
+- kritische Research-/Blindspot-Runde dokumentiert
 
 ## Aktueller Stand in einem Satz
 
-Die App hat ein solides lokales Fundament fuer Findings, Nutzerentscheidungen, einen ersten echten Startup-Item-Sensor, echte lokale Change-Detection und eine klare MVP-Linie fuer minimale macOS-Rechte.
+Die App hat ein solides lokales Fundament und ist auf GitHub gesichert; die Research-Runde bestaetigt die Richtung, zeigt aber vor dem Baseline-Refresh einen kleinen Sauberkeitsschnitt fuer Baseline-Fehler und Sensor-ID-Validierung.
 
 ## Naechster konkreter Schritt
 
-Einen expliziten "trusted baseline refresh"-Flow fuer erwartete Langzeit-Aenderungen entwerfen, damit Nutzer bewusst einen neuen lokalen Ausgangszustand setzen koennen.
+Vor dem "trusted baseline refresh" die Baseline-Robustheit verbessern: erwartete `sensorID` validieren und Baseline-Load-/Save-Fehler sichtbar machen, statt Change-Detection still auf Inventar-Findings zurueckfallen zu lassen.
 
 ## Danach sinnvoll
 
+- danach einen expliziten "trusted baseline refresh"-Flow fuer erwartete Langzeit-Aenderungen entwerfen
 - spaeter weitere Sensoren wie Privacy Permissions auf denselben Vertrag setzen
 - danach die UI fuer Baseline-Diff-Findings so erweitern, dass erwartete Aenderungen ruhig bestaetigt werden koennen
+- spaeter modernen macOS-Background-Task-Management-Status als eigenen Research-Spike oder Sensor pruefen
 
 ## Offene Punkte
 
@@ -52,6 +56,8 @@ Einen expliziten "trusted baseline refresh"-Flow fuer erwartete Langzeit-Aenderu
 - Der erste Sensor nutzt nur sichtbare Dateisystem-Belege und liest noch keine `plist`-Inhalte aus.
 - Fuer den aktuellen SwiftPM-Stand gibt es noch kein eigenes Signing-/Entitlements-Profil im Repo.
 - Full Disk Access, Administratorrechte, Accessibility, Screen Recording, Network Client Access und privilegierte Helper sind fuer den aktuellen MVP bewusst nicht noetig.
+- Der aktuelle Startup-Sensor deckt nur sichtbare `plist`-Dateien ab; moderne Login-/Background-Items und tatsaechlich geladener Zustand sind noch nicht abgedeckt.
+- Baseline-Fehler sind im aktuellen Sensorverhalten noch zu still.
 
 ## Letzte Validierung
 
@@ -67,6 +73,14 @@ Zusaetzlich am 2026-05-06 erneut ausgefuehrt:
 - `./scripts/checks.sh`
 
 Der Lauf war erfolgreich.
+
+## Letzte externe Recherche
+
+- `docs/research-and-blindspots.md`
+- Apple Developer: Service Management
+- Apple Developer: Creating Launch Daemons and Agents
+- Apple Support: Manage login items and background tasks on Mac
+- Apple Developer: App Sandbox und Hardened Runtime
 
 ## Wenn du hier weitermachst
 

@@ -18,6 +18,9 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Kleine lokale JSON-Snapshots in `Application Support` sind eine gute erste Baseline-Form, solange spaetere Diff-Logik auf stabilen Kennungen wie Scope plus Pfad aufsetzt.
 - Fuer lokale Dateisystem-Vergleiche muessen Pfade vor der ID-Bildung normalisiert werden, damit macOS-Aliase wie `/var` und `/private/var` nicht falsche Baseline-Diffs erzeugen.
 - Fuer den MVP sollen macOS-Berechtigungen minimal bleiben: normale App-Ausfuehrung und lokaler Application-Support-Speicher reichen aktuell; staerkere Rechte brauchen erst einen konkreten, erklaerten Nutzen.
+- Der Startup-Sensor darf in Nutzertexten nicht als vollstaendige Startup- oder Persistenzanalyse verkauft werden; er sieht aktuell nur sichtbare `plist`-Hinweise.
+- Moderne macOS-Versionen haben Background Task Management rund um Login Items, LaunchAgents und LaunchDaemons; das sollte spaeter separat geprueft werden.
+- Baseline-Probleme sollen sichtbar statt still sein, weil sonst gerade die Vertrauensfunktion der App schwerer nachvollziehbar wird.
 
 ## Workflow Gotchas
 

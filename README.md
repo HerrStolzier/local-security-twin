@@ -83,12 +83,13 @@ More detail lives in:
 - `docs/session-status.md`
 - `docs/project-learnings.md`
 - `docs/macos-permissions-entitlements.md`
+- `docs/research-and-blindspots.md`
 
 ## Near-Term Next Steps
 
-1. Add an explicit trusted-baseline refresh flow so expected long-term changes can be re-anchored calmly.
-2. Add the next calm, local-first sensor on top of the same finding contract.
-3. Expand the smoke-level E2E suite toward real UI navigation.
+1. Make baseline failures visible and validate that stored baselines belong to the expected sensor.
+2. Add an explicit trusted-baseline refresh flow so expected long-term changes can be re-anchored calmly.
+3. Add the next calm, local-first sensor or a focused Background Task Management research spike.
 
 ## License
 
