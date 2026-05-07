@@ -56,6 +56,11 @@ The current implementation includes:
 - local system inspection first
 - optional local rule engine for scoring and explanations
 
+## Requirements
+
+- macOS 15 or newer
+- Xcode 16 or newer, including the Swift 6 toolchain
+
 ## Build
 
 ```bash
