@@ -98,6 +98,8 @@ Die Detailansicht beantwortet zuerst "Was bedeutet das fuer mich?", bevor sie Ro
 
 ## Iteration 3: UI-nah testen
 
+Status: umgesetzt am 2026-05-12 als Store-/Presentation-naher Test. Echte macOS-Klickautomation bleibt spaeter offen.
+
 Ziel:
 Der `Als erwartet merken`-Flow soll nicht nur in Domain-Tests funktionieren.
 

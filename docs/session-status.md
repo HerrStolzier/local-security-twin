@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-12
-- Bereich: Roadmap Iteration 2 - Startup-Details besser nutzbar machen
+- Bereich: Roadmap Iteration 3 - UI-naher Test fuer Als-erwartet-merken-Flow
 
 ## Zuletzt abgeschlossen
 
@@ -49,14 +49,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Roadmap Iteration 2 umgesetzt: Detailansicht zeigt Autostart-Details jetzt als verstaendliche Zusammenfassung mit Datei, internem Namen, Startbefehl, Startverhalten, Hintergrundverhalten und Pfad
 - Evidence-Titel und wichtige Evidence-Zusammenfassungen werden nutzerfreundlicher auf Deutsch angezeigt
 - Test fuer die Presentation-Logik der Startup-Details ergaenzt
+- Roadmap Iteration 3 umgesetzt: Dashboard-Entscheidungen in `DashboardPresentation` gebuendelt und der `Als erwartet merken`-Flow UI-nah ueber Store plus Presentation getestet
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details in der Detailansicht; als naechstes sollte der `Als erwartet merken`-Flow UI-nah getestet werden.
+Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; der `Als erwartet merken`-Flow ist UI-nah ueber Store und Dashboard-Presentation abgesichert.
 
 ## Naechster konkreter Schritt
 
-Roadmap Iteration 3 umsetzen: den `Als erwartet merken`-Flow UI-nah testen oder bewusst dokumentieren, warum echte macOS-UI-Automation im aktuellen SwiftPM-Setup noch nicht stabil genug ist.
+Roadmap Iteration 4 umsetzen: Background Task Management Spike aktualisieren und auf dem lokalen macOS-System pruefen, ob `sfltool dumpbtm` ohne Zusatzrechte nutzbare, stabile Daten liefert.
 
 ## Danach sinnvoll
 
@@ -73,6 +74,7 @@ Roadmap Iteration 3 umsetzen: den `Als erwartet merken`-Flow UI-nah testen oder 
 - Der aktuelle Startup-Sensor deckt nur sichtbare `plist`-Dateien ab; moderne Login-/Background-Items und tatsaechlich geladener Zustand sind noch nicht abgedeckt.
 - Die UI-Aktion zum Merken des aktuellen Startup-Zustands ist vorhanden, aber noch nicht mit echter macOS-UI-Automation getestet.
 - Die App-Oberflaeche ist jetzt deutlich deutscher und strukturierter; echte macOS-UI-Automation fehlt weiterhin.
+- Der wichtigste UI-Flow ist Store-/Presentation-nah getestet; echte macOS-Klickautomation fehlt weiterhin.
 
 ## Letzte Validierung
 
@@ -114,6 +116,10 @@ Zusaetzlich nach Roadmap Iteration 2:
 - `swift test`
 
 Der Lauf war erfolgreich mit 21 Tests.
+
+Zusaetzlich nach Roadmap Iteration 3:
+
+- Store-/Presentation-Test fuer den `Als erwartet merken`-Flow erweitert.
 
 ## Letzte externe Recherche
 

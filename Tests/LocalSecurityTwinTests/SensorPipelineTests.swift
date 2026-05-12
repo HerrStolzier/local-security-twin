@@ -383,13 +383,26 @@ struct SensorPipelineTests {
                 )
             ]
         )
-        let store = await MainActor.run { FindingStore(pipeline: pipeline) }
+        let store = await MainActor.run {
+            FindingStore(
+                pipeline: pipeline,
+                contextProvider: {
+                    SensorContext(homeDirectoryURL: homeURL, now: Date(timeIntervalSince1970: 1_000))
+                }
+            )
+        }
 
         await MainActor.run {
             store.refresh()
             #expect(store.findings.contains(where: { $0.source.kind == .baselineDiff }))
+            let presentationBeforeRefresh = DashboardPresentation(findings: store.findings)
+            #expect(presentationBeforeRefresh.showsRememberCurrentStartupStateAction)
+            #expect(presentationBeforeRefresh.startupChangeCount == 1)
             store.rememberCurrentStartupState()
             #expect(!store.findings.contains(where: { $0.source.kind == .baselineDiff }))
+            let presentationAfterRefresh = DashboardPresentation(findings: store.findings)
+            #expect(!presentationAfterRefresh.showsRememberCurrentStartupStateAction)
+            #expect(presentationAfterRefresh.startupChangeCount == 0)
             #expect(store.lastBaselineRefreshError == nil)
         }
     }

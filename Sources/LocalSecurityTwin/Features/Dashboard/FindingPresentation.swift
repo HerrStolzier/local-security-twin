@@ -32,6 +32,42 @@ enum FindingGroup: String, CaseIterable, Identifiable {
     }
 }
 
+struct DashboardPresentation {
+    let findings: [Finding]
+
+    var startupChangeCount: Int {
+        findings(in: .changes).count
+    }
+
+    var knownStartupCount: Int {
+        findings(in: .knownStartupHints).count
+    }
+
+    var reviewCount: Int {
+        findings(in: .review).count
+    }
+
+    var showsRememberCurrentStartupStateAction: Bool {
+        startupChangeCount > 0
+    }
+
+    var summaryText: String {
+        if findings.isEmpty {
+            return "Aktuell sieht die App keine lokalen Hinweise, die sie anzeigen sollte."
+        }
+
+        if startupChangeCount > 0 {
+            return "Wichtig sind zuerst die Aenderungen seit dem gemerkten Zustand. Bekannte Hinweise kannst du danach in Ruhe pruefen."
+        }
+
+        return "Es sind sichtbare Autostart-Hinweise vorhanden. Das ist nicht automatisch gefaehrlich, sondern zuerst eine lokale Orientierung."
+    }
+
+    func findings(in group: FindingGroup) -> [Finding] {
+        findings.filter { $0.displayGroup == group }
+    }
+}
+
 extension Finding {
     var displayGroup: FindingGroup {
         switch source.kind {

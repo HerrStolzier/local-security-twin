@@ -7,12 +7,16 @@ struct ContentView: View {
     @State private var selection: Finding.ID?
     @State private var isShowingRememberConfirmation = false
 
+    private var presentation: DashboardPresentation {
+        DashboardPresentation(findings: findings)
+    }
+
     var body: some View {
         NavigationSplitView {
             VStack(spacing: 0) {
-                DashboardSummary(findings: findings)
+                DashboardSummary(presentation: presentation)
 
-                if hasStartupChanges {
+                if presentation.showsRememberCurrentStartupStateAction {
                     RememberStartupStateBanner(
                         error: lastBaselineRefreshError,
                         onConfirm: {
@@ -23,7 +27,7 @@ struct ContentView: View {
 
                 List(selection: $selection) {
                     ForEach(FindingGroup.allCases) { group in
-                        let groupFindings = findings(in: group)
+                        let groupFindings = presentation.findings(in: group)
                         if !groupFindings.isEmpty {
                             Section(group.title) {
                                 ForEach(groupFindings) { finding in
@@ -81,17 +85,10 @@ struct ContentView: View {
         }
     }
 
-    private var hasStartupChanges: Bool {
-        findings.contains { $0.source.kind == .baselineDiff }
-    }
-
-    private func findings(in group: FindingGroup) -> [Finding] {
-        findings.filter { $0.displayGroup == group }
-    }
 }
 
 private struct DashboardSummary: View {
-    let findings: [Finding]
+    let presentation: DashboardPresentation
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -103,9 +100,9 @@ private struct DashboardSummary: View {
                 .foregroundStyle(.secondary)
 
             HStack(spacing: 10) {
-                SummaryPill(value: startupChangeCount, label: "neue Aenderungen")
-                SummaryPill(value: knownStartupCount, label: "Autostart-Hinweise")
-                SummaryPill(value: reviewCount, label: "zur Beobachtung")
+                SummaryPill(value: presentation.startupChangeCount, label: "neue Aenderungen")
+                SummaryPill(value: presentation.knownStartupCount, label: "Autostart-Hinweise")
+                SummaryPill(value: presentation.reviewCount, label: "zur Beobachtung")
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -113,28 +110,8 @@ private struct DashboardSummary: View {
         .background(.background)
     }
 
-    private var startupChangeCount: Int {
-        findings.filter { $0.displayGroup == .changes }.count
-    }
-
-    private var knownStartupCount: Int {
-        findings.filter { $0.displayGroup == .knownStartupHints }.count
-    }
-
-    private var reviewCount: Int {
-        findings.filter { $0.displayGroup == .review }.count
-    }
-
     private var summaryText: String {
-        if findings.isEmpty {
-            return "Aktuell sieht die App keine lokalen Hinweise, die sie anzeigen sollte."
-        }
-
-        if startupChangeCount > 0 {
-            return "Wichtig sind zuerst die Aenderungen seit dem gemerkten Zustand. Bekannte Hinweise kannst du danach in Ruhe pruefen."
-        }
-
-        return "Es sind sichtbare Autostart-Hinweise vorhanden. Das ist nicht automatisch gefaehrlich, sondern zuerst eine lokale Orientierung."
+        presentation.summaryText
     }
 }
 

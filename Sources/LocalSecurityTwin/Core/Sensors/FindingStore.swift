@@ -8,12 +8,15 @@ final class FindingStore: ObservableObject {
     @Published private(set) var lastBaselineRefreshError: String?
 
     private let pipeline: SensorPipeline
+    private let contextProvider: () -> SensorContext
     private var hasLoaded = false
 
     init(
-        pipeline: SensorPipeline = .live()
+        pipeline: SensorPipeline = .live(),
+        contextProvider: @escaping () -> SensorContext = { .live() }
     ) {
         self.pipeline = pipeline
+        self.contextProvider = contextProvider
         self.findings = []
         self.sensorRuns = []
     }
@@ -28,7 +31,7 @@ final class FindingStore: ObservableObject {
     }
 
     func refresh() {
-        let runs = pipeline.collect()
+        let runs = pipeline.collect(in: contextProvider())
         sensorRuns = runs
         findings = runs
             .flatMap(\.findings)
@@ -38,7 +41,7 @@ final class FindingStore: ObservableObject {
 
     func rememberCurrentStartupState() {
         do {
-            try pipeline.refreshRememberedStartupState()
+            try pipeline.refreshRememberedStartupState(in: contextProvider())
             lastBaselineRefreshError = nil
             refresh()
         } catch {
