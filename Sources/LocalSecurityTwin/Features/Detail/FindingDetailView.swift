@@ -22,6 +22,9 @@ struct FindingDetailView: View {
                 }
 
                 FindingSection(title: "Kurze Einordnung", text: finding.plainLanguageAssessment)
+                if finding.source.kind == .baselineDiff || finding.source.kind == .launchAgentInventory {
+                    StartupDetailOverview(finding: finding)
+                }
                 FindingSection(title: "Was wurde gefunden?", text: finding.displaySummary)
                 FindingSection(title: "Warum ist das wichtig?", text: finding.userImpact)
                 FindingSection(title: "Naechster sicherer Schritt", text: finding.nextStep)
@@ -46,6 +49,69 @@ struct FindingDetailView: View {
     }
 }
 
+private struct StartupDetailOverview: View {
+    let finding: Finding
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Autostart kurz erklaert")
+                .font(.title3)
+                .fontWeight(.semibold)
+
+            VStack(alignment: .leading, spacing: 8) {
+                StartupDetailLine(label: "Datei", value: finding.displaySubject)
+
+                if let label = finding.startupLabel {
+                    StartupDetailLine(label: "Interner Name", value: label)
+                }
+
+                if let program = finding.startupProgram {
+                    StartupDetailLine(label: "Programm", value: program)
+                } else if let arguments = finding.startupProgramArguments {
+                    StartupDetailLine(label: "Startbefehl", value: arguments)
+                }
+
+                if let runAtLoad = finding.startupRunAtLoadText {
+                    StartupDetailLine(label: "Startverhalten", value: runAtLoad)
+                }
+
+                if let keepAlive = finding.startupKeepAliveText {
+                    StartupDetailLine(label: "Hintergrundverhalten", value: keepAlive)
+                }
+
+                if let path = finding.startupFilePath {
+                    StartupDetailLine(label: "Pfad", value: path)
+                }
+            }
+
+            Text("Das sind Belege aus einer sichtbaren plist-Datei. Sie zeigen, was macOS verwenden kann, aber nicht, ob der Dienst gerade aktiv laeuft.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .padding(16)
+        .background(.quinary, in: RoundedRectangle(cornerRadius: 8))
+    }
+}
+
+private struct StartupDetailLine: View {
+    let label: String
+    let value: String
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 12) {
+            Text(label)
+                .font(.subheadline)
+                .fontWeight(.semibold)
+                .foregroundStyle(.secondary)
+                .frame(width: 150, alignment: .leading)
+
+            Text(value)
+                .font(.subheadline)
+                .textSelection(.enabled)
+        }
+    }
+}
+
 private struct EvidenceSection: View {
     let evidence: [FindingEvidence]
 
@@ -57,10 +123,10 @@ private struct EvidenceSection: View {
 
             ForEach(evidence) { item in
                 VStack(alignment: .leading, spacing: 6) {
-                    Text(item.title)
+                    Text(item.displayTitle)
                         .font(.headline)
-                    Text(item.summary)
-                    Text(item.detail)
+                    Text(item.displaySummary)
+                    Text(item.displayDetail)
                         .foregroundStyle(.secondary)
                         .font(.subheadline)
                 }

@@ -136,16 +136,132 @@ extension Finding {
         }
     }
 
+    var startupFilePath: String? {
+        evidence
+            .lazy
+            .compactMap { evidenceItem in
+                path(from: evidenceItem.summary)
+            }
+            .first
+    }
+
+    var startupLabel: String? {
+        startupDetailValue(prefix: "Label:")
+    }
+
+    var startupProgram: String? {
+        startupDetailValue(prefix: "Program:")
+    }
+
+    var startupProgramArguments: String? {
+        startupDetailValue(prefix: "Program arguments:")
+    }
+
+    var startupRunAtLoadText: String? {
+        guard let value = startupDetailValue(prefix: "Run at load:") else {
+            return nil
+        }
+
+        return value == "yes"
+            ? "Kann beim Laden automatisch starten"
+            : "Startet nicht ausdruecklich beim Laden"
+    }
+
+    var startupKeepAliveText: String? {
+        guard let value = startupDetailValue(prefix: "Keep alive:") else {
+            return nil
+        }
+
+        if value.localizedCaseInsensitiveContains("always") {
+            return "Soll im Hintergrund verfuegbar bleiben"
+        }
+
+        if value.localizedCaseInsensitiveContains("conditional") {
+            return "Nutzt Bedingungen, um bei Bedarf verfuegbar zu bleiben"
+        }
+
+        return value
+    }
+
     private func fileName(from text: String) -> String? {
+        guard let path = path(from: text) else {
+            return nil
+        }
+
+        return URL(fileURLWithPath: path).lastPathComponent
+    }
+
+    private func path(from text: String) -> String? {
         guard let range = text.range(of: ".plist") else {
             return nil
         }
 
         let prefix = text[..<range.upperBound]
-        let separators = CharacterSet(charactersIn: " /")
+        let separators = CharacterSet.whitespacesAndNewlines
         return prefix
             .components(separatedBy: separators)
-            .last
+            .last { $0.hasSuffix(".plist") }
+            .map { $0.trimmingCharacters(in: CharacterSet(charactersIn: ".")) }
+    }
+
+    private func startupDetailValue(prefix: String) -> String? {
+        guard let details = evidence.first(where: { $0.id == "plist-details" })?.detail else {
+            return nil
+        }
+
+        return details
+            .components(separatedBy: .newlines)
+            .first { $0.hasPrefix(prefix) }
+            .map { line in
+                String(line.dropFirst(prefix.count)).trimmingCharacters(in: .whitespaces)
+            }
+    }
+}
+
+extension FindingEvidence {
+    var displayTitle: String {
+        switch id {
+        case "plist-details":
+            return "Autostart-Details"
+        case "path", "current-path":
+            return "Aktuell beobachtete Datei"
+        case "previous-path":
+            return "Frueher beobachtete Datei"
+        case "scope":
+            return "Bereich"
+        case "baseline-comparison":
+            return "Aenderung seit gemerktem Zustand"
+        default:
+            return title
+        }
+    }
+
+    var displaySummary: String {
+        switch id {
+        case "plist-details":
+            return "Die App konnte einfache Startinformationen aus der plist-Datei lesen."
+        case "path", "current-path":
+            return "Diese Datei ist aktuell sichtbar."
+        case "previous-path":
+            return "Diese Datei war im gemerkten Zustand sichtbar."
+        case "scope":
+            return "Dieser Bereich bestimmt, ob der Hinweis nur den Nutzer oder das System betrifft."
+        case "baseline-comparison":
+            return "Die App vergleicht den aktuellen Zustand mit dem lokal gemerkten Zustand."
+        default:
+            return summary
+        }
+    }
+
+    var displayDetail: String {
+        switch id {
+        case "plist-details":
+            return detail
+        case "path", "current-path", "previous-path", "baseline-comparison", "scope":
+            return detail
+        default:
+            return detail
+        }
     }
 }
 

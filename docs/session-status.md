@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-12
-- Bereich: Roadmap Iteration 1 - deutsche Orientierung fuer den ersten Sensor
+- Bereich: Roadmap Iteration 2 - Startup-Details besser nutzbar machen
 
 ## Zuletzt abgeschlossen
 
@@ -46,14 +46,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Roadmap Iteration 1 umgesetzt: deutsche Hauptnavigation, deutscher Dashboard-Ueberblick, gruppierte Hinweis-Liste und ruhigere Finding-Zeilen
 - Detailansicht, Menueleiste und Settings weitgehend auf deutsche Nutzertexte umgestellt
 - Finding-Darstellung nutzt jetzt kuerzere, nutzerfreundlichere Titel und trennt neue Aenderungen von bekannten Autostart-Hinweisen
+- Roadmap Iteration 2 umgesetzt: Detailansicht zeigt Autostart-Details jetzt als verstaendliche Zusammenfassung mit Datei, internem Namen, Startbefehl, Startverhalten, Hintergrundverhalten und Pfad
+- Evidence-Titel und wichtige Evidence-Zusammenfassungen werden nutzerfreundlicher auf Deutsch angezeigt
+- Test fuer die Presentation-Logik der Startup-Details ergaenzt
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt deutlich verstaendlicher: deutsch, mit Ueberblick, gruppierten Hinweisen und ruhigeren Titeln; als naechstes sollten die Startup-Details in der Detailansicht noch besser nutzbar werden.
+Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details in der Detailansicht; als naechstes sollte der `Als erwartet merken`-Flow UI-nah getestet werden.
 
 ## Naechster konkreter Schritt
 
-Roadmap Iteration 2 umsetzen: Startup-Details besser nutzbar machen, also Label, Dateiname, Programmpfad, RunAtLoad und KeepAlive klarer hervorheben und alltagssprachlich erklaeren.
+Roadmap Iteration 3 umsetzen: den `Als erwartet merken`-Flow UI-nah testen oder bewusst dokumentieren, warum echte macOS-UI-Automation im aktuellen SwiftPM-Setup noch nicht stabil genug ist.
 
 ## Danach sinnvoll
 
@@ -69,7 +72,7 @@ Roadmap Iteration 2 umsetzen: Startup-Details besser nutzbar machen, also Label,
 - Full Disk Access, Administratorrechte, Accessibility, Screen Recording, Network Client Access und privilegierte Helper sind fuer den aktuellen MVP bewusst nicht noetig.
 - Der aktuelle Startup-Sensor deckt nur sichtbare `plist`-Dateien ab; moderne Login-/Background-Items und tatsaechlich geladener Zustand sind noch nicht abgedeckt.
 - Die UI-Aktion zum Merken des aktuellen Startup-Zustands ist vorhanden, aber noch nicht mit echter macOS-UI-Automation getestet.
-- Die App-Oberflaeche ist jetzt deutlich deutscher und strukturierter, aber Detail-Belege wirken noch wie technische Textbloecke.
+- Die App-Oberflaeche ist jetzt deutlich deutscher und strukturierter; echte macOS-UI-Automation fehlt weiterhin.
 
 ## Letzte Validierung
 
@@ -105,6 +108,12 @@ Zusaetzlich nach Roadmap Iteration 1:
 - `swift test`
 
 Der Lauf war erfolgreich mit 20 Tests.
+
+Zusaetzlich nach Roadmap Iteration 2:
+
+- `swift test`
+
+Der Lauf war erfolgreich mit 21 Tests.
 
 ## Letzte externe Recherche
 

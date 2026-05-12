@@ -81,6 +81,8 @@ Ein normaler Nutzer soll in 10 Sekunden verstehen:
 
 ## Iteration 2: Startup-Details besser nutzbar machen
 
+Status: umgesetzt am 2026-05-12.
+
 Ziel:
 Die gelesenen `.plist`-Details sollen nicht wie ein technischer Textblock wirken.
 
