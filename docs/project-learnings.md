@@ -23,6 +23,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Baseline-Probleme sollen sichtbar statt still sein, weil sonst gerade die Vertrauensfunktion der App schwerer nachvollziehbar wird.
 - Ein Baseline-Refresh darf nur als explizite Nutzerentscheidung passieren; normale Sensorlaeufe duerfen den bekannten Zustand nicht still ersetzen.
 - Einfache `.plist`-Details sind nuetzliche Evidence, bleiben aber Hinweise: sie beweisen weder, dass ein Eintrag aktiv laeuft, noch dass er gefaehrlich ist.
+- Die aktuelle App-UI muss fuer den MVP zuerst deutsch, priorisiert und erklaerend werden; eine reine Finding-Liste ohne roten Faden fuehlt sich trotz korrekter Daten unuebersichtlich an.
 
 ## Workflow Gotchas
 

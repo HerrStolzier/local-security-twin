@@ -58,9 +58,22 @@ Das ist fuer den MVP Absicht. Die App soll erst sicher erklaeren, was sie wirkli
 
 Der naechste gute Produkt-Schritt ist:
 
-1. Die `Remember as Expected`-UI mit echter macOS-UI-Interaktion testen.
-2. Danach Startup-Details in der UI besser darstellen.
-3. Danach entscheiden, ob Background Task Management als Spike oder Sensor folgt.
+1. Die aktuelle UI auf Deutsch und klarere Orientierung umbauen.
+2. Findings gruppieren und priorisieren, statt nur eine lange Liste zu zeigen.
+3. Danach die `Remember as Expected`-UI mit echter macOS-UI-Interaktion testen.
+4. Danach entscheiden, ob Background Task Management als Spike oder Sensor folgt.
+
+## Aktueller UX-Befund
+
+Der erste manuelle Blick auf die App zeigt:
+
+- Die Oberflaeche ist noch Englisch.
+- Die Liste ist schwer zu scannen.
+- Viele Findings klingen gleich wichtig.
+- Es fehlt ein roter Faden: Was ist neu, was ist bekannt, was soll ich tun?
+- Die App wirkt noch wie ein technischer Inspector, nicht wie ein ruhiger Sicherheitsbegleiter.
+
+Details stehen in `docs/ui-ux-redesign-notes.md`.
 
 ## Aktuelle technische Grenze
 

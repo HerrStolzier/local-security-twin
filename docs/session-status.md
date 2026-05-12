@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-12
-- Bereich: Orientierung, aktueller Repo-Review und isolierter App-Smoke
+- Bereich: Manueller UI-Befund und UX-Redesign-Notizen
 
 ## Zuletzt abgeschlossen
 
@@ -40,14 +40,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Doku-Spikes fuer Background Task Management, naechste Sensorwahl und Packaging/Signing angelegt
 - aktueller Ueberblick in `docs/current-overview.md` angelegt
 - App in isolierter temporaerer HOME-Umgebung mit vorbereitetem Startup-Diff gestartet; sie baute und blieb als GUI-Prozess aktiv, bis der Smoke-Test sie beendete
+- manueller UI-Befund dokumentiert: App ist noch englisch, unuebersichtlich und ohne klaren roten Faden
+- UI-/UX-Redesign-Notizen in `docs/ui-ux-redesign-notes.md` angelegt
 
 ## Aktueller Stand in einem Satz
 
-Die App kann Startup-Aenderungen robuster vergleichen, Baseline-Probleme sichtbar machen, den aktuellen Startup-Zustand bewusst neu merken und einfache Startup-`plist`-Details als Evidence anzeigen; die technische Basis ist gruen, aber echte UI-Automation fehlt noch.
+Die technische Basis ist gruen, aber der erste echte Blick auf die App zeigt klaren UX-Bedarf: deutsche Produktsprache, bessere Priorisierung, kuerzere Finding-Titel und ein roter Faden fehlen noch.
 
 ## Naechster konkreter Schritt
 
-Die neue "Remember as Expected"-UI mit echter macOS-UI-Interaktion pruefen. Wenn keine UI-Automation verfuegbar ist, als naechstes Startup-Details in der UI besser sichtbar machen und den manuellen UI-Check dokumentieren.
+Einen UI-/UX-Schnitt fuer den ersten Sensor umsetzen: Nutzertexte auf Deutsch, Dashboard mit kurzer Orientierung, Findings gruppieren/priorisieren und Detailansicht mit klarerer Einordnung starten.
 
 ## Danach sinnvoll
 
@@ -63,6 +65,7 @@ Die neue "Remember as Expected"-UI mit echter macOS-UI-Interaktion pruefen. Wenn
 - Full Disk Access, Administratorrechte, Accessibility, Screen Recording, Network Client Access und privilegierte Helper sind fuer den aktuellen MVP bewusst nicht noetig.
 - Der aktuelle Startup-Sensor deckt nur sichtbare `plist`-Dateien ab; moderne Login-/Background-Items und tatsaechlich geladener Zustand sind noch nicht abgedeckt.
 - Die UI-Aktion zum Merken des aktuellen Startup-Zustands ist vorhanden, aber noch nicht mit echter macOS-UI-Automation getestet.
+- Die App-Oberflaeche ist aktuell noch zu technisch, englisch und listenlastig fuer normale Nutzer.
 
 ## Letzte Validierung
 
@@ -104,6 +107,7 @@ Der volle Check war erfolgreich. Der App-Smoke bestaetigte Build und Start; ein 
 - `docs/next-sensor-selection.md`
 - `docs/packaging-signing-plan.md`
 - `docs/current-overview.md`
+- `docs/ui-ux-redesign-notes.md`
 
 ## Wenn du hier weitermachst
 

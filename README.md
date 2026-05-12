@@ -86,6 +86,7 @@ More detail lives in:
 
 - `docs/development-workflow.md`
 - `docs/current-overview.md`
+- `docs/ui-ux-redesign-notes.md`
 - `docs/session-status.md`
 - `docs/project-learnings.md`
 - `docs/macos-permissions-entitlements.md`
@@ -97,8 +98,8 @@ More detail lives in:
 ## Near-Term Next Steps
 
 1. Exercise the new "remember current startup state" UI against a real local app run.
-2. Decide whether the next product step should be deeper startup-item detail UI or a Background Task Management spike.
-3. Prepare the packaging/signing spike before adding broader system visibility.
+2. Redesign the first sensor UI around German product language, prioritization, and a clearer user path.
+3. Decide whether the next product step should be deeper startup-item detail UI or a Background Task Management spike.
 
 ## License
 
