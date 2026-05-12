@@ -117,6 +117,8 @@ Der wichtigste Nutzerfluss ist automatisiert oder bewusst als noch nicht automat
 
 ## Iteration 4: Background Task Management Spike
 
+Status: umgesetzt am 2026-05-12 als erster lokaler Spike. Entscheidung: noch keinen produktiven Sensor auf `sfltool dumpbtm` bauen.
+
 Ziel:
 Pruefen, ob moderne macOS-Login-/Background-Items eine stabile Quelle fuer einen spaeteren Sensor sind.
 

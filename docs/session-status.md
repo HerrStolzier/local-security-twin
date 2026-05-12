@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-12
-- Bereich: Roadmap Iteration 3 - UI-naher Test fuer Als-erwartet-merken-Flow
+- Bereich: Roadmap Iteration 4 - Background Task Management Spike
 
 ## Zuletzt abgeschlossen
 
@@ -50,14 +50,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Evidence-Titel und wichtige Evidence-Zusammenfassungen werden nutzerfreundlicher auf Deutsch angezeigt
 - Test fuer die Presentation-Logik der Startup-Details ergaenzt
 - Roadmap Iteration 3 umgesetzt: Dashboard-Entscheidungen in `DashboardPresentation` gebuendelt und der `Als erwartet merken`-Flow UI-nah ueber Store plus Presentation getestet
+- Roadmap Iteration 4 umgesetzt: Background Task Management Spike aktualisiert, `sfltool dumpbtm` lokal geprueft und als noch nicht robuste Produktquelle eingestuft
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; der `Als erwartet merken`-Flow ist UI-nah ueber Store und Dashboard-Presentation abgesichert.
+Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; Background Task Management bleibt fuer spaeter, weil `sfltool dumpbtm` lokal nicht robust genug fuer eine direkte MVP-Integration wirkte.
 
 ## Naechster konkreter Schritt
 
-Roadmap Iteration 4 umsetzen: Background Task Management Spike aktualisieren und auf dem lokalen macOS-System pruefen, ob `sfltool dumpbtm` ohne Zusatzrechte nutzbare, stabile Daten liefert.
+Roadmap Iteration 5 umsetzen: naechsten Sensor bewusst auswaehlen. Nach aktuellem Stand spricht viel dafuer, zuerst keinen neuen Sensor zu bauen, sondern Packaging/Signing und UI-Reife weiter vorzuziehen.
 
 ## Danach sinnvoll
 
@@ -75,6 +76,7 @@ Roadmap Iteration 4 umsetzen: Background Task Management Spike aktualisieren und
 - Die UI-Aktion zum Merken des aktuellen Startup-Zustands ist vorhanden, aber noch nicht mit echter macOS-UI-Automation getestet.
 - Die App-Oberflaeche ist jetzt deutlich deutscher und strukturierter; echte macOS-UI-Automation fehlt weiterhin.
 - Der wichtigste UI-Flow ist Store-/Presentation-nah getestet; echte macOS-Klickautomation fehlt weiterhin.
+- Background Task Management ist relevant, aber noch keine robuste Produktquelle fuer den MVP.
 
 ## Letzte Validierung
 
@@ -120,6 +122,12 @@ Der Lauf war erfolgreich mit 21 Tests.
 Zusaetzlich nach Roadmap Iteration 3:
 
 - Store-/Presentation-Test fuer den `Als erwartet merken`-Flow erweitert.
+
+Zusaetzlich nach Roadmap Iteration 4:
+
+- `sw_vers`
+- `command -v sfltool`
+- `sfltool dumpbtm` zeitbegrenzt manuell geprueft
 
 ## Letzte externe Recherche
 
