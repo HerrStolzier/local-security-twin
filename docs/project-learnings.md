@@ -28,6 +28,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Startup-Details sind fuer normale Nutzer nur hilfreich, wenn `Label`, Startbefehl, Startverhalten und Hintergrundverhalten vor den Roh-Belegen kurz eingeordnet werden.
 - `sfltool dumpbtm` ist relevant fuer Background Task Management, wirkte im ersten lokalen Test aber nicht robust genug fuer eine direkte MVP-Datenquelle.
 - Der naechste Sensor sollte erst nach Packaging-/Sandbox-Klaerung gewaehlt werden, weil Distribution und Sandbox die lokale Sichtbarkeit stark beeinflussen koennen.
+- Der aktuelle SwiftPM-Build ist ein ad-hoc signiertes Executable ohne `.app`-Bundle, Entitlements und TeamIdentifier; fuer Nutzer-Testbuilds braucht das Projekt einen App-Bundle-/Xcode-Projekt-Spike.
 
 ## Workflow Gotchas
 

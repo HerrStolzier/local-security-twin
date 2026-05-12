@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-12
-- Bereich: Roadmap Iteration 5 - naechsten Sensor bewusst auswaehlen
+- Bereich: Roadmap Iteration 6 - Packaging, Signing und Sandbox
 
 ## Zuletzt abgeschlossen
 
@@ -52,14 +52,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Roadmap Iteration 3 umgesetzt: Dashboard-Entscheidungen in `DashboardPresentation` gebuendelt und der `Als erwartet merken`-Flow UI-nah ueber Store plus Presentation getestet
 - Roadmap Iteration 4 umgesetzt: Background Task Management Spike aktualisiert, `sfltool dumpbtm` lokal geprueft und als noch nicht robuste Produktquelle eingestuft
 - Roadmap Iteration 5 umgesetzt: Entscheidung dokumentiert, jetzt keinen zweiten Sensor zu bauen und zuerst Packaging/Signing/Sandbox zu klaeren
+- Roadmap Iteration 6 umgesetzt: Packaging-/Signing-Plan konkretisiert; aktueller SwiftPM-Build ist ad-hoc signiertes Executable ohne App-Bundle, Xcode-Projekt oder Entitlements
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; der naechste Sensor ist bewusst zurueckgestellt, bis Packaging/Signing/Sandbox geklaert sind.
+Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; alle Roadmap-Iterationen sind abgearbeitet, und der naechste technische Schnitt ist ein minimaler App-Bundle-/Xcode-Projekt-Spike.
 
 ## Naechster konkreter Schritt
 
-Roadmap Iteration 6 umsetzen: Packaging, Signing und Sandbox klaeren, insbesondere SwiftPM vs. Xcode-Projekt und Sandbox-Auswirkung auf den Startup-Sensor.
+Einen minimalen App-Bundle-/Xcode-Projekt-Spike planen oder umsetzen, damit UI-Automation, Signing, Hardened Runtime und Sandbox-Auswirkungen sauber getestet werden koennen.
 
 ## Danach sinnvoll
 
@@ -79,6 +80,7 @@ Roadmap Iteration 6 umsetzen: Packaging, Signing und Sandbox klaeren, insbesonde
 - Der wichtigste UI-Flow ist Store-/Presentation-nah getestet; echte macOS-Klickautomation fehlt weiterhin.
 - Background Task Management ist relevant, aber noch keine robuste Produktquelle fuer den MVP.
 - Kein zweiter Sensor ist aktuell ausgewaehlt; diese Entscheidung ist bewusst, nicht vergessen.
+- Aktueller Build ist fuer Entwicklung gut, aber noch kein distributionsnahes `.app`-Bundle.
 
 ## Letzte Validierung
 
@@ -130,6 +132,13 @@ Zusaetzlich nach Roadmap Iteration 4:
 - `sw_vers`
 - `command -v sfltool`
 - `sfltool dumpbtm` zeitbegrenzt manuell geprueft
+
+Zusaetzlich nach Roadmap Iteration 6:
+
+- `swift package describe --type json`
+- Suche nach `.xcodeproj`, `.xcworkspace` und `.entitlements`
+- `xcodebuild -version`
+- `codesign -dv .build/debug/LocalSecurityTwin`
 
 ## Letzte externe Recherche
 

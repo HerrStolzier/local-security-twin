@@ -159,6 +159,8 @@ Auswahlkriterien:
 
 ## Iteration 6: Packaging, Signing und Sandbox
 
+Status: umgesetzt am 2026-05-12 als Packaging-Spike. Entscheidung: SwiftPM bleibt kurzfristig fuer Entwicklung; vor Nutzer-Testbuilds braucht es einen App-Bundle-/Xcode-Projekt-Spike.
+
 Ziel:
 Vor echter Distribution klaeren, wie die App sauber gebaut, signiert und spaeter notarized wird.
 
