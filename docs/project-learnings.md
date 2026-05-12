@@ -24,6 +24,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Ein Baseline-Refresh darf nur als explizite Nutzerentscheidung passieren; normale Sensorlaeufe duerfen den bekannten Zustand nicht still ersetzen.
 - Einfache `.plist`-Details sind nuetzliche Evidence, bleiben aber Hinweise: sie beweisen weder, dass ein Eintrag aktiv laeuft, noch dass er gefaehrlich ist.
 - Die aktuelle App-UI muss fuer den MVP zuerst deutsch, priorisiert und erklaerend werden; eine reine Finding-Liste ohne roten Faden fuehlt sich trotz korrekter Daten unuebersichtlich an.
+- Fuer den ersten UI-Schnitt reicht es nicht, Texte zu uebersetzen; die App braucht einen Ueberblick und Gruppen, damit neue Aenderungen nicht zwischen bekannten Autostart-Hinweisen untergehen.
 
 ## Workflow Gotchas
 

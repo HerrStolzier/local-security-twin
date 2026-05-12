@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-12
-- Bereich: Manueller UI-Befund und UX-Redesign-Notizen
+- Bereich: Roadmap Iteration 1 - deutsche Orientierung fuer den ersten Sensor
 
 ## Zuletzt abgeschlossen
 
@@ -43,14 +43,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - manueller UI-Befund dokumentiert: App ist noch englisch, unuebersichtlich und ohne klaren roten Faden
 - UI-/UX-Redesign-Notizen in `docs/ui-ux-redesign-notes.md` angelegt
 - zentrale Planungsuebersicht in `docs/roadmap.md` angelegt
+- Roadmap Iteration 1 umgesetzt: deutsche Hauptnavigation, deutscher Dashboard-Ueberblick, gruppierte Hinweis-Liste und ruhigere Finding-Zeilen
+- Detailansicht, Menueleiste und Settings weitgehend auf deutsche Nutzertexte umgestellt
+- Finding-Darstellung nutzt jetzt kuerzere, nutzerfreundlichere Titel und trennt neue Aenderungen von bekannten Autostart-Hinweisen
 
 ## Aktueller Stand in einem Satz
 
-Die technische Basis ist gruen, aber der erste echte Blick auf die App zeigt klaren UX-Bedarf: deutsche Produktsprache, bessere Priorisierung, kuerzere Finding-Titel und ein roter Faden fehlen noch.
+Die App zeigt den ersten Sensor jetzt deutlich verstaendlicher: deutsch, mit Ueberblick, gruppierten Hinweisen und ruhigeren Titeln; als naechstes sollten die Startup-Details in der Detailansicht noch besser nutzbar werden.
 
 ## Naechster konkreter Schritt
 
-Einen UI-/UX-Schnitt fuer den ersten Sensor umsetzen: Nutzertexte auf Deutsch, Dashboard mit kurzer Orientierung, Findings gruppieren/priorisieren und Detailansicht mit klarerer Einordnung starten.
+Roadmap Iteration 2 umsetzen: Startup-Details besser nutzbar machen, also Label, Dateiname, Programmpfad, RunAtLoad und KeepAlive klarer hervorheben und alltagssprachlich erklaeren.
 
 ## Danach sinnvoll
 
@@ -66,7 +69,7 @@ Einen UI-/UX-Schnitt fuer den ersten Sensor umsetzen: Nutzertexte auf Deutsch, D
 - Full Disk Access, Administratorrechte, Accessibility, Screen Recording, Network Client Access und privilegierte Helper sind fuer den aktuellen MVP bewusst nicht noetig.
 - Der aktuelle Startup-Sensor deckt nur sichtbare `plist`-Dateien ab; moderne Login-/Background-Items und tatsaechlich geladener Zustand sind noch nicht abgedeckt.
 - Die UI-Aktion zum Merken des aktuellen Startup-Zustands ist vorhanden, aber noch nicht mit echter macOS-UI-Automation getestet.
-- Die App-Oberflaeche ist aktuell noch zu technisch, englisch und listenlastig fuer normale Nutzer.
+- Die App-Oberflaeche ist jetzt deutlich deutscher und strukturierter, aber Detail-Belege wirken noch wie technische Textbloecke.
 
 ## Letzte Validierung
 
@@ -96,6 +99,12 @@ Zusaetzlich am 2026-05-12:
 - isolierter `swift run LocalSecurityTwin`-Smoke mit temporaerer HOME-Umgebung und vorbereitetem Startup-Diff
 
 Der volle Check war erfolgreich. Der App-Smoke bestaetigte Build und Start; ein echter Klick auf die macOS-UI wurde noch nicht automatisiert.
+
+Zusaetzlich nach Roadmap Iteration 1:
+
+- `swift test`
+
+Der Lauf war erfolgreich mit 20 Tests.
 
 ## Letzte externe Recherche
 

@@ -54,6 +54,8 @@ Nicht-Ziel dieses Schnitts:
 
 ## Iteration 1: Deutsche Orientierung fuer den ersten Sensor
 
+Status: umgesetzt am 2026-05-12.
+
 Ziel:
 Die App soll beim ersten echten Blick verstaendlich sein.
 

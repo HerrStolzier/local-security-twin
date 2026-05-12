@@ -10,6 +10,8 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             VStack(spacing: 0) {
+                DashboardSummary(findings: findings)
+
                 if hasStartupChanges {
                     RememberStartupStateBanner(
                         error: lastBaselineRefreshError,
@@ -19,26 +21,35 @@ struct ContentView: View {
                     )
                 }
 
-                List(findings, selection: $selection) { finding in
-                    FindingRowView(finding: finding)
-                        .tag(finding.id)
+                List(selection: $selection) {
+                    ForEach(FindingGroup.allCases) { group in
+                        let groupFindings = findings(in: group)
+                        if !groupFindings.isEmpty {
+                            Section(group.title) {
+                                ForEach(groupFindings) { finding in
+                                    FindingRowView(finding: finding)
+                                        .tag(finding.id)
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            .navigationTitle("Findings")
+            .navigationTitle("Hinweise")
         } detail: {
             if findings.isEmpty {
                 ContentUnavailableView(
-                    "No findings yet",
+                    "Noch keine Hinweise",
                     systemImage: "checkmark.shield",
-                    description: Text("The first local sensor stays quiet unless it finds visible startup items. That means the app is not seeing anything worth surfacing right now.")
+                    description: Text("Der erste lokale Sensor bleibt ruhig, solange keine sichtbaren Autostart-Hinweise gefunden werden.")
                 )
             } else if let selectedFinding = findings.first(where: { $0.id == selection }) {
                 FindingDetailView(finding: selectedFinding)
             } else {
                 ContentUnavailableView(
-                    "Select a finding",
+                    "Hinweis auswaehlen",
                     systemImage: "shield",
-                    description: Text("The future app will show live evidence, user guidance, and policy decisions here.")
+                    description: Text("Waehle links einen Hinweis aus, um Einordnung, Belege und sichere naechste Schritte zu sehen.")
                 )
             }
         }
@@ -56,22 +67,92 @@ struct ContentView: View {
             selection = newFindings.first?.id
         }
         .confirmationDialog(
-            "Remember current startup state?",
+            "Aktuellen Autostart-Zustand merken?",
             isPresented: $isShowingRememberConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Remember Current Startup State") {
+            Button("Als erwartet merken") {
                 rememberCurrentStartupState()
             }
 
-            Button("Cancel", role: .cancel) {}
+            Button("Abbrechen", role: .cancel) {}
         } message: {
-            Text("The app will treat the currently visible startup hints as expected from now on. It will not change system settings.")
+            Text("Die App behandelt die aktuell sichtbaren Autostart-Hinweise danach als erwartet. Sie aendert dabei keine Systemeinstellungen.")
         }
     }
 
     private var hasStartupChanges: Bool {
         findings.contains { $0.source.kind == .baselineDiff }
+    }
+
+    private func findings(in group: FindingGroup) -> [Finding] {
+        findings.filter { $0.displayGroup == group }
+    }
+}
+
+private struct DashboardSummary: View {
+    let findings: [Finding]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Lokaler Sicherheitsueberblick")
+                .font(.headline)
+
+            Text(summaryText)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+
+            HStack(spacing: 10) {
+                SummaryPill(value: startupChangeCount, label: "neue Aenderungen")
+                SummaryPill(value: knownStartupCount, label: "Autostart-Hinweise")
+                SummaryPill(value: reviewCount, label: "zur Beobachtung")
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(14)
+        .background(.background)
+    }
+
+    private var startupChangeCount: Int {
+        findings.filter { $0.displayGroup == .changes }.count
+    }
+
+    private var knownStartupCount: Int {
+        findings.filter { $0.displayGroup == .knownStartupHints }.count
+    }
+
+    private var reviewCount: Int {
+        findings.filter { $0.displayGroup == .review }.count
+    }
+
+    private var summaryText: String {
+        if findings.isEmpty {
+            return "Aktuell sieht die App keine lokalen Hinweise, die sie anzeigen sollte."
+        }
+
+        if startupChangeCount > 0 {
+            return "Wichtig sind zuerst die Aenderungen seit dem gemerkten Zustand. Bekannte Hinweise kannst du danach in Ruhe pruefen."
+        }
+
+        return "Es sind sichtbare Autostart-Hinweise vorhanden. Das ist nicht automatisch gefaehrlich, sondern zuerst eine lokale Orientierung."
+    }
+}
+
+private struct SummaryPill: View {
+    let value: Int
+    let label: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("\(value)")
+                .font(.headline)
+            Text(label)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(10)
+        .background(.quinary, in: RoundedRectangle(cornerRadius: 8))
     }
 }
 
@@ -83,16 +164,16 @@ private struct RememberStartupStateBanner: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .center, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Startup changes are visible")
+                    Text("Autostart-Aenderungen sichtbar")
                         .font(.headline)
-                    Text("If these changes are expected, remember the current startup state so the app can stay quiet about them next time.")
+                    Text("Wenn diese Aenderungen erwartet sind, kannst du den aktuellen Zustand merken. Die App bleibt dann beim naechsten Lauf ruhiger.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
 
                 Spacer()
 
-                Button("Remember as Expected", action: onConfirm)
+                Button("Als erwartet merken", action: onConfirm)
                     .buttonStyle(.borderedProminent)
             }
 

@@ -6,10 +6,10 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            Section("Trust and policy") {
+            Section("Vertrauen und Entscheidungen") {
                 if policyStore.rememberedPolicies.isEmpty {
-                    Text("No remembered approvals yet.")
-                    Text("The app can now remember approved or denied actions locally. Future work will connect this store to real findings and guided actions.")
+                    Text("Noch keine gemerkten Entscheidungen.")
+                    Text("Die App kann erlaubte oder abgelehnte Schritte lokal merken. Spaetere gefuehrte Aktionen werden diese Entscheidungen nutzen.")
                         .foregroundStyle(.secondary)
                 } else {
                     ForEach(policyStore.rememberedPolicies) { record in
@@ -32,11 +32,11 @@ struct SettingsView: View {
                                 .foregroundStyle(.secondary)
 
                             HStack {
-                                Text("\(record.scope.title) · \(record.risk.title) risk")
+                                Text("\(record.scope.title) · Risiko: \(record.risk.title)")
                                     .font(.caption)
                                     .foregroundStyle(.tertiary)
                                 Spacer()
-                                Button("Reset") {
+                                Button("Zuruecksetzen") {
                                     reset(record.key)
                                 }
                             }
@@ -44,20 +44,20 @@ struct SettingsView: View {
                         .padding(.vertical, 4)
                     }
 
-                    Button("Reset all remembered decisions", role: .destructive) {
+                    Button("Alle gemerkten Entscheidungen zuruecksetzen", role: .destructive) {
                         resetAll()
                     }
                 }
             }
 
-            Section("Connectivity") {
-                Text("Online intelligence is not enabled in this skeleton.")
-                Text("The product should stay useful offline.")
+            Section("Verbindung") {
+                Text("Online-Intelligenz ist aktuell nicht aktiviert.")
+                Text("Das Produkt soll auch offline nuetzlich bleiben.")
                     .foregroundStyle(.secondary)
             }
 
             if let persistenceError {
-                Section("Storage") {
+                Section("Speicher") {
                     Text(persistenceError)
                         .foregroundStyle(.red)
                 }

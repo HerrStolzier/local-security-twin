@@ -11,27 +11,27 @@ struct MenuBarView: View {
             Text("Local Security Twin")
                 .font(.headline)
 
-            Text("\(findings.count) sample findings loaded")
+            Text("\(findings.count) lokale Hinweise geladen")
                 .foregroundStyle(.secondary)
 
             Divider()
 
-            Text("Default posture")
+            Text("Grundhaltung")
                 .font(.subheadline)
                 .fontWeight(.semibold)
-            Text("Inspect, explain, and recommend. No silent changes.")
+            Text("Erst pruefen und erklaeren. Keine stillen Systemaenderungen.")
                 .foregroundStyle(.secondary)
 
             Divider()
 
-            Text("\(rememberedPolicyCount) remembered policy decisions")
+            Text("\(rememberedPolicyCount) gemerkte Entscheidungen")
                 .font(.subheadline)
-            Text("Trusted and denied actions stay visible so the user can review them later.")
+            Text("Erlaubte und abgelehnte Schritte bleiben lokal nachvollziehbar.")
                 .foregroundStyle(.secondary)
 
             Divider()
 
-            Text("\(sensorCount) local sensor(s) connected")
+            Text("\(sensorCount) lokale Sensoren verbunden")
                 .font(.subheadline)
             Text(lastRefreshText)
                 .foregroundStyle(.secondary)
@@ -42,11 +42,11 @@ struct MenuBarView: View {
 
     private var lastRefreshText: String {
         guard let lastRefreshAt else {
-            return "No local sensor refresh has finished yet."
+            return "Noch kein lokaler Sensorlauf abgeschlossen."
         }
 
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .full
-        return "Last refresh \(formatter.localizedString(for: lastRefreshAt, relativeTo: Date()))."
+        return "Letzter Lauf \(formatter.localizedString(for: lastRefreshAt, relativeTo: Date()))."
     }
 }

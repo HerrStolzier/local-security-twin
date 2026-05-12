@@ -8,22 +8,23 @@ struct FindingDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(finding.title)
+                    Text(finding.displayTitle)
                         .font(.largeTitle)
                         .fontWeight(.bold)
 
                     HStack(spacing: 12) {
-                        Label(finding.source.title, systemImage: "dot.scope")
-                        Label(finding.severity.title, systemImage: "shield")
-                        Label(finding.confidence.title, systemImage: "checkmark.seal")
+                        Label(finding.displaySourceTitle, systemImage: "dot.scope")
+                        Label(finding.severity.displayTitle, systemImage: "shield")
+                        Label(finding.confidence.displayTitle, systemImage: "checkmark.seal")
                     }
                     .foregroundStyle(.secondary)
                     .font(.subheadline)
                 }
 
-                FindingSection(title: "What happened", text: finding.summary)
-                FindingSection(title: "Why it matters", text: finding.userImpact)
-                FindingSection(title: "What to do next", text: finding.nextStep)
+                FindingSection(title: "Kurze Einordnung", text: finding.plainLanguageAssessment)
+                FindingSection(title: "Was wurde gefunden?", text: finding.displaySummary)
+                FindingSection(title: "Warum ist das wichtig?", text: finding.userImpact)
+                FindingSection(title: "Naechster sicherer Schritt", text: finding.nextStep)
                 EvidenceSection(evidence: finding.evidence)
                 RecommendationSection(
                     finding: finding,
@@ -31,17 +32,17 @@ struct FindingDetailView: View {
                 )
 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Product note")
+                    Text("Produkt-Hinweis")
                         .font(.title3)
                         .fontWeight(.semibold)
 
-                    Text("This placeholder detail view represents the future explain-before-action flow. Real findings should always carry evidence, plain-language context, and a safe action path.")
+                    Text("Diese Ansicht erklaert zuerst, was sichtbar ist. Sie aendert keine Systemeinstellungen und beweist nicht, dass ein Hinweis gefaehrlich ist.")
                         .foregroundStyle(.secondary)
                 }
             }
             .padding(28)
         }
-        .navigationTitle(finding.title)
+        .navigationTitle(finding.displayTitle)
     }
 }
 
@@ -50,7 +51,7 @@ private struct EvidenceSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Evidence")
+            Text("Belege")
                 .font(.title3)
                 .fontWeight(.semibold)
 
@@ -76,11 +77,11 @@ private struct RecommendationSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Recommended actions")
+            Text("Empfohlene Schritte")
                 .font(.title3)
                 .fontWeight(.semibold)
 
-            Text("These controls currently record local trust decisions only. They do not run the real action yet.")
+            Text("Diese Schaltflaechen speichern aktuell nur lokale Entscheidungen. Sie fuehren noch keine echte Systemaktion aus.")
                 .foregroundStyle(.secondary)
 
             ForEach(finding.recommendations) { recommendation in
@@ -125,15 +126,15 @@ private struct RecommendationCard: View {
                 .foregroundStyle(.secondary)
 
             HStack {
-                Button("Allow Once") {
+                Button("Einmal erlauben") {
                     record(.allow, scope: .session)
                 }
 
-                Button("Remember Allow") {
+                Button("Merken: erlauben") {
                     record(.allow, scope: .remembered)
                 }
 
-                Button("Remember Deny") {
+                Button("Merken: ablehnen") {
                     record(.deny, scope: .remembered)
                 }
             }
@@ -152,26 +153,26 @@ private struct RecommendationCard: View {
     private var statusText: String {
         switch policyStore.resolution(for: request) {
         case .needsConsent(.standard):
-            return "Ask First"
+            return "Fragt zuerst"
         case .needsConsent(.explicitApproval):
-            return "Needs Explicit Approval"
+            return "Braucht Zustimmung"
         case .allowed(.session):
-            return "Allowed This Session"
+            return "Diese Sitzung erlaubt"
         case .allowed(.remembered):
-            return "Remembered Allow"
+            return "Erlaubnis gemerkt"
         case .denied(.session):
-            return "Denied This Session"
+            return "Diese Sitzung abgelehnt"
         case .denied(.remembered):
-            return "Remembered Deny"
+            return "Ablehnung gemerkt"
         }
     }
 
     private var requirementText: String {
         switch request.confirmationRequirement {
         case .standard:
-            return "This is a standard-risk guided action."
+            return "Das ist ein normaler gefuehrter Schritt."
         case .explicitApproval:
-            return "This is a high-risk guided action and should always be treated as an explicit user choice."
+            return "Dieser Schritt braucht eine bewusste Zustimmung."
         }
     }
 
