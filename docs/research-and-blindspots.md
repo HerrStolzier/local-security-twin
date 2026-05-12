@@ -222,3 +222,18 @@ Vor dem Trusted-Baseline-Refresh sollte ein kleiner technischer Sauberkeitsschni
 - Tests decken korrupten/falschen Baseline-Zustand ab
 
 Danach ist der Trusted-Baseline-Refresh deutlich vertrauenswuerdiger.
+
+## Umsetzungsstand nach der Runde
+
+Dieser Sauberkeitsschnitt wurde inzwischen umgesetzt:
+
+- `StartupItemBaselineStore` validiert die erwartete `sensorID`.
+- Baseline-Fehler werden als Sensor-Note sichtbar.
+- Der aktuelle Startup-Zustand kann explizit als erwartet gemerkt werden.
+- Einfache `.plist`-Details werden als Evidence gelesen.
+
+Weiter offen bleibt:
+
+- echte macOS-UI-Automation fuer den `Remember as Expected`-Klickpfad
+- moderne Login-/Background-Items
+- Packaging, Signing, Sandbox und Notarization

@@ -36,4 +36,4 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Der lokale Standardlauf fuer Qualitaet ist `./scripts/checks.sh`.
 - Darin stecken Refactor-/Regression-Pass, Security Checks und E2E-Smoke-Tests.
 - Die jetzigen E2E-Tests pruefen noch keinen echten UI-Flow, sondern das aktuelle Integrationsfundament.
-- Der erste reale Sensor liest aktuell sichtbare `LaunchAgents`- und `LaunchDaemons`-`plist`-Dateien aus dem Dateisystem, ohne deren Inhalte schon tiefer zu interpretieren.
+- Der erste reale Sensor liest aktuell sichtbare `LaunchAgents`- und `LaunchDaemons`-`plist`-Dateien aus dem Dateisystem und interpretiert einfache Felder wie `Label`, `ProgramArguments`, `RunAtLoad` und `KeepAlive`, ohne daraus Aktivitaet oder Gefahr zu behaupten.

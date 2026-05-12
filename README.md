@@ -85,6 +85,7 @@ That workflow intentionally includes:
 More detail lives in:
 
 - `docs/development-workflow.md`
+- `docs/current-overview.md`
 - `docs/session-status.md`
 - `docs/project-learnings.md`
 - `docs/macos-permissions-entitlements.md`

@@ -9,8 +9,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-06
-- Bereich: Baseline-Robustheit, Trusted-Refresh-Domainlogik und naechste Spike-Dokumente
+- Datum: 2026-05-12
+- Bereich: Orientierung, aktueller Repo-Review und isolierter App-Smoke
 
 ## Zuletzt abgeschlossen
 
@@ -38,14 +38,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Dashboard zeigt bei Startup-Aenderungen eine Aktion zum bewussten Merken des aktuellen Startup-Zustands
 - UI-/Policy-Sprache fuer Safe Validation ruhiger gefasst als "Gather More Evidence"
 - Doku-Spikes fuer Background Task Management, naechste Sensorwahl und Packaging/Signing angelegt
+- aktueller Ueberblick in `docs/current-overview.md` angelegt
+- App in isolierter temporaerer HOME-Umgebung mit vorbereitetem Startup-Diff gestartet; sie baute und blieb als GUI-Prozess aktiv, bis der Smoke-Test sie beendete
 
 ## Aktueller Stand in einem Satz
 
-Die App kann Startup-Aenderungen robuster vergleichen, Baseline-Probleme sichtbar machen, den aktuellen Startup-Zustand bewusst neu merken und einfache Startup-`plist`-Details als Evidence anzeigen.
+Die App kann Startup-Aenderungen robuster vergleichen, Baseline-Probleme sichtbar machen, den aktuellen Startup-Zustand bewusst neu merken und einfache Startup-`plist`-Details als Evidence anzeigen; die technische Basis ist gruen, aber echte UI-Automation fehlt noch.
 
 ## Naechster konkreter Schritt
 
-Die neue "Remember as Expected"-UI gegen einen echten lokalen App-Lauf pruefen und danach entscheiden, ob als naechstes tiefere Startup-Detail-UI oder der Background-Task-Management-Spike priorisiert wird.
+Die neue "Remember as Expected"-UI mit echter macOS-UI-Interaktion pruefen. Wenn keine UI-Automation verfuegbar ist, als naechstes Startup-Details in der UI besser sichtbar machen und den manuellen UI-Check dokumentieren.
 
 ## Danach sinnvoll
 
@@ -84,6 +86,13 @@ Zusaetzlich nach der Baseline-/Refresh-Implementierung:
 
 Die Laeufe waren erfolgreich; `swift test` umfasst jetzt 20 Tests.
 
+Zusaetzlich am 2026-05-12:
+
+- `./scripts/checks.sh`
+- isolierter `swift run LocalSecurityTwin`-Smoke mit temporaerer HOME-Umgebung und vorbereitetem Startup-Diff
+
+Der volle Check war erfolgreich. Der App-Smoke bestaetigte Build und Start; ein echter Klick auf die macOS-UI wurde noch nicht automatisiert.
+
 ## Letzte externe Recherche
 
 - `docs/research-and-blindspots.md`
@@ -94,6 +103,7 @@ Die Laeufe waren erfolgreich; `swift test` umfasst jetzt 20 Tests.
 - `docs/background-task-management-spike.md`
 - `docs/next-sensor-selection.md`
 - `docs/packaging-signing-plan.md`
+- `docs/current-overview.md`
 
 ## Wenn du hier weitermachst
 
