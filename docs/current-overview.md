@@ -63,6 +63,8 @@ Der naechste gute Produkt-Schritt ist:
 3. Danach die `Remember as Expected`-UI mit echter macOS-UI-Interaktion testen.
 4. Danach entscheiden, ob Background Task Management als Spike oder Sensor folgt.
 
+Die zentrale Planungsuebersicht steht in `docs/roadmap.md`.
+
 ## Aktueller UX-Befund
 
 Der erste manuelle Blick auf die App zeigt:

@@ -42,6 +42,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - App in isolierter temporaerer HOME-Umgebung mit vorbereitetem Startup-Diff gestartet; sie baute und blieb als GUI-Prozess aktiv, bis der Smoke-Test sie beendete
 - manueller UI-Befund dokumentiert: App ist noch englisch, unuebersichtlich und ohne klaren roten Faden
 - UI-/UX-Redesign-Notizen in `docs/ui-ux-redesign-notes.md` angelegt
+- zentrale Planungsuebersicht in `docs/roadmap.md` angelegt
 
 ## Aktueller Stand in einem Satz
 
@@ -108,6 +109,7 @@ Der volle Check war erfolgreich. Der App-Smoke bestaetigte Build und Start; ein 
 - `docs/packaging-signing-plan.md`
 - `docs/current-overview.md`
 - `docs/ui-ux-redesign-notes.md`
+- `docs/roadmap.md`
 
 ## Wenn du hier weitermachst
 
