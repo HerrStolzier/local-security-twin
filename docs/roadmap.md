@@ -138,6 +138,8 @@ Eine klare Entscheidung:
 
 ## Iteration 5: Naechsten Sensor auswaehlen
 
+Status: umgesetzt am 2026-05-12. Entscheidung: noch keinen neuen Sensor bauen; zuerst Packaging/Signing/Sandbox klaeren.
+
 Ziel:
 Nach UI-Klarheit entscheiden, welche lokale Sicht als naechstes echten Nutzerwert bringt.
 

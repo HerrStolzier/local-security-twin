@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-12
-- Bereich: Roadmap Iteration 4 - Background Task Management Spike
+- Bereich: Roadmap Iteration 5 - naechsten Sensor bewusst auswaehlen
 
 ## Zuletzt abgeschlossen
 
@@ -51,14 +51,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Test fuer die Presentation-Logik der Startup-Details ergaenzt
 - Roadmap Iteration 3 umgesetzt: Dashboard-Entscheidungen in `DashboardPresentation` gebuendelt und der `Als erwartet merken`-Flow UI-nah ueber Store plus Presentation getestet
 - Roadmap Iteration 4 umgesetzt: Background Task Management Spike aktualisiert, `sfltool dumpbtm` lokal geprueft und als noch nicht robuste Produktquelle eingestuft
+- Roadmap Iteration 5 umgesetzt: Entscheidung dokumentiert, jetzt keinen zweiten Sensor zu bauen und zuerst Packaging/Signing/Sandbox zu klaeren
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; Background Task Management bleibt fuer spaeter, weil `sfltool dumpbtm` lokal nicht robust genug fuer eine direkte MVP-Integration wirkte.
+Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; der naechste Sensor ist bewusst zurueckgestellt, bis Packaging/Signing/Sandbox geklaert sind.
 
 ## Naechster konkreter Schritt
 
-Roadmap Iteration 5 umsetzen: naechsten Sensor bewusst auswaehlen. Nach aktuellem Stand spricht viel dafuer, zuerst keinen neuen Sensor zu bauen, sondern Packaging/Signing und UI-Reife weiter vorzuziehen.
+Roadmap Iteration 6 umsetzen: Packaging, Signing und Sandbox klaeren, insbesondere SwiftPM vs. Xcode-Projekt und Sandbox-Auswirkung auf den Startup-Sensor.
 
 ## Danach sinnvoll
 
@@ -77,6 +78,7 @@ Roadmap Iteration 5 umsetzen: naechsten Sensor bewusst auswaehlen. Nach aktuelle
 - Die App-Oberflaeche ist jetzt deutlich deutscher und strukturierter; echte macOS-UI-Automation fehlt weiterhin.
 - Der wichtigste UI-Flow ist Store-/Presentation-nah getestet; echte macOS-Klickautomation fehlt weiterhin.
 - Background Task Management ist relevant, aber noch keine robuste Produktquelle fuer den MVP.
+- Kein zweiter Sensor ist aktuell ausgewaehlt; diese Entscheidung ist bewusst, nicht vergessen.
 
 ## Letzte Validierung
 

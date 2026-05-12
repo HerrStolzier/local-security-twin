@@ -8,6 +8,12 @@ Diese Datei haelt die Kriterien fuer den naechsten lokalen Sensor fest.
 
 Noch keinen zweiten Sensor bauen, bevor Baseline-Refresh, UI-Sprache und Startup-Item-Details stabil sind.
 
+Update 2026-05-12:
+Nach UI-Iteration und Background-Task-Management-Spike bleibt diese Entscheidung bestehen.
+
+Der naechste Sensor wird bewusst noch nicht implementiert.
+Stattdessen soll zuerst Packaging/Signing geklaert werden, weil Sandbox, App-Bundle-Form und spaetere UI-Automation die Sensor-Strategie beeinflussen koennen.
+
 ## Kandidaten
 
 ### Moderne Login- und Background-Items
@@ -19,7 +25,7 @@ Risiko:
 Quelle und Stabilitaet muessen erst ueber den Background-Task-Management-Spike geprueft werden.
 
 Status:
-Interessant, aber noch nicht sofort implementieren.
+Interessant, aber noch nicht sofort implementieren. Der erste lokale `sfltool dumpbtm`-Test war nicht robust genug fuer eine direkte Produktquelle.
 
 ### Privacy-Permissions-Sichtbarkeit
 
@@ -43,6 +49,15 @@ Zu viele kleine Checks koennen wie ein lautes Security-Dashboard wirken.
 Status:
 Nur auswaehlen, wenn der Nutzerwert in einem Satz erklaerbar ist.
 
+## Aktuelle Priorisierung
+
+1. Kein neuer Sensor in der naechsten Iteration.
+2. Packaging/Signing/Sandbox klaeren.
+3. Danach erneut entscheiden:
+   - Wenn Sandbox/Distribution die Startup-Sicht stark begrenzt, Sensor-Strategie anpassen.
+   - Wenn Packaging stabil ist, Privacy-Permissions-Sichtbarkeit als naechsten Research-Kandidaten pruefen.
+   - Background Task Management erst wieder aufgreifen, wenn ein stabiler Diagnose-Harness existiert.
+
 ## Auswahlkriterien
 
 Der naechste Sensor muss:
@@ -52,3 +67,10 @@ Der naechste Sensor muss:
 - fuer normale Nutzer leicht erklaerbar sein
 - geringe Fehlalarm-Gefahr haben
 - Evidence liefern, statt nur Behauptungen
+
+## Entscheidung
+
+Fuer den aktuellen MVP ist der naechste fachliche Schritt kein neuer Sensor.
+
+Naechster Schritt:
+`docs/packaging-signing-plan.md` konkretisieren und einen kleinen Packaging-/Sandbox-Spike durchfuehren.

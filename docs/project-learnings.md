@@ -27,6 +27,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Fuer den ersten UI-Schnitt reicht es nicht, Texte zu uebersetzen; die App braucht einen Ueberblick und Gruppen, damit neue Aenderungen nicht zwischen bekannten Autostart-Hinweisen untergehen.
 - Startup-Details sind fuer normale Nutzer nur hilfreich, wenn `Label`, Startbefehl, Startverhalten und Hintergrundverhalten vor den Roh-Belegen kurz eingeordnet werden.
 - `sfltool dumpbtm` ist relevant fuer Background Task Management, wirkte im ersten lokalen Test aber nicht robust genug fuer eine direkte MVP-Datenquelle.
+- Der naechste Sensor sollte erst nach Packaging-/Sandbox-Klaerung gewaehlt werden, weil Distribution und Sandbox die lokale Sichtbarkeit stark beeinflussen koennen.
 
 ## Workflow Gotchas
 
