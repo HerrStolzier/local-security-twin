@@ -129,6 +129,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 2: Trust-Flow und UI-nahe Tests
 
+**Status**: in Umsetzung seit 2026-05-13. Task 2.1 ist umgesetzt.
+
 **Goal**: Der Nutzer kann Startup-Aenderungen bewusst als erwartet merken, und dieser Flow ist testbar.
 
 **Demo/Validation**:
@@ -138,6 +140,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 - pruefen, dass Diff-Hinweise danach verschwinden oder als bekannt eingeordnet werden
 
 ### Task 2.1: Testdaten fuer Startup-Diff-App-Start standardisieren
+
+**Status**: umgesetzt am 2026-05-13.
 
 - **Location**:
   - `scripts/`
