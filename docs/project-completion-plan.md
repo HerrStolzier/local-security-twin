@@ -390,6 +390,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 6: Produktreife und Distribution
 
+**Status**: umgesetzt am 2026-05-13.
+
 **Goal**: Die App wird als testbare MVP-App verteilbar, ohne die Sicherheitsgrenzen zu verwischen.
 
 **Demo/Validation**:
@@ -399,6 +401,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 - Distribution-Pfad ist reproduzierbar oder bewusst als noch manuell markiert
 
 ### Task 6.1: Versionierung und Bundle-Metadaten formalisieren
+
+**Status**: umgesetzt am 2026-05-13. App-Metadaten und `Info.plist`-Vorlage liegen in `Packaging/`.
 
 - **Location**:
   - `scripts/build-app-bundle.sh`
@@ -414,6 +418,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ### Task 6.2: Developer-ID-Signing-Checkliste erstellen
 
+**Status**: umgesetzt am 2026-05-13 in `docs/distribution-checklist.md`.
+
 - **Location**:
   - `docs/packaging-signing-plan.md`
   - optional `docs/distribution-checklist.md`
@@ -427,6 +433,8 @@ Das Projekt gilt als MVP-fertig, wenn:
   - `./scripts/security-checks.sh`
 
 ### Task 6.3: Notarization-Probe vorbereiten
+
+**Status**: umgesetzt am 2026-05-13 mit `scripts/notarization-preflight.sh`.
 
 - **Location**:
   - `docs/distribution-checklist.md`

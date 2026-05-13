@@ -38,6 +38,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Der zweite MVP-Sensor ist bewusst ein Systemprofil-Sensor: Er liefert lokale Kontextdaten und sichtbare Schutzsignale, darf daraus aber kein Gesamturteil ueber die Sicherheit des Macs ableiten.
 - Optionale Systemschutz-Abfragen wie Gatekeeper oder SIP muessen weich behandelt werden: feste Tool-Pfade, keine Shell, Fehler als Notes statt Crash oder lauter Alarm.
 - Gefuehrte Aktionen brauchen eine sichtbare Aktionsart, bevor sie ausgefuehrt oder gemerkt werden; Nutzer muessen unterscheiden koennen zwischen lokalem Merken, Anleitung, externem Oeffnen und spaeterem Belegesammeln.
+- Distribution bleibt zweistufig: lokale Beta-Smokes duerfen ad-hoc signiert sein, echte Nutzerverteilung braucht spaeter Developer ID, Hardened Runtime, Notarization und Secrets ausserhalb des Repos.
 
 ## Workflow Gotchas
 

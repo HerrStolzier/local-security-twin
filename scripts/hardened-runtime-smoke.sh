@@ -12,7 +12,9 @@ HARDENED_RUNTIME=1 "$SCRIPT_DIR/build-app-bundle.sh"
 
 codesign --verify --deep --strict --verbose=2 "$APP_PATH" >/dev/null
 
-if ! { codesign -dv "$APP_PATH" 2>&1 | grep -q "runtime"; }; then
+CODESIGN_DETAILS=$(codesign -dv "$APP_PATH" 2>&1 || true)
+
+if ! grep -q "runtime" <<< "$CODESIGN_DETAILS"; then
     echo "Hardened runtime smoke failed: signature does not report runtime option." >&2
     exit 1
 fi

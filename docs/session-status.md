@@ -77,14 +77,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 5 Task 5.1 umgesetzt: `PolicyActionKind` unterscheidet lokale Entscheidung, externes Oeffnen, Anleitung und spaeteres Belegesammeln
 - Sprint 5 Task 5.2 umgesetzt: Empfehlungsbuttons bestaetigen vor dem Speichern, was lokal passiert und dass keine Systemeinstellung geaendert wird
 - Sprint 5 Task 5.3 umgesetzt: Policy-Historie in Settings bleibt sichtbar und resetbar; Labels sind deutscher formuliert
+- Sprint 6 Task 6.1 umgesetzt: App-Metadaten und `Info.plist`-Vorlage liegen zentral in `Packaging/`
+- Sprint 6 Task 6.2 umgesetzt: `docs/distribution-checklist.md` trennt lokale Beta-Smokes von echter Developer-ID-Distribution
+- Sprint 6 Task 6.3 umgesetzt: `scripts/notarization-preflight.sh` prueft Bundle, Signatur, Hardened Runtime und Security-Checks ohne echte Apple-Notarization
 
 ## Aktueller Stand in einem Satz
 
-Die App hat zwei lokale read-only Sensorbereiche und gefuehrte Empfehlungen, die vor dem Speichern klar sagen, was lokal passiert und was nicht.
+Die App hat zwei lokale read-only Sensorbereiche, klare gefuehrte Empfehlungen und einen reproduzierbareren lokalen Bundle-/Distribution-Preflight.
 
 ## Naechster konkreter Schritt
 
-Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 6, Task 6.1: Versionierung und Bundle-Metadaten formalisieren.
+Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 7, Task 7.1: README auf echten Stand bringen.
 
 ## Danach sinnvoll
 
@@ -221,6 +224,12 @@ Zusaetzlich nach Sprint 4 Task 4.3/4.4:
 Zusaetzlich nach Sprint 5:
 
 - `swift test`
+
+Zusaetzlich nach Sprint 6:
+
+- `./scripts/app-bundle-smoke.sh`
+- `./scripts/hardened-runtime-smoke.sh`
+- `./scripts/notarization-preflight.sh`
 
 ## Letzte externe Recherche
 

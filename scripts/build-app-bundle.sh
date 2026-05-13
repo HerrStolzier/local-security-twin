@@ -5,10 +5,17 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "$0")" && pwd)
 REPO_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd)
 
 CONFIGURATION="${1:-debug}"
-PRODUCT_NAME="LocalSecurityTwin"
+METADATA_PATH="$REPO_ROOT/Packaging/AppMetadata.env"
+INFO_PLIST_TEMPLATE="$REPO_ROOT/Packaging/Info.plist.template"
+
+if [[ ! -f "$METADATA_PATH" ]]; then
+    echo "Expected app metadata not found: $METADATA_PATH" >&2
+    exit 66
+fi
+
+source "$METADATA_PATH"
+
 BUNDLE_NAME="${PRODUCT_NAME}.app"
-BUNDLE_IDENTIFIER="com.herrstolzier.LocalSecurityTwin"
-BUNDLE_VERSION="0.1.0"
 BUILD_ROOT="$REPO_ROOT/.build/app"
 ENTITLEMENTS_PATH="$REPO_ROOT/Packaging/LocalSecurityTwin.entitlements"
 
@@ -48,36 +55,20 @@ mkdir -p "$MACOS_PATH" "$RESOURCES_PATH"
 
 cp "$EXECUTABLE" "$MACOS_PATH/$PRODUCT_NAME"
 
-cat > "$CONTENTS_PATH/Info.plist" <<PLIST
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>CFBundleDevelopmentRegion</key>
-    <string>de</string>
-    <key>CFBundleExecutable</key>
-    <string>$PRODUCT_NAME</string>
-    <key>CFBundleIdentifier</key>
-    <string>$BUNDLE_IDENTIFIER</string>
-    <key>CFBundleInfoDictionaryVersion</key>
-    <string>6.0</string>
-    <key>CFBundleName</key>
-    <string>Local Security Twin</string>
-    <key>CFBundlePackageType</key>
-    <string>APPL</string>
-    <key>CFBundleShortVersionString</key>
-    <string>$BUNDLE_VERSION</string>
-    <key>CFBundleVersion</key>
-    <string>1</string>
-    <key>LSApplicationCategoryType</key>
-    <string>public.app-category.utilities</string>
-    <key>LSMinimumSystemVersion</key>
-    <string>15.0</string>
-    <key>NSPrincipalClass</key>
-    <string>NSApplication</string>
-</dict>
-</plist>
-PLIST
+if [[ ! -f "$INFO_PLIST_TEMPLATE" ]]; then
+    echo "Expected Info.plist template not found: $INFO_PLIST_TEMPLATE" >&2
+    exit 66
+fi
+
+sed \
+    -e "s|@PRODUCT_NAME@|$PRODUCT_NAME|g" \
+    -e "s|@APP_DISPLAY_NAME@|$APP_DISPLAY_NAME|g" \
+    -e "s|@BUNDLE_IDENTIFIER@|$BUNDLE_IDENTIFIER|g" \
+    -e "s|@BUNDLE_VERSION@|$BUNDLE_VERSION|g" \
+    -e "s|@BUNDLE_BUILD@|$BUNDLE_BUILD|g" \
+    -e "s|@APP_CATEGORY@|$APP_CATEGORY|g" \
+    -e "s|@MINIMUM_MACOS_VERSION@|$MINIMUM_MACOS_VERSION|g" \
+    "$INFO_PLIST_TEMPLATE" > "$CONTENTS_PATH/Info.plist"
 
 plutil -lint "$CONTENTS_PATH/Info.plist" >/dev/null
 

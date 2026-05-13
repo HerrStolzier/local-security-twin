@@ -62,6 +62,14 @@ Update nach dem Sandbox-Smoke:
 - der Smoke startet die App mit temporaerem HOME und vorbereitetem Startup-Diff
 - automatisiert bestaetigt ist damit Startfaehigkeit mit Sandbox; die konkrete UI-Sichtbarkeit des Startup-Hinweises bleibt bis zur echten UI-Automation als manueller Check offen
 
+Update nach Sprint 6:
+
+- App-Metadaten liegen zentral in `Packaging/AppMetadata.env`
+- `Packaging/Info.plist.template` ist die Vorlage fuer das lokale Bundle
+- `scripts/build-app-bundle.sh` erzeugt `Info.plist` aus Vorlage plus Metadaten
+- `docs/distribution-checklist.md` trennt lokale Beta-Smokes von echter Developer-ID-Distribution
+- `scripts/notarization-preflight.sh` prueft lokal Bundle, Signatur, Hardened Runtime und Security-Checks, ohne eine echte Notarization auszufuehren
+
 ## Entscheidungen fuer den MVP
 
 - Keine Network-Client-Entitlement ohne konkreten Produktnutzen.
@@ -73,6 +81,8 @@ Update nach dem Sandbox-Smoke:
 - Vor echter Nutzerverteilung braucht das Projekt ein App-Bundle mit Signing-/Entitlements-Strategie.
 - Der lokale App-Bundle-Spike ersetzt noch kein Xcode-Archiv und keine notarized Distribution.
 - Sandbox wird nur explizit fuer lokale Tests aktiviert, nicht als Standard-Build.
+- Version, Bundle-ID, Anzeigename und Mindest-macOS werden ueber `Packaging/AppMetadata.env` kontrolliert.
+- Notarization bleibt ein separater Distribution-Schritt und ist keine Voraussetzung fuer normale lokale Entwicklung.
 
 ## Offene technische Fragen
 
@@ -142,3 +152,4 @@ Ein Xcode-Projekt wird erst angelegt, wenn echte macOS-Klickautomation, Develope
 2. Fuer UI-Automation gibt es jetzt ein lokales `.app`-Bundle unter `.build/app/LocalSecurityTwin.app`.
 3. Fuer echte Distribution wird Developer ID plus Hardened Runtime plus Notarization benoetigt.
 4. App Sandbox wird nicht pauschal aktiviert, bevor der Startup-Sensor dagegen getestet wurde.
+5. Vor jedem Beta-Schnitt laufen die Checks aus `docs/distribution-checklist.md`.
