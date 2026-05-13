@@ -6,6 +6,8 @@ Diese Checkliste beschreibt einen ehrlichen Beta-/MVP-Schnitt.
 
 Ein Punkt gilt nur dann als erledigt, wenn der Zustand reproduzierbar ist und die Doku nicht mehr vom Chatverlauf abhaengt.
 
+Der konkrete Ablauf steht in `docs/beta-validation-plan.md`.
+
 ## Vor dem Schnitt
 
 - `AGENTS.md` lesen

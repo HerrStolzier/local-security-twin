@@ -83,14 +83,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 7 Task 7.1 umgesetzt: README auf den echten MVP-Stand gebracht
 - Sprint 7 Task 7.2 umgesetzt: `docs/known-limits.md` beschreibt Sensor-, Rechte-, UI- und Produktgrenzen
 - Sprint 7 Task 7.3 umgesetzt: `docs/mvp-release-checklist.md` beschreibt den Beta-/MVP-Schnitt
+- Beta-Validierungsplan in `docs/beta-validation-plan.md` angelegt; er trennt technische Codex-Checks von manuellen Nutzerpruefungen
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints aus `docs/project-completion-plan.md` sind umgesetzt; die App hat zwei lokale Sensorbereiche, klare Guided Actions, reproduzierbare Packaging-Smokes und ehrliche MVP-Doku.
+Die sieben Sprints aus `docs/project-completion-plan.md` sind umgesetzt; als naechster Schritt ist jetzt ein gemeinsamer Beta-Validierungsdurchlauf dokumentiert.
 
 ## Naechster konkreter Schritt
 
-Einen Beta-Schnitt anhand `docs/mvp-release-checklist.md` pruefen und danach entscheiden, ob echte macOS-UI-Automation oder ein Xcode-Projekt als naechstes kommt.
+`docs/beta-validation-plan.md` ausfuehren: Codex prueft die technischen Checks, der Nutzer prueft App-Verstaendlichkeit, Trust-Flow, Settings und Known Limits.
 
 ## Danach sinnvoll
 
