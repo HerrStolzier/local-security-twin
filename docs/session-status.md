@@ -86,10 +86,11 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Beta-Validierungsplan in `docs/beta-validation-plan.md` angelegt; er trennt technische Codex-Checks von manuellen Nutzerpruefungen
 - Beta-UI-Blocker aus Nutzer-Screenshot behoben: linke Spalte hat feste Breite, Detailbereich rendert robuster und Sidebar-Inhalt hat Abstand zu den macOS-Fensterknoepfen
 - Nutzer-Feedback nach Layout-Fix dokumentiert: Detailansicht ist weiterhin ein Info-Overflow-Problem und vor echter Beta als UX-Blocker zu behandeln
+- Settings-Test bestanden: gemerkte Entscheidung erscheint und Reset ist sichtbar; UX-Kanten sind Fenstertitel, abgeschnittener Text und technisches Risiko-Label
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; der Layout-Blocker ist behoben, aber die App braucht vor echter Beta einen UX-Schnitt gegen Informationsueberladung.
+Die sieben Sprints sind umgesetzt; Layout und Settings funktionieren, aber die App braucht vor echter Beta einen UX-Schnitt gegen Informationsueberladung und technische Sprache.
 
 ## Naechster konkreter Schritt
 

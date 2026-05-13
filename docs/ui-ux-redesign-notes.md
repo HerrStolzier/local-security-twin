@@ -100,6 +100,15 @@ Beta-Status:
 
 Das ist kein Build-Blocker mehr, aber ein Produkt-/UX-Blocker vor einer echten Beta fuer normale Nutzer.
 
+Settings-Feedback aus dem manuellen Test:
+
+- Gemerkte Entscheidungen erscheinen korrekt.
+- Zuruecksetzen ist vorhanden.
+- Der lokale Charakter ist erkennbar.
+- Der Fenstertitel ist noch halb Englisch: `Local Security Twin-Einstellungen`.
+- Lange Texte werden abgeschnitten und sollten in Settings umbrochen oder gekuerzt werden.
+- `Risiko: Erhoeht` klingt noch zu technisch und sollte nutzerfreundlicher erklaert werden.
+
 ## Empfohlener naechster UX-Schnitt
 
 Vor neuen Sensoren sollte ein UI-/UX-Schnitt kommen:
