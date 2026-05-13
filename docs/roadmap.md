@@ -9,6 +9,7 @@ Sie ersetzt nicht die Detaildokumente, sondern ordnet sie:
 - `docs/session-status.md`: aktueller Uebergabestand
 - `docs/current-overview.md`: technischer und produktlicher Kurzueberblick
 - `docs/product-flow-and-feature-plan.md`: roter Faden, Produktbild und Feature-Bausteine
+- `docs/adversarial-review-and-best-practices.md`: Black-Hat-Gegenpruefung und Best-Practice-Monitoring
 - `docs/project-completion-plan.md`: detaillierter Weg vom aktuellen Prototyp zum MVP
 - `docs/ui-ux-redesign-notes.md`: naechster UI-/UX-Schnitt
 - `docs/background-task-management-spike.md`: spaeterer macOS-Startup-Spike
@@ -52,6 +53,8 @@ Der naechste Schnitt soll deshalb:
 4. technische Belege einklappbar oder nachrangig machen
 5. spaeter Online-Intelligence wie SOFA, CISA KEV und EPSS anbinden
 6. LLM-Erklaerungen erst als Erklaerhilfe planen, nicht als alleinige Wahrheit
+7. Security-Hygiene-Themen wie 2FA, Passwortmanager, VPN, Antivirus/Security-Tools, Firewall, FileVault und System Extensions als eigene, ehrlich begrenzte Schicht planen
+8. eine feste adversarial Review-Perspektive nutzen: "Welche realistische Angriffskette wuerde ein Verteidiger hier sichtbar machen wollen?"
 
 Nicht-Ziel dieses Schnitts:
 
@@ -60,6 +63,8 @@ Nicht-Ziel dieses Schnitts:
 - keine neuen macOS-Rechte
 - keine wilde Web-Recherche ohne kuratierte Quellen
 - keine LLM-Entscheidungen ohne belegbare lokale oder externe Daten
+- keine Exploit-Automation und keine offensiven Tests gegen reale Systeme
+- keine pauschalen Versprechen zu 2FA, VPN, Antivirus oder Passwortmanagern, wenn die App es nicht lokal oder per Integration belegen kann
 
 ## Neue Phasen nach dem roten Faden
 
@@ -100,6 +105,26 @@ Erste Quelle:
 
 - SOFA von macadmins
 
+### Phase 1.5: Best-Practice-Grundlage
+
+Status: geplant.
+
+Ziel:
+Der Buddy prueft nicht nur technische Einzelhinweise, sondern begleitet wichtige Sicherheits-Best-Practices.
+
+Erster Schnitt:
+
+- lokale Checks von Buddy-Fragen trennen
+- Rechtebedarf je Check dokumentieren
+- defensive Angreiferpruefung je Check ergaenzen
+- erste Kandidaten priorisieren: macOS-Updates, FileVault, Firewall, Gatekeeper/SIP, System Extensions
+
+Nicht-Ziel:
+
+- 2FA fuer externe Accounts ungeprueft behaupten
+- VPN pauschal als sicher verkaufen
+- Antivirus-/EDR-Status ohne klare lokale Belege bewerten
+
 ### Phase 2: Real Threat Matching
 
 Status: geplant.
@@ -112,6 +137,43 @@ Erste Quellen:
 - CISA Known Exploited Vulnerabilities
 - FIRST EPSS
 - spaeter NVD
+
+### Phase 2b: Security-Hygiene und Nutzer-Schutzgewohnheiten
+
+Status: geplant.
+
+Ziel:
+Die App macht grundlegende Schutzthemen sichtbar, ohne mehr zu behaupten als sie wirklich pruefen kann.
+
+Erste Reihenfolge:
+
+1. macOS-Firewall, FileVault und automatische Updates als lokale Schutzsignale pruefen
+2. 2FA und Passwortmanager als gefuehrte Checklisten starten
+3. VPN mit klarer Alltagserklaerung einordnen: hilfreich in bestimmten Netzen, kein kompletter Schutz
+4. installierte Security-/Antivirus-Tools nur als Inventar zeigen, solange keine verlaessliche Produktintegration besteht
+5. Treiber, System Extensions und Network Extensions als eigenen macOS-Rechte-/Sichtbarkeits-Spike planen
+
+Akzeptanzkriterien:
+
+- Jeder Check zeigt den Belegtyp: automatisch gesehen, Nutzerangabe oder nicht pruefbar.
+- Die App bleibt lokal-first und fragt keine sensiblen Kontodaten ab.
+- Hinweise bleiben handlungsorientiert: "was bedeutet das?", "warum wichtig?", "was kannst du jetzt tun?"
+- Keine stillen Aenderungen an Firewall, FileVault, VPN, Security-Tools oder Extensions.
+
+### Phase 2c: Adversarial Review als Produkt-Routine
+
+Status: geplant.
+
+Ziel:
+Jeder neue Sicherheitsbaustein bekommt vor Umsetzung eine kurze Gegenperspektive:
+Wie wuerde ein Angreifer das Thema praktisch ausnutzen, und welches harmlose Verteidigungssignal kann die App daraus ableiten?
+
+Regeln:
+
+- Nur Verteidigungsfragen, keine Exploit-Anleitungen.
+- Keine echten Angriffe, keine fremden Ziele, keine destruktiven Tests.
+- Ergebnis ist eine bessere Sensor-/UX-Entscheidung oder eine ehrliche Grenze in `docs/known-limits.md`.
+- Hohe Rechte werden erst vorgeschlagen, wenn der Nutzen konkret und verstaendlich ist.
 
 ### Phase 3: App-Inventur
 
@@ -133,6 +195,18 @@ Status: spaeter.
 
 Ziel:
 Mehr Handlungskraft durch Netzwerk-, Prozess-, Safe-Mode- oder Haertungsfunktionen, aber nur mit klarer Zustimmung und sauberem Rechtekonzept.
+
+## Fester Entwicklungscheck: Angreiferperspektive
+
+Ab jetzt soll jede groessere Funktion eine defensive Black-Hat-Pruefung bekommen.
+
+Kurzformat:
+
+1. Wie koennte das missbraucht werden?
+2. Welche Daten oder Rechte waeren besonders sensibel?
+3. Wie verhindern wir stille Systemaenderungen oder falsche Sicherheit?
+4. Was muss der Nutzer bewusst bestaetigen?
+5. Was darf das Feature ausdruecklich nicht tun?
 
 ## Iteration 1: Deutsche Orientierung fuer den ersten Sensor
 

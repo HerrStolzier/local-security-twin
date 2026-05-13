@@ -18,13 +18,20 @@ Er soll nicht nur eine Hinweis-Liste sein. Er soll wie ein Verteidiger arbeiten:
 
 - lokal beobachten
 - relevante Aenderungen erkennen
+- aus Angreifer-Sicht fragen, welche Wege realistisch missbraucht werden koennten
 - aktuelle Bedrohungsinformationen einordnen
+- wichtige Schutzgewohnheiten sichtbar machen
 - einfach erklaeren, was das fuer diesen Mac bedeutet
 - mit dem Nutzer zusammen entscheiden
 - sichere naechste Schritte fuehren
 
 Wichtig:
 Kraftvoll heisst nicht laut, hektisch oder riskant. Kraftvoll heisst: gute Belege, klare Prioritaeten, aktuelle Informationen und handlungsfaehige naechste Schritte.
+
+Ein wichtiger Teil davon ist eine eingebaute Gegenperspektive:
+Die App soll beim Planen und Bewerten immer auch fragen: "Wenn ich ein vorsichtiger Angreifer waere, was waere der naheliegende Weg?"
+Diese Perspektive ist kein Auftrag fuer echte Angriffe.
+Sie ist ein Sicherheitsfilter, damit die App bessere Verteidigungshinweise gibt und keine einfachen Risiken uebersieht.
 
 ## Was die App nicht ist
 
@@ -35,6 +42,8 @@ Sie kann nicht jede Ebene schuetzen:
 - Firmware, BIOS und Boot-Kette sind weitgehend ausserhalb der App-Kontrolle.
 - Phishing und Social Engineering kann sie nicht sicher verhindern.
 - Tiefes Netzwerk-Monitoring, Kernel- oder Endpoint-Security-Funktionen brauchen spaeter starke Rechte und muessen sehr bewusst geplant werden.
+- 2FA-, Passwortmanager-, VPN- oder Antivirus-Nutzung kann sie nur dort pruefen, wo macOS oder die jeweilige App verlaessliche lokale Signale liefert.
+- Cloud-Konten, Browser-Erweiterungen und externe Security-Produkte koennen ohne Integrationen meist nur als gefuehrte Checkliste bewertet werden.
 
 Die App soll ehrlich bleiben:
 Sie sieht nicht alles. Aber was sie sieht, soll sie sehr gut erklaeren und mit aktuellen Bedrohungsdaten verbinden.
@@ -63,6 +72,7 @@ Beispiele:
 - Gatekeeper
 - SIP
 - spaeter FileVault, Firewall, Update-Status
+- spaeter Treiber-, System-Extension- und Network-Extension-Sichtbarkeit
 
 ### 3. Apps und Versionen
 
@@ -116,6 +126,24 @@ Beispiele:
 - einfache Warnungen bei aktuellen Betrugswellen
 - kurze Erklaerungen im Chat-Stil
 - Checklisten fuer "Was mache ich jetzt?"
+
+### 7. Schutzgewohnheiten und Security-Hygiene
+
+Ziel:
+Der Buddy soll nicht nur technische Findings zeigen, sondern auch grundlegende Schutzgewohnheiten greifbar machen.
+
+Beispiele:
+
+- 2FA fuer wichtige Konten als gefuehrte Checkliste
+- Passwortmanager-Nutzung als Nutzerentscheidung oder spaetere App-Erkennung
+- VPN nur dort empfehlen, wo es wirklich hilft, etwa unsichere Netze, aber nicht als magischer Rundumschutz
+- Antivirus-/Security-Tool-Status, wenn ein installiertes Tool lokal erkennbar ist
+- macOS-Firewall, FileVault und automatische Updates als lokale Schutzsignale
+- Treiber, System Extensions und Network Extensions als spaetere Sichtbarkeitsquelle fuer tiefer eingreifende Software
+
+Wichtig:
+Viele dieser Punkte sind zuerst keine automatischen Sensoren, sondern gefuehrte Fragen.
+Die App soll ehrlich unterscheiden zwischen "gesehen", "vom Nutzer bestaetigt" und "noch nicht pruefbar".
 
 ## Der rote Nutzerfluss
 
@@ -186,6 +214,8 @@ Naechste sinnvolle Sensoren:
 - macOS-Update-/Sicherheitsupdate-Status
 - installierte Apps und Versionen
 - FileVault-/Firewall-Sichtbarkeit, falls ohne zu starke Rechte sinnvoll
+- System Extensions, Network Extensions und Login-/Background-Items als eigener spaeterer macOS-Spike
+- Security-Tool- und Antivirus-Sichtbarkeit nur als read-only Inventar, nicht als Bewertung fremder Produkte ohne Beleg
 
 ### B. Threat-Intelligence-Schicht
 
@@ -215,6 +245,24 @@ Beispiele:
 
 Diese Engine sollte deterministisch sein.
 Das heisst: Sie entscheidet nach klaren Regeln und Belegen, nicht nach Bauchgefuehl eines LLM.
+
+### C2. Adversarial Review Layer
+
+Aufgabe:
+Der Buddy soll jedes groessere Feature aus Verteidiger- und Angreifer-Sicht pruefen.
+
+Praktisch heisst das:
+
+- Welche einfache Missbrauchskette koennte ein Angreifer versuchen?
+- Welche lokalen Signale wuerden diese Kette sichtbar machen?
+- Welche Rechte braeuchte die App, um das zu sehen?
+- Wie erklaert die App das, ohne Angst zu machen?
+- Wo ist eine Checkliste ehrlicher als ein automatischer Sensor?
+
+Grenze:
+Diese Ebene beschreibt Risiken und Verteidigung.
+Sie liefert keine Schritt-fuer-Schritt-Anleitung fuer echte Angriffe, keine Exploit-Automation und keine verdeckten Tests gegen reale Systeme.
+Details stehen in `docs/adversarial-review-and-best-practices.md`.
 
 ### D. Buddy Brain
 
@@ -268,6 +316,28 @@ Spaeter:
 - akzeptierte Risiken
 - wiederkehrende Muster
 - erledigte Empfehlungen
+
+### G. Best-Practice-Monitoring
+
+Aufgabe:
+Der Buddy soll spaeter nicht nur einzelne Findings zeigen, sondern wichtige Sicherheits-Best-Practices ueberwachen oder gefuehrt abfragen.
+
+Beispiele:
+
+- macOS-Update-Stand
+- FileVault
+- Firewall
+- Gatekeeper/SIP
+- System Extensions und Treiberzustand
+- Passwort-Manager
+- Zwei-Faktor-Authentifizierung
+- Backup-Status
+- VPN-Sinnhaftigkeit
+- Antivirus-/EDR-Hinweise
+
+Wichtig:
+Was die App nicht lokal sicher messen kann, darf sie nicht behaupten.
+Solche Themen werden als Buddy-Frage oder Checkliste behandelt.
 
 ## Bauen, integrieren oder inspirieren lassen
 
@@ -341,6 +411,27 @@ Akzeptanzkriterien fuer diesen Baustein:
 - Gespeichert werden nur die noetigen Feed-Daten, keine unnoetigen persoenlichen Nutzerdaten.
 - Die App kann offline weiter lokale Hinweise erklaeren.
 
+### Phase 1.5: Best-Practice-Grundlage
+
+Ziel:
+Der Buddy bekommt eine erste strukturierte Sicht auf Sicherheits-Best-Practices.
+
+Aufgaben:
+
+- Best-Practice-Kategorien in der UI planen
+- lokale Checks von Buddy-Fragen trennen
+- Rechtebedarf pro Check dokumentieren
+- Angreifer-Missbrauchsfaelle pro Check notieren
+- ersten lokalen Haertungsblock auswaehlen
+
+Erste Kandidaten:
+
+- FileVault
+- Firewall
+- Gatekeeper/SIP besser erklaeren
+- macOS-Update-Status
+- System Extensions / Treiberzustand
+
 ### Phase 2: Real Threat Matching
 
 Ziel:
@@ -352,6 +443,26 @@ Aufgaben:
 - EPSS als Priorisierungssignal pruefen
 - spaeter NVD fuer breitere Abdeckung
 - Regeln bauen, wann etwas wirklich relevant fuer diesen Mac ist
+
+### Phase 2b: Security-Hygiene-Checks
+
+Ziel:
+Der Buddy fragt und prueft grundlegende Schutzthemen, die fuer normale Nutzer wirklich relevant sind.
+
+Prioritaet:
+
+1. macOS-Firewall, FileVault und automatische Updates, weil sie lokal und verstaendlich sind
+2. Passwortmanager- und 2FA-Checklisten, weil echte automatische Pruefung oft kontenabhaengig ist
+3. Security-Tool-/Antivirus-Inventar, falls installierte Produkte sauber erkennbar sind
+4. VPN-Erklaerung und Entscheidungscheck, aber nur kontextbezogen
+5. Treiber, System Extensions und Network Extensions als spaeterer fortgeschrittener Sensor
+
+Akzeptanzkriterien:
+
+- Jede Aussage sagt klar, ob sie automatisch geprueft oder vom Nutzer beantwortet wurde.
+- Kein Schutzprodukt wird pauschal als gut oder schlecht bewertet, solange kein konkreter Beleg vorliegt.
+- VPN wird nicht als allgemeiner Sicherheitszauber dargestellt.
+- 2FA wird fuer wichtige Konten empfohlen, aber die App behauptet ohne Integration nicht, es wirklich verifiziert zu haben.
 
 ### Phase 3: App-Inventur
 
@@ -403,10 +514,14 @@ Der naechste Schritt ist der UX-Rote-Faden-Schnitt:
 
 - keine stillen Systemaenderungen
 - keine dramatischen Behauptungen ohne Beleg
+- jede neue groessere Funktion bekommt eine defensive Angreiferpruefung
 - LLM nie als alleinige Wahrheit
 - externe Feeds transparent und cachebar
 - starke Rechte nur mit konkretem Nutzen
 - lokale Entscheidungen bleiben sichtbar und ruecksetzbar
+- adversarial thinking nur fuer Verteidigung und Produktqualitaet
+- keine Exploit-Automation, keine echten Angriffsketten gegen fremde Systeme
+- bei Schutzgewohnheiten klar trennen zwischen automatisch gesehen, Nutzerangabe und nicht pruefbar
 
 ## Referenzen fuer spaetere Integration
 

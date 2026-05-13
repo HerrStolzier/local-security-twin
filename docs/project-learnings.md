@@ -42,6 +42,10 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Der MVP-Schnitt braucht eine eigene Known-Limits-Doku, weil die wichtigste Sicherheitsqualitaet des Produkts darin liegt, sichtbare Belege nicht als vollstaendige Wahrheit zu verkaufen.
 - Das Produktbild wurde am 2026-05-13 geschaerft: Die App soll ein kraftvoller Security Buddy mit Punch werden. Ruhige Sprache bleibt wichtig, aber die Verteidigungsambition ist staerker: lokale Beobachtung, echte Threat Intelligence, klare Priorisierung und gefuehrte naechste Schritte.
 - LLMs sind fuer dieses Projekt eher Erklaer-, Recherche- und Assistenzschicht, nicht alleinige Sicherheitsinstanz. Sicherheitsentscheidungen brauchen belegbare lokale Daten, kuratierte externe Quellen und nachvollziehbare Regeln.
+- Adversarial thinking gehoert dauerhaft als defensive Review-Perspektive ins Projekt: Es soll helfen, realistische Missbrauchswege in harmlose Sensorideen, Checklisten, Guided Actions oder dokumentierte Grenzen zu uebersetzen, aber nicht in Exploit-Automation.
+- Security-Hygiene-Themen wie 2FA, Passwortmanager, VPN, Antivirus/Security-Tools, Firewall, FileVault und System Extensions muessen klar nach Belegtyp getrennt werden: automatisch gesehen, Nutzerangabe, abgeleitet oder nicht pruefbar.
+- Jede groessere neue Funktion soll ab jetzt eine defensive Black-Hat-Pruefung bekommen: Wie koennte ein Angreifer die Funktion, ihre Daten, ihre Rechte oder ihre Nutzertexte missbrauchen?
+- Best-Practice-Monitoring muss lokale Messbarkeit von gefuehrten Buddy-Fragen trennen. Dinge wie 2FA oder Passwort-Hygiene sind wichtig, aber oft nicht direkt lokal beweisbar.
 
 ## Workflow Gotchas
 

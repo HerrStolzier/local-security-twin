@@ -96,3 +96,25 @@ Sie soll nicht:
 - automatisch haerten
 - versteckte Aenderungen vornehmen
 - mehr Systemzugriff verlangen als noetig
+
+## Security-Hygiene-Grenzen
+
+Einige wichtige Schutzthemen sind fuer normale Nutzer sehr relevant, aber lokal nicht immer sicher automatisch pruefbar.
+
+Aktuell noch nicht automatisch verifiziert:
+
+- 2FA fuer Apple-ID, E-Mail, Banking, Social Media oder andere Konten
+- Nutzung eines Passwortmanagers
+- Qualitaet oder Vollstaendigkeit eines VPN-Schutzes
+- Schutzleistung eines Antivirus- oder Security-Tools
+- Zustand aller Treiber, System Extensions und Network Extensions
+
+Was das praktisch bedeutet:
+
+- Die App darf diese Themen als gefuehrte Checkliste aufnehmen.
+- Sie darf lokale Hinweise nutzen, wenn sie sauber belegbar sind.
+- Sie darf aber ohne Integration nicht behaupten, ein Konto sei wirklich mit 2FA geschuetzt.
+- Sie darf VPN nicht als Rundumschutz darstellen.
+- Sie darf installierte Security-Tools nicht pauschal bewerten, solange nur deren Existenz sichtbar ist.
+
+Spaetere Sensoren fuer diese Bereiche brauchen eine eigene Rechte-, Datenschutz- und Fehlalarm-Pruefung.

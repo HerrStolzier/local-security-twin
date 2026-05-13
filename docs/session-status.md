@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-13
-- Bereich: Produktfaden und Security-Buddy-Zielbild
+- Bereich: Produktfaden, Security-Hygiene und adversarial Review
 
 ## Zuletzt abgeschlossen
 
@@ -92,10 +92,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Roadmap und Ueberblick auf den neuen Fokus "Buddy statt Inspector" aktualisiert
 - Phase 0 `Buddy statt Inspector` als ersten UI-Schnitt umgesetzt: Buddy-Status oben, zusammengefasste bekannte Autostart-Hinweise, naechster Schritt vor Belegen, technische Belege einklappbar
 - Presentation-/E2E-nahe Tests fuer Buddy-Status und zusammengefasste bekannte Autostart-Hinweise ergaenzt
+- Produktfaden erweitert: Der Buddy soll kuenftig auch eine defensive Angreifer-Perspektive nutzen, also realistische Missbrauchswege als Review-Frage betrachten, ohne offensive Funktionen zu bauen
+- Security-Hygiene als eigene geplante Schicht dokumentiert: 2FA, Passwortmanager, VPN, Antivirus/Security-Tools, Firewall, FileVault, Treiber/System Extensions und Network Extensions
+- Roadmap um Phase 2b `Security-Hygiene und Nutzer-Schutzgewohnheiten` und Phase 2c `Adversarial Review als Produkt-Routine` erweitert
+- `docs/safety-policy.md` konkretisiert, dass adversarial thinking nur Verteidigung, Sensorideen, Checklisten, Guided Actions oder dokumentierte Grenzen liefern darf
+- `docs/known-limits.md` ergaenzt: 2FA, Passwortmanager, VPN, Security-Tools und Extensions sind aktuell noch nicht automatisch verifiziert und duerfen nur ehrlich eingeordnet werden
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Phase 0 des roten Produktfadens ist als erster UI-Schnitt gebaut, aber die neue Buddy-Ansicht braucht noch einen manuellen Screenshot-Check und Feinschliff.
+Die sieben Sprints sind umgesetzt; Phase 0 des roten Produktfadens ist als erster UI-Schnitt gebaut, und der Produktplan enthaelt jetzt eine klare Security-Hygiene- sowie defensive adversarial Review-Schicht.
 
 ## Naechster konkreter Schritt
 
@@ -104,6 +109,8 @@ Manuell die App starten und pruefen, ob die neue Buddy-Ansicht weniger ueberlaed
 ## Danach sinnvoll
 
 - spaeter weitere Sensoren wie Privacy Permissions auf denselben Vertrag setzen
+- Security-Hygiene-Schnitt planen: zuerst entscheiden, welche Punkte automatisch belegbar sind und welche als gefuehrte Checkliste starten
+- fuer neue Sensoren eine kurze adversarial Review-Frage dokumentieren: welche harmlose Verteidigungssicht entsteht aus einer realistischen Missbrauchskette?
 - spaeter modernen macOS-Background-Task-Management-Status als eigenen Research-Spike oder Sensor pruefen
 - Hardened Runtime und Sandbox-Auswirkungen gegen das lokale `.app`-Bundle testen
 
@@ -122,6 +129,8 @@ Manuell die App starten und pruefen, ob die neue Buddy-Ansicht weniger ueberlaed
 - Der zweite Sensor ist der vorhandene Systemprofil-Sensor; weitere Sensoren sollten erst nach dem UX-Rote-Faden-Schnitt und der Update-Awareness-Planung folgen.
 - Aktuelles `.app`-Bundle ist fuer Entwicklung und lokale Spikes gut, aber noch kein distributionsnahes, notarized Build-Artefakt.
 - Die neue Phase-0-UI ist automatisiert ueber Presentation-/E2E-nahe Tests abgedeckt; echte visuelle macOS-UI-Automation fehlt weiterhin.
+- Security-Hygiene ist geplant, aber noch nicht implementiert; 2FA, Passwortmanager, VPN und Security-Tool-Status duerfen vorerst nicht als automatisch geprueft dargestellt werden.
+- Adversarial Review ist als Produkt-Routine dokumentiert, aber noch nicht als wiederholbare Vorlage oder Checkliste im Repo umgesetzt.
 
 ## Letzte Validierung
 
@@ -232,6 +241,12 @@ Zusaetzlich nach Phase 0 `Buddy statt Inspector`:
 - `./scripts/app-bundle-smoke.sh`
 
 Die Laeufe waren erfolgreich; `swift test` umfasst jetzt 33 Tests.
+
+Zusaetzlich nach der Planerweiterung fuer Security-Hygiene und adversarial Review:
+
+- `./scripts/checks.sh`
+
+Der Lauf war erfolgreich.
 
 Zusaetzlich nach Sprint 3 Task 3.3:
 
