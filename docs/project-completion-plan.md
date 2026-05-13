@@ -293,6 +293,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ### Task 4.3: Sensor minimal implementieren
 
+**Status**: umgesetzt am 2026-05-13. `SystemProfileSensor` liest lokale Basisdaten, Gatekeeper und SIP optional read-only und ist in der Live-Pipeline registriert.
+
 - **Location**:
   - `Sources/LocalSecurityTwin/Sensors/<SensorName>/`
   - `Sources/LocalSecurityTwin/Core/Sensors/FindingStore.swift`
@@ -309,6 +311,8 @@ Das Projekt gilt als MVP-fertig, wenn:
   - `./scripts/checks.sh`
 
 ### Task 4.4: UI-Gruppierung fuer mehrere Sensoren
+
+**Status**: umgesetzt am 2026-05-13. Dashboard-Texte und System-Finding-Darstellung sind nicht mehr nur auf Autostart-Hinweise zugeschnitten.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Dashboard`

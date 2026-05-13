@@ -45,7 +45,7 @@ struct ContentView: View {
                 ContentUnavailableView(
                     "Noch keine Hinweise",
                     systemImage: "checkmark.shield",
-                    description: Text("Der erste lokale Sensor bleibt ruhig, solange keine sichtbaren Autostart-Hinweise gefunden werden.")
+                    description: Text("Die lokalen Sensoren bleiben ruhig, solange sie keine Hinweise anzeigen muessen.")
                 )
             } else if let selectedFinding = findings.first(where: { $0.id == selection }) {
                 FindingDetailView(finding: selectedFinding)
@@ -109,7 +109,7 @@ private struct DashboardSummary: View {
             HStack(spacing: 10) {
                 SummaryPill(value: presentation.startupChangeCount, label: "neue Aenderungen")
                 SummaryPill(value: presentation.knownStartupCount, label: "Autostart-Hinweise")
-                SummaryPill(value: presentation.reviewCount, label: "zur Beobachtung")
+                SummaryPill(value: presentation.reviewCount, label: "System & Beobachtung")
             }
 
             Divider()

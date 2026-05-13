@@ -60,6 +60,10 @@ struct DashboardPresentation {
             return "\(startupChangeCount) Autostart-Aenderung(en) brauchen deine Einordnung"
         }
 
+        if knownStartupCount == 0 && reviewCount > 0 {
+            return "\(reviewCount) lokale Systemhinweis(e) sichtbar"
+        }
+
         return "\(knownStartupCount) bekannte Autostart-Hinweis(e) sichtbar"
     }
 
@@ -70,6 +74,10 @@ struct DashboardPresentation {
 
         if startupChangeCount > 0 {
             return "Wichtig sind zuerst die Aenderungen seit dem gemerkten Zustand. Bekannte Hinweise kannst du danach in Ruhe pruefen."
+        }
+
+        if knownStartupCount == 0 && reviewCount > 0 {
+            return "Die App sieht lokale Systemhinweise. Das ist Orientierung, kein vollstaendiges Sicherheitsurteil."
         }
 
         return "Es sind sichtbare Autostart-Hinweise vorhanden. Das ist nicht automatisch gefaehrlich, sondern zuerst eine lokale Orientierung."
@@ -84,11 +92,15 @@ struct DashboardPresentation {
             return "Pruefe zuerst die neuen oder verschwundenen Hinweise. Wenn sie erwartet sind, merke den aktuellen Zustand bewusst als normal."
         }
 
+        if knownStartupCount == 0 && reviewCount > 0 {
+            return "Lies die Systemhinweise als Kontext. Wichtig ist, ob eine Einstellung anders wirkt, als du sie erwartest."
+        }
+
         return "Schau dir bekannte Hinweise in Ruhe an. Wichtig ist vor allem, ob du die zugehoerige App erkennst."
     }
 
     var visibilityText: String {
-        "Aktuell sieht die App sichtbare plist-Dateien in Autostart-Ordnern. Das ist ein Hinweis auf moeglichen Hintergrundstart, kein Beweis fuer aktive oder gefaehrliche Software."
+        "Aktuell sieht die App sichtbare Autostart-Dateien und lokale Systemprofil-Daten. Das sind Belege zur Einordnung, kein Beweis fuer aktive oder gefaehrliche Software und kein vollstaendiges Urteil ueber den Mac."
     }
 
     func findings(in group: FindingGroup) -> [Finding] {
@@ -131,7 +143,7 @@ extension Finding {
         case .privacyPermissions:
             return "Datenschutz-Berechtigung"
         case .systemInventory:
-            return "System-Hinweis"
+            return title
         }
     }
 
@@ -159,7 +171,7 @@ extension Finding {
         case .privacyPermissions:
             return "Datenschutz"
         case .systemInventory:
-            return "System"
+            return source.title
         }
     }
 

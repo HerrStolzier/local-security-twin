@@ -35,6 +35,8 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Der weitere MVP-Weg ist in `docs/project-completion-plan.md` als Sprint-Plan dokumentiert; naechster Umsetzungspunkt ist UI-Text-Inventar und UX-Orientierung.
 - Nutzertexte sollen moeglichst an der Datenquelle geglaettet werden, nicht nur in der SwiftUI-Darstellung, weil Findings, Evidence, Recommendations und Sensor-Notizen sonst unterschiedlich klingen.
 - Ein Xcode-Projekt wird erst bei konkretem Bedarf angelegt; aktuell reichen SwiftPM plus lokale Bundle-, Sandbox- und Runtime-Smokes fuer den naechsten MVP-Abschnitt.
+- Der zweite MVP-Sensor ist bewusst ein Systemprofil-Sensor: Er liefert lokale Kontextdaten und sichtbare Schutzsignale, darf daraus aber kein Gesamturteil ueber die Sicherheit des Macs ableiten.
+- Optionale Systemschutz-Abfragen wie Gatekeeper oder SIP muessen weich behandelt werden: feste Tool-Pfade, keine Shell, Fehler als Notes statt Crash oder lauter Alarm.
 
 ## Workflow Gotchas
 

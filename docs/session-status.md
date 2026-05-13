@@ -72,14 +72,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 3 Task 3.3 umgesetzt: Entscheidung dokumentiert, vorerst kein Xcode-Projekt anzulegen; SwiftPM plus Bundle-Scripts bleiben Hauptpfad
 - Sprint 4 Task 4.1 umgesetzt: zweiter MVP-Sensor als kleiner Systemprofil-Sensor ausgewaehlt; Privacy-Permissions und moderne Background Items bleiben bewusst spaeter
 - Sprint 4 Task 4.2 umgesetzt: Sensor-Design in `docs/system-profile-sensor-design.md` dokumentiert
+- Sprint 4 Task 4.3 umgesetzt: `SystemProfileSensor` liest lokale Basisdaten, Gatekeeper und SIP optional read-only und ist in `SensorPipeline.live()` registriert
+- Sprint 4 Task 4.4 umgesetzt: Dashboard- und Finding-Presentation-Texte tragen jetzt mehrere Sensorbereiche, statt nur Autostart-Hinweise zu beschreiben
 
 ## Aktueller Stand in einem Satz
 
-Die App hat einen stabilen ersten Startup-Sensor, lokale Bundle-/Signing-Smokes und jetzt eine klare Entscheidung fuer den zweiten MVP-Sensor: ein read-only Systemprofil-Sensor ohne neue macOS-Rechte.
+Die App hat jetzt zwei lokale read-only Sensorbereiche: sichtbare Autostart-Hinweise mit Baseline-Trust-Flow und ein ruhiges Mac-Systemprofil ohne neue macOS-Rechte.
 
 ## Naechster konkreter Schritt
 
-Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 4, Task 4.3: Systemprofil-Sensor minimal implementieren.
+Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 5, Task 5.1: Aktionsarten definieren.
 
 ## Danach sinnvoll
 
@@ -207,6 +209,11 @@ Zusaetzlich nach Sprint 3 Task 3.2:
 Zusaetzlich nach Sprint 3 Task 3.3:
 
 - `docs/xcode-project-decision.md`
+
+Zusaetzlich nach Sprint 4 Task 4.3/4.4:
+
+- `swift test`
+- `./scripts/checks.sh`
 
 ## Letzte externe Recherche
 
