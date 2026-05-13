@@ -106,4 +106,12 @@ Until then, every UI-facing change should have at least one of:
 - an E2E-near store flow test
 - a documented manual check in `docs/session-status.md`
 
+For the current `Als erwartet merken` flow, use this manual checklist:
+
+1. Run `./scripts/start-startup-diff-demo.sh`.
+2. The script builds `.build/app/LocalSecurityTwin.app`, creates a temporary HOME, writes one demo LaunchAgent plist, writes an empty remembered startup state, and starts the app executable with that HOME.
+3. Confirm the dashboard headline shows a visible startup change and the banner offers `Als erwartet merken`.
+4. Trigger `Als erwartet merken` and confirm the confirmation text says no system settings are changed.
+5. Confirm the dashboard becomes calmer afterwards: no startup diff remains and the visible item moves into the known startup hints group.
+
 As the app grows, this suite should expand to cover menu bar startup, main-window navigation, and real guided actions.

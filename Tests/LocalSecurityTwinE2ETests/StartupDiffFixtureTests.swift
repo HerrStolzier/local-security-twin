@@ -16,13 +16,35 @@ struct StartupDiffFixtureTests {
         let before = DashboardPresentation(findings: store.findings)
         #expect(before.startupChangeCount == 1)
         #expect(before.showsRememberCurrentStartupStateAction)
-        #expect(store.findings.contains(where: { $0.displaySubject == "com.example.current.plist" }))
+        let startupChange = try #require(store.findings.first(where: { $0.displaySubject == "com.example.current.plist" }))
+        #expect(startupChange.source.kind == .baselineDiff)
+        #expect(startupChange.nextStep.contains("als erwartet merken"))
+        #expect(startupChange.recommendations.contains(where: { $0.action == .trustItem }))
+    }
+
+    @Test func rememberingCurrentStartupStateMakesDashboardCalmAgain() throws {
+        let fixture = try StartupDiffFixture()
+        let store = FindingStore(
+            pipeline: fixture.pipeline,
+            contextProvider: fixture.context
+        )
+
+        store.refresh()
+
+        let before = DashboardPresentation(findings: store.findings)
+        #expect(before.headlineText == "1 Autostart-Aenderung(en) brauchen deine Einordnung")
+        #expect(before.showsRememberCurrentStartupStateAction)
+        #expect(before.nextStepText == "Pruefe zuerst die neuen oder verschwundenen Hinweise. Wenn sie erwartet sind, merke den aktuellen Zustand bewusst als normal.")
 
         store.rememberCurrentStartupState()
 
         let after = DashboardPresentation(findings: store.findings)
         #expect(after.startupChangeCount == 0)
+        #expect(after.knownStartupCount == 1)
         #expect(!after.showsRememberCurrentStartupStateAction)
+        #expect(after.headlineText == "1 bekannte Autostart-Hinweis(e) sichtbar")
+        #expect(after.summaryText == "Es sind sichtbare Autostart-Hinweise vorhanden. Das ist nicht automatisch gefaehrlich, sondern zuerst eine lokale Orientierung.")
+        #expect(after.nextStepText == "Schau dir bekannte Hinweise in Ruhe an. Wichtig ist vor allem, ob du die zugehoerige App erkennst.")
         #expect(store.lastBaselineRefreshError == nil)
     }
 }

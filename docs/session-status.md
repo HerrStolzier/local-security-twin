@@ -66,6 +66,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 1 Task 1.4 umgesetzt: Wichtigkeits-Badges sind visuell ruhiger und nutzen keine rote Alarmoptik mehr
 - Sprint 2 Task 2.1 umgesetzt: wiederholbare Startup-Diff-Fixture in den E2E-Tests angelegt, ohne echte LaunchAgent-Ordner zu veraendern
 - Sprint 2 Task 2.2 umgesetzt: UI-Testpfad dokumentiert; vorerst Store-/Presentation-Tests plus Bundle-Smokes, echte Klickautomation nach Sandbox-/Xcode-Entscheidung
+- Sprint 2 Task 2.3 umgesetzt: UI-naher E2E-Flow prueft Startup-Diff, verfuegbare Trust-Empfehlung, Dashboard-Aktion und ruhigen Zustand nach `rememberCurrentStartupState`; `scripts/start-startup-diff-demo.sh` startet denselben Flow fuer manuelle UI-Pruefung; echte macOS-Klickautomation bleibt nach Sandbox-/Xcode-Entscheidung offen
 
 ## Aktueller Stand in einem Satz
 
@@ -73,7 +74,7 @@ Die App zeigt den ersten Sensor jetzt noch konsequenter deutsch, gruppiert und m
 
 ## Naechster konkreter Schritt
 
-Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 2, Task 2.3: erster UI-naher Flow-Test.
+Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 3, Task 3.1: minimale Entitlements-Datei fuer lokale Sandbox-Tests anlegen.
 
 ## Danach sinnvoll
 
@@ -91,6 +92,7 @@ Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 2, Task 2.3: er
 - Die UI-Aktion zum Merken des aktuellen Startup-Zustands ist vorhanden, aber noch nicht mit echter macOS-UI-Automation getestet.
 - Die App-Oberflaeche ist jetzt deutlich deutscher und strukturierter; echte macOS-UI-Automation fehlt weiterhin.
 - Der wichtigste UI-Flow ist Store-/Presentation-nah getestet; echte macOS-Klickautomation fehlt weiterhin.
+- Fuer den `Als erwartet merken`-Flow gibt es jetzt eine feste manuelle Checkliste im Development-Workflow; echte Klickautomation bleibt trotzdem offen.
 - Background Task Management ist relevant, aber noch keine robuste Produktquelle fuer den MVP.
 - Kein zweiter Sensor ist aktuell ausgewaehlt; diese Entscheidung ist bewusst, nicht vergessen.
 - Aktuelles `.app`-Bundle ist fuer Entwicklung und lokale Spikes gut, aber noch kein distributionsnahes, notarized Build-Artefakt.
@@ -181,6 +183,12 @@ Zusaetzlich nach Sprint 1 Task 1.2:
 Zusaetzlich nach Sprint 2 Task 2.1:
 
 - E2E-Fixture-Test fuer Startup-Diff und `Als erwartet merken`
+
+Zusaetzlich nach Sprint 2 Task 2.3:
+
+- `swift test --filter E2E`
+- `swift test`
+- `scripts/start-startup-diff-demo.sh` fuer manuelle UI-Pruefung mit temporaerem HOME
 
 ## Letzte externe Recherche
 

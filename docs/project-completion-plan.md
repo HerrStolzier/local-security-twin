@@ -129,7 +129,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 2: Trust-Flow und UI-nahe Tests
 
-**Status**: in Umsetzung seit 2026-05-13. Tasks 2.1 und 2.2 sind umgesetzt.
+**Status**: umgesetzt am 2026-05-13.
 
 **Goal**: Der Nutzer kann Startup-Aenderungen bewusst als erwartet merken, und dieser Flow ist testbar.
 
@@ -141,7 +141,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ### Task 2.1: Testdaten fuer Startup-Diff-App-Start standardisieren
 
-**Status**: umgesetzt am 2026-05-13.
+**Status**: umgesetzt am 2026-05-13 als Store-/Presentation-naher E2E-Test. Echte macOS-Klickautomation bleibt nach Sandbox-/Xcode-Entscheidung offen.
 
 - **Location**:
   - `scripts/`
@@ -173,9 +173,11 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ### Task 2.3: Erster UI-naher Flow-Test
 
+**Status**: umgesetzt am 2026-05-13.
+
 - **Location**:
   - `Tests/LocalSecurityTwinE2ETests`
-  - optional `scripts/`
+  - `scripts/start-startup-diff-demo.sh`
 - **Description**: Den wichtigsten Flow testen: Findings geladen, Startup-Diff sichtbar, Merken-Aktion verfuegbar, Folgezustand ruhig.
 - **Complexity**: 6/10
 - **Dependencies**: Task 2.1, Task 2.2
