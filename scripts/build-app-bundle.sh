@@ -81,7 +81,13 @@ PLIST
 plutil -lint "$CONTENTS_PATH/Info.plist" >/dev/null
 
 if command -v codesign >/dev/null; then
-    codesign --force --sign - "$BUNDLE_PATH" >/dev/null
+    CODESIGN_OPTIONS=()
+
+    if [[ "${HARDENED_RUNTIME:-0}" == "1" ]]; then
+        CODESIGN_OPTIONS=(--options runtime)
+    fi
+
+    codesign --force --sign - "${CODESIGN_OPTIONS[@]}" "$BUNDLE_PATH" >/dev/null
 fi
 
 echo "Built app bundle: $BUNDLE_PATH"

@@ -40,6 +40,14 @@ Run the local app-bundle smoke check:
 
 This rebuilds the bundle, verifies its local signature, launches it once, and stops it again.
 
+Run the local Hardened Runtime smoke check:
+
+```bash
+./scripts/hardened-runtime-smoke.sh
+```
+
+This signs the local bundle ad-hoc with the runtime option and verifies that it still launches.
+
 ## Handoff Documents
 
 Every finished step must leave the repo in a resumable state.

@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-13
-- Bereich: App-Bundle-Smoke nach Roadmap
+- Bereich: Hardened-Runtime-Smoke nach Roadmap
 
 ## Zuletzt abgeschlossen
 
@@ -56,14 +56,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - lokaler App-Bundle-Spike umgesetzt: `scripts/build-app-bundle.sh` erzeugt `.build/app/LocalSecurityTwin.app` aus dem SwiftPM-Executable
 - lokales `.app`-Bundle validiert: `Info.plist` ist gueltig, `codesign --verify --deep --strict` ist erfolgreich, Start-Smoke per `open -n` ist erfolgreich
 - App-Bundle-Smoke automatisiert: `scripts/app-bundle-smoke.sh` baut, validiert, startet und beendet das lokale `.app`-Bundle
+- Hardened-Runtime-Smoke automatisiert: `scripts/hardened-runtime-smoke.sh` signiert lokal ad-hoc mit Runtime-Option, verifiziert die Signatur und startet die App
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; zusaetzlich gibt es ein lokales `.app`-Bundle plus Smoke-Test fuer die naechsten UI- und Signing-Spikes.
+Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; zusaetzlich gibt es lokale Bundle-, Start- und Hardened-Runtime-Smokes fuer die naechsten UI- und Signing-Spikes.
 
 ## Naechster konkreter Schritt
 
-Auf Basis von `scripts/app-bundle-smoke.sh` den ersten echten UI-Automation- oder manuellen UI-Review-Schnitt planen.
+Als naechstes Sandbox-Auswirkung oder erste echte UI-Automation gegen `.build/app/LocalSecurityTwin.app` pruefen.
 
 ## Danach sinnvoll
 
@@ -154,6 +155,11 @@ Zusaetzlich nach dem App-Bundle-Spike am 2026-05-13:
 Zusaetzlich nach dem App-Bundle-Smoke-Script:
 
 - `./scripts/app-bundle-smoke.sh`
+
+Zusaetzlich nach dem Hardened-Runtime-Smoke-Script:
+
+- `HARDENED_RUNTIME=1 ./scripts/build-app-bundle.sh`
+- `./scripts/hardened-runtime-smoke.sh`
 
 ## Letzte externe Recherche
 

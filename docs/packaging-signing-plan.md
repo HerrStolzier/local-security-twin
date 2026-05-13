@@ -42,6 +42,12 @@ Update nach dem ersten Script-Spike:
 - der Smoke baut das Bundle, validiert `Info.plist`, prueft `codesign --verify`, startet die App und beendet sie danach wieder
 - der Smoke ersetzt noch keine echte UI-Klickautomation, senkt aber das Risiko fuer den naechsten UI-Test deutlich
 
+Update nach dem Hardened-Runtime-Smoke:
+
+- `scripts/build-app-bundle.sh` kann ueber `HARDENED_RUNTIME=1` ad-hoc mit Runtime-Option signieren
+- `scripts/hardened-runtime-smoke.sh` prueft, dass die Signatur `runtime` meldet und die App weiterhin startet
+- das ist weiterhin keine notarized Distribution, aber ein guter lokaler Vorcheck fuer spaetere Developer-ID-Signing-Schritte
+
 ## Entscheidungen fuer den MVP
 
 - Keine Network-Client-Entitlement ohne konkreten Produktnutzen.
@@ -87,10 +93,9 @@ Den lokalen App-Bundle-Spike fuer genauere Tests nutzen:
 
 1. Lokales `.app`-Bundle als UI-Automation-Ziel verwenden.
 2. Erste UI-nahe Automation auf dem Bundle aufbauen.
-3. Hardened Runtime ohne Ausnahmen testen.
-4. Sandbox einmal bewusst an/aus gegen den Startup-Sensor pruefen.
-5. Erst danach entscheiden, ob ein Xcode-Projekt noetig ist.
-6. Ergebnis dokumentieren, bevor neue Sensoren mit breiterer System-Sicht gebaut werden.
+3. Sandbox einmal bewusst an/aus gegen den Startup-Sensor pruefen.
+4. Erst danach entscheiden, ob ein Xcode-Projekt noetig ist.
+5. Ergebnis dokumentieren, bevor neue Sensoren mit breiterer System-Sicht gebaut werden.
 
 ## Vorlaeufiger Distributionspfad
 

@@ -31,6 +31,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Der aktuelle SwiftPM-Build ist ein ad-hoc signiertes Executable ohne `.app`-Bundle, Entitlements und TeamIdentifier; fuer Nutzer-Testbuilds braucht das Projekt einen App-Bundle-/Xcode-Projekt-Spike.
 - Ein lokales `.app`-Bundle kann aus dem SwiftPM-Executable erzeugt und ad-hoc signiert werden; das reicht fuer lokale Start- und UI-Automation-Spikes, aber nicht fuer echte Distribution.
 - Der App-Bundle-Smoke sollte vor echter UI-Automation laufen, weil er zuerst klaert, ob das `.app`-Artefakt ueberhaupt sauber baut, signiert und startet.
+- Die App startet lokal auch mit ad-hoc Hardened-Runtime-Signatur; echte Distribution braucht trotzdem spaeter Developer ID und Notarization.
 
 ## Workflow Gotchas
 
@@ -45,5 +46,6 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Darin stecken Refactor-/Regression-Pass, Security Checks und E2E-Smoke-Tests.
 - Ein lokales Entwicklungs-Bundle entsteht mit `./scripts/build-app-bundle.sh` unter `.build/app/LocalSecurityTwin.app`.
 - Der lokale App-Bundle-Smoke laeuft mit `./scripts/app-bundle-smoke.sh`.
+- Der lokale Hardened-Runtime-Smoke laeuft mit `./scripts/hardened-runtime-smoke.sh`.
 - Die jetzigen E2E-Tests pruefen noch keinen echten UI-Flow, sondern das aktuelle Integrationsfundament.
 - Der erste reale Sensor liest aktuell sichtbare `LaunchAgents`- und `LaunchDaemons`-`plist`-Dateien aus dem Dateisystem und interpretiert einfache Felder wie `Label`, `ProgramArguments`, `RunAtLoad` und `KeepAlive`, ohne daraus Aktivitaet oder Gefahr zu behaupten.
