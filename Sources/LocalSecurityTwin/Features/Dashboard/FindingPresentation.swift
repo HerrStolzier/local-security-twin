@@ -89,11 +89,13 @@ extension Finding {
 
             return "Neuer Autostart-Hinweis"
         case .launchAgentInventory:
-            if title.localizedCaseInsensitiveContains("shared daemon") {
+            if title.localizedCaseInsensitiveContains("systemweit")
+                || title.localizedCaseInsensitiveContains("shared daemon") {
                 return "Systemweiter Autostart-Hinweis"
             }
 
-            if title.localizedCaseInsensitiveContains("shared") {
+            if title.localizedCaseInsensitiveContains("gemeinsam")
+                || title.localizedCaseInsensitiveContains("shared") {
                 return "Gemeinsamer Autostart-Hinweis"
             }
 
@@ -147,11 +149,11 @@ extension Finding {
     var displayImportance: String {
         switch severity {
         case .low:
-            return "Ruhig pruefen"
+            return "Zur Info"
         case .medium:
-            return "Anschauen"
+            return "Pruefen"
         case .high:
-            return "Genauer ansehen"
+            return "Genauer pruefen"
         }
     }
 
@@ -208,11 +210,13 @@ extension Finding {
             return nil
         }
 
-        if value.localizedCaseInsensitiveContains("always") {
+        if value.localizedCaseInsensitiveContains("dauerhaft")
+            || value.localizedCaseInsensitiveContains("always") {
             return "Soll im Hintergrund verfuegbar bleiben"
         }
 
-        if value.localizedCaseInsensitiveContains("conditional") {
+        if value.localizedCaseInsensitiveContains("bedingungen")
+            || value.localizedCaseInsensitiveContains("conditional") {
             return "Nutzt Bedingungen, um bei Bedarf verfuegbar zu bleiben"
         }
 

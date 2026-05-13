@@ -44,6 +44,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 1: Orientierung und UX-Fokus
 
+**Status**: in Umsetzung seit 2026-05-13. Task 1.1 ist umgesetzt; wesentliche englische Nutzertexte im ersten Sensor und App-Chrome sind geglaettet.
+
 **Goal**: Die App soll fuer normale Nutzer in einem Blick erklaeren, was gerade wichtig ist.
 
 **Demo/Validation**:
@@ -57,6 +59,8 @@ Das Projekt gilt als MVP-fertig, wenn:
   - Detailansicht beginnt mit Einordnung, nicht Rohdaten
 
 ### Task 1.1: UI-Texte vollstaendig inventarisieren
+
+**Status**: umgesetzt am 2026-05-13.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Features`

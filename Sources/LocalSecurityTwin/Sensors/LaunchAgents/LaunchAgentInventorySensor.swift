@@ -3,8 +3,8 @@ import Foundation
 struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
     let descriptor = SensorDescriptor(
         id: "launch-agent-inventory",
-        title: "Launch Agent Inventory",
-        summary: "Looks for visible startup item plist files in user and shared launch-agent folders."
+        title: "Sichtbare Autostart-Hinweise",
+        summary: "Sucht sichtbare plist-Dateien in Autostart-Ordnern des Nutzers und des Systems."
     )
 
     private let fileManager: FileManager
@@ -136,13 +136,13 @@ struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
     private func keepAliveSummary(from value: Any?) -> String? {
         switch value {
         case let bool as Bool:
-            return bool ? "Always tries to stay available" : "Does not request constant launchd keep-alive"
+            return bool ? "Soll dauerhaft verfuegbar bleiben" : "Fordert kein dauerhaftes Neustarten durch launchd an"
         case let dictionary as [String: Any]:
             if dictionary.isEmpty {
                 return nil
             }
 
-            return "Uses conditional keep-alive rules: \(dictionary.keys.sorted().joined(separator: ", "))"
+            return "Nutzt Bedingungen fuer Hintergrundverfuegbarkeit: \(dictionary.keys.sorted().joined(separator: ", "))"
         default:
             return nil
         }
@@ -182,42 +182,42 @@ struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
 
         return Finding(
             id: "launch-item::\(item.id)",
-            title: "\(scopeTitle) background startup hint is visible",
+            title: "\(scopeTitle) Autostart-Hinweis ist sichtbar",
             source: FindingSource(
                 kind: .launchAgentInventory,
-                title: "Visible Startup Hints",
-                detail: "Looks for visible startup item plist files in user and shared launch-agent folders."
+                title: "Sichtbare Autostart-Hinweise",
+                detail: "Sucht sichtbare plist-Dateien in Autostart-Ordnern des Nutzers und des Systems."
             ),
             severity: item.scope.defaultSeverity,
             confidence: .supported,
-            summary: "\(fileName) is visible in a location macOS can use for automatic background startup.",
-            userImpact: "This is a startup hint, not proof that the software is running or dangerous. It matters because items in these locations can make software available in the background after login or boot.",
-            nextStep: "Check whether this item belongs to software you expected. If yes, you can mark it as expected. If not, keep it under review before treating it as normal.",
+            summary: "\(fileName) ist an einem Ort sichtbar, den macOS fuer automatischen Hintergrundstart nutzen kann.",
+            userImpact: "Das ist ein Autostart-Hinweis, kein Beweis dafuer, dass die Software gerade laeuft oder gefaehrlich ist. Wichtig ist er, weil solche Orte Software nach Login oder Start im Hintergrund verfuegbar machen koennen.",
+            nextStep: "Pruefe, ob dieser Hinweis zu Software gehoert, die du erwartest. Wenn ja, kannst du ihn als erwartet merken. Wenn nicht, beobachte ihn weiter, bevor du ihn als normal behandelst.",
             evidence: startupEvidence(for: item, scopeTitle: scopeTitle) + [
                 FindingEvidence(
                     id: "path",
-                    title: "Observed file",
-                    summary: "A plist file was found at \(item.path).",
-                    detail: "This sensor reports visible filesystem evidence. It does not prove the item is currently loaded or running."
+                    title: "Beobachtete Datei",
+                    summary: "Eine plist-Datei wurde unter \(item.path) gefunden.",
+                    detail: "Dieser Sensor meldet sichtbare Dateisystem-Belege. Das beweist nicht, dass der Eintrag gerade geladen ist oder laeuft."
                 ),
                 FindingEvidence(
                     id: "scope",
-                    title: "Startup scope",
-                    summary: "The item sits in the \(scopeTitle.lowercased()) scope.",
+                    title: "Autostart-Bereich",
+                    summary: "Der Hinweis liegt im Bereich: \(scopeTitle).",
                     detail: item.scope.userExplanation
                 ),
             ],
             recommendations: [
                 FindingRecommendation(
                     id: "trust-launch-item",
-                    title: "Mark this startup item as expected",
-                    explanation: "Use this if you recognize the item and do not want it to keep surfacing as a surprise.",
+                    title: "Diesen Autostart-Hinweis als erwartet merken",
+                    explanation: "Nutze das, wenn du den Eintrag kennst und er nicht weiter als Ueberraschung auftauchen soll.",
                     action: .trustItem
                 ),
                 FindingRecommendation(
                     id: "validate-launch-item",
-                    title: "Keep this item under review",
-                    explanation: "Use a bounded validation step later if you want stronger proof before trusting or escalating this startup item.",
+                    title: "Diesen Hinweis weiter beobachten",
+                    explanation: "Nutze spaeter einen begrenzten Pruefschritt, wenn du mehr Belege brauchst, bevor du den Hinweis einordnest.",
                     action: .runSafeValidation
                 ),
             ]
@@ -229,9 +229,9 @@ struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
             return [
                 FindingEvidence(
                     id: "plist-details",
-                    title: "Startup file details",
-                    summary: "The plist file was visible, but the app could not read simple launch details from it.",
-                    detail: "This can happen when the file is empty, malformed, or uses a shape this first reader does not understand yet. The file path evidence is still preserved."
+                    title: "Autostart-Details",
+                    summary: "Die plist-Datei war sichtbar, aber die App konnte keine einfachen Startdetails daraus lesen.",
+                    detail: "Das kann passieren, wenn die Datei leer, fehlerhaft oder anders aufgebaut ist, als dieser erste Leser versteht. Der Dateipfad bleibt trotzdem als Beleg erhalten."
                 ),
             ]
         }
@@ -259,14 +259,14 @@ struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
         }
 
         if lines.isEmpty {
-            lines.append("No simple Label, Program, ProgramArguments, RunAtLoad, or KeepAlive values were present.")
+            lines.append("Keine einfachen Werte fuer Label, Program, ProgramArguments, RunAtLoad oder KeepAlive vorhanden.")
         }
 
         return [
             FindingEvidence(
                 id: "plist-details",
-                title: "Startup file details",
-                summary: "The plist file contains readable launch details for this \(scopeTitle.lowercased()) startup hint.",
+                title: "Autostart-Details",
+                summary: "Die plist-Datei enthaelt lesbare Startdetails fuer diesen Autostart-Hinweis.",
                 detail: lines.joined(separator: "\n")
             ),
         ]
@@ -281,48 +281,48 @@ struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
 
         return Finding(
             id: "baseline-diff::added::\(item.id)",
-            title: "\(scopeTitle) startup hint is new since the remembered state",
+            title: "\(scopeTitle) Autostart-Hinweis ist seit dem gemerkten Zustand neu",
             source: FindingSource(
                 kind: .baselineDiff,
-                title: "Startup change since remembered state",
-                detail: "Compared the latest visible startup hints with the stored local known state."
+                title: "Autostart-Aenderung seit gemerktem Zustand",
+                detail: "Vergleicht die aktuell sichtbaren Autostart-Hinweise mit dem lokal gemerkten Zustand."
             ),
             severity: item.scope.defaultSeverity,
             confidence: .supported,
-            summary: "\(item.fileName) was not part of the remembered startup state and is now visible in an automatic startup location.",
-            userImpact: "A newly visible startup hint is often normal after an install or update. It still deserves a calm review because it may affect what can start in the background.",
-            nextStep: "Check whether you expected this software change. If yes, you can mark the current startup state as expected. If not, keep it under review before treating it as normal.",
+            summary: "\(item.fileName) war nicht Teil des gemerkten Autostart-Zustands und ist jetzt an einem Autostart-Ort sichtbar.",
+            userImpact: "Ein neuer sichtbarer Autostart-Hinweis ist nach Installation oder Update oft normal. Er verdient trotzdem eine ruhige Pruefung, weil er beeinflussen kann, was im Hintergrund starten darf.",
+            nextStep: "Pruefe, ob du diese Software-Aenderung erwartet hast. Wenn ja, kannst du den aktuellen Autostart-Zustand als erwartet merken. Wenn nicht, beobachte sie weiter.",
             evidence: startupEvidence(for: item, scopeTitle: scopeTitle) + [
                 FindingEvidence(
                     id: "baseline-comparison",
-                    title: "Change since remembered state",
-                    summary: "The remembered state from \(baselineTimestamp) did not include this startup hint.",
-                    detail: "The app compared the current visible startup set against a local known state saved earlier on this Mac."
+                    title: "Aenderung seit gemerktem Zustand",
+                    summary: "Der gemerkte Zustand vom \(baselineTimestamp) enthielt diesen Autostart-Hinweis nicht.",
+                    detail: "Die App hat die aktuell sichtbaren Autostart-Hinweise mit einem frueher lokal gespeicherten Zustand dieses Macs verglichen."
                 ),
                 FindingEvidence(
                     id: "current-path",
-                    title: "Current observed file",
-                    summary: "A plist file is currently visible at \(item.path).",
-                    detail: "This means the item is visible now, even though it was not part of the remembered baseline snapshot."
+                    title: "Aktuell beobachtete Datei",
+                    summary: "Eine plist-Datei ist aktuell unter \(item.path) sichtbar.",
+                    detail: "Das bedeutet: Der Eintrag ist jetzt sichtbar, obwohl er nicht Teil des gemerkten Zustands war."
                 ),
                 FindingEvidence(
                     id: "scope",
-                    title: "Startup scope",
-                    summary: "The item sits in the \(scopeTitle.lowercased()) scope.",
+                    title: "Autostart-Bereich",
+                    summary: "Der Hinweis liegt im Bereich: \(scopeTitle).",
                     detail: item.scope.userExplanation
                 ),
             ],
             recommendations: [
                 FindingRecommendation(
                     id: "trust-startup-change",
-                    title: "Mark this startup change as expected",
-                    explanation: "Use this if you recognize the new startup item and do not want it to keep surfacing as a surprise.",
+                    title: "Diese Autostart-Aenderung als erwartet merken",
+                    explanation: "Nutze das, wenn du den neuen Eintrag kennst und er nicht weiter als Ueberraschung auftauchen soll.",
                     action: .trustItem
                 ),
                 FindingRecommendation(
                     id: "validate-startup-change",
-                    title: "Keep this change under review",
-                    explanation: "Use a bounded validation step later if you want stronger proof before trusting or escalating this startup change.",
+                    title: "Diese Aenderung weiter beobachten",
+                    explanation: "Nutze spaeter einen begrenzten Pruefschritt, wenn du mehr Belege brauchst, bevor du die Aenderung einordnest.",
                     action: .runSafeValidation
                 ),
             ]
@@ -338,48 +338,48 @@ struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
 
         return Finding(
             id: "baseline-diff::removed::\(item.id)",
-            title: "\(scopeTitle) startup hint disappeared since the remembered state",
+            title: "\(scopeTitle) Autostart-Hinweis ist seit dem gemerkten Zustand verschwunden",
             source: FindingSource(
                 kind: .baselineDiff,
-                title: "Startup change since remembered state",
-                detail: "Compared the latest visible startup hints with the stored local known state."
+                title: "Autostart-Aenderung seit gemerktem Zustand",
+                detail: "Vergleicht die aktuell sichtbaren Autostart-Hinweise mit dem lokal gemerkten Zustand."
             ),
             severity: item.scope.removalSeverity,
             confidence: .supported,
-            summary: "\(item.fileName) was present in the remembered startup state but is no longer visible in its previous startup location.",
-            userImpact: "A disappeared startup hint is often harmless after an uninstall or update. It simply means the visible startup set changed since the app last remembered it.",
-            nextStep: "If you recently removed or updated the related software, this is likely expected. If not, keep an eye on whether the item returns or whether other startup behavior changes around it.",
+            summary: "\(item.fileName) war im gemerkten Autostart-Zustand vorhanden und ist am frueheren Autostart-Ort nicht mehr sichtbar.",
+            userImpact: "Ein verschwundener Autostart-Hinweis ist nach Deinstallation oder Update oft harmlos. Er bedeutet zuerst nur, dass sich die sichtbare Autostart-Liste geaendert hat.",
+            nextStep: "Wenn du die zugehoerige Software kuerzlich entfernt oder aktualisiert hast, ist das wahrscheinlich erwartet. Wenn nicht, beobachte, ob der Eintrag wieder auftaucht oder sich Startverhalten veraendert.",
             evidence: [
                 FindingEvidence(
                     id: "baseline-comparison",
-                    title: "Change since remembered state",
-                    summary: "The remembered state from \(baselineTimestamp) included this startup hint, but the current snapshot does not.",
-                    detail: "This is a disappearance relative to the remembered local state, not proof of malicious behavior on its own."
+                    title: "Aenderung seit gemerktem Zustand",
+                    summary: "Der gemerkte Zustand vom \(baselineTimestamp) enthielt diesen Autostart-Hinweis, der aktuelle Zustand nicht mehr.",
+                    detail: "Das ist ein Verschwinden relativ zum lokal gemerkten Zustand, fuer sich allein aber kein Beweis fuer schaedliches Verhalten."
                 ),
                 FindingEvidence(
                     id: "previous-path",
-                    title: "Previously observed file",
-                    summary: "The baseline recorded the item at \(item.path).",
-                    detail: "The current sensor run no longer sees a plist file at that stored startup path."
+                    title: "Frueher beobachtete Datei",
+                    summary: "Der gemerkte Zustand hatte den Eintrag unter \(item.path) gespeichert.",
+                    detail: "Der aktuelle Sensorlauf sieht an diesem gemerkten Autostart-Pfad keine plist-Datei mehr."
                 ),
                 FindingEvidence(
                     id: "scope",
-                    title: "Startup scope",
-                    summary: "The missing item belonged to the \(scopeTitle.lowercased()) scope.",
+                    title: "Autostart-Bereich",
+                    summary: "Der fehlende Hinweis gehoerte zum Bereich: \(scopeTitle).",
                     detail: item.scope.userExplanation
                 ),
             ],
             recommendations: [
                 FindingRecommendation(
                     id: "trust-startup-removal",
-                    title: "Mark this disappearance as expected",
-                    explanation: "Use this if the missing startup item matches a software change you expected, such as an uninstall or cleanup.",
+                    title: "Dieses Verschwinden als erwartet merken",
+                    explanation: "Nutze das, wenn der fehlende Autostart-Hinweis zu einer erwarteten Software-Aenderung passt, etwa Deinstallation oder Aufraeumen.",
                     action: .trustItem
                 ),
                 FindingRecommendation(
                     id: "validate-startup-removal",
-                    title: "Keep this disappearance under review",
-                    explanation: "Use a bounded validation step later if the disappearance feels unexpected and you want more proof before escalating.",
+                    title: "Dieses Verschwinden weiter beobachten",
+                    explanation: "Nutze spaeter einen begrenzten Pruefschritt, wenn das Verschwinden unerwartet wirkt und du mehr Belege brauchst.",
                     action: .runSafeValidation
                 ),
             ]
@@ -395,9 +395,9 @@ struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
 
         if items.isEmpty {
             let joinedDirectories = directories.map(\.path).joined(separator: ", ")
-            notes.append("No visible startup plist files were found in: \(joinedDirectories).")
+            notes.append("Keine sichtbaren Autostart-plist-Dateien gefunden in: \(joinedDirectories).")
         } else {
-            notes.append("Detected \(items.count) visible startup plist file(s).")
+            notes.append("\(items.count) sichtbare Autostart-plist-Datei(en) gefunden.")
         }
 
         notes.append(baselineNote(for: baselineState, currentItems: items))
@@ -414,12 +414,12 @@ struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
 
         if items.isEmpty {
             let joinedDirectories = directories.map(\.path).joined(separator: ", ")
-            notes.append("No visible startup plist files were found in: \(joinedDirectories).")
+            notes.append("Keine sichtbaren Autostart-plist-Dateien gefunden in: \(joinedDirectories).")
         } else {
-            notes.append("Detected \(items.count) visible startup plist file(s).")
+            notes.append("\(items.count) sichtbare Autostart-plist-Datei(en) gefunden.")
         }
 
-        notes.append("Startup change detection is limited in this run because the remembered local state could not be loaded or saved: \(error.localizedDescription)")
+        notes.append("Die Autostart-Aenderungserkennung ist in diesem Lauf eingeschraenkt, weil der lokal gemerkte Zustand nicht geladen oder gespeichert werden konnte: \(error.localizedDescription)")
         return notes
     }
 
@@ -429,14 +429,14 @@ struct LaunchAgentInventorySensor: StartupBaselineRefreshingSensor {
     ) -> String {
         switch state.status {
         case .createdInitialSnapshot:
-            return "Saved the first local startup baseline with \(state.snapshot.items.count) item(s). Later runs can compare against this remembered starting point."
+            return "Ersten lokalen Autostart-Zustand mit \(state.snapshot.items.count) Eintrag/Eintraegen gemerkt. Spaetere Laeufe koennen damit vergleichen."
         case .loadedExistingSnapshot:
             let diff = compare(items: currentItems, against: state.snapshot.items)
             if diff.added.isEmpty && diff.removed.isEmpty {
-                return "Current startup snapshot matches the stored local baseline."
+                return "Der aktuelle Autostart-Zustand entspricht dem lokal gemerkten Zustand."
             }
 
-            return "Compared against the stored local baseline: \(diff.added.count) new item(s), \(diff.removed.count) missing item(s)."
+            return "Mit dem lokal gemerkten Zustand verglichen: \(diff.added.count) neue Eintraege, \(diff.removed.count) verschwundene Eintraege."
         }
     }
 
@@ -491,11 +491,11 @@ private extension StartupItemScope {
     var title: String {
         switch self {
         case .userAgent:
-            return "User"
+            return "Benutzer"
         case .sharedAgent:
-            return "Shared"
+            return "Gemeinsam"
         case .sharedDaemon:
-            return "Shared daemon"
+            return "Systemweit"
         }
     }
 
@@ -524,11 +524,11 @@ private extension StartupItemScope {
     var userExplanation: String {
         switch self {
         case .userAgent:
-            return "User launch agents normally affect the logged-in user account and are often created by installed apps."
+            return "Autostart-Hinweise fuer den Benutzer betreffen normalerweise das angemeldete Konto und werden oft von installierten Apps angelegt."
         case .sharedAgent:
-            return "Shared launch agents can affect multiple users on the Mac and deserve a slightly stronger review."
+            return "Gemeinsame Autostart-Hinweise koennen mehrere Benutzer dieses Macs betreffen und verdienen deshalb etwas mehr Aufmerksamkeit."
         case .sharedDaemon:
-            return "Shared launch daemons can start in a more privileged system-wide scope, so they deserve closer attention."
+            return "Systemweite Hintergrunddienste koennen in einem staerkeren systemweiten Bereich starten und sollten deshalb genauer angesehen werden."
         }
     }
 }

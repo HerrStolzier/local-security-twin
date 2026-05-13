@@ -11,7 +11,7 @@ struct LocalSecurityTwinApp: App {
     }
 
     var body: some Scene {
-        WindowGroup("Local Security Twin") {
+        WindowGroup("Lokaler Sicherheitszwilling") {
             ContentView(
                 findings: findingStore.findings,
                 lastBaselineRefreshError: findingStore.lastBaselineRefreshError,
@@ -30,7 +30,7 @@ struct LocalSecurityTwinApp: App {
                 .environmentObject(policyStore)
         }
 
-        MenuBarExtra("Security Twin", systemImage: "shield.lefthalf.filled") {
+        MenuBarExtra("Sicherheitszwilling", systemImage: "shield.lefthalf.filled") {
             MenuBarView(
                 findings: findingStore.findings,
                 rememberedPolicyCount: policyStore.rememberedPolicies.count,

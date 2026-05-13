@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-13
-- Bereich: Abschlussplan und Dokumentation
+- Bereich: Sprint 1 - UI-Texte und Orientierung
 
 ## Zuletzt abgeschlossen
 
@@ -58,14 +58,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - App-Bundle-Smoke automatisiert: `scripts/app-bundle-smoke.sh` baut, validiert, startet und beendet das lokale `.app`-Bundle
 - Hardened-Runtime-Smoke automatisiert: `scripts/hardened-runtime-smoke.sh` signiert lokal ad-hoc mit Runtime-Option, verifiziert die Signatur und startet die App
 - detaillierten Abschlussplan in `docs/project-completion-plan.md` erstellt; er ordnet UX, Trust-Flow, Sandbox/Packaging, zweiten Sensor, Guided Actions, Distribution und MVP-Abschluss in testbare Sprints
+- Sprint 1 Task 1.1 umgesetzt: UI-Text-Inventar in `docs/ui-ux-redesign-notes.md` ergaenzt
+- auffaellige englische Nutzertexte im ersten Startup-Sensor, Fenster- und Menueleistentitel eingedeutscht
+- Severity-/Wichtigkeitslabels ruhiger formuliert: `Zur Info`, `Pruefen`, `Genauer pruefen`
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; zusaetzlich gibt es lokale Bundle-, Start- und Hardened-Runtime-Smokes sowie einen detaillierten Abschlussplan fuer den Weg zum MVP.
+Die App zeigt den ersten Sensor jetzt noch konsequenter deutsch, gruppiert und mit besser nutzbaren Startup-Details; zusaetzlich gibt es lokale Bundle-, Start- und Hardened-Runtime-Smokes sowie einen detaillierten Abschlussplan fuer den Weg zum MVP.
 
 ## Naechster konkreter Schritt
 
-Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 1, Task 1.1: UI-Texte vollstaendig inventarisieren.
+Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 1, Task 1.2: Dashboard-Story schaerfen.
 
 ## Danach sinnvoll
 
@@ -161,6 +164,10 @@ Zusaetzlich nach dem Hardened-Runtime-Smoke-Script:
 
 - `HARDENED_RUNTIME=1 ./scripts/build-app-bundle.sh`
 - `./scripts/hardened-runtime-smoke.sh`
+
+Zusaetzlich nach Sprint 1 Task 1.1:
+
+- `swift test`
 
 ## Letzte externe Recherche
 

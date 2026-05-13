@@ -104,3 +104,27 @@ Vor neuen Sensoren sollte ein UI-/UX-Schnitt kommen:
 - keine vollstaendige Design-Neuerfindung
 
 Ziel ist erst einmal Orientierung.
+
+## UI-Text-Inventar 2026-05-13
+
+Sprint 1, Task 1.1 hat die sichtbaren Texte erneut geprueft.
+
+Bereits geglaettet:
+
+- Fenster- und Menueleistentitel sind deutsch.
+- Dashboard, Detailansicht, Settings und Menueleiste sind weitgehend deutsch.
+- Der Startup-Sensor liefert Finding-, Evidence-, Recommendation- und Sensor-Notiztexte jetzt auf Deutsch.
+- Severity-Badges sind ruhiger formuliert: `Zur Info`, `Pruefen`, `Genauer pruefen`.
+
+Bewusst noch technisch oder intern:
+
+- interne IDs wie `launch-agent-inventory`, `baseline-diff`, `plist-details`
+- plist-Schluessel wie `Label`, `Program`, `ProgramArguments`, `RunAtLoad`, `KeepAlive`
+- Pfade wie `/Library/LaunchAgents`
+- Code-Typen und Testnamen
+
+Noch offen fuer spaetere UX-Schnitte:
+
+- Raw-Detailwerte aus `plist`-Dateien koennen noch technischer wirken als die Zusammenfassung.
+- Die App braucht weiterhin einen staerkeren roten Faden im Dashboard, besonders wenn spaeter mehrere Sensoren dazukommen.
+- Echte UI-Automation fehlt weiterhin; die aktuelle Verbesserung ist in Unit-/Presentation-Tests und manuellen Smokes abzusichern.
