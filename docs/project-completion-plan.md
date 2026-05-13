@@ -251,6 +251,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 4: Zweiten Sensor bewusst auswaehlen und bauen
 
+**Status**: in Arbeit seit 2026-05-13.
+
 **Goal**: Der MVP bekommt eine zweite lokale Sicht, ohne Rechteumfang unnoetig zu vergroessern.
 
 **Demo/Validation**:
@@ -260,6 +262,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 - keine zusaetzlichen macOS-Rechte werden still gefordert
 
 ### Task 4.1: Sensor-Kandidaten final bewerten
+
+**Status**: umgesetzt am 2026-05-13. Gewaehlt wurde ein kleiner Systemprofil-Sensor; Privacy-Permissions und moderne Background Items bleiben bewusst spaeter.
 
 - **Location**:
   - `docs/next-sensor-selection.md`
@@ -273,6 +277,8 @@ Das Projekt gilt als MVP-fertig, wenn:
   - Doku-Review
 
 ### Task 4.2: Sensor-Design-Plan schreiben
+
+**Status**: umgesetzt am 2026-05-13 in `docs/system-profile-sensor-design.md`.
 
 - **Location**:
   - neues `docs/<sensor-name>-design.md`

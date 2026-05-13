@@ -2,61 +2,69 @@
 
 ## Zweck
 
-Diese Datei haelt die Kriterien fuer den naechsten lokalen Sensor fest.
+Diese Datei haelt die Entscheidung fuer den naechsten lokalen Sensor fest.
 
-## Entscheidung fuer jetzt
+## Entscheidung fuer Sprint 4
 
-Noch keinen zweiten Sensor bauen, bevor Baseline-Refresh, UI-Sprache und Startup-Item-Details stabil sind.
+Der zweite MVP-Sensor wird ein kleiner **Systemprofil-Sensor**.
 
-Update 2026-05-12:
-Nach UI-Iteration und Background-Task-Management-Spike bleibt diese Entscheidung bestehen.
+Er liest nur harmlose, lokal sichtbare Grunddaten:
 
-Der naechste Sensor wird bewusst noch nicht implementiert.
-Stattdessen soll zuerst Packaging/Signing geklaert werden, weil Sandbox, App-Bundle-Form und spaetere UI-Automation die Sensor-Strategie beeinflussen koennen.
+- macOS-Version
+- Prozessor-/Systemarchitektur
+- optional sichtbarer Computername oder Hostname
+- optional Gatekeeper-Status, wenn die Abfrage ohne Zusatzrechte stabil gelingt
+- optional SIP-Status, wenn die Abfrage ohne Zusatzrechte stabil gelingt
 
-## Kandidaten
+Der Sensor ist bewusst kein vollstaendiger Sicherheitscheck. Er ist eher ein ruhiger Kontext-Sensor: Die App kann erklaeren, auf welchem Mac sie laeuft und welche Basis-Schutzsignale lokal sichtbar sind.
+
+## Warum dieser Sensor
+
+Der MVP braucht eine zweite lokale Sicht, aber ohne neue macOS-Rechte und ohne Fehlalarm-Druck.
+
+Der Systemprofil-Sensor passt deshalb am besten:
+
+- read-only
+- keine Full-Disk-Access-Anforderung
+- gut in Tests simulierbar
+- fuer normale Nutzer leicht erklaerbar
+- geringe Gefahr, mehr Sicherheit zu behaupten, als wirklich belegt ist
+- gute Grundlage fuer spaetere Packaging-, Sandbox- und Guided-Action-Entscheidungen
+
+## Nicht gewaehlt
 
 ### Moderne Login- und Background-Items
 
 Vorteil:
 Sehr nah am aktuellen Startup-Thema.
 
-Risiko:
-Quelle und Stabilitaet muessen erst ueber den Background-Task-Management-Spike geprueft werden.
+Warum nicht jetzt:
+Der lokale `sfltool dumpbtm`-Spike war noch nicht robust genug. Ausgabe und Verfuegbarkeit sind als Produktquelle noch zu unsicher.
 
 Status:
-Interessant, aber noch nicht sofort implementieren. Der erste lokale `sfltool dumpbtm`-Test war nicht robust genug fuer eine direkte Produktquelle.
+Spaeter erneut pruefen, wenn ein stabiler Diagnose-Harness existiert.
 
 ### Privacy-Permissions-Sichtbarkeit
 
 Vorteil:
 Passt stark zum Produktversprechen Privacy und Vertrauen.
 
-Risiko:
-Viele TCC-Daten sind geschuetzt oder nur mit hohen Rechten vollstaendig sichtbar. Die App darf hier nicht so tun, als saehe sie alles.
+Warum nicht jetzt:
+Viele TCC-Daten sind geschuetzt oder ohne Full Disk Access nur lueckenhaft sichtbar. Die App darf nicht so wirken, als saehe sie alle Datenschutzfreigaben, wenn sie das lokal nicht sauber belegen kann.
 
 Status:
-Guter Kandidat, wenn eine read-only Quelle ohne Full Disk Access sauber gefunden wird.
+Guter spaeterer Kandidat, sobald eine read-only Quelle ohne hohe Rechte sauber belegt ist.
 
 ### Weitere lokale Exposure Checks
 
 Vorteil:
-Kann klein und risikoarm bleiben.
+Kleine Checks koennen schnell Nutzerwert bringen.
 
-Risiko:
-Zu viele kleine Checks koennen wie ein lautes Security-Dashboard wirken.
+Warum nicht als eigener zweiter Sensor:
+Viele Einzelchecks wuerden schnell wie ein lautes Security-Dashboard wirken. Der Systemprofil-Sensor buendelt diese Richtung ruhiger und erklaert Grenzen besser.
 
 Status:
-Nur auswaehlen, wenn der Nutzerwert in einem Satz erklaerbar ist.
-
-## Aktuelle Priorisierung
-
-1. Kein neuer Sensor in der naechsten Iteration.
-2. Packaging/Signing/Sandbox klaeren.
-3. Danach erneut entscheiden:
-   - Wenn Sandbox/Distribution die Startup-Sicht stark begrenzt, Sensor-Strategie anpassen.
-   - Wenn Packaging stabil ist, Privacy-Permissions-Sichtbarkeit als naechsten Research-Kandidaten pruefen.
-   - Background Task Management erst wieder aufgreifen, wenn ein stabiler Diagnose-Harness existiert.
+Einzelne Checks koennen spaeter aus dem Systemprofil herausgeloest werden, wenn sie eigenen Nutzerwert haben.
 
 ## Auswahlkriterien
 
@@ -67,10 +75,15 @@ Der naechste Sensor muss:
 - fuer normale Nutzer leicht erklaerbar sein
 - geringe Fehlalarm-Gefahr haben
 - Evidence liefern, statt nur Behauptungen
+- seine Sichtgrenzen ausdruecklich nennen
 
-## Entscheidung
+## Naechster Schritt
 
-Fuer den aktuellen MVP ist der naechste fachliche Schritt kein neuer Sensor.
+`docs/system-profile-sensor-design.md` anlegen und vor der Implementierung festhalten:
 
-Naechster Schritt:
-`docs/packaging-signing-plan.md` konkretisieren und einen kleinen Packaging-/Sandbox-Spike durchfuehren.
+- Datenquellen
+- Rechtebedarf
+- Findings und Evidence
+- Fehlerverhalten
+- Nutzertexte
+- Tests

@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-13
-- Bereich: Sprint 1 - UI-Texte und Orientierung
+- Bereich: Sprint 4 - zweiter Sensor
 
 ## Zuletzt abgeschlossen
 
@@ -70,14 +70,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 3 Task 3.1 umgesetzt: minimale Sandbox-Entitlements angelegt und optionales `APP_SANDBOX=1`-Signing im lokalen Bundle-Script ergaenzt
 - Sprint 3 Task 3.2 umgesetzt: `scripts/sandbox-smoke.sh` baut mit Sandbox, prueft Entitlements, startet mit temporaerem HOME und vorbereitetem Startup-Diff; konkrete UI-Sichtbarkeit bleibt bis echter UI-Automation manuell zu pruefen
 - Sprint 3 Task 3.3 umgesetzt: Entscheidung dokumentiert, vorerst kein Xcode-Projekt anzulegen; SwiftPM plus Bundle-Scripts bleiben Hauptpfad
+- Sprint 4 Task 4.1 umgesetzt: zweiter MVP-Sensor als kleiner Systemprofil-Sensor ausgewaehlt; Privacy-Permissions und moderne Background Items bleiben bewusst spaeter
+- Sprint 4 Task 4.2 umgesetzt: Sensor-Design in `docs/system-profile-sensor-design.md` dokumentiert
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt noch konsequenter deutsch, gruppiert und mit besser nutzbaren Startup-Details; zusaetzlich gibt es lokale Bundle-, Start- und Hardened-Runtime-Smokes sowie einen detaillierten Abschlussplan fuer den Weg zum MVP.
+Die App hat einen stabilen ersten Startup-Sensor, lokale Bundle-/Signing-Smokes und jetzt eine klare Entscheidung fuer den zweiten MVP-Sensor: ein read-only Systemprofil-Sensor ohne neue macOS-Rechte.
 
 ## Naechster konkreter Schritt
 
-Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 4, Task 4.1: Sensor-Kandidaten final bewerten.
+Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 4, Task 4.3: Systemprofil-Sensor minimal implementieren.
 
 ## Danach sinnvoll
 
@@ -218,6 +220,7 @@ Zusaetzlich nach Sprint 3 Task 3.3:
 - `docs/packaging-signing-plan.md`
 - `docs/current-overview.md`
 - `docs/ui-ux-redesign-notes.md`
+- `docs/system-profile-sensor-design.md`
 - `docs/roadmap.md`
 - `docs/project-completion-plan.md`
 
