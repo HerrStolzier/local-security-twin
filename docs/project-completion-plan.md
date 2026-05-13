@@ -189,6 +189,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 3: Sandbox- und Packaging-Entscheidung
 
+**Status**: in Umsetzung seit 2026-05-13. Task 3.1 ist umgesetzt.
+
 **Goal**: Das Projekt weiss, ob Sandbox fuer den MVP realistisch ist und ob SwiftPM-Bundling reicht.
 
 **Demo/Validation**:
@@ -199,8 +201,10 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ### Task 3.1: Minimale Entitlements-Datei fuer lokale Sandbox-Tests anlegen
 
+**Status**: umgesetzt am 2026-05-13.
+
 - **Location**:
-  - neu: `Packaging/LocalSecurityTwin.entitlements`
+  - `Packaging/LocalSecurityTwin.entitlements`
   - `scripts/build-app-bundle.sh`
 - **Description**: Optionales lokales Signing mit Entitlements ermoeglichen, ohne Sandbox standardmaessig zu aktivieren.
 - **Complexity**: 5/10

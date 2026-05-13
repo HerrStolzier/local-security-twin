@@ -10,6 +10,7 @@ BUNDLE_NAME="${PRODUCT_NAME}.app"
 BUNDLE_IDENTIFIER="com.herrstolzier.LocalSecurityTwin"
 BUNDLE_VERSION="0.1.0"
 BUILD_ROOT="$REPO_ROOT/.build/app"
+ENTITLEMENTS_PATH="$REPO_ROOT/Packaging/LocalSecurityTwin.entitlements"
 
 case "$CONFIGURATION" in
     debug)
@@ -85,6 +86,15 @@ if command -v codesign >/dev/null; then
 
     if [[ "${HARDENED_RUNTIME:-0}" == "1" ]]; then
         CODESIGN_OPTIONS=(--options runtime)
+    fi
+
+    if [[ "${APP_SANDBOX:-0}" == "1" ]]; then
+        if [[ ! -f "$ENTITLEMENTS_PATH" ]]; then
+            echo "Expected entitlements not found: $ENTITLEMENTS_PATH" >&2
+            exit 66
+        fi
+
+        CODESIGN_OPTIONS+=(--entitlements "$ENTITLEMENTS_PATH")
     fi
 
     codesign --force --sign - "${CODESIGN_OPTIONS[@]}" "$BUNDLE_PATH" >/dev/null

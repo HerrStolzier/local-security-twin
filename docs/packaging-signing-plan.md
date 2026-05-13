@@ -48,6 +48,13 @@ Update nach dem Hardened-Runtime-Smoke:
 - `scripts/hardened-runtime-smoke.sh` prueft, dass die Signatur `runtime` meldet und die App weiterhin startet
 - das ist weiterhin keine notarized Distribution, aber ein guter lokaler Vorcheck fuer spaetere Developer-ID-Signing-Schritte
 
+Update nach dem Entitlements-Spike:
+
+- `Packaging/LocalSecurityTwin.entitlements` enthaelt nur `com.apple.security.app-sandbox`
+- `scripts/build-app-bundle.sh` bleibt standardmaessig ohne Sandbox
+- `APP_SANDBOX=1 ./scripts/build-app-bundle.sh` signiert lokal ad-hoc mit Sandbox-Entitlements
+- es wurden bewusst keine Network-, Accessibility-, Apple-Events-, Full-Disk-Access- oder Helper-Entitlements ergaenzt
+
 ## Entscheidungen fuer den MVP
 
 - Keine Network-Client-Entitlement ohne konkreten Produktnutzen.
@@ -58,6 +65,7 @@ Update nach dem Hardened-Runtime-Smoke:
 - SwiftPM bleibt fuer die aktuelle Code-/Testentwicklung ausreichend.
 - Vor echter Nutzerverteilung braucht das Projekt ein App-Bundle mit Signing-/Entitlements-Strategie.
 - Der lokale App-Bundle-Spike ersetzt noch kein Xcode-Archiv und keine notarized Distribution.
+- Sandbox wird nur explizit fuer lokale Tests aktiviert, nicht als Standard-Build.
 
 ## Offene technische Fragen
 
