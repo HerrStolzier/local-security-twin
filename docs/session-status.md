@@ -84,14 +84,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 7 Task 7.2 umgesetzt: `docs/known-limits.md` beschreibt Sensor-, Rechte-, UI- und Produktgrenzen
 - Sprint 7 Task 7.3 umgesetzt: `docs/mvp-release-checklist.md` beschreibt den Beta-/MVP-Schnitt
 - Beta-Validierungsplan in `docs/beta-validation-plan.md` angelegt; er trennt technische Codex-Checks von manuellen Nutzerpruefungen
+- Beta-UI-Blocker aus Nutzer-Screenshot behoben: linke Spalte hat feste Breite, Detailbereich rendert robuster und Sidebar-Inhalt hat Abstand zu den macOS-Fensterknoepfen
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints aus `docs/project-completion-plan.md` sind umgesetzt; als naechster Schritt ist jetzt ein gemeinsamer Beta-Validierungsdurchlauf dokumentiert.
+Die sieben Sprints sind umgesetzt; ein erster Beta-UI-Blocker wurde behoben und muss jetzt vom Nutzer visuell gegengeprueft werden.
 
 ## Naechster konkreter Schritt
 
-`docs/beta-validation-plan.md` ausfuehren: Codex prueft die technischen Checks, der Nutzer prueft App-Verstaendlichkeit, Trust-Flow, Settings und Known Limits.
+Nutzer prueft die neu gebaute App visuell: linke Spalte lesbar, Detailbereich gefuellt, keine Kollision mit Fensterknoepfen.
 
 ## Danach sinnvoll
 

@@ -44,8 +44,10 @@ struct FindingDetailView: View {
                 }
             }
             .padding(28)
+            .frame(maxWidth: 920, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .navigationTitle(finding.displayTitle)
+        .background(.background)
     }
 }
 

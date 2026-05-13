@@ -5,12 +5,15 @@ struct FindingRowView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text(finding.displayTitle)
                     .font(.headline)
+                    .lineLimit(2)
                 Spacer()
                 Text(finding.displayImportance)
                     .font(.caption)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 2)
                     .foregroundStyle(finding.severity.textColor)
@@ -25,17 +28,20 @@ struct FindingRowView: View {
                 .font(.subheadline)
                 .fontWeight(.medium)
                 .lineLimit(1)
+                .truncationMode(.middle)
 
             Text(finding.displaySummary)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-                .lineLimit(2)
+                .lineLimit(3)
 
             Text(finding.displaySourceTitle)
                 .font(.caption)
                 .foregroundStyle(.tertiary)
+                .lineLimit(1)
         }
         .padding(.vertical, 6)
+        .frame(minHeight: 92, alignment: .topLeading)
     }
 }
 

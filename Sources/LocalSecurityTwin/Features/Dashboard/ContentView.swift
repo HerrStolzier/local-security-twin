@@ -12,7 +12,7 @@ struct ContentView: View {
     }
 
     var body: some View {
-        NavigationSplitView {
+        HSplitView {
             VStack(spacing: 0) {
                 DashboardSummary(presentation: presentation)
 
@@ -38,24 +38,17 @@ struct ContentView: View {
                         }
                     }
                 }
+                .listStyle(.sidebar)
             }
-            .navigationTitle("Hinweise")
-        } detail: {
-            if findings.isEmpty {
-                ContentUnavailableView(
-                    "Noch keine Hinweise",
-                    systemImage: "checkmark.shield",
-                    description: Text("Die lokalen Sensoren bleiben ruhig, solange sie keine Hinweise anzeigen muessen.")
-                )
-            } else if let selectedFinding = findings.first(where: { $0.id == selection }) {
-                FindingDetailView(finding: selectedFinding)
-            } else {
-                ContentUnavailableView(
-                    "Hinweis auswaehlen",
-                    systemImage: "shield",
-                    description: Text("Waehle links einen Hinweis aus, um Einordnung, Belege und sichere naechste Schritte zu sehen.")
-                )
-            }
+            .safeAreaPadding(.top, 28)
+            .frame(minWidth: 300, idealWidth: 340, maxWidth: 420)
+            .background(.thinMaterial)
+
+            DetailPane(
+                findings: findings,
+                selection: selection
+            )
+            .frame(minWidth: 640)
         }
         .frame(minWidth: 1020, minHeight: 640)
         .onAppear {
@@ -85,6 +78,31 @@ struct ContentView: View {
         }
     }
 
+}
+
+private struct DetailPane: View {
+    let findings: [Finding]
+    let selection: Finding.ID?
+
+    var body: some View {
+        if findings.isEmpty {
+            ContentUnavailableView(
+                "Noch keine Hinweise",
+                systemImage: "checkmark.shield",
+                description: Text("Die lokalen Sensoren bleiben ruhig, solange sie keine Hinweise anzeigen muessen.")
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else if let selectedFinding = findings.first(where: { $0.id == selection }) ?? findings.first {
+            FindingDetailView(finding: selectedFinding)
+        } else {
+            ContentUnavailableView(
+                "Hinweis auswaehlen",
+                systemImage: "shield",
+                description: Text("Waehle links einen Hinweis aus, um Einordnung, Belege und sichere naechste Schritte zu sehen.")
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
 }
 
 private struct DashboardSummary: View {
