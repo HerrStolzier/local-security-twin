@@ -85,14 +85,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 7 Task 7.3 umgesetzt: `docs/mvp-release-checklist.md` beschreibt den Beta-/MVP-Schnitt
 - Beta-Validierungsplan in `docs/beta-validation-plan.md` angelegt; er trennt technische Codex-Checks von manuellen Nutzerpruefungen
 - Beta-UI-Blocker aus Nutzer-Screenshot behoben: linke Spalte hat feste Breite, Detailbereich rendert robuster und Sidebar-Inhalt hat Abstand zu den macOS-Fensterknoepfen
+- Nutzer-Feedback nach Layout-Fix dokumentiert: Detailansicht ist weiterhin ein Info-Overflow-Problem und vor echter Beta als UX-Blocker zu behandeln
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; ein erster Beta-UI-Blocker wurde behoben und muss jetzt vom Nutzer visuell gegengeprueft werden.
+Die sieben Sprints sind umgesetzt; der Layout-Blocker ist behoben, aber die App braucht vor echter Beta einen UX-Schnitt gegen Informationsueberladung.
 
 ## Naechster konkreter Schritt
 
-Nutzer prueft die neu gebaute App visuell: linke Spalte lesbar, Detailbereich gefuellt, keine Kollision mit Fensterknoepfen.
+Beta-Validierung fortsetzen: Startup-Diff-Flow, Settings/Reset und Known-Limits-Doku manuell pruefen; danach UX-Schnitt gegen Info-Overflow planen.
 
 ## Danach sinnvoll
 

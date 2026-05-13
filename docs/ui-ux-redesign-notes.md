@@ -77,6 +77,29 @@ Jede Ansicht soll implizit diese Geschichte erzaehlen:
 - Evidence-Cards sind okay, aber ohne vorherige Priorisierung schwer einzuordnen.
 - Empfohlene Aktionen liegen weit unten; der Nutzer sieht zuerst sehr viel Text.
 
+## Beta-Feedback 2026-05-13
+
+Der Layout-Fix hat die App deutlich lesbarer gemacht, aber die Detailansicht ist weiterhin ein Info-Overflow-Problem.
+
+Aktueller Nutzerbefund:
+
+- Fuer einen Cybersecurity-Buddy ist die Ansicht zu voll.
+- Zu viele Belege, technische Details und Buttons erscheinen gleichzeitig.
+- Die App wirkt noch zu stark wie ein Inspector.
+- Der Nutzer braucht weniger Rohdaten und mehr gefuehrte Einordnung.
+
+UX-Ziel fuer den naechsten Schnitt:
+
+1. zuerst eine sehr kurze Buddy-Zusammenfassung zeigen
+2. nur 1 klaren primaeren naechsten Schritt zeigen
+3. technische Belege einklappbar oder nachrangig machen
+4. Wiederholungen in der linken Liste reduzieren
+5. bekannte Autostart-Hinweise staerker zusammenfassen, statt 17 Einzelkarten gleich laut zu zeigen
+
+Beta-Status:
+
+Das ist kein Build-Blocker mehr, aber ein Produkt-/UX-Blocker vor einer echten Beta fuer normale Nutzer.
+
 ## Empfohlener naechster UX-Schnitt
 
 Vor neuen Sensoren sollte ein UI-/UX-Schnitt kommen:
