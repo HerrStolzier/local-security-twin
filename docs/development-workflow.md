@@ -23,6 +23,15 @@ Run only the focused checks:
 ./scripts/e2e-smoke.sh
 ```
 
+Build a local development `.app` bundle:
+
+```bash
+./scripts/build-app-bundle.sh
+```
+
+This creates `.build/app/LocalSecurityTwin.app` from the SwiftPM executable and signs it ad-hoc for local validation.
+It is not a notarized distribution build.
+
 ## Handoff Documents
 
 Every finished step must leave the repo in a resumable state.

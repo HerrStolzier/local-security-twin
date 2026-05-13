@@ -29,6 +29,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - `sfltool dumpbtm` ist relevant fuer Background Task Management, wirkte im ersten lokalen Test aber nicht robust genug fuer eine direkte MVP-Datenquelle.
 - Der naechste Sensor sollte erst nach Packaging-/Sandbox-Klaerung gewaehlt werden, weil Distribution und Sandbox die lokale Sichtbarkeit stark beeinflussen koennen.
 - Der aktuelle SwiftPM-Build ist ein ad-hoc signiertes Executable ohne `.app`-Bundle, Entitlements und TeamIdentifier; fuer Nutzer-Testbuilds braucht das Projekt einen App-Bundle-/Xcode-Projekt-Spike.
+- Ein lokales `.app`-Bundle kann aus dem SwiftPM-Executable erzeugt und ad-hoc signiert werden; das reicht fuer lokale Start- und UI-Automation-Spikes, aber nicht fuer echte Distribution.
 
 ## Workflow Gotchas
 
@@ -41,5 +42,6 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 
 - Der lokale Standardlauf fuer Qualitaet ist `./scripts/checks.sh`.
 - Darin stecken Refactor-/Regression-Pass, Security Checks und E2E-Smoke-Tests.
+- Ein lokales Entwicklungs-Bundle entsteht mit `./scripts/build-app-bundle.sh` unter `.build/app/LocalSecurityTwin.app`.
 - Die jetzigen E2E-Tests pruefen noch keinen echten UI-Flow, sondern das aktuelle Integrationsfundament.
 - Der erste reale Sensor liest aktuell sichtbare `LaunchAgents`- und `LaunchDaemons`-`plist`-Dateien aus dem Dateisystem und interpretiert einfache Felder wie `Label`, `ProgramArguments`, `RunAtLoad` und `KeepAlive`, ohne daraus Aktivitaet oder Gefahr zu behaupten.

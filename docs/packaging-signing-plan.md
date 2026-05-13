@@ -18,11 +18,23 @@ Aktueller technischer Zustand:
 - kein `.xcodeproj`
 - kein `.xcworkspace`
 - kein `.entitlements`-File
-- `swift build` erzeugt ein Mach-O-Executable, kein fertiges `.app`-Bundle
+- `swift build` erzeugt ein Mach-O-Executable
+- `scripts/build-app-bundle.sh` erzeugt daraus ein lokales `.app`-Bundle unter `.build/app/LocalSecurityTwin.app`
 - lokaler Debug-Build ist ad-hoc signiert
 - `TeamIdentifier` ist nicht gesetzt
-- `Info.plist` ist nicht gebunden
+- das lokale `.app`-Bundle hat eine minimale `Info.plist`
 - Xcode ist lokal vorhanden: Xcode 26.5, Build 17F42
+
+Update 2026-05-13:
+Der erste App-Bundle-Spike ist umgesetzt.
+
+Ergebnis:
+
+- `.build/app/LocalSecurityTwin.app` wird reproduzierbar aus SwiftPM gebaut
+- Bundle-Struktur enthaelt `Contents/MacOS/LocalSecurityTwin` und `Contents/Info.plist`
+- `codesign --verify --deep --strict` akzeptiert das lokale Bundle
+- Start-Smoke per `open -n .build/app/LocalSecurityTwin.app` war erfolgreich
+- Signatur bleibt bewusst ad-hoc und ist nur fuer lokale Entwicklung gedacht
 
 ## Entscheidungen fuer den MVP
 
@@ -33,10 +45,11 @@ Aktueller technischer Zustand:
 - Hardened Runtime fuer spaetere Notarization einplanen.
 - SwiftPM bleibt fuer die aktuelle Code-/Testentwicklung ausreichend.
 - Vor echter Nutzerverteilung braucht das Projekt ein App-Bundle mit Signing-/Entitlements-Strategie.
+- Der lokale App-Bundle-Spike ersetzt noch kein Xcode-Archiv und keine notarized Distribution.
 
 ## Offene technische Fragen
 
-- Reicht SwiftPM plus manuelles App-Bundling fuer den naechsten UI-Test oder soll ein Xcode-Projekt ergaenzt werden?
+- Reicht SwiftPM plus manuelles App-Bundling fuer die naechste UI-Automation oder soll ein Xcode-Projekt ergaenzt werden?
 - Soll fuer Signing, Entitlements und UI-Tests ein Xcode-Projekt die bevorzugte Route werden?
 - Kann App Sandbox aktiv sein, ohne die sichtbaren Startup-Pfade fuer den MVP unbrauchbar zu machen?
 - Welche Sensoren brauchen spaeter eine klare Berechtigungs-Erklaerung vor dem ersten Lauf?
@@ -56,9 +69,9 @@ Noch keine Sandbox aktivieren.
 Noch kein neues Entitlement hinzufuegen.
 
 Naechster Packaging-Schritt:
-Ein minimaler App-Bundle-/Xcode-Projekt-Spike, der genau prueft:
+Den lokalen App-Bundle-Spike fuer genauere Tests nutzen:
 
-- startet die App als echtes `.app`-Bundle?
+- startet die App wiederholt stabil als echtes `.app`-Bundle?
 - funktioniert MenuBarExtra wie erwartet?
 - bleiben Startup-`plist`-Pfade ohne Sandbox sichtbar?
 - was passiert mit Sandbox?
@@ -66,14 +79,15 @@ Ein minimaler App-Bundle-/Xcode-Projekt-Spike, der genau prueft:
 
 ## Empfohlener naechster Packaging-Spike
 
-1. Minimales Xcode- oder Packaging-Setup evaluieren.
+1. Lokales `.app`-Bundle als UI-Automation-Ziel verwenden.
 2. Hardened Runtime ohne Ausnahmen testen.
 3. Sandbox einmal bewusst an/aus gegen den Startup-Sensor pruefen.
-4. Ergebnis dokumentieren, bevor neue Sensoren mit breiterer System-Sicht gebaut werden.
+4. Erst danach entscheiden, ob ein Xcode-Projekt noetig ist.
+5. Ergebnis dokumentieren, bevor neue Sensoren mit breiterer System-Sicht gebaut werden.
 
 ## Vorlaeufiger Distributionspfad
 
 1. Weiterentwicklung bleibt kurzfristig bei SwiftPM.
-2. Fuer UI-Automation und Nutzer-Testbuilds wird ein `.app`-Bundle-Spike vorbereitet.
+2. Fuer UI-Automation gibt es jetzt ein lokales `.app`-Bundle unter `.build/app/LocalSecurityTwin.app`.
 3. Fuer echte Distribution wird Developer ID plus Hardened Runtime plus Notarization benoetigt.
 4. App Sandbox wird nicht pauschal aktiviert, bevor der Startup-Sensor dagegen getestet wurde.

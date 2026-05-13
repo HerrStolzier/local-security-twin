@@ -9,8 +9,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-12
-- Bereich: Roadmap Iteration 6 - Packaging, Signing und Sandbox
+- Datum: 2026-05-13
+- Bereich: App-Bundle-Spike nach Roadmap
 
 ## Zuletzt abgeschlossen
 
@@ -53,26 +53,28 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Roadmap Iteration 4 umgesetzt: Background Task Management Spike aktualisiert, `sfltool dumpbtm` lokal geprueft und als noch nicht robuste Produktquelle eingestuft
 - Roadmap Iteration 5 umgesetzt: Entscheidung dokumentiert, jetzt keinen zweiten Sensor zu bauen und zuerst Packaging/Signing/Sandbox zu klaeren
 - Roadmap Iteration 6 umgesetzt: Packaging-/Signing-Plan konkretisiert; aktueller SwiftPM-Build ist ad-hoc signiertes Executable ohne App-Bundle, Xcode-Projekt oder Entitlements
+- lokaler App-Bundle-Spike umgesetzt: `scripts/build-app-bundle.sh` erzeugt `.build/app/LocalSecurityTwin.app` aus dem SwiftPM-Executable
+- lokales `.app`-Bundle validiert: `Info.plist` ist gueltig, `codesign --verify --deep --strict` ist erfolgreich, Start-Smoke per `open -n` ist erfolgreich
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; alle Roadmap-Iterationen sind abgearbeitet, und der naechste technische Schnitt ist ein minimaler App-Bundle-/Xcode-Projekt-Spike.
+Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; zusaetzlich gibt es ein lokales `.app`-Bundle fuer die naechsten UI- und Signing-Spikes.
 
 ## Naechster konkreter Schritt
 
-Einen minimalen App-Bundle-/Xcode-Projekt-Spike planen oder umsetzen, damit UI-Automation, Signing, Hardened Runtime und Sandbox-Auswirkungen sauber getestet werden koennen.
+Das lokale `.app`-Bundle als Ziel fuer einen ersten echten UI-Automation- oder manuellen UI-Review-Schnitt verwenden.
 
 ## Danach sinnvoll
 
 - spaeter weitere Sensoren wie Privacy Permissions auf denselben Vertrag setzen
 - spaeter modernen macOS-Background-Task-Management-Status als eigenen Research-Spike oder Sensor pruefen
-- Packaging-/Signing-/Sandbox-Spike vor echter Distribution durchfuehren
+- Hardened Runtime und Sandbox-Auswirkungen gegen das lokale `.app`-Bundle testen
 
 ## Offene Punkte
 
 - Die aktuellen empfohlenen Aktionen speichern nur Policy-Entscheidungen und fuehren noch keine echten Guided Actions aus.
 - E2E ist momentan Smoke-Level, noch keine echte UI-Automation.
-- Fuer den aktuellen SwiftPM-Stand gibt es noch kein eigenes Signing-/Entitlements-Profil im Repo.
+- Fuer den aktuellen SwiftPM-Stand gibt es noch kein eigenes Developer-ID-Signing-/Entitlements-Profil im Repo.
 - Full Disk Access, Administratorrechte, Accessibility, Screen Recording, Network Client Access und privilegierte Helper sind fuer den aktuellen MVP bewusst nicht noetig.
 - Der aktuelle Startup-Sensor deckt nur sichtbare `plist`-Dateien ab; moderne Login-/Background-Items und tatsaechlich geladener Zustand sind noch nicht abgedeckt.
 - Die UI-Aktion zum Merken des aktuellen Startup-Zustands ist vorhanden, aber noch nicht mit echter macOS-UI-Automation getestet.
@@ -80,7 +82,7 @@ Einen minimalen App-Bundle-/Xcode-Projekt-Spike planen oder umsetzen, damit UI-A
 - Der wichtigste UI-Flow ist Store-/Presentation-nah getestet; echte macOS-Klickautomation fehlt weiterhin.
 - Background Task Management ist relevant, aber noch keine robuste Produktquelle fuer den MVP.
 - Kein zweiter Sensor ist aktuell ausgewaehlt; diese Entscheidung ist bewusst, nicht vergessen.
-- Aktueller Build ist fuer Entwicklung gut, aber noch kein distributionsnahes `.app`-Bundle.
+- Aktuelles `.app`-Bundle ist fuer Entwicklung und lokale Spikes gut, aber noch kein distributionsnahes, notarized Build-Artefakt.
 
 ## Letzte Validierung
 
@@ -139,6 +141,14 @@ Zusaetzlich nach Roadmap Iteration 6:
 - Suche nach `.xcodeproj`, `.xcworkspace` und `.entitlements`
 - `xcodebuild -version`
 - `codesign -dv .build/debug/LocalSecurityTwin`
+
+Zusaetzlich nach dem App-Bundle-Spike am 2026-05-13:
+
+- `./scripts/build-app-bundle.sh`
+- `plutil -p .build/app/LocalSecurityTwin.app/Contents/Info.plist`
+- `codesign -dv .build/app/LocalSecurityTwin.app`
+- `codesign --verify --deep --strict --verbose=2 .build/app/LocalSecurityTwin.app`
+- Start-Smoke per `open -n .build/app/LocalSecurityTwin.app`
 
 ## Letzte externe Recherche
 
