@@ -2,87 +2,88 @@
 
 ## Kurzstand
 
-`local-security-twin` ist aktuell eine kleine lokale macOS-Sicherheits-App mit einem echten ersten Sensor.
+`local-security-twin` ist aktuell ein lokaler macOS-MVP-Prototyp mit zwei read-only Sensorbereichen, deutscherer UI, lokalem Trust-Flow und reproduzierbaren Packaging-Smokes.
 
 Die App kann:
 
 - sichtbare Startup-`plist`-Dateien in Nutzer- und gemeinsamen Launch-Ordnern finden
 - einfache Details aus diesen Dateien lesen
-- Findings mit Evidence und Recommendations erzeugen
 - einen lokalen bekannten Startup-Zustand speichern
 - neue oder verschwundene Startup-Hinweise seit diesem Zustand melden
 - den aktuellen Startup-Zustand bewusst als erwartet merken
-- lokale Policy-Entscheidungen speichern
+- lokale Systemprofil-Daten und sichtbare Schutzsignale einordnen
+- lokale Policy-Entscheidungen speichern und zuruecksetzen
+- ein lokales `.app`-Bundle bauen und pruefen
 
 ## Wichtiges mentales Modell
 
-Die App ist noch kein vollstaendiger macOS-Sicherheitscanner.
+Die App ist kein vollstaendiger macOS-Sicherheitscanner.
 
-Sie ist im Moment eher ein ruhiger lokaler Beobachter:
+Sie ist ein ruhiger lokaler Beobachter:
 
 1. Was ist sichtbar?
 2. Was hat sich seit dem gemerkten Zustand geaendert?
-3. Wie erklaeren wir das, ohne Panik zu machen?
-4. Was darf der Nutzer bewusst als erwartet markieren?
+3. Welche Schutzsignale sind lokal sichtbar?
+4. Was bedeutet das in normaler Sprache?
+5. Was darf der Nutzer bewusst merken oder spaeter pruefen?
 
 ## Hauptfluss
 
 1. `LocalSecurityTwinApp` erstellt `FindingStore` und `PolicyStore`.
 2. `FindingStore` ruft die `SensorPipeline` auf.
-3. Die Live-Pipeline enthaelt aktuell den `LaunchAgentInventorySensor`.
-4. Der Sensor scannt sichtbare Startup-Ordner.
-5. Er baut daraus `Finding`-Objekte.
-6. `ContentView` zeigt die Findings.
-7. `FindingDetailView` zeigt Evidence, Kontext und empfohlene Aktionen.
-8. Wenn Startup-Aenderungen sichtbar sind, bietet das Dashboard `Remember as Expected` an.
+3. Die Live-Pipeline enthaelt `LaunchAgentInventorySensor` und `SystemProfileSensor`.
+4. Die Sensoren bauen `Finding`-Objekte mit Evidence und Recommendations.
+5. `ContentView` gruppiert die Hinweise.
+6. `FindingDetailView` erklaert Kontext, Belege und sichere naechste Schritte.
+7. Guided Actions erklaeren vor dem Speichern, was lokal passiert und was nicht.
+8. `SettingsView` zeigt gemerkte Entscheidungen und erlaubt Reset.
 
-## Was bewusst begrenzt ist
+## Bewusste Grenzen
 
-Der erste Sensor sieht:
+Der Startup-Sensor sieht sichtbare `plist`-Dateien, aber nicht den vollstaendigen laufenden Zustand.
 
-- `~/Library/LaunchAgents`
-- `/Library/LaunchAgents`
-- `/Library/LaunchDaemons`
+Der Systemprofil-Sensor sieht lokale Kontextdaten, aber kein Gesamturteil ueber die Sicherheit des Macs.
 
-Er sieht aktuell nicht:
+Nicht Teil des aktuellen MVP:
 
-- moderne Login Items vollstaendig
-- Background Task Management Status
-- tatsaechlich laufende oder geladene Jobs
-- System-LaunchAgents unter `/System/Library`
-- Signaturen oder Herkunft der Zielprogramme
+- Full Disk Access
+- Accessibility
+- Screen Recording
+- Network Client
+- Apple Events
+- privilegierte Helper
+- echte Developer-ID-Distribution
+- echte macOS-Klickautomation
 
-Das ist fuer den MVP Absicht. Die App soll erst sicher erklaeren, was sie wirklich sieht.
+Details stehen in `docs/known-limits.md`.
 
 ## Aktueller naechster Schritt
 
-Der naechste gute Produkt-Schritt ist:
+Die sieben Sprints aus `docs/project-completion-plan.md` sind umgesetzt.
 
-1. Die aktuelle UI auf Deutsch und klarere Orientierung umbauen.
-2. Findings gruppieren und priorisieren, statt nur eine lange Liste zu zeigen.
-3. Danach die `Remember as Expected`-UI mit echter macOS-UI-Interaktion testen.
-4. Danach entscheiden, ob Background Task Management als Spike oder Sensor folgt.
+Der naechste gute Schnitt ist:
 
-Die zentrale Planungsuebersicht steht in `docs/roadmap.md`.
+1. Beta-/MVP-Schnitt anhand `docs/mvp-release-checklist.md` pruefen.
+2. Echte macOS-UI-Automation oder Xcode-Projekt bewusst entscheiden.
+3. Danach erst weitere Sensoren planen.
 
-## Aktueller UX-Befund
+## Wichtige Startwege
 
-Der erste manuelle Blick auf die App zeigt:
+Direkt:
 
-- Die Oberflaeche ist noch Englisch.
-- Die Liste ist schwer zu scannen.
-- Viele Findings klingen gleich wichtig.
-- Es fehlt ein roter Faden: Was ist neu, was ist bekannt, was soll ich tun?
-- Die App wirkt noch wie ein technischer Inspector, nicht wie ein ruhiger Sicherheitsbegleiter.
+```bash
+swift run LocalSecurityTwin
+```
 
-Details stehen in `docs/ui-ux-redesign-notes.md`.
+Als Bundle:
 
-## Aktuelle technische Grenze
+```bash
+./scripts/build-app-bundle.sh
+open .build/app/LocalSecurityTwin.app
+```
 
-Die Domain- und Store-Logik fuer `Remember as Expected` ist getestet.
+Standardcheck:
 
-Was noch fehlt:
-
-- echte SwiftUI-/macOS-UI-Automation fuer den Klickpfad
-- ein Packaging-/Signing-Setup, das spaeter stabilere UI-Tests erleichtert
-- eine Entscheidung, ob SwiftPM allein reicht oder ein Xcode-Projekt ergaenzt werden soll
+```bash
+./scripts/checks.sh
+```

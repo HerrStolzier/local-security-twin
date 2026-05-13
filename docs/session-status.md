@@ -80,14 +80,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 6 Task 6.1 umgesetzt: App-Metadaten und `Info.plist`-Vorlage liegen zentral in `Packaging/`
 - Sprint 6 Task 6.2 umgesetzt: `docs/distribution-checklist.md` trennt lokale Beta-Smokes von echter Developer-ID-Distribution
 - Sprint 6 Task 6.3 umgesetzt: `scripts/notarization-preflight.sh` prueft Bundle, Signatur, Hardened Runtime und Security-Checks ohne echte Apple-Notarization
+- Sprint 7 Task 7.1 umgesetzt: README auf den echten MVP-Stand gebracht
+- Sprint 7 Task 7.2 umgesetzt: `docs/known-limits.md` beschreibt Sensor-, Rechte-, UI- und Produktgrenzen
+- Sprint 7 Task 7.3 umgesetzt: `docs/mvp-release-checklist.md` beschreibt den Beta-/MVP-Schnitt
 
 ## Aktueller Stand in einem Satz
 
-Die App hat zwei lokale read-only Sensorbereiche, klare gefuehrte Empfehlungen und einen reproduzierbareren lokalen Bundle-/Distribution-Preflight.
+Die sieben Sprints aus `docs/project-completion-plan.md` sind umgesetzt; die App hat zwei lokale Sensorbereiche, klare Guided Actions, reproduzierbare Packaging-Smokes und ehrliche MVP-Doku.
 
 ## Naechster konkreter Schritt
 
-Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 7, Task 7.1: README auf echten Stand bringen.
+Einen Beta-Schnitt anhand `docs/mvp-release-checklist.md` pruefen und danach entscheiden, ob echte macOS-UI-Automation oder ein Xcode-Projekt als naechstes kommt.
 
 ## Danach sinnvoll
 
@@ -230,6 +233,12 @@ Zusaetzlich nach Sprint 6:
 - `./scripts/app-bundle-smoke.sh`
 - `./scripts/hardened-runtime-smoke.sh`
 - `./scripts/notarization-preflight.sh`
+
+Zusaetzlich nach Sprint 7:
+
+- `./scripts/checks.sh`
+- `./scripts/app-bundle-smoke.sh`
+- `./scripts/hardened-runtime-smoke.sh`
 
 ## Letzte externe Recherche
 

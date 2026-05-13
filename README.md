@@ -1,106 +1,96 @@
 # Local Security Twin
 
-Local-first macOS security companion for normal users, combining privacy, hardening, and controlled validation.
+Local-first macOS security companion fuer normale Nutzer.
 
-## Why this exists
+Die App soll lokale Sicherheits- und Privacy-Hinweise ruhig erklaeren: was sichtbar ist, warum es relevant sein kann und was der naechste sichere Schritt ist. Sie ist kein lauter Scanner und nimmt keine stillen Systemaenderungen vor.
 
-Most security tools are either too shallow to be useful or so technical that normal users bounce off immediately.
-This project explores a calmer middle ground: a Mac app that explains what matters, checks the local machine safely, and helps people improve their setup without fear-based UX.
+## Aktueller Stand
 
-## Core Product Idea
+Der aktuelle MVP-Prototyp ist eine SwiftPM-basierte SwiftUI-macOS-App mit:
 
-Local Security Twin should help a user answer simple, practical questions:
+- Menueleisten-App, Hauptfenster und Settings
+- deutschem Dashboard und deutscher Finding-Detailansicht
+- lokalem Policy-/Consent-Modell mit gemerkten Entscheidungen
+- normalisiertem Finding-Schema mit Evidence und Recommendations
+- Sensor-Pipeline mit zwei read-only Sensorbereichen
+- Startup-Sensor fuer sichtbare `LaunchAgents`-/`LaunchDaemons`-`plist`-Dateien
+- lokaler Startup-Baseline und bewusstem "als erwartet merken"-Flow
+- Systemprofil-Sensor fuer lokale Basisdaten, Gatekeeper und SIP, ohne neue Rechte
+- lokalen Bundle-, Sandbox-, Hardened-Runtime- und Preflight-Smokes
 
-- Is my Mac configured in a sensible way?
-- Where are the obvious privacy or hardening gaps?
-- Which changes are safe for me to make?
-- How can I validate something without turning into a terminal expert?
+## Was die App bewusst nicht macht
 
-## Product Principles
+- keine stillen Systemaenderungen
+- keine Cloud-Pflicht
+- kein Full Disk Access im MVP
+- keine Accessibility-, Screen-Recording-, Network- oder Apple-Events-Entitlements
+- keine echte Notarization ohne Developer-ID-Zugangsdaten
+- keine Behauptung, dass sichtbare Hinweise automatisch gefaehrlich sind
 
-- **Local first**: sensitive machine data should stay local
-- **Explain before acting**: every recommendation needs plain-language context
-- **Safe defaults**: no destructive actions hidden behind one click
-- **Reversible changes**: users should understand what can be undone
-- **Calm tone**: inform clearly without panic or shame
+Mehr dazu steht in `docs/known-limits.md`.
 
-## Current Status
+## Anforderungen
 
-This repository currently contains a SwiftPM-based SwiftUI macOS skeleton with the first local security foundation in place.
-It is the starting point for the product plan in:
+- macOS 15 oder neuer
+- Xcode 26.5 oder kompatible Swift-6-Toolchain
+- SwiftPM
 
-- `../local-security-twin-plan.md`
+## Starten
 
-The current implementation includes:
-
-- a menu bar app, main window, and settings scene
-- a local consent and policy model
-- a normalized finding schema with evidence and recommendations
-- a shared sensor contract and synchronous sensor pipeline
-- a first local sensor for visible LaunchAgent and LaunchDaemon plist files
-- a local startup-item baseline for later change detection
-- baseline-diff findings for new or disappeared startup items
-
-## Planned Focus Areas
-
-- privacy posture
-- macOS hardening basics
-- permissions and exposure checks
-- guided validation tasks
-- simple history of reviewed or changed items
-
-## Planned Stack
-
-- SwiftUI for the main app
-- AppKit interop for system-heavy workflows where needed
-- local system inspection first
-- optional local rule engine for scoring and explanations
-
-## Requirements
-
-- macOS 15 or newer
-- Xcode 16 or newer, including the Swift 6 toolchain
-
-## Build
+Direkt aus SwiftPM:
 
 ```bash
-swift build
 swift run LocalSecurityTwin
 ```
 
-## Workflow
+Als lokales `.app`-Bundle:
 
-Run the local quality workflow before merging changes:
+```bash
+./scripts/build-app-bundle.sh
+open .build/app/LocalSecurityTwin.app
+```
+
+Manueller Startup-Diff-Demo-Flow:
+
+```bash
+./scripts/start-startup-diff-demo.sh
+```
+
+## Checks
+
+Standardlauf vor Commits:
 
 ```bash
 ./scripts/checks.sh
 ```
 
-That workflow intentionally includes:
+Packaging-Smokes:
 
-- a refactor and regression pass
-- local security checks
-- the current end-to-end smoke suite
+```bash
+./scripts/app-bundle-smoke.sh
+./scripts/hardened-runtime-smoke.sh
+./scripts/sandbox-smoke.sh
+./scripts/notarization-preflight.sh
+```
 
-More detail lives in:
+`notarization-preflight.sh` fuehrt keine echte Apple-Notarization aus. Es prueft lokal Bundle, Signatur, Hardened Runtime und Security-Checks.
 
-- `docs/roadmap.md`
-- `docs/development-workflow.md`
-- `docs/current-overview.md`
-- `docs/ui-ux-redesign-notes.md`
-- `docs/session-status.md`
-- `docs/project-learnings.md`
-- `docs/macos-permissions-entitlements.md`
-- `docs/research-and-blindspots.md`
-- `docs/background-task-management-spike.md`
-- `docs/next-sensor-selection.md`
-- `docs/packaging-signing-plan.md`
+## Wichtige Doku
 
-## Near-Term Next Steps
+- `AGENTS.md`: stabile Projektregeln und Arbeitsweise
+- `docs/session-status.md`: aktueller Uebergabestand
+- `docs/project-learnings.md`: dauerhafte Erkenntnisse
+- `docs/project-completion-plan.md`: Sprint-Plan zum MVP
+- `docs/known-limits.md`: ehrliche Grenzen der App
+- `docs/mvp-release-checklist.md`: Beta-/MVP-Checkliste
+- `docs/packaging-signing-plan.md`: Signing, Sandbox und Distribution
+- `docs/distribution-checklist.md`: lokaler Beta-Schnitt vs. echte Distribution
 
-1. Redesign the first sensor UI around German product language, prioritization, and a clearer user path.
-2. Exercise the "remember current startup state" flow through a UI-near test or documented manual UI check.
-3. Decide whether the next product step should be deeper startup-item detail UI or a Background Task Management spike.
+## Naechste sinnvolle Schritte
+
+1. Echte macOS-UI-Automation klaeren.
+2. Beta-Schnitt anhand `docs/mvp-release-checklist.md` vorbereiten.
+3. Danach erst neue Sensoren planen, mit denselben Grenzen: read-only, erklaerend, ohne unnoetige Rechte.
 
 ## License
 

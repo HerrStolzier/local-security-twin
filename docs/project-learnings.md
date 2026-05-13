@@ -27,18 +27,19 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Fuer den ersten UI-Schnitt reicht es nicht, Texte zu uebersetzen; die App braucht einen Ueberblick und Gruppen, damit neue Aenderungen nicht zwischen bekannten Autostart-Hinweisen untergehen.
 - Startup-Details sind fuer normale Nutzer nur hilfreich, wenn `Label`, Startbefehl, Startverhalten und Hintergrundverhalten vor den Roh-Belegen kurz eingeordnet werden.
 - `sfltool dumpbtm` ist relevant fuer Background Task Management, wirkte im ersten lokalen Test aber nicht robust genug fuer eine direkte MVP-Datenquelle.
-- Der naechste Sensor sollte erst nach Packaging-/Sandbox-Klaerung gewaehlt werden, weil Distribution und Sandbox die lokale Sichtbarkeit stark beeinflussen koennen.
+- Der zweite Sensor wurde erst nach Packaging-/Sandbox-Klaerung gewaehlt; diese Reihenfolge bleibt als Muster sinnvoll, weil Distribution und Sandbox die lokale Sichtbarkeit stark beeinflussen koennen.
 - Der aktuelle SwiftPM-Build ist ein ad-hoc signiertes Executable ohne `.app`-Bundle, Entitlements und TeamIdentifier; fuer Nutzer-Testbuilds braucht das Projekt einen App-Bundle-/Xcode-Projekt-Spike.
 - Ein lokales `.app`-Bundle kann aus dem SwiftPM-Executable erzeugt und ad-hoc signiert werden; das reicht fuer lokale Start- und UI-Automation-Spikes, aber nicht fuer echte Distribution.
 - Der App-Bundle-Smoke sollte vor echter UI-Automation laufen, weil er zuerst klaert, ob das `.app`-Artefakt ueberhaupt sauber baut, signiert und startet.
 - Die App startet lokal auch mit ad-hoc Hardened-Runtime-Signatur; echte Distribution braucht trotzdem spaeter Developer ID und Notarization.
-- Der weitere MVP-Weg ist in `docs/project-completion-plan.md` als Sprint-Plan dokumentiert; naechster Umsetzungspunkt ist UI-Text-Inventar und UX-Orientierung.
+- Der weitere MVP-Weg wurde in `docs/project-completion-plan.md` als Sprint-Plan umgesetzt; fuer den naechsten Schnitt ist `docs/mvp-release-checklist.md` massgeblich.
 - Nutzertexte sollen moeglichst an der Datenquelle geglaettet werden, nicht nur in der SwiftUI-Darstellung, weil Findings, Evidence, Recommendations und Sensor-Notizen sonst unterschiedlich klingen.
 - Ein Xcode-Projekt wird erst bei konkretem Bedarf angelegt; aktuell reichen SwiftPM plus lokale Bundle-, Sandbox- und Runtime-Smokes fuer den naechsten MVP-Abschnitt.
 - Der zweite MVP-Sensor ist bewusst ein Systemprofil-Sensor: Er liefert lokale Kontextdaten und sichtbare Schutzsignale, darf daraus aber kein Gesamturteil ueber die Sicherheit des Macs ableiten.
 - Optionale Systemschutz-Abfragen wie Gatekeeper oder SIP muessen weich behandelt werden: feste Tool-Pfade, keine Shell, Fehler als Notes statt Crash oder lauter Alarm.
 - Gefuehrte Aktionen brauchen eine sichtbare Aktionsart, bevor sie ausgefuehrt oder gemerkt werden; Nutzer muessen unterscheiden koennen zwischen lokalem Merken, Anleitung, externem Oeffnen und spaeterem Belegesammeln.
 - Distribution bleibt zweistufig: lokale Beta-Smokes duerfen ad-hoc signiert sein, echte Nutzerverteilung braucht spaeter Developer ID, Hardened Runtime, Notarization und Secrets ausserhalb des Repos.
+- Der MVP-Schnitt braucht eine eigene Known-Limits-Doku, weil die wichtigste Sicherheitsqualitaet des Produkts darin liegt, sichtbare Belege nicht als vollstaendige Wahrheit zu verkaufen.
 
 ## Workflow Gotchas
 

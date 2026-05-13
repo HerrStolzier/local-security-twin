@@ -451,6 +451,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 7: MVP-Abschluss und Beta-Readiness
 
+**Status**: umgesetzt am 2026-05-13.
+
 **Goal**: Das Projekt hat einen klaren, vorzeigbaren MVP-Stand und eine ehrliche Liste bekannter Grenzen.
 
 **Demo/Validation**:
@@ -460,6 +462,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 - Checks laufen gruen
 
 ### Task 7.1: README auf echten Stand bringen
+
+**Status**: umgesetzt am 2026-05-13.
 
 - **Location**:
   - `README.md`
@@ -474,6 +478,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ### Task 7.2: Known-Limits-Dokument schreiben
 
+**Status**: umgesetzt am 2026-05-13 in `docs/known-limits.md`.
+
 - **Location**:
   - neues `docs/known-limits.md`
 - **Description**: Ehrlich beschreiben, was die App sieht und nicht sieht.
@@ -487,6 +493,8 @@ Das Projekt gilt als MVP-fertig, wenn:
   - Review gegen `docs/project-learnings.md`
 
 ### Task 7.3: MVP-Release-Checkliste
+
+**Status**: umgesetzt am 2026-05-13 in `docs/mvp-release-checklist.md`.
 
 - **Location**:
   - neues `docs/mvp-release-checklist.md`
@@ -582,4 +590,4 @@ Nach jedem Sprint:
 6. Sprint 6: Produktreife und Distribution
 7. Sprint 7: MVP-Abschluss und Beta-Readiness
 
-Der naechste konkrete Arbeitsschritt ist Sprint 1, Task 1.1.
+Die sieben Sprints sind umgesetzt. Der naechste konkrete Arbeitsschritt ist kein weiterer Roadmap-Sprint, sondern ein Beta-Schnitt nach `docs/mvp-release-checklist.md` und danach die Entscheidung ueber echte macOS-UI-Automation.
