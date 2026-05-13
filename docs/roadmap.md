@@ -8,6 +8,7 @@ Sie ersetzt nicht die Detaildokumente, sondern ordnet sie:
 
 - `docs/session-status.md`: aktueller Uebergabestand
 - `docs/current-overview.md`: technischer und produktlicher Kurzueberblick
+- `docs/product-flow-and-feature-plan.md`: roter Faden, Produktbild und Feature-Bausteine
 - `docs/project-completion-plan.md`: detaillierter Weg vom aktuellen Prototyp zum MVP
 - `docs/ui-ux-redesign-notes.md`: naechster UI-/UX-Schnitt
 - `docs/background-task-management-spike.md`: spaeterer macOS-Startup-Spike
@@ -32,30 +33,95 @@ Vorhanden ist:
 
 ## Aktuelle Hauptprioritaet
 
-Die aktuelle Umsetzungsreihenfolge steht im detaillierten Abschlussplan:
+Die bisherige technische Umsetzungsreihenfolge steht im detaillierten Abschlussplan:
 
 - `docs/project-completion-plan.md`
 
-Die naechste Hauptprioritaet bleibt UI/UX.
+Die naechste Hauptprioritaet ist jetzt der rote Produktfaden:
+
+- `docs/product-flow-and-feature-plan.md`
 
 Grund:
-Der erste manuelle Blick zeigt, dass die App technisch funktioniert, aber fuer normale Nutzer noch keinen klaren roten Faden bietet.
+Der erste manuelle Blick zeigt, dass die App technisch funktioniert, aber noch wie ein Inspector wirkt. Das Ziel ist groesser: ein kraftvoller Security Buddy, der mit dem Nutzer zusammenarbeitet und bei real relevanten Risiken Punch hat.
 
 Der naechste Schnitt soll deshalb:
 
-1. Nutzertexte auf Deutsch umstellen.
-2. Ein klares Dashboard mit Orientierung bauen.
-3. Findings gruppieren und priorisieren.
-4. Neue Aenderungen klar von bekannten Hinweisen trennen.
-5. Detailansichten mit einer kurzen Einordnung beginnen.
-6. Severity ruhiger darstellen, damit normale Daemons nicht wie Panikmeldungen wirken.
+1. die Startansicht als Buddy-Status statt Finding-Liste fuehren
+2. nur die wichtigste Meldung und den naechsten Schritt zuerst zeigen
+3. bekannte Autostart-Hinweise zusammenfassen
+4. technische Belege einklappbar oder nachrangig machen
+5. spaeter Online-Intelligence wie SOFA, CISA KEV und EPSS anbinden
+6. LLM-Erklaerungen erst als Erklaerhilfe planen, nicht als alleinige Wahrheit
 
 Nicht-Ziel dieses Schnitts:
 
 - kein neuer Sensor
-- kein neues Security-Scoring-System
 - keine Systemaenderungen
 - keine neuen macOS-Rechte
+- keine wilde Web-Recherche ohne kuratierte Quellen
+- keine LLM-Entscheidungen ohne belegbare lokale oder externe Daten
+
+## Neue Phasen nach dem roten Faden
+
+### Phase 0: Buddy statt Inspector
+
+Status: naechster konkreter Schritt.
+
+Ziel:
+Die aktuelle UI zeigt zuerst "Was bedeutet das fuer mich?" und erst danach Rohdetails.
+
+Umfang:
+
+- Dashboard als Buddy-Status
+- Aktivitaetsfeed oder Chat-aehnliche Meldungen
+- eine klare Hauptaktion pro Meldung
+- technische Details einklappbar
+- wiederholte Autostart-Hinweise zusammenfassen
+
+### Phase 1: Update-Awareness
+
+Status: geplant.
+
+Ziel:
+Die App erkennt, ob macOS-Sicherheitsupdates fuer diesen Mac relevant sind.
+
+Erste Quelle:
+
+- SOFA von macadmins
+
+### Phase 2: Real Threat Matching
+
+Status: geplant.
+
+Ziel:
+Lokale Fakten mit echten Bedrohungsdaten verbinden.
+
+Erste Quellen:
+
+- CISA Known Exploited Vulnerabilities
+- FIRST EPSS
+- spaeter NVD
+
+### Phase 3: App-Inventur
+
+Status: geplant.
+
+Ziel:
+Installierte Apps und Versionen verstehen, damit externe Schwachstelleninfos wirklich auf diesen Mac bezogen werden koennen.
+
+### Phase 4: Optionales Buddy Brain
+
+Status: geplant.
+
+Ziel:
+Ein lokales oder cloudbasiertes LLM hilft beim Erklaeren, aber nicht beim unbelegten Entscheiden.
+
+### Phase 5: Staerkere Verteidigung
+
+Status: spaeter.
+
+Ziel:
+Mehr Handlungskraft durch Netzwerk-, Prozess-, Safe-Mode- oder Haertungsfunktionen, aber nur mit klarer Zustimmung und sauberem Rechtekonzept.
 
 ## Iteration 1: Deutsche Orientierung fuer den ersten Sensor
 

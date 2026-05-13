@@ -2,7 +2,10 @@
 
 ## Kurzstand
 
-`local-security-twin` ist aktuell ein lokaler macOS-MVP-Prototyp mit zwei read-only Sensorbereichen, deutscherer UI, lokalem Trust-Flow und reproduzierbaren Packaging-Smokes.
+`local-security-twin` ist aktuell ein lokaler macOS-Prototyp mit zwei read-only Sensorbereichen, deutscherer UI, lokalem Trust-Flow und reproduzierbaren Packaging-Smokes.
+
+Das neue Produktziel ist groesser als der bisherige MVP-Schnitt:
+Die App soll ein kraftvoller Security Buddy werden, der mit dem Nutzer zusammenarbeitet, aktuelle Bedrohungen einordnet und bei echten Risiken handlungsfaehige naechste Schritte liefert.
 
 Die App kann:
 
@@ -19,13 +22,17 @@ Die App kann:
 
 Die App ist kein vollstaendiger macOS-Sicherheitscanner.
 
-Sie ist ein ruhiger lokaler Beobachter:
+Sie ist der Anfang eines starken Verteidigers:
 
 1. Was ist sichtbar?
 2. Was hat sich seit dem gemerkten Zustand geaendert?
 3. Welche Schutzsignale sind lokal sichtbar?
-4. Was bedeutet das in normaler Sprache?
-5. Was darf der Nutzer bewusst merken oder spaeter pruefen?
+4. Welche echten Bedrohungsinformationen passen dazu?
+5. Was bedeutet das in normaler Sprache?
+6. Was ist der naechste sichere Schritt?
+
+Der Ton darf ruhig bleiben.
+Die Produktambition ist potent: klare Belege, gute Priorisierung und echter Verteidigungsnutzen.
 
 ## Hauptfluss
 
@@ -63,9 +70,12 @@ Die sieben Sprints aus `docs/project-completion-plan.md` sind umgesetzt.
 
 Der naechste gute Schnitt ist:
 
-1. Beta-/MVP-Schnitt anhand `docs/mvp-release-checklist.md` pruefen.
-2. Echte macOS-UI-Automation oder Xcode-Projekt bewusst entscheiden.
-3. Danach erst weitere Sensoren planen.
+1. Den roten Faden aus `docs/product-flow-and-feature-plan.md` in die UI uebertragen.
+2. Die App von einer Inspector-Liste zu einem Buddy-Status mit gefuehrten Meldungen umbauen.
+3. Danach SOFA-/Update-Awareness als ersten Online-Intelligence-Baustein planen.
+
+Wichtig:
+Online-Intelligence ist nicht Teil des aktuellen lokalen MVPs. Sobald sie gebaut wird, braucht sie eine eigene, sichtbare Entscheidung fuer Netzwerkzugriff, Datenschutz, Caching und Fehlerfaelle.
 
 ## Wichtige Startwege
 

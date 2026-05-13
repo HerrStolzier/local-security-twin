@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-13
-- Bereich: Sprint 4 - zweiter Sensor
+- Bereich: Produktfaden und Security-Buddy-Zielbild
 
 ## Zuletzt abgeschlossen
 
@@ -85,16 +85,19 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 7 Task 7.3 umgesetzt: `docs/mvp-release-checklist.md` beschreibt den Beta-/MVP-Schnitt
 - Beta-Validierungsplan in `docs/beta-validation-plan.md` angelegt; er trennt technische Codex-Checks von manuellen Nutzerpruefungen
 - Beta-UI-Blocker aus Nutzer-Screenshot behoben: linke Spalte hat feste Breite, Detailbereich rendert robuster und Sidebar-Inhalt hat Abstand zu den macOS-Fensterknoepfen
-- Nutzer-Feedback nach Layout-Fix dokumentiert: Detailansicht ist weiterhin ein Info-Overflow-Problem und vor echter Beta als UX-Blocker zu behandeln
+- Nutzer-Feedback nach Layout-Fix dokumentiert: Detailansicht ist weiterhin ein Info-Overflow-Problem und als UX-Blocker fuer den Security-Buddy-Anspruch zu behandeln
 - Settings-Test bestanden: gemerkte Entscheidung erscheint und Reset ist sichtbar; UX-Kanten sind Fenstertitel, abgeschnittener Text und technisches Risiko-Label
+- Produktbild aktualisiert: Die App soll nicht nur ein ruhiger Beobachter sein, sondern ein kraftvoller Security Buddy mit Punch, der lokale Beobachtungen spaeter mit echter Threat Intelligence verbindet
+- roten Produktfaden in `docs/product-flow-and-feature-plan.md` angelegt
+- Roadmap und Ueberblick auf den neuen Fokus "Buddy statt Inspector" aktualisiert
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Layout und Settings funktionieren, aber die App braucht vor echter Beta einen UX-Schnitt gegen Informationsueberladung und technische Sprache.
+Die sieben Sprints sind umgesetzt; Layout und Settings funktionieren, und der naechste Fokus ist jetzt der rote Produktfaden: weg von der Inspector-Liste, hin zu einem starken Security Buddy mit klaren, gefuehrten Meldungen.
 
 ## Naechster konkreter Schritt
 
-Beta-Validierung fortsetzen: Startup-Diff-Flow, Settings/Reset und Known-Limits-Doku manuell pruefen; danach UX-Schnitt gegen Info-Overflow planen.
+UX-Rote-Faden-Schnitt umsetzen: Startansicht als Buddy-Status, technische Details nachrangig, bekannte Autostart-Hinweise zusammenfassen und pro Meldung einen klaren naechsten Schritt zeigen.
 
 ## Danach sinnvoll
 
@@ -114,7 +117,7 @@ Beta-Validierung fortsetzen: Startup-Diff-Flow, Settings/Reset und Known-Limits-
 - Der wichtigste UI-Flow ist Store-/Presentation-nah getestet; echte macOS-Klickautomation fehlt weiterhin.
 - Fuer den `Als erwartet merken`-Flow gibt es jetzt eine feste manuelle Checkliste im Development-Workflow; echte Klickautomation bleibt trotzdem offen.
 - Background Task Management ist relevant, aber noch keine robuste Produktquelle fuer den MVP.
-- Kein zweiter Sensor ist aktuell ausgewaehlt; diese Entscheidung ist bewusst, nicht vergessen.
+- Der zweite Sensor ist der vorhandene Systemprofil-Sensor; weitere Sensoren sollten erst nach dem UX-Rote-Faden-Schnitt und der Update-Awareness-Planung folgen.
 - Aktuelles `.app`-Bundle ist fuer Entwicklung und lokale Spikes gut, aber noch kein distributionsnahes, notarized Build-Artefakt.
 
 ## Letzte Validierung

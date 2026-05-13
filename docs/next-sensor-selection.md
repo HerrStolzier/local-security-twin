@@ -8,7 +8,7 @@ Diese Datei haelt die Entscheidung fuer den naechsten lokalen Sensor fest.
 
 Der zweite MVP-Sensor wird ein kleiner **Systemprofil-Sensor**.
 
-Er liest nur harmlose, lokal sichtbare Grunddaten:
+Er liest nur risikoarme, lokal sichtbare Grunddaten:
 
 - macOS-Version
 - Prozessor-/Systemarchitektur
@@ -16,7 +16,7 @@ Er liest nur harmlose, lokal sichtbare Grunddaten:
 - optional Gatekeeper-Status, wenn die Abfrage ohne Zusatzrechte stabil gelingt
 - optional SIP-Status, wenn die Abfrage ohne Zusatzrechte stabil gelingt
 
-Der Sensor ist bewusst kein vollstaendiger Sicherheitscheck. Er ist eher ein ruhiger Kontext-Sensor: Die App kann erklaeren, auf welchem Mac sie laeuft und welche Basis-Schutzsignale lokal sichtbar sind.
+Der Sensor ist bewusst kein vollstaendiger Sicherheitscheck. Er ist ein Kontext-Sensor: Die App kann erklaeren, auf welchem Mac sie laeuft und welche Basis-Schutzsignale lokal sichtbar sind.
 
 ## Warum dieser Sensor
 

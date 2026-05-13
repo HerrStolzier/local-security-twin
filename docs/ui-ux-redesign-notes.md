@@ -16,13 +16,17 @@ Die technische Basis funktioniert, aber die aktuelle Oberflaeche wirkt noch wie 
 
 Die App soll nicht wie ein Log-Viewer wirken.
 
-Sie soll wie ein ruhiger Sicherheitsbegleiter wirken:
+Sie soll wie ein kraftvoller Security Buddy wirken:
 
 1. Was wurde gefunden?
 2. Warum ist das relevant?
 3. Ist es dringend oder nur beobachtenswert?
 4. Was ist der sicherste naechste Schritt?
 5. Was kann ich als erwartet merken?
+
+Der wichtige Wechsel:
+Der Ton bleibt ruhig und verstaendlich, aber das Produktbild ist kraftvoller.
+Der Buddy soll ein Verteidiger mit Punch werden: Er priorisiert klar, verbindet lokale Beobachtungen spaeter mit echter Threat Intelligence und fuehrt zu konkreten naechsten Schritten.
 
 ## Sprachentscheidung
 
@@ -66,7 +70,7 @@ Empfohlene Dashboard-Struktur:
 
 Jede Ansicht soll implizit diese Geschichte erzaehlen:
 
-> Dein Mac hat sichtbare Autostart-Hinweise. Einige davon sind normal. Wichtig sind vor allem Veraenderungen seit dem gemerkten Zustand. Du kannst erwartete Veraenderungen bewusst merken, ohne dass die App etwas am System veraendert.
+> Ich beobachte deinen Mac, merke mir was normal ist, erkenne relevante Aenderungen und gleiche sie spaeter mit echten Bedrohungsinformationen ab. Wenn etwas wichtig wird, sage ich dir klar, warum es zaehlt und was du als naechstes sicher tun kannst.
 
 ## Konkrete UX-Probleme aus dem Screenshot
 
@@ -77,7 +81,7 @@ Jede Ansicht soll implizit diese Geschichte erzaehlen:
 - Evidence-Cards sind okay, aber ohne vorherige Priorisierung schwer einzuordnen.
 - Empfohlene Aktionen liegen weit unten; der Nutzer sieht zuerst sehr viel Text.
 
-## Beta-Feedback 2026-05-13
+## Nutzerfeedback 2026-05-13
 
 Der Layout-Fix hat die App deutlich lesbarer gemacht, aber die Detailansicht ist weiterhin ein Info-Overflow-Problem.
 
@@ -96,9 +100,9 @@ UX-Ziel fuer den naechsten Schnitt:
 4. Wiederholungen in der linken Liste reduzieren
 5. bekannte Autostart-Hinweise staerker zusammenfassen, statt 17 Einzelkarten gleich laut zu zeigen
 
-Beta-Status:
+Produktstatus:
 
-Das ist kein Build-Blocker mehr, aber ein Produkt-/UX-Blocker vor einer echten Beta fuer normale Nutzer.
+Das ist kein Build-Blocker mehr, aber ein Produkt-/UX-Blocker fuer den Security-Buddy-Anspruch.
 
 Settings-Feedback aus dem manuellen Test:
 

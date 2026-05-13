@@ -40,6 +40,8 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Gefuehrte Aktionen brauchen eine sichtbare Aktionsart, bevor sie ausgefuehrt oder gemerkt werden; Nutzer muessen unterscheiden koennen zwischen lokalem Merken, Anleitung, externem Oeffnen und spaeterem Belegesammeln.
 - Distribution bleibt zweistufig: lokale Beta-Smokes duerfen ad-hoc signiert sein, echte Nutzerverteilung braucht spaeter Developer ID, Hardened Runtime, Notarization und Secrets ausserhalb des Repos.
 - Der MVP-Schnitt braucht eine eigene Known-Limits-Doku, weil die wichtigste Sicherheitsqualitaet des Produkts darin liegt, sichtbare Belege nicht als vollstaendige Wahrheit zu verkaufen.
+- Das Produktbild wurde am 2026-05-13 geschaerft: Die App soll ein kraftvoller Security Buddy mit Punch werden. Ruhige Sprache bleibt wichtig, aber die Verteidigungsambition ist staerker: lokale Beobachtung, echte Threat Intelligence, klare Priorisierung und gefuehrte naechste Schritte.
+- LLMs sind fuer dieses Projekt eher Erklaer-, Recherche- und Assistenzschicht, nicht alleinige Sicherheitsinstanz. Sicherheitsentscheidungen brauchen belegbare lokale Daten, kuratierte externe Quellen und nachvollziehbare Regeln.
 
 ## Workflow Gotchas
 
