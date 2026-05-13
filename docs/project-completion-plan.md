@@ -329,6 +329,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 5: Guided Actions ohne Systemrisiko
 
+**Status**: umgesetzt am 2026-05-13.
+
 **Goal**: Empfehlungen werden nuetzlicher, ohne echte Systemaenderungen zu verstecken.
 
 **Demo/Validation**:
@@ -337,6 +339,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 - Aktion erklaert, ob sie nur merkt, oeffnet oder spaeter etwas aendern koennte
 
 ### Task 5.1: Aktionsarten definieren
+
+**Status**: umgesetzt am 2026-05-13. `PolicyActionKind` trennt lokale Entscheidung, externes Oeffnen, Anleitung und spaeteres Belegesammeln.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Core/Policy/`
@@ -352,6 +356,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ### Task 5.2: Erklaer-Dialog fuer vertrauensrelevante Aktionen
 
+**Status**: umgesetzt am 2026-05-13. Empfehlungsbuttons zeigen vor dem Speichern eine kurze Bestaetigung, was lokal passiert und was nicht.
+
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Detail`
   - `Sources/LocalSecurityTwin/Core/Policy`
@@ -366,6 +372,8 @@ Das Projekt gilt als MVP-fertig, wenn:
   - manueller UI-Smoke
 
 ### Task 5.3: Policy-Historie sichtbar machen
+
+**Status**: bereits vorhanden und am 2026-05-13 geglaettet. Settings zeigen gemerkte Entscheidungen mit Reset; Labels sind deutscher.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Settings/SettingsView.swift`

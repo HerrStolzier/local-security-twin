@@ -74,14 +74,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 4 Task 4.2 umgesetzt: Sensor-Design in `docs/system-profile-sensor-design.md` dokumentiert
 - Sprint 4 Task 4.3 umgesetzt: `SystemProfileSensor` liest lokale Basisdaten, Gatekeeper und SIP optional read-only und ist in `SensorPipeline.live()` registriert
 - Sprint 4 Task 4.4 umgesetzt: Dashboard- und Finding-Presentation-Texte tragen jetzt mehrere Sensorbereiche, statt nur Autostart-Hinweise zu beschreiben
+- Sprint 5 Task 5.1 umgesetzt: `PolicyActionKind` unterscheidet lokale Entscheidung, externes Oeffnen, Anleitung und spaeteres Belegesammeln
+- Sprint 5 Task 5.2 umgesetzt: Empfehlungsbuttons bestaetigen vor dem Speichern, was lokal passiert und dass keine Systemeinstellung geaendert wird
+- Sprint 5 Task 5.3 umgesetzt: Policy-Historie in Settings bleibt sichtbar und resetbar; Labels sind deutscher formuliert
 
 ## Aktueller Stand in einem Satz
 
-Die App hat jetzt zwei lokale read-only Sensorbereiche: sichtbare Autostart-Hinweise mit Baseline-Trust-Flow und ein ruhiges Mac-Systemprofil ohne neue macOS-Rechte.
+Die App hat zwei lokale read-only Sensorbereiche und gefuehrte Empfehlungen, die vor dem Speichern klar sagen, was lokal passiert und was nicht.
 
 ## Naechster konkreter Schritt
 
-Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 5, Task 5.1: Aktionsarten definieren.
+Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 6, Task 6.1: Versionierung und Bundle-Metadaten formalisieren.
 
 ## Danach sinnvoll
 
@@ -214,6 +217,10 @@ Zusaetzlich nach Sprint 4 Task 4.3/4.4:
 
 - `swift test`
 - `./scripts/checks.sh`
+
+Zusaetzlich nach Sprint 5:
+
+- `swift test`
 
 ## Letzte externe Recherche
 

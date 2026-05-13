@@ -15,6 +15,12 @@ The app must not silently change system settings.
 - The user should understand why an action is suggested.
 - Higher-risk actions require explicit confirmation.
 - Remembered approval must be visible and reversible.
+- Every guided action must name what kind of action it is before the user confirms it:
+  - local decision only
+  - external location opening
+  - guidance display
+  - bounded evidence gathering
+- No guided action may silently change system settings.
 
 ## Safe Mode
 

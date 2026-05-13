@@ -12,11 +12,11 @@ enum PolicyRisk: Int, Codable, CaseIterable, Comparable, Sendable {
     var title: String {
         switch self {
         case .low:
-            return "Low"
+            return "Niedrig"
         case .medium:
-            return "Medium"
+            return "Mittel"
         case .high:
-            return "High"
+            return "Erhoeht"
         }
     }
 }
@@ -28,9 +28,9 @@ enum PolicyDecision: String, Codable, CaseIterable, Sendable {
     var title: String {
         switch self {
         case .allow:
-            return "Allowed"
+            return "Erlaubt"
         case .deny:
-            return "Denied"
+            return "Abgelehnt"
         }
     }
 }
@@ -42,9 +42,9 @@ enum PolicyPersistenceScope: String, Codable, CaseIterable, Sendable {
     var title: String {
         switch self {
         case .session:
-            return "This Session"
+            return "Diese Sitzung"
         case .remembered:
-            return "Remembered"
+            return "Lokal gemerkt"
         }
     }
 }
@@ -69,9 +69,9 @@ enum PolicyConfirmationRequirement: String, Codable, CaseIterable, Comparable, S
     var title: String {
         switch self {
         case .standard:
-            return "Standard Confirmation"
+            return "Normale Bestaetigung"
         case .explicitApproval:
-            return "Explicit Confirmation"
+            return "Bewusste Zustimmung"
         }
     }
 }
@@ -81,32 +81,129 @@ enum PolicyDecisionSource: String, Codable, Sendable {
     case remembered
 }
 
+enum PolicyActionKind: String, Codable, CaseIterable, Sendable {
+    case rememberLocalDecision
+    case openExternalLocation
+    case showGuidance
+    case gatherEvidence
+
+    var title: String {
+        switch self {
+        case .rememberLocalDecision:
+            return "Lokale Entscheidung merken"
+        case .openExternalLocation:
+            return "Externen Ort oeffnen"
+        case .showGuidance:
+            return "Anleitung anzeigen"
+        case .gatherEvidence:
+            return "Weitere Belege sammeln"
+        }
+    }
+
+    var consentSummary: String {
+        switch self {
+        case .rememberLocalDecision:
+            return "Die App speichert nur deine Entscheidung lokal auf diesem Mac."
+        case .openExternalLocation:
+            return "Die App wuerde einen sichtbaren Ort ausserhalb dieser Ansicht oeffnen, aber keine Einstellung selbst aendern."
+        case .showGuidance:
+            return "Die App zeigt dir eine Anleitung und nimmt keine Systemaenderung vor."
+        case .gatherEvidence:
+            return "Die App wuerde spaeter nur eng begrenzte Belege sammeln und keine Systemeinstellung veraendern."
+        }
+    }
+}
+
 struct PolicyAction: Identifiable, Hashable, Codable, Sendable {
     let id: String
     let title: String
     let explanation: String
+    let kind: PolicyActionKind
     let minimumConfirmation: PolicyConfirmationRequirement
+
+    init(
+        id: String,
+        title: String,
+        explanation: String,
+        kind: PolicyActionKind,
+        minimumConfirmation: PolicyConfirmationRequirement
+    ) {
+        self.id = id
+        self.title = title
+        self.explanation = explanation
+        self.kind = kind
+        self.minimumConfirmation = minimumConfirmation
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let id = try container.decode(String.self, forKey: .id)
+
+        self.id = id
+        self.title = try container.decode(String.self, forKey: .title)
+        self.explanation = try container.decode(String.self, forKey: .explanation)
+        self.kind = try container.decodeIfPresent(PolicyActionKind.self, forKey: .kind)
+            ?? PolicyActionKind.legacyDefault(for: id)
+        self.minimumConfirmation = try container.decode(
+            PolicyConfirmationRequirement.self,
+            forKey: .minimumConfirmation
+        )
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case explanation
+        case kind
+        case minimumConfirmation
+    }
+}
+
+private extension PolicyActionKind {
+    static func legacyDefault(for actionID: String) -> PolicyActionKind {
+        switch actionID {
+        case "open-sensitive-settings":
+            return .openExternalLocation
+        case "run-safe-validation":
+            return .gatherEvidence
+        case "show-guidance":
+            return .showGuidance
+        default:
+            return .rememberLocalDecision
+        }
+    }
 }
 
 extension PolicyAction {
     static let openSensitiveSettings = PolicyAction(
         id: "open-sensitive-settings",
-        title: "Open Sensitive Settings",
-        explanation: "Open a sensitive system settings area so the user can review access.",
+        title: "Sensible Einstellungen oeffnen",
+        explanation: "Oeffnet einen passenden Bereich der Systemeinstellungen, damit du ihn selbst pruefen kannst.",
+        kind: .openExternalLocation,
         minimumConfirmation: .standard
     )
 
     static let trustItem = PolicyAction(
         id: "trust-item",
-        title: "Trust Item",
-        explanation: "Remember that a specific item is expected and should stay calmer in future views.",
+        title: "Hinweis als erwartet merken",
+        explanation: "Merkt lokal, dass ein bestimmter Hinweis erwartet ist und kuenftig ruhiger eingeordnet werden soll.",
+        kind: .rememberLocalDecision,
+        minimumConfirmation: .standard
+    )
+
+    static let showGuidance = PolicyAction(
+        id: "show-guidance",
+        title: "Anleitung anzeigen",
+        explanation: "Zeigt eine sichere Anleitung, ohne eine Systemeinstellung automatisch zu aendern.",
+        kind: .showGuidance,
         minimumConfirmation: .standard
     )
 
     static let runSafeValidation = PolicyAction(
         id: "run-safe-validation",
-        title: "Gather More Evidence",
-        explanation: "Run a tightly bounded check that gathers more evidence without changing system settings.",
+        title: "Weitere Belege sammeln",
+        explanation: "Fuehrt spaeter einen eng begrenzten Pruefschritt aus, der mehr Belege sammelt, ohne Systemeinstellungen zu aendern.",
+        kind: .gatherEvidence,
         minimumConfirmation: .explicitApproval
     )
 }
@@ -177,7 +274,7 @@ enum PolicyStoreError: LocalizedError, Equatable {
     var errorDescription: String? {
         switch self {
         case .explicitConfirmationRequired(let actionTitle):
-            return "\(actionTitle) needs an explicit confirmation because the request is high risk."
+            return "\(actionTitle) braucht eine bewusste Zustimmung, weil der Schritt erhoehtes Risiko hat."
         }
     }
 }

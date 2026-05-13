@@ -228,6 +228,8 @@ private struct RecommendationCard: View {
     let policyStore: PolicyStore
 
     @State private var localError: String?
+    @State private var pendingDecision: PendingPolicyDecision?
+    @State private var isShowingConfirmation = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -252,17 +254,24 @@ private struct RecommendationCard: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
+            Text(request.action.kind.consentSummary)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
             HStack {
                 Button("Einmal erlauben") {
-                    record(.allow, scope: .session)
+                    pendingDecision = PendingPolicyDecision(decision: .allow, scope: .session)
+                    isShowingConfirmation = true
                 }
 
                 Button("Merken: erlauben") {
-                    record(.allow, scope: .remembered)
+                    pendingDecision = PendingPolicyDecision(decision: .allow, scope: .remembered)
+                    isShowingConfirmation = true
                 }
 
                 Button("Merken: ablehnen") {
-                    record(.deny, scope: .remembered)
+                    pendingDecision = PendingPolicyDecision(decision: .deny, scope: .remembered)
+                    isShowingConfirmation = true
                 }
             }
             .buttonStyle(.bordered)
@@ -279,6 +288,26 @@ private struct RecommendationCard: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(.quaternary)
         )
+        .confirmationDialog(
+            confirmationTitle,
+            isPresented: $isShowingConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Bestaetigen") {
+                if let pendingDecision {
+                    record(pendingDecision.decision, scope: pendingDecision.scope)
+                }
+                pendingDecision = nil
+            }
+
+            Button("Abbrechen", role: .cancel) {
+                pendingDecision = nil
+            }
+        } message: {
+            if let pendingDecision {
+                Text(confirmationMessage(for: pendingDecision))
+            }
+        }
     }
 
     private var statusText: String {
@@ -301,10 +330,23 @@ private struct RecommendationCard: View {
     private var requirementText: String {
         switch request.confirmationRequirement {
         case .standard:
-            return "Das ist ein normaler gefuehrter Schritt."
+            return "Das ist ein normaler gefuehrter Schritt. Er passiert erst nach deiner Bestaetigung."
         case .explicitApproval:
-            return "Dieser Schritt braucht eine bewusste Zustimmung."
+            return "Dieser Schritt braucht eine bewusste Zustimmung, weil er mehr Belege sammeln koennte."
         }
+    }
+
+    private var confirmationTitle: String {
+        "Schritt bestaetigen?"
+    }
+
+    private func confirmationMessage(for pendingDecision: PendingPolicyDecision) -> String {
+        let persistenceText =
+            pendingDecision.scope == .remembered
+            ? "Diese Entscheidung wird lokal gespeichert und kann in den Einstellungen wieder geloescht werden."
+            : "Diese Entscheidung gilt nur fuer diese Sitzung."
+
+        return "\(request.action.kind.consentSummary) \(persistenceText) Die App aendert dabei keine Systemeinstellungen."
     }
 
     private func record(_ decision: PolicyDecision, scope: PolicyPersistenceScope) {
@@ -313,13 +355,19 @@ private struct RecommendationCard: View {
                 decision: decision,
                 for: request,
                 scope: scope,
-                explicitConfirmation: scope == .remembered
+                explicitConfirmation: request.confirmationRequirement == .explicitApproval
             )
             localError = nil
         } catch {
             localError = error.localizedDescription
         }
     }
+}
+
+private struct PendingPolicyDecision: Identifiable {
+    let id = UUID()
+    let decision: PolicyDecision
+    let scope: PolicyPersistenceScope
 }
 
 private struct FindingSection: View {

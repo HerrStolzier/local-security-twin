@@ -46,7 +46,7 @@ final class PolicyStore: ObservableObject {
         scope: PolicyPersistenceScope,
         explicitConfirmation: Bool = false
     ) throws {
-        if scope == .remembered && request.confirmationRequirement == .explicitApproval && !explicitConfirmation {
+        if request.confirmationRequirement == .explicitApproval && !explicitConfirmation {
             throw PolicyStoreError.explicitConfirmationRequired(actionTitle: request.action.title)
         }
 

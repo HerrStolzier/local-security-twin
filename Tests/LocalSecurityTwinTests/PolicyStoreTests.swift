@@ -42,7 +42,7 @@ struct PolicyStoreTests {
         let store = makeStore()
         let request = makeRequest(risk: .high, action: .runSafeValidation)
 
-        #expect(throws: PolicyStoreError.explicitConfirmationRequired(actionTitle: "Gather More Evidence")) {
+        #expect(throws: PolicyStoreError.explicitConfirmationRequired(actionTitle: "Weitere Belege sammeln")) {
             try store.record(decision: .allow, for: request, scope: .remembered)
         }
 
@@ -54,6 +54,49 @@ struct PolicyStoreTests {
         )
 
         #expect(store.resolution(for: request) == .allowed(.remembered))
+    }
+
+    @Test func highRiskSessionApprovalsNeedExplicitConfirmationToo() throws {
+        let store = makeStore()
+        let request = makeRequest(risk: .high, action: .runSafeValidation)
+
+        #expect(throws: PolicyStoreError.explicitConfirmationRequired(actionTitle: "Weitere Belege sammeln")) {
+            try store.record(decision: .allow, for: request, scope: .session)
+        }
+
+        try store.record(
+            decision: .allow,
+            for: request,
+            scope: .session,
+            explicitConfirmation: true
+        )
+
+        #expect(store.resolution(for: request) == .allowed(.session))
+    }
+
+    @Test func guidedActionsDeclareTheirUserVisibleKind() {
+        #expect(PolicyAction.trustItem.kind == .rememberLocalDecision)
+        #expect(PolicyAction.openSensitiveSettings.kind == .openExternalLocation)
+        #expect(PolicyAction.showGuidance.kind == .showGuidance)
+        #expect(PolicyAction.runSafeValidation.kind == .gatherEvidence)
+        #expect(PolicyAction.runSafeValidation.minimumConfirmation == .explicitApproval)
+        #expect(PolicyAction.trustItem.kind.consentSummary.contains("lokal"))
+    }
+
+    @Test func legacyPolicyActionJSONDefaultsKindFromActionID() throws {
+        let json = """
+        {
+          "id": "run-safe-validation",
+          "title": "Gather More Evidence",
+          "explanation": "Legacy action without kind.",
+          "minimumConfirmation": "explicitApproval"
+        }
+        """
+
+        let action = try JSONDecoder().decode(PolicyAction.self, from: Data(json.utf8))
+
+        #expect(action.kind == .gatherEvidence)
+        #expect(action.minimumConfirmation == .explicitApproval)
     }
 
     @Test func resetAllRememberedPoliciesClearsPersistedState() throws {
