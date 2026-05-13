@@ -92,10 +92,23 @@ Den lokalen App-Bundle-Spike fuer genauere Tests nutzen:
 ## Empfohlener naechster Packaging-Spike
 
 1. Lokales `.app`-Bundle als UI-Automation-Ziel verwenden.
-2. Erste UI-nahe Automation auf dem Bundle aufbauen.
-3. Sandbox einmal bewusst an/aus gegen den Startup-Sensor pruefen.
-4. Erst danach entscheiden, ob ein Xcode-Projekt noetig ist.
-5. Ergebnis dokumentieren, bevor neue Sensoren mit breiterer System-Sicht gebaut werden.
+2. Vorerst Store-/Presentation-Tests plus Bundle-Smokes nutzen.
+3. Echte macOS-Klickautomation erst nach Sandbox-/Xcode-Projekt-Entscheidung aufbauen.
+4. Sandbox einmal bewusst an/aus gegen den Startup-Sensor pruefen.
+5. Erst danach entscheiden, ob ein Xcode-Projekt noetig ist.
+6. Ergebnis dokumentieren, bevor neue Sensoren mit breiterer System-Sicht gebaut werden.
+
+## UI-Test-Entscheidung
+
+Aktuelle Entscheidung:
+Noch keine echte macOS-Klickautomation als Pflicht fuer jeden UI-Schnitt.
+
+Begruendung:
+
+- SwiftPM-Bundling startet lokal stabil, ist aber noch kein vollstaendiges Xcode-UI-Test-Setup.
+- Store-/Presentation-Tests decken den wichtigsten Trust-Flow bereits reproduzierbar ab.
+- Bundle-Smokes pruefen, dass das lokale App-Artefakt baut, signiert und startet.
+- Echte UI-Automation soll nach dem Sandbox-/Xcode-Projekt-Schnitt entschieden werden.
 
 ## Vorlaeufiger Distributionspfad
 

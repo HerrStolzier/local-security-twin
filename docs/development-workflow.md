@@ -87,5 +87,23 @@ The current E2E suite is a smoke-level integration check around the policy workf
 - explicit approval can be remembered locally
 - a new store instance reloads the remembered decision
 - reset removes the remembered decision again
+- a startup-diff fixture creates a temporary LaunchAgents setup, verifies that the dashboard sees a rememberable change, and verifies that remembering the current state clears the diff
+
+## UI Test Path
+
+For the current SwiftPM-first app, UI validation has three levels:
+
+1. Store-/presentation-near tests in `swift test`.
+2. App-bundle start validation with `./scripts/app-bundle-smoke.sh`.
+3. Manual UI review against `.build/app/LocalSecurityTwin.app`.
+
+Real macOS click automation is intentionally not the next default step yet.
+It should be added after the Sandbox/Packaging decision, because SwiftPM-only bundling may not be enough for stable window and accessibility automation.
+
+Until then, every UI-facing change should have at least one of:
+
+- a `DashboardPresentation` or similar presentation test
+- an E2E-near store flow test
+- a documented manual check in `docs/session-status.md`
 
 As the app grows, this suite should expand to cover menu bar startup, main-window navigation, and real guided actions.

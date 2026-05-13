@@ -129,7 +129,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 2: Trust-Flow und UI-nahe Tests
 
-**Status**: in Umsetzung seit 2026-05-13. Task 2.1 ist umgesetzt.
+**Status**: in Umsetzung seit 2026-05-13. Tasks 2.1 und 2.2 sind umgesetzt.
 
 **Goal**: Der Nutzer kann Startup-Aenderungen bewusst als erwartet merken, und dieser Flow ist testbar.
 
@@ -156,6 +156,8 @@ Das Projekt gilt als MVP-fertig, wenn:
   - `swift test --filter E2E`
 
 ### Task 2.2: App-Bundle als UI-Testziel dokumentieren
+
+**Status**: umgesetzt am 2026-05-13.
 
 - **Location**:
   - `docs/development-workflow.md`

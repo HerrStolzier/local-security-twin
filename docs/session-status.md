@@ -65,6 +65,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 1 Task 1.3 umgesetzt: Detailansicht beginnt jetzt mit einem Erklaerpanel fuer Kurz gesagt, Warum wichtig und Naechster sicherer Schritt
 - Sprint 1 Task 1.4 umgesetzt: Wichtigkeits-Badges sind visuell ruhiger und nutzen keine rote Alarmoptik mehr
 - Sprint 2 Task 2.1 umgesetzt: wiederholbare Startup-Diff-Fixture in den E2E-Tests angelegt, ohne echte LaunchAgent-Ordner zu veraendern
+- Sprint 2 Task 2.2 umgesetzt: UI-Testpfad dokumentiert; vorerst Store-/Presentation-Tests plus Bundle-Smokes, echte Klickautomation nach Sandbox-/Xcode-Entscheidung
 
 ## Aktueller Stand in einem Satz
 
@@ -72,7 +73,7 @@ Die App zeigt den ersten Sensor jetzt noch konsequenter deutsch, gruppiert und m
 
 ## Naechster konkreter Schritt
 
-Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 2, Task 2.2: App-Bundle als UI-Testziel dokumentieren.
+Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 2, Task 2.3: erster UI-naher Flow-Test.
 
 ## Danach sinnvoll
 
