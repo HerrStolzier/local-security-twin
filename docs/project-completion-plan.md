@@ -189,7 +189,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 3: Sandbox- und Packaging-Entscheidung
 
-**Status**: in Umsetzung seit 2026-05-13. Tasks 3.1 und 3.2 sind umgesetzt.
+**Status**: umgesetzt am 2026-05-13.
 
 **Goal**: Das Projekt weiss, ob Sandbox fuer den MVP realistisch ist und ob SwiftPM-Bundling reicht.
 
@@ -235,9 +235,11 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ### Task 3.3: SwiftPM-Bundle vs. Xcode-Projekt entscheiden
 
+**Status**: umgesetzt am 2026-05-13. Entscheidung: vorerst kein Xcode-Projekt; SwiftPM plus Bundle-Scripts bleiben Hauptpfad.
+
 - **Location**:
   - `docs/packaging-signing-plan.md`
-  - optional neues `docs/xcode-project-decision.md`
+  - `docs/xcode-project-decision.md`
 - **Description**: Entscheiden, ob fuer UI-Tests, Signing und spaetere Distribution ein Xcode-Projekt noetig wird.
 - **Complexity**: 4/10
 - **Dependencies**: Task 3.2

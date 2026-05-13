@@ -125,6 +125,17 @@ Begruendung:
 - Bundle-Smokes pruefen, dass das lokale App-Artefakt baut, signiert und startet.
 - Echte UI-Automation soll nach dem Sandbox-/Xcode-Projekt-Schnitt entschieden werden.
 
+## SwiftPM vs. Xcode-Projekt
+
+Aktuelle Entscheidung:
+Noch kein Xcode-Projekt anlegen.
+
+Die Begruendung steht in `docs/xcode-project-decision.md`.
+
+Kurz:
+SwiftPM plus lokale Bundle-Scripts reichen fuer den naechsten MVP-Abschnitt.
+Ein Xcode-Projekt wird erst angelegt, wenn echte macOS-Klickautomation, Developer-ID-Archivierung, App-Icons/Assets oder Xcode-spezifische Signing-Konfiguration konkret gebraucht werden.
+
 ## Vorlaeufiger Distributionspfad
 
 1. Weiterentwicklung bleibt kurzfristig bei SwiftPM.

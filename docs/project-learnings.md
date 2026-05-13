@@ -34,6 +34,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Die App startet lokal auch mit ad-hoc Hardened-Runtime-Signatur; echte Distribution braucht trotzdem spaeter Developer ID und Notarization.
 - Der weitere MVP-Weg ist in `docs/project-completion-plan.md` als Sprint-Plan dokumentiert; naechster Umsetzungspunkt ist UI-Text-Inventar und UX-Orientierung.
 - Nutzertexte sollen moeglichst an der Datenquelle geglaettet werden, nicht nur in der SwiftUI-Darstellung, weil Findings, Evidence, Recommendations und Sensor-Notizen sonst unterschiedlich klingen.
+- Ein Xcode-Projekt wird erst bei konkretem Bedarf angelegt; aktuell reichen SwiftPM plus lokale Bundle-, Sandbox- und Runtime-Smokes fuer den naechsten MVP-Abschnitt.
 
 ## Workflow Gotchas
 
