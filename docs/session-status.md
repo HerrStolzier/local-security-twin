@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-13
-- Bereich: App-Bundle-Spike nach Roadmap
+- Bereich: App-Bundle-Smoke nach Roadmap
 
 ## Zuletzt abgeschlossen
 
@@ -55,14 +55,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Roadmap Iteration 6 umgesetzt: Packaging-/Signing-Plan konkretisiert; aktueller SwiftPM-Build ist ad-hoc signiertes Executable ohne App-Bundle, Xcode-Projekt oder Entitlements
 - lokaler App-Bundle-Spike umgesetzt: `scripts/build-app-bundle.sh` erzeugt `.build/app/LocalSecurityTwin.app` aus dem SwiftPM-Executable
 - lokales `.app`-Bundle validiert: `Info.plist` ist gueltig, `codesign --verify --deep --strict` ist erfolgreich, Start-Smoke per `open -n` ist erfolgreich
+- App-Bundle-Smoke automatisiert: `scripts/app-bundle-smoke.sh` baut, validiert, startet und beendet das lokale `.app`-Bundle
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; zusaetzlich gibt es ein lokales `.app`-Bundle fuer die naechsten UI- und Signing-Spikes.
+Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; zusaetzlich gibt es ein lokales `.app`-Bundle plus Smoke-Test fuer die naechsten UI- und Signing-Spikes.
 
 ## Naechster konkreter Schritt
 
-Das lokale `.app`-Bundle als Ziel fuer einen ersten echten UI-Automation- oder manuellen UI-Review-Schnitt verwenden.
+Auf Basis von `scripts/app-bundle-smoke.sh` den ersten echten UI-Automation- oder manuellen UI-Review-Schnitt planen.
 
 ## Danach sinnvoll
 
@@ -149,6 +150,10 @@ Zusaetzlich nach dem App-Bundle-Spike am 2026-05-13:
 - `codesign -dv .build/app/LocalSecurityTwin.app`
 - `codesign --verify --deep --strict --verbose=2 .build/app/LocalSecurityTwin.app`
 - Start-Smoke per `open -n .build/app/LocalSecurityTwin.app`
+
+Zusaetzlich nach dem App-Bundle-Smoke-Script:
+
+- `./scripts/app-bundle-smoke.sh`
 
 ## Letzte externe Recherche
 

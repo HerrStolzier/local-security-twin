@@ -32,6 +32,14 @@ Build a local development `.app` bundle:
 This creates `.build/app/LocalSecurityTwin.app` from the SwiftPM executable and signs it ad-hoc for local validation.
 It is not a notarized distribution build.
 
+Run the local app-bundle smoke check:
+
+```bash
+./scripts/app-bundle-smoke.sh
+```
+
+This rebuilds the bundle, verifies its local signature, launches it once, and stops it again.
+
 ## Handoff Documents
 
 Every finished step must leave the repo in a resumable state.
