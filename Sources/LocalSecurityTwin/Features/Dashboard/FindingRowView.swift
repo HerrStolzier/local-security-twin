@@ -13,7 +13,12 @@ struct FindingRowView: View {
                     .font(.caption)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 2)
-                    .background(finding.severity.color.opacity(0.16), in: Capsule())
+                    .foregroundStyle(finding.severity.textColor)
+                    .background(finding.severity.badgeFill, in: Capsule())
+                    .overlay(
+                        Capsule()
+                            .stroke(finding.severity.badgeStroke)
+                    )
             }
 
             Text(finding.displaySubject)
@@ -35,14 +40,36 @@ struct FindingRowView: View {
 }
 
 private extension FindingSeverity {
-    var color: Color {
+    var textColor: Color {
         switch self {
         case .low:
-            return .blue
+            return .secondary
         case .medium:
-            return .orange
+            return .primary
         case .high:
-            return .red
+            return .primary
+        }
+    }
+
+    var badgeFill: Color {
+        switch self {
+        case .low:
+            return .secondary.opacity(0.08)
+        case .medium:
+            return .secondary.opacity(0.12)
+        case .high:
+            return .orange.opacity(0.14)
+        }
+    }
+
+    var badgeStroke: Color {
+        switch self {
+        case .low:
+            return .secondary.opacity(0.16)
+        case .medium:
+            return .secondary.opacity(0.2)
+        case .high:
+            return .orange.opacity(0.28)
         }
     }
 }

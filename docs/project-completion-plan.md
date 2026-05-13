@@ -44,7 +44,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 1: Orientierung und UX-Fokus
 
-**Status**: in Umsetzung seit 2026-05-13. Tasks 1.1 bis 1.3 sind umgesetzt; wesentliche englische Nutzertexte, Dashboard-Story und Detail-Erklaerfluss sind geglaettet.
+**Status**: umgesetzt am 2026-05-13.
 
 **Goal**: Die App soll fuer normale Nutzer in einem Blick erklaeren, was gerade wichtig ist.
 
@@ -110,6 +110,8 @@ Das Projekt gilt als MVP-fertig, wenn:
   - manueller Vergleich gegen Screenshot-Befund in `docs/ui-ux-redesign-notes.md`
 
 ### Task 1.4: Ruhigere Severity-Darstellung
+
+**Status**: umgesetzt am 2026-05-13.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Dashboard/FindingRowView.swift`

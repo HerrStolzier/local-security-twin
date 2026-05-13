@@ -63,6 +63,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Severity-/Wichtigkeitslabels ruhiger formuliert: `Zur Info`, `Pruefen`, `Genauer pruefen`
 - Sprint 1 Task 1.2 umgesetzt: Dashboard zeigt jetzt eine klarere Headline, naechsten sicheren Schritt und eine ruhige Sichtbarkeitsgrenze
 - Sprint 1 Task 1.3 umgesetzt: Detailansicht beginnt jetzt mit einem Erklaerpanel fuer Kurz gesagt, Warum wichtig und Naechster sicherer Schritt
+- Sprint 1 Task 1.4 umgesetzt: Wichtigkeits-Badges sind visuell ruhiger und nutzen keine rote Alarmoptik mehr
 
 ## Aktueller Stand in einem Satz
 
@@ -70,7 +71,7 @@ Die App zeigt den ersten Sensor jetzt noch konsequenter deutsch, gruppiert und m
 
 ## Naechster konkreter Schritt
 
-Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 1, Task 1.4: ruhigere Severity-Darstellung visuell abschliessen.
+Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 2, Task 2.1: Testdaten fuer Startup-Diff-App-Start standardisieren.
 
 ## Danach sinnvoll
 
