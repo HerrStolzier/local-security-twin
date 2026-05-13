@@ -189,7 +189,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 3: Sandbox- und Packaging-Entscheidung
 
-**Status**: in Umsetzung seit 2026-05-13. Task 3.1 ist umgesetzt.
+**Status**: in Umsetzung seit 2026-05-13. Tasks 3.1 und 3.2 sind umgesetzt.
 
 **Goal**: Das Projekt weiss, ob Sandbox fuer den MVP realistisch ist und ob SwiftPM-Bundling reicht.
 
@@ -218,8 +218,10 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ### Task 3.2: Sandbox-Smoke gegen Startup-Sensor
 
+**Status**: umgesetzt am 2026-05-13 als Sandbox-Start-Smoke mit vorbereitetem Startup-Diff. Automatisierte UI-Sichtbarkeitspruefung bleibt bis zur echten UI-Automation offen.
+
 - **Location**:
-  - neu: `scripts/sandbox-smoke.sh`
+  - `scripts/sandbox-smoke.sh`
   - `docs/packaging-signing-plan.md`
 - **Description**: App mit Sandbox starten und dokumentieren, ob sichtbare Startup-Pfade weiter lesbar sind.
 - **Complexity**: 6/10

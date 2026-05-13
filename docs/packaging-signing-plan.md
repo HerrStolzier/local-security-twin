@@ -55,6 +55,13 @@ Update nach dem Entitlements-Spike:
 - `APP_SANDBOX=1 ./scripts/build-app-bundle.sh` signiert lokal ad-hoc mit Sandbox-Entitlements
 - es wurden bewusst keine Network-, Accessibility-, Apple-Events-, Full-Disk-Access- oder Helper-Entitlements ergaenzt
 
+Update nach dem Sandbox-Smoke:
+
+- `scripts/sandbox-smoke.sh` baut das Bundle mit `APP_SANDBOX=1`
+- der Smoke prueft `codesign --verify` und das vorhandene App-Sandbox-Entitlement
+- der Smoke startet die App mit temporaerem HOME und vorbereitetem Startup-Diff
+- automatisiert bestaetigt ist damit Startfaehigkeit mit Sandbox; die konkrete UI-Sichtbarkeit des Startup-Hinweises bleibt bis zur echten UI-Automation als manueller Check offen
+
 ## Entscheidungen fuer den MVP
 
 - Keine Network-Client-Entitlement ohne konkreten Produktnutzen.
