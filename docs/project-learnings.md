@@ -32,6 +32,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Ein lokales `.app`-Bundle kann aus dem SwiftPM-Executable erzeugt und ad-hoc signiert werden; das reicht fuer lokale Start- und UI-Automation-Spikes, aber nicht fuer echte Distribution.
 - Der App-Bundle-Smoke sollte vor echter UI-Automation laufen, weil er zuerst klaert, ob das `.app`-Artefakt ueberhaupt sauber baut, signiert und startet.
 - Die App startet lokal auch mit ad-hoc Hardened-Runtime-Signatur; echte Distribution braucht trotzdem spaeter Developer ID und Notarization.
+- Der weitere MVP-Weg ist in `docs/project-completion-plan.md` als Sprint-Plan dokumentiert; naechster Umsetzungspunkt ist UI-Text-Inventar und UX-Orientierung.
 
 ## Workflow Gotchas
 

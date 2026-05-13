@@ -8,6 +8,7 @@ Sie ersetzt nicht die Detaildokumente, sondern ordnet sie:
 
 - `docs/session-status.md`: aktueller Uebergabestand
 - `docs/current-overview.md`: technischer und produktlicher Kurzueberblick
+- `docs/project-completion-plan.md`: detaillierter Weg vom aktuellen Prototyp zum MVP
 - `docs/ui-ux-redesign-notes.md`: naechster UI-/UX-Schnitt
 - `docs/background-task-management-spike.md`: spaeterer macOS-Startup-Spike
 - `docs/packaging-signing-plan.md`: spaeterer Distribution-/Signing-Schnitt
@@ -31,7 +32,11 @@ Vorhanden ist:
 
 ## Aktuelle Hauptprioritaet
 
-Die naechste Hauptprioritaet ist UI/UX.
+Die aktuelle Umsetzungsreihenfolge steht im detaillierten Abschlussplan:
+
+- `docs/project-completion-plan.md`
+
+Die naechste Hauptprioritaet bleibt UI/UX.
 
 Grund:
 Der erste manuelle Blick zeigt, dass die App technisch funktioniert, aber fuer normale Nutzer noch keinen klaren roten Faden bietet.

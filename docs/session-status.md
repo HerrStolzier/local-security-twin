@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-13
-- Bereich: Hardened-Runtime-Smoke nach Roadmap
+- Bereich: Abschlussplan und Dokumentation
 
 ## Zuletzt abgeschlossen
 
@@ -57,14 +57,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - lokales `.app`-Bundle validiert: `Info.plist` ist gueltig, `codesign --verify --deep --strict` ist erfolgreich, Start-Smoke per `open -n` ist erfolgreich
 - App-Bundle-Smoke automatisiert: `scripts/app-bundle-smoke.sh` baut, validiert, startet und beendet das lokale `.app`-Bundle
 - Hardened-Runtime-Smoke automatisiert: `scripts/hardened-runtime-smoke.sh` signiert lokal ad-hoc mit Runtime-Option, verifiziert die Signatur und startet die App
+- detaillierten Abschlussplan in `docs/project-completion-plan.md` erstellt; er ordnet UX, Trust-Flow, Sandbox/Packaging, zweiten Sensor, Guided Actions, Distribution und MVP-Abschluss in testbare Sprints
 
 ## Aktueller Stand in einem Satz
 
-Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; zusaetzlich gibt es lokale Bundle-, Start- und Hardened-Runtime-Smokes fuer die naechsten UI- und Signing-Spikes.
+Die App zeigt den ersten Sensor jetzt deutsch, gruppiert und mit besser nutzbaren Startup-Details; zusaetzlich gibt es lokale Bundle-, Start- und Hardened-Runtime-Smokes sowie einen detaillierten Abschlussplan fuer den Weg zum MVP.
 
 ## Naechster konkreter Schritt
 
-Als naechstes Sandbox-Auswirkung oder erste echte UI-Automation gegen `.build/app/LocalSecurityTwin.app` pruefen.
+Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 1, Task 1.1: UI-Texte vollstaendig inventarisieren.
 
 ## Danach sinnvoll
 
@@ -174,6 +175,7 @@ Zusaetzlich nach dem Hardened-Runtime-Smoke-Script:
 - `docs/current-overview.md`
 - `docs/ui-ux-redesign-notes.md`
 - `docs/roadmap.md`
+- `docs/project-completion-plan.md`
 
 ## Wenn du hier weitermachst
 
