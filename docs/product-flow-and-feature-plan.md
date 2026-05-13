@@ -299,16 +299,25 @@ Spaeter:
 
 ### Phase 0: Buddy statt Inspector
 
+Status:
+Erster UI-Schnitt umgesetzt am 2026-05-13.
+Weitere visuelle Verfeinerung bleibt sinnvoll.
+
 Ziel:
 Die aktuelle App wird weniger wie eine technische Fundliste und mehr wie ein Begleiter.
 
 Aufgaben:
 
-- Dashboard in Buddy-Status umbauen
-- nur die wichtigsten Dinge zuerst zeigen
-- technische Belege einklappbar machen
-- linke Liste zusammenfassen
-- eine klare Hauptaktion pro Hinweis zeigen
+- Dashboard in Buddy-Status umbauen: umgesetzt
+- nur die wichtigsten Dinge zuerst zeigen: umgesetzt im ersten Schnitt
+- technische Belege einklappbar machen: umgesetzt
+- linke Liste zusammenfassen: fuer bekannte Autostart-Hinweise umgesetzt
+- eine klare Hauptaktion pro Hinweis zeigen: erste Empfehlung steht jetzt vorne
+
+Offen:
+
+- optische Feinabstimmung nach manuellem App-Blick
+- echte Chat-/Feed-Struktur spaeter weiter ausbauen
 
 ### Phase 1: Update-Awareness
 

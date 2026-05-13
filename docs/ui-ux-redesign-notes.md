@@ -164,3 +164,22 @@ Noch offen fuer spaetere UX-Schnitte:
 - Raw-Detailwerte aus `plist`-Dateien koennen noch technischer wirken als die Zusammenfassung.
 - Die App braucht weiterhin einen staerkeren roten Faden im Dashboard, besonders wenn spaeter mehrere Sensoren dazukommen.
 - Echte UI-Automation fehlt weiterhin; die aktuelle Verbesserung ist in Unit-/Presentation-Tests und manuellen Smokes abzusichern.
+
+## Phase-0-Umsetzung 2026-05-13
+
+Erster Schnitt fuer `Buddy statt Inspector` ist umgesetzt.
+
+Geaendert:
+
+- Dashboard beginnt jetzt mit einem Buddy-Status wie `Bitte kurz pruefen`, `Alles ruhig` oder `Zur Beobachtung`.
+- Die Hauptaktion steht oben und richtet sich nach dem Zustand, z. B. `Neue Aenderung ansehen`.
+- Bekannte Autostart-Hinweise werden zuerst zusammengefasst, statt sofort alle Einzelzeilen gleich laut zu zeigen.
+- Detailansicht zeigt den naechsten Schritt vor den technischen Belegen.
+- Technische Belege sind einklappbar.
+- Weitere Empfehlungen sind einklappbar und nicht mehr gleichrangig mit dem ersten Schritt.
+
+Noch offen:
+
+- manueller Screenshot-Check
+- pruefen, ob die neue Summary wirklich weniger ueberlaedt
+- langfristig eine echte Chat-/Feed-Form statt klassischer Listenstruktur entwerfen

@@ -47,6 +47,58 @@ struct DashboardPresentation {
         findings(in: .review).count
     }
 
+    var statusTitle: String {
+        if startupChangeCount > 0 {
+            return "Bitte kurz pruefen"
+        }
+
+        if findings.isEmpty {
+            return "Alles ruhig"
+        }
+
+        return "Zur Beobachtung"
+    }
+
+    var buddyMessageText: String {
+        if findings.isEmpty {
+            return "Ich sehe gerade keinen Hinweis, der deine Aufmerksamkeit braucht."
+        }
+
+        if startupChangeCount > 0 {
+            return "Ich habe eine Veraenderung im Autostart gesehen. Das ist nicht automatisch gefaehrlich, aber wir sollten kurz klaeren, ob du sie erwartest."
+        }
+
+        if knownStartupCount > 0 && reviewCount > 0 {
+            return "Ich sehe bekannte Autostart-Hinweise und ein paar Systemsignale. Das ist vor allem Orientierung; wichtig wird es erst, wenn etwas neu oder unerwartet ist."
+        }
+
+        if knownStartupCount > 0 {
+            return "Ich sehe bekannte Autostart-Hinweise. Sie sind nicht automatisch kritisch, aber sie erklaeren, was im Hintergrund starten kann."
+        }
+
+        return "Ich sehe lokale Systemsignale. Sie helfen uns, den Mac einzuordnen, ersetzen aber kein vollstaendiges Sicherheitsurteil."
+    }
+
+    var primaryActionTitle: String {
+        if startupChangeCount > 0 {
+            return "Neue Aenderung ansehen"
+        }
+
+        if findings.isEmpty {
+            return "Nichts zu tun"
+        }
+
+        return "Hinweise ansehen"
+    }
+
+    var knownStartupSummaryText: String? {
+        guard knownStartupCount > 1 else {
+            return nil
+        }
+
+        return "\(knownStartupCount) bekannte Autostart-Hinweise zusammengefasst. Oeffne die Einzelhinweise nur, wenn du eine bestimmte App genauer ansehen willst."
+    }
+
     var showsRememberCurrentStartupStateAction: Bool {
         startupChangeCount > 0
     }

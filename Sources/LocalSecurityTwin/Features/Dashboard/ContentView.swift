@@ -6,6 +6,7 @@ struct ContentView: View {
     let rememberCurrentStartupState: () -> Void
     @State private var selection: Finding.ID?
     @State private var isShowingRememberConfirmation = false
+    @State private var isKnownStartupExpanded = true
 
     private var presentation: DashboardPresentation {
         DashboardPresentation(findings: findings)
@@ -14,7 +15,13 @@ struct ContentView: View {
     var body: some View {
         HSplitView {
             VStack(spacing: 0) {
-                DashboardSummary(presentation: presentation)
+                BuddyStatusPanel(
+                    presentation: presentation,
+                    primaryAction: {
+                        selection = presentation.findings(in: .changes).first?.id
+                            ?? findings.first?.id
+                    }
+                )
 
                 if presentation.showsRememberCurrentStartupStateAction {
                     RememberStartupStateBanner(
@@ -30,9 +37,19 @@ struct ContentView: View {
                         let groupFindings = presentation.findings(in: group)
                         if !groupFindings.isEmpty {
                             Section(group.title) {
-                                ForEach(groupFindings) { finding in
-                                    FindingRowView(finding: finding)
-                                        .tag(finding.id)
+                                if group == .knownStartupHints, let summary = presentation.knownStartupSummaryText {
+                                    KnownStartupSummaryRow(text: summary)
+                                    DisclosureGroup("Einzelne Hinweise anzeigen", isExpanded: $isKnownStartupExpanded) {
+                                        ForEach(groupFindings) { finding in
+                                            FindingRowView(finding: finding)
+                                                .tag(finding.id)
+                                        }
+                                    }
+                                } else {
+                                    ForEach(groupFindings) { finding in
+                                        FindingRowView(finding: finding)
+                                            .tag(finding.id)
+                                    }
                                 }
                             }
                         }
@@ -105,24 +122,38 @@ private struct DetailPane: View {
     }
 }
 
-private struct DashboardSummary: View {
+private struct BuddyStatusPanel: View {
     let presentation: DashboardPresentation
+    let primaryAction: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Lokaler Sicherheitsueberblick")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(alignment: .top, spacing: 12) {
+                Image(systemName: "shield.lefthalf.filled")
+                    .font(.title2)
+                    .foregroundStyle(.blue)
+                    .frame(width: 28)
 
-                Text(presentation.headlineText)
-                    .font(.title3)
-                    .fontWeight(.semibold)
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(presentation.statusTitle)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.secondary)
+
+                    Text(presentation.headlineText)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+
+                    Text(presentation.buddyMessageText)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
 
-            Text(summaryText)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+            Button(presentation.primaryActionTitle, action: primaryAction)
+                .buttonStyle(.borderedProminent)
+                .disabled(presentation.findings.isEmpty)
 
             HStack(spacing: 10) {
                 SummaryPill(value: presentation.startupChangeCount, label: "neue Aenderungen")
@@ -140,10 +171,6 @@ private struct DashboardSummary: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
         .background(.background)
-    }
-
-    private var summaryText: String {
-        presentation.summaryText
     }
 }
 
@@ -213,5 +240,23 @@ private struct RememberStartupStateBanner: View {
         }
         .padding(14)
         .background(.quinary)
+    }
+}
+
+private struct KnownStartupSummaryRow: View {
+    let text: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "rectangle.stack")
+                .foregroundStyle(.secondary)
+                .frame(width: 18)
+
+            Text(text)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.vertical, 6)
     }
 }

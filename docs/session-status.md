@@ -90,14 +90,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Produktbild aktualisiert: Die App soll nicht nur ein ruhiger Beobachter sein, sondern ein kraftvoller Security Buddy mit Punch, der lokale Beobachtungen spaeter mit echter Threat Intelligence verbindet
 - roten Produktfaden in `docs/product-flow-and-feature-plan.md` angelegt
 - Roadmap und Ueberblick auf den neuen Fokus "Buddy statt Inspector" aktualisiert
+- Phase 0 `Buddy statt Inspector` als ersten UI-Schnitt umgesetzt: Buddy-Status oben, zusammengefasste bekannte Autostart-Hinweise, naechster Schritt vor Belegen, technische Belege einklappbar
+- Presentation-/E2E-nahe Tests fuer Buddy-Status und zusammengefasste bekannte Autostart-Hinweise ergaenzt
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Layout und Settings funktionieren, und der naechste Fokus ist jetzt der rote Produktfaden: weg von der Inspector-Liste, hin zu einem starken Security Buddy mit klaren, gefuehrten Meldungen.
+Die sieben Sprints sind umgesetzt; Phase 0 des roten Produktfadens ist als erster UI-Schnitt gebaut, aber die neue Buddy-Ansicht braucht noch einen manuellen Screenshot-Check und Feinschliff.
 
 ## Naechster konkreter Schritt
 
-UX-Rote-Faden-Schnitt umsetzen: Startansicht als Buddy-Status, technische Details nachrangig, bekannte Autostart-Hinweise zusammenfassen und pro Meldung einen klaren naechsten Schritt zeigen.
+Manuell die App starten und pruefen, ob die neue Buddy-Ansicht weniger ueberlaedt: Status oben, bekannte Autostart-Hinweise zusammengefasst, technische Belege einklappbar.
 
 ## Danach sinnvoll
 
@@ -119,6 +121,7 @@ UX-Rote-Faden-Schnitt umsetzen: Startansicht als Buddy-Status, technische Detail
 - Background Task Management ist relevant, aber noch keine robuste Produktquelle fuer den MVP.
 - Der zweite Sensor ist der vorhandene Systemprofil-Sensor; weitere Sensoren sollten erst nach dem UX-Rote-Faden-Schnitt und der Update-Awareness-Planung folgen.
 - Aktuelles `.app`-Bundle ist fuer Entwicklung und lokale Spikes gut, aber noch kein distributionsnahes, notarized Build-Artefakt.
+- Die neue Phase-0-UI ist automatisiert ueber Presentation-/E2E-nahe Tests abgedeckt; echte visuelle macOS-UI-Automation fehlt weiterhin.
 
 ## Letzte Validierung
 
@@ -221,6 +224,14 @@ Zusaetzlich nach Sprint 3 Task 3.1:
 Zusaetzlich nach Sprint 3 Task 3.2:
 
 - `./scripts/sandbox-smoke.sh`
+
+Zusaetzlich nach Phase 0 `Buddy statt Inspector`:
+
+- `swift test`
+- `./scripts/checks.sh`
+- `./scripts/app-bundle-smoke.sh`
+
+Die Laeufe waren erfolgreich; `swift test` umfasst jetzt 33 Tests.
 
 Zusaetzlich nach Sprint 3 Task 3.3:
 

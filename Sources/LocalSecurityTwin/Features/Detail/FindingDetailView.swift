@@ -27,12 +27,12 @@ struct FindingDetailView: View {
                     StartupDetailOverview(finding: finding)
                 }
 
-                FindingSection(title: "Was wurde gefunden?", text: finding.displaySummary)
-                EvidenceSection(evidence: finding.evidence)
                 RecommendationSection(
                     finding: finding,
                     policyStore: policyStore
                 )
+                FindingSection(title: "Was wurde gefunden?", text: finding.displaySummary)
+                EvidenceSection(evidence: finding.evidence)
 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Produkt-Hinweis")
@@ -175,11 +175,7 @@ private struct EvidenceSection: View {
     let evidence: [FindingEvidence]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Belege")
-                .font(.title3)
-                .fontWeight(.semibold)
-
+        DisclosureGroup {
             ForEach(evidence) { item in
                 VStack(alignment: .leading, spacing: 6) {
                     Text(item.displayTitle)
@@ -196,6 +192,16 @@ private struct EvidenceSection: View {
                         .stroke(.quaternary)
                 )
             }
+        } label: {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Technische Belege")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+
+                Text("Aufklappen, wenn du Pfade, plist-Details und Rohbelege sehen willst.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
         }
     }
 }
@@ -206,19 +212,32 @@ private struct RecommendationSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Empfohlene Schritte")
+            Text("Naechster Schritt")
                 .font(.title3)
                 .fontWeight(.semibold)
 
-            Text("Diese Schaltflaechen speichern aktuell nur lokale Entscheidungen. Sie fuehren noch keine echte Systemaktion aus.")
+            Text("Die App fuehrt dich erst durch eine bewusste Entscheidung. Sie aendert dabei keine Systemeinstellungen.")
                 .foregroundStyle(.secondary)
 
-            ForEach(finding.recommendations) { recommendation in
+            if let primaryRecommendation = finding.recommendations.first {
                 RecommendationCard(
-                    recommendation: recommendation,
-                    request: finding.policyRequest(for: recommendation),
+                    recommendation: primaryRecommendation,
+                    request: finding.policyRequest(for: primaryRecommendation),
                     policyStore: policyStore
                 )
+            }
+
+            let remainingRecommendations = Array(finding.recommendations.dropFirst())
+            if !remainingRecommendations.isEmpty {
+                DisclosureGroup("Weitere moegliche Schritte") {
+                    ForEach(remainingRecommendations) { recommendation in
+                        RecommendationCard(
+                            recommendation: recommendation,
+                            request: finding.policyRequest(for: recommendation),
+                            policyStore: policyStore
+                        )
+                    }
+                }
             }
         }
     }

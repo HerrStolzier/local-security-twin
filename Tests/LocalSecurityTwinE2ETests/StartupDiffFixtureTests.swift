@@ -33,6 +33,8 @@ struct StartupDiffFixtureTests {
 
         let before = DashboardPresentation(findings: store.findings)
         #expect(before.headlineText == "1 Autostart-Aenderung(en) brauchen deine Einordnung")
+        #expect(before.statusTitle == "Bitte kurz pruefen")
+        #expect(before.primaryActionTitle == "Neue Aenderung ansehen")
         #expect(before.showsRememberCurrentStartupStateAction)
         #expect(before.nextStepText == "Pruefe zuerst die neuen oder verschwundenen Hinweise. Wenn sie erwartet sind, merke den aktuellen Zustand bewusst als normal.")
 
@@ -43,6 +45,8 @@ struct StartupDiffFixtureTests {
         #expect(after.knownStartupCount == 1)
         #expect(!after.showsRememberCurrentStartupStateAction)
         #expect(after.headlineText == "1 bekannte Autostart-Hinweis(e) sichtbar")
+        #expect(after.statusTitle == "Zur Beobachtung")
+        #expect(after.primaryActionTitle == "Hinweise ansehen")
         #expect(after.summaryText == "Es sind sichtbare Autostart-Hinweise vorhanden. Das ist nicht automatisch gefaehrlich, sondern zuerst eine lokale Orientierung.")
         #expect(after.nextStepText == "Schau dir bekannte Hinweise in Ruhe an. Wichtig ist vor allem, ob du die zugehoerige App erkennst.")
         #expect(store.lastBaselineRefreshError == nil)

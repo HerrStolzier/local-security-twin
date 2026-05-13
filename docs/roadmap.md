@@ -65,7 +65,7 @@ Nicht-Ziel dieses Schnitts:
 
 ### Phase 0: Buddy statt Inspector
 
-Status: naechster konkreter Schritt.
+Status: erster Schnitt umgesetzt am 2026-05-13.
 
 Ziel:
 Die aktuelle UI zeigt zuerst "Was bedeutet das fuer mich?" und erst danach Rohdetails.
@@ -77,6 +77,17 @@ Umfang:
 - eine klare Hauptaktion pro Meldung
 - technische Details einklappbar
 - wiederholte Autostart-Hinweise zusammenfassen
+
+Umgesetzt:
+
+- Dashboard beginnt mit Buddy-Status statt reiner Uebersicht
+- bekannte Autostart-Hinweise bekommen eine Zusammenfassung vor den Einzelzeilen
+- Detailansicht zeigt den naechsten Schritt vor den technischen Belegen
+- technische Belege sind einklappbar
+- weitere Empfehlungen sind nachrangig einklappbar
+
+Naechster Schritt:
+Manuelle App-Pruefung und danach optische Feinabstimmung der Buddy-Ansicht.
 
 ### Phase 1: Update-Awareness
 

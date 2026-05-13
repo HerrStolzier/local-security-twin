@@ -92,8 +92,53 @@ struct FindingSchemaTests {
         let presentation = DashboardPresentation(findings: [finding])
 
         #expect(presentation.headlineText.contains("Autostart-Aenderung"))
+        #expect(presentation.statusTitle == "Bitte kurz pruefen")
+        #expect(presentation.buddyMessageText.contains("Veraenderung im Autostart"))
+        #expect(presentation.primaryActionTitle == "Neue Aenderung ansehen")
         #expect(presentation.nextStepText.contains("Pruefe zuerst"))
         #expect(presentation.visibilityText.contains("kein Beweis"))
         #expect(presentation.showsRememberCurrentStartupStateAction)
+    }
+
+    @Test func dashboardPresentationSummarizesRepeatedKnownStartupHints() throws {
+        let first = Finding(
+            id: "launch-item::sharedDaemon::/Library/LaunchDaemons/com.example.one.plist",
+            title: "Systemweiter Autostart-Hinweis",
+            source: FindingSource(
+                kind: .launchAgentInventory,
+                title: "Sichtbare Autostart-Hinweise",
+                detail: "Test"
+            ),
+            severity: .medium,
+            confidence: .supported,
+            summary: "com.example.one.plist liegt an einem Ort, den macOS fuer automatischen Hintergrundstart nutzen kann.",
+            userImpact: "Test",
+            nextStep: "Test",
+            evidence: [],
+            recommendations: []
+        )
+        let second = Finding(
+            id: "launch-item::sharedDaemon::/Library/LaunchDaemons/com.example.two.plist",
+            title: "Systemweiter Autostart-Hinweis",
+            source: FindingSource(
+                kind: .launchAgentInventory,
+                title: "Sichtbare Autostart-Hinweise",
+                detail: "Test"
+            ),
+            severity: .medium,
+            confidence: .supported,
+            summary: "com.example.two.plist liegt an einem Ort, den macOS fuer automatischen Hintergrundstart nutzen kann.",
+            userImpact: "Test",
+            nextStep: "Test",
+            evidence: [],
+            recommendations: []
+        )
+
+        let presentation = DashboardPresentation(findings: [first, second])
+
+        #expect(presentation.statusTitle == "Zur Beobachtung")
+        #expect(presentation.primaryActionTitle == "Hinweise ansehen")
+        #expect(presentation.buddyMessageText.contains("bekannte Autostart-Hinweise"))
+        #expect(presentation.knownStartupSummaryText == "2 bekannte Autostart-Hinweise zusammengefasst. Oeffne die Einzelhinweise nur, wenn du eine bestimmte App genauer ansehen willst.")
     }
 }
