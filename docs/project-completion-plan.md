@@ -44,7 +44,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 1: Orientierung und UX-Fokus
 
-**Status**: in Umsetzung seit 2026-05-13. Task 1.1 ist umgesetzt; wesentliche englische Nutzertexte im ersten Sensor und App-Chrome sind geglaettet.
+**Status**: in Umsetzung seit 2026-05-13. Tasks 1.1 und 1.2 sind umgesetzt; wesentliche englische Nutzertexte und die Dashboard-Story sind geglaettet.
 
 **Goal**: Die App soll fuer normale Nutzer in einem Blick erklaeren, was gerade wichtig ist.
 
@@ -75,6 +75,8 @@ Das Projekt gilt als MVP-fertig, wenn:
   - `rg '"[A-Za-z][^"]*"' Sources/LocalSecurityTwin`
 
 ### Task 1.2: Dashboard-Story schaerfen
+
+**Status**: umgesetzt am 2026-05-13.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Dashboard/ContentView.swift`

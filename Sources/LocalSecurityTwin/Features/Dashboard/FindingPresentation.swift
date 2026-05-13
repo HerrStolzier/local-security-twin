@@ -51,6 +51,18 @@ struct DashboardPresentation {
         startupChangeCount > 0
     }
 
+    var headlineText: String {
+        if findings.isEmpty {
+            return "Alles ruhig im ersten lokalen Blick"
+        }
+
+        if startupChangeCount > 0 {
+            return "\(startupChangeCount) Autostart-Aenderung(en) brauchen deine Einordnung"
+        }
+
+        return "\(knownStartupCount) bekannte Autostart-Hinweis(e) sichtbar"
+    }
+
     var summaryText: String {
         if findings.isEmpty {
             return "Aktuell sieht die App keine lokalen Hinweise, die sie anzeigen sollte."
@@ -61,6 +73,22 @@ struct DashboardPresentation {
         }
 
         return "Es sind sichtbare Autostart-Hinweise vorhanden. Das ist nicht automatisch gefaehrlich, sondern zuerst eine lokale Orientierung."
+    }
+
+    var nextStepText: String {
+        if findings.isEmpty {
+            return "Du musst gerade nichts tun. Beim naechsten Lauf vergleicht die App wieder den sichtbaren Zustand."
+        }
+
+        if startupChangeCount > 0 {
+            return "Pruefe zuerst die neuen oder verschwundenen Hinweise. Wenn sie erwartet sind, merke den aktuellen Zustand bewusst als normal."
+        }
+
+        return "Schau dir bekannte Hinweise in Ruhe an. Wichtig ist vor allem, ob du die zugehoerige App erkennst."
+    }
+
+    var visibilityText: String {
+        "Aktuell sieht die App sichtbare plist-Dateien in Autostart-Ordnern. Das ist ein Hinweis auf moeglichen Hintergrundstart, kein Beweis fuer aktive oder gefaehrliche Software."
     }
 
     func findings(in group: FindingGroup) -> [Finding] {

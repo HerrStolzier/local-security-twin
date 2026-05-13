@@ -61,6 +61,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sprint 1 Task 1.1 umgesetzt: UI-Text-Inventar in `docs/ui-ux-redesign-notes.md` ergaenzt
 - auffaellige englische Nutzertexte im ersten Startup-Sensor, Fenster- und Menueleistentitel eingedeutscht
 - Severity-/Wichtigkeitslabels ruhiger formuliert: `Zur Info`, `Pruefen`, `Genauer pruefen`
+- Sprint 1 Task 1.2 umgesetzt: Dashboard zeigt jetzt eine klarere Headline, naechsten sicheren Schritt und eine ruhige Sichtbarkeitsgrenze
 
 ## Aktueller Stand in einem Satz
 
@@ -68,7 +69,7 @@ Die App zeigt den ersten Sensor jetzt noch konsequenter deutsch, gruppiert und m
 
 ## Naechster konkreter Schritt
 
-Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 1, Task 1.2: Dashboard-Story schaerfen.
+Mit `docs/project-completion-plan.md` fortfahren, konkret Sprint 1, Task 1.3: Detailansicht als Erklaerfluss gliedern.
 
 ## Danach sinnvoll
 
@@ -168,6 +169,10 @@ Zusaetzlich nach dem Hardened-Runtime-Smoke-Script:
 Zusaetzlich nach Sprint 1 Task 1.1:
 
 - `swift test`
+
+Zusaetzlich nach Sprint 1 Task 1.2:
+
+- neuer Presentation-Test fuer Dashboard-Headline, naechsten Schritt und Sichtbarkeitsgrenze
 
 ## Letzte externe Recherche
 

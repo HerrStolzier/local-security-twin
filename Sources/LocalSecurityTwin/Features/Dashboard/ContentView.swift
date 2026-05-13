@@ -92,8 +92,15 @@ private struct DashboardSummary: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Lokaler Sicherheitsueberblick")
-                .font(.headline)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Lokaler Sicherheitsueberblick")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
+                Text(presentation.headlineText)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+            }
 
             Text(summaryText)
                 .font(.subheadline)
@@ -104,6 +111,13 @@ private struct DashboardSummary: View {
                 SummaryPill(value: presentation.knownStartupCount, label: "Autostart-Hinweise")
                 SummaryPill(value: presentation.reviewCount, label: "zur Beobachtung")
             }
+
+            Divider()
+
+            VStack(alignment: .leading, spacing: 6) {
+                DashboardGuidanceLine(title: "Naechster sicherer Schritt", text: presentation.nextStepText)
+                DashboardGuidanceLine(title: "Was die App gerade sieht", text: presentation.visibilityText)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
@@ -112,6 +126,25 @@ private struct DashboardSummary: View {
 
     private var summaryText: String {
         presentation.summaryText
+    }
+}
+
+private struct DashboardGuidanceLine: View {
+    let title: String
+    let text: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(title)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundStyle(.secondary)
+
+            Text(text)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 }
 

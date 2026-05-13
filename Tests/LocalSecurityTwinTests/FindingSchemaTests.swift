@@ -70,4 +70,30 @@ struct FindingSchemaTests {
         #expect(finding.startupKeepAliveText == "Soll im Hintergrund verfuegbar bleiben")
         #expect(finding.startupFilePath == "/Library/LaunchDaemons/com.example.agent.plist")
     }
+
+    @Test func dashboardPresentationExplainsNextStepForStartupChanges() throws {
+        let finding = Finding(
+            id: "baseline-diff::added::sharedDaemon::/Library/LaunchDaemons/com.example.agent.plist",
+            title: "Systemweit Autostart-Hinweis ist seit dem gemerkten Zustand neu",
+            source: FindingSource(
+                kind: .baselineDiff,
+                title: "Autostart-Aenderung seit gemerktem Zustand",
+                detail: "Test"
+            ),
+            severity: .high,
+            confidence: .supported,
+            summary: "com.example.agent.plist ist seit dem gemerkten Zustand neu sichtbar.",
+            userImpact: "Test",
+            nextStep: "Test",
+            evidence: [],
+            recommendations: []
+        )
+
+        let presentation = DashboardPresentation(findings: [finding])
+
+        #expect(presentation.headlineText.contains("Autostart-Aenderung"))
+        #expect(presentation.nextStepText.contains("Pruefe zuerst"))
+        #expect(presentation.visibilityText.contains("kein Beweis"))
+        #expect(presentation.showsRememberCurrentStartupStateAction)
+    }
 }
