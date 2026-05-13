@@ -9,8 +9,8 @@ struct FindingDetailView: View {
             VStack(alignment: .leading, spacing: 20) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(finding.displayTitle)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .font(.title)
+                        .fontWeight(.semibold)
 
                     HStack(spacing: 12) {
                         Label(finding.displaySourceTitle, systemImage: "dot.scope")
@@ -21,13 +21,13 @@ struct FindingDetailView: View {
                     .font(.subheadline)
                 }
 
-                FindingSection(title: "Kurze Einordnung", text: finding.plainLanguageAssessment)
+                DetailGuidancePanel(finding: finding)
+
                 if finding.source.kind == .baselineDiff || finding.source.kind == .launchAgentInventory {
                     StartupDetailOverview(finding: finding)
                 }
+
                 FindingSection(title: "Was wurde gefunden?", text: finding.displaySummary)
-                FindingSection(title: "Warum ist das wichtig?", text: finding.userImpact)
-                FindingSection(title: "Naechster sicherer Schritt", text: finding.nextStep)
                 EvidenceSection(evidence: finding.evidence)
                 RecommendationSection(
                     finding: finding,
@@ -46,6 +46,59 @@ struct FindingDetailView: View {
             .padding(28)
         }
         .navigationTitle(finding.displayTitle)
+    }
+}
+
+private struct DetailGuidancePanel: View {
+    let finding: Finding
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            DetailGuidanceItem(
+                title: "Kurz gesagt",
+                text: finding.plainLanguageAssessment,
+                systemImage: "text.bubble"
+            )
+
+            DetailGuidanceItem(
+                title: "Warum das wichtig ist",
+                text: finding.userImpact,
+                systemImage: "questionmark.circle"
+            )
+
+            DetailGuidanceItem(
+                title: "Naechster sicherer Schritt",
+                text: finding.nextStep,
+                systemImage: "checkmark.seal"
+            )
+        }
+        .padding(16)
+        .background(.quinary, in: RoundedRectangle(cornerRadius: 8))
+    }
+}
+
+private struct DetailGuidanceItem: View {
+    let title: String
+    let text: String
+    let systemImage: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: systemImage)
+                .foregroundStyle(.secondary)
+                .frame(width: 18)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+
+                Text(text)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
     }
 }
 
@@ -89,7 +142,11 @@ private struct StartupDetailOverview: View {
                 .foregroundStyle(.secondary)
         }
         .padding(16)
-        .background(.quinary, in: RoundedRectangle(cornerRadius: 8))
+        .background(.background, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.quaternary)
+        )
     }
 }
 
@@ -131,7 +188,11 @@ private struct EvidenceSection: View {
                         .font(.subheadline)
                 }
                 .padding(14)
-                .background(.quinary, in: RoundedRectangle(cornerRadius: 12))
+                .background(.background, in: RoundedRectangle(cornerRadius: 8))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(.quaternary)
+                )
             }
         }
     }
@@ -213,7 +274,11 @@ private struct RecommendationCard: View {
             }
         }
         .padding(14)
-        .background(.quinary, in: RoundedRectangle(cornerRadius: 12))
+        .background(.background, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.quaternary)
+        )
     }
 
     private var statusText: String {

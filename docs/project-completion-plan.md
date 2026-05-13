@@ -44,7 +44,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ## Sprint 1: Orientierung und UX-Fokus
 
-**Status**: in Umsetzung seit 2026-05-13. Tasks 1.1 und 1.2 sind umgesetzt; wesentliche englische Nutzertexte und die Dashboard-Story sind geglaettet.
+**Status**: in Umsetzung seit 2026-05-13. Tasks 1.1 bis 1.3 sind umgesetzt; wesentliche englische Nutzertexte, Dashboard-Story und Detail-Erklaerfluss sind geglaettet.
 
 **Goal**: Die App soll fuer normale Nutzer in einem Blick erklaeren, was gerade wichtig ist.
 
@@ -93,6 +93,8 @@ Das Projekt gilt als MVP-fertig, wenn:
   - manueller App-Start
 
 ### Task 1.3: Detailansicht als Erklaerfluss gliedern
+
+**Status**: umgesetzt am 2026-05-13.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Detail/FindingDetailView.swift`
