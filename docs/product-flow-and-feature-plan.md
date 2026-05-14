@@ -170,6 +170,12 @@ Der Alltag soll so aussehen:
 
 Die Hauptansicht soll eher wie ein Chat oder Aktivitaetsfeed wirken, nicht wie eine lange Liste aus Rohdaten.
 
+Die gewaehlte visuelle Richtung steht in `docs/visual-direction.md`.
+
+Kurzfassung:
+Die App soll wie eine Mischung aus freundlicher Mac-Health-App, nativem Command Center und dezent gamifiziertem Verteidiger wirken.
+Also: einfach genug fuer normale Nutzer, stark genug fuer einen Security Buddy, aber nicht wie ein Cyberpunk-SIEM.
+
 ### Oben
 
 Ein klarer Status:
@@ -373,6 +379,10 @@ Status:
 Erster UI-Schnitt umgesetzt am 2026-05-13.
 Weitere visuelle Verfeinerung bleibt sinnvoll.
 
+Screenshot-Review am 2026-05-14:
+Der erste Schnitt hat die Struktur verbessert, aber optisch wirkt die App weiterhin wie ein Inspector.
+Deshalb braucht Phase 0 jetzt einen echten Redesign-Schnitt, nicht nur weitere Detailaufraeumung.
+
 Ziel:
 Die aktuelle App wird weniger wie eine technische Fundliste und mehr wie ein Begleiter.
 
@@ -386,8 +396,11 @@ Aufgaben:
 
 Offen:
 
-- optische Feinabstimmung nach manuellem App-Blick
-- echte Chat-/Feed-Struktur spaeter weiter ausbauen
+- echte `BuddyHomeView` als Startseite bauen
+- linke Finding-Liste aus der ersten Wahrnehmung entfernen oder stark zurueckstufen
+- Missionen und Schutzbereiche statt Rohlisten zeigen
+- echte Chat-/Feed-Struktur weiter ausbauen
+- danach Liquid-Glass-/visueller Feinschliff
 
 ### Phase 1: Update-Awareness
 
@@ -503,12 +516,14 @@ Moegliche spaetere Bereiche:
 
 Der naechste Schritt ist nicht noch ein Sensor.
 
-Der naechste Schritt ist der UX-Rote-Faden-Schnitt:
+Der naechste Schritt ist ein echter visueller Redesign-Schnitt:
 
-1. Startansicht als Buddy-Status statt Finding-Liste entwerfen.
-2. Detailansicht kuerzen: erst Aussage, dann Aktion, dann Details.
-3. Autostart-Hinweise zusammenfassen, statt viele fast gleiche Karten zu zeigen.
-4. Danach erst SOFA-/Update-Awareness als ersten Online-Intelligence-Baustein bauen.
+1. `BuddyHomeView` als Startseite bauen.
+2. Guardian-Status, Missionen und Buddy-Meldungen als erste Ebene zeigen.
+3. Die aktuelle Finding-Liste in einen Detailmodus verschieben.
+4. Autostart-Hinweise als Mission oder Sammelmeldung darstellen, nicht als 17 sichtbare Karten.
+5. Danach Screenshot pruefen.
+6. Danach erst SOFA-/Update-Awareness als ersten Online-Intelligence-Baustein bauen.
 
 ## Sicherheitsleitplanken
 

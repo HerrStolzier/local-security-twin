@@ -9,6 +9,7 @@ Sie ersetzt nicht die Detaildokumente, sondern ordnet sie:
 - `docs/session-status.md`: aktueller Uebergabestand
 - `docs/current-overview.md`: technischer und produktlicher Kurzueberblick
 - `docs/product-flow-and-feature-plan.md`: roter Faden, Produktbild und Feature-Bausteine
+- `docs/visual-direction.md`: gewaehlte visuelle Richtung fuer den Buddy-Redesign-Schnitt
 - `docs/adversarial-review-and-best-practices.md`: Black-Hat-Gegenpruefung und Best-Practice-Monitoring
 - `docs/project-completion-plan.md`: detaillierter Weg vom aktuellen Prototyp zum MVP
 - `docs/ui-ux-redesign-notes.md`: naechster UI-/UX-Schnitt
@@ -70,7 +71,7 @@ Nicht-Ziel dieses Schnitts:
 
 ### Phase 0: Buddy statt Inspector
 
-Status: erster Schnitt umgesetzt am 2026-05-13.
+Status: erster Schnitt umgesetzt am 2026-05-13; echter Redesign-Schnitt nach Screenshot-Review am 2026-05-14 noetig.
 
 Ziel:
 Die aktuelle UI zeigt zuerst "Was bedeutet das fuer mich?" und erst danach Rohdetails.
@@ -92,7 +93,13 @@ Umgesetzt:
 - weitere Empfehlungen sind nachrangig einklappbar
 
 Naechster Schritt:
-Manuelle App-Pruefung und danach optische Feinabstimmung der Buddy-Ansicht.
+`BuddyHomeView` bauen:
+
+- Guardian-Status oben
+- Missionen und Schutzbereiche statt Finding-Liste als erste Ebene
+- Buddy-Meldungen als Aktivitaetsfeed
+- technische Details nur nach bewusster Auswahl
+- danach visueller Feinschliff mit macOS-nativen Patterns und spaeter Liquid Glass
 
 ### Phase 1: Update-Awareness
 

@@ -131,15 +131,15 @@ Vor neuen Sensoren sollte ein UI-/UX-Schnitt kommen:
    - `Das ist wahrscheinlich normal, wenn du diese App kennst.`
    - `Auffaellig ist vor allem, dass es seit dem gemerkten Zustand neu ist.`
 
-## Nicht-Ziel fuer den naechsten Schnitt
+## Nicht-Ziel fuer den frueheren Aufraeum-Schnitt
 
 - kein neues Security-Scoring-System
 - kein neuer Sensor
 - keine Systemaenderungen
 - keine aggressiven Warnfarben
-- keine vollstaendige Design-Neuerfindung
 
-Ziel ist erst einmal Orientierung.
+Der Screenshot-Test am 2026-05-14 hat gezeigt:
+Nur Orientierung reicht nicht. Die App braucht jetzt eine echte Design-Neuerfindung der Startansicht.
 
 ## UI-Text-Inventar 2026-05-13
 
@@ -183,3 +183,31 @@ Noch offen:
 - manueller Screenshot-Check
 - pruefen, ob die neue Summary wirklich weniger ueberlaedt
 - langfristig eine echte Chat-/Feed-Form statt klassischer Listenstruktur entwerfen
+
+## Visuelle Richtung 2026-05-14
+
+Die gewaehlte Richtung ist:
+
+- freundliche Mac-Health-App
+- native Command-Center-Klarheit
+- dezente Gamification als Verteidiger-Schicht
+
+Inspiration:
+
+- Raycast fuer schnelle, native Mac-Klarheit
+- CleanMyMac fuer freundliche Health-/Status-Kommunikation
+- Little Snitch/TinyShield nur fuer spaetere Power-User-Details
+- gamified Security-Dashboards fuer Missionen, Schutzbereiche und Fortschritt
+
+Wichtig:
+Die App soll nicht wie ein Cyberpunk-Neon-Hacker-Dashboard aussehen.
+Gamification bedeutet hier Missionen, Fortschritt und naechste Verteidigungsschritte, nicht Spielzeugoptik.
+
+Naechster UX-Schritt:
+
+1. echte `BuddyHomeView` bauen
+2. Guardian-Status oben
+3. Missionen statt Rohlisten
+4. Aktivitaetsfeed statt Sidebar-Dominanz
+5. Details nur auf bewusste Auswahl
+6. danach Liquid-Glass-Feinschliff

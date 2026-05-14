@@ -9,8 +9,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-13
-- Bereich: Produktfaden, Security-Hygiene und adversarial Review
+- Datum: 2026-05-14
+- Bereich: Visuelle Richtung und Buddy-Redesign
 
 ## Zuletzt abgeschlossen
 
@@ -97,14 +97,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Roadmap um Phase 2b `Security-Hygiene und Nutzer-Schutzgewohnheiten` und Phase 2c `Adversarial Review als Produkt-Routine` erweitert
 - `docs/safety-policy.md` konkretisiert, dass adversarial thinking nur Verteidigung, Sensorideen, Checklisten, Guided Actions oder dokumentierte Grenzen liefern darf
 - `docs/known-limits.md` ergaenzt: 2FA, Passwortmanager, VPN, Security-Tools und Extensions sind aktuell noch nicht automatisch verifiziert und duerfen nur ehrlich eingeordnet werden
+- Screenshot-Review am 2026-05-14 bestaetigt: Der erste `Buddy statt Inspector`-Schnitt hat die Struktur verbessert, aber optisch wirkt die App weiterhin wie ein Inspector/Admin-Tool
+- visuelle Richtung festgelegt: freundliche Mac-Health-App plus native Command-Center-Klarheit plus dezente Gameful-Defender-Schicht
+- `docs/visual-direction.md` angelegt
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Phase 0 des roten Produktfadens ist als erster UI-Schnitt gebaut, und der Produktplan enthaelt jetzt eine klare Security-Hygiene- sowie defensive adversarial Review-Schicht.
+Die sieben Sprints sind umgesetzt; Phase 0 braucht nach dem Screenshot-Review einen echten Redesign-Schnitt mit `BuddyHomeView`, Missionen und Aktivitaetsfeed statt dominanter Finding-Liste.
 
 ## Naechster konkreter Schritt
 
-Manuell die App starten und pruefen, ob die neue Buddy-Ansicht weniger ueberlaedt: Status oben, bekannte Autostart-Hinweise zusammengefasst, technische Belege einklappbar.
+`BuddyHomeView` bauen: Guardian-Status oben, Missionen und Schutzbereiche in der Mitte, Buddy-Aktivitaetsfeed darunter oder daneben, technische Details nur nach bewusster Auswahl.
 
 ## Danach sinnvoll
 
@@ -113,6 +116,7 @@ Manuell die App starten und pruefen, ob die neue Buddy-Ansicht weniger ueberlaed
 - fuer neue Sensoren eine kurze adversarial Review-Frage dokumentieren: welche harmlose Verteidigungssicht entsteht aus einer realistischen Missbrauchskette?
 - spaeter modernen macOS-Background-Task-Management-Status als eigenen Research-Spike oder Sensor pruefen
 - Hardened Runtime und Sandbox-Auswirkungen gegen das lokale `.app`-Bundle testen
+- danach SOFA-/Update-Awareness als ersten Online-Intelligence-Baustein bauen
 
 ## Offene Punkte
 
@@ -243,6 +247,12 @@ Zusaetzlich nach Phase 0 `Buddy statt Inspector`:
 Die Laeufe waren erfolgreich; `swift test` umfasst jetzt 33 Tests.
 
 Zusaetzlich nach der Planerweiterung fuer Security-Hygiene und adversarial Review:
+
+- `./scripts/checks.sh`
+
+Der Lauf war erfolgreich.
+
+Zusaetzlich nach Festlegung der visuellen Richtung am 2026-05-14:
 
 - `./scripts/checks.sh`
 
