@@ -48,6 +48,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Best-Practice-Monitoring muss lokale Messbarkeit von gefuehrten Buddy-Fragen trennen. Dinge wie 2FA oder Passwort-Hygiene sind wichtig, aber oft nicht direkt lokal beweisbar.
 - Der Phase-0-UI-Schnitt hat strukturell geholfen, aber optisch nicht genug. Die App braucht eine echte `BuddyHomeView`: Guardian-Status, Missionen, Aktivitaetsfeed und Details erst auf bewusste Auswahl.
 - Die gewaehlte visuelle Richtung ist: freundliche Mac-Health-App plus native Command-Center-Klarheit plus dezente Gamification. Kein Cyberpunk-SIEM als Hauptoberflaeche.
+- Die Roadmap soll ab 2026-05-14 in groesseren Kapiteln bearbeitet werden. Erst ein Kapitel abschliessen, dann das naechste beginnen; der naechste Fokus ist Kapitel 1 `Buddy Home`.
 
 ## Workflow Gotchas
 

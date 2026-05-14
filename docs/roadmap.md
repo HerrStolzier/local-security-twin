@@ -7,6 +7,7 @@ Diese Datei ist die aktuelle Planungsuebersicht fuer `local-security-twin`.
 Sie ersetzt nicht die Detaildokumente, sondern ordnet sie:
 
 - `docs/session-status.md`: aktueller Uebergabestand
+- `docs/chapter-plan.md`: grobe Kapitel, die nacheinander fertiggestellt werden
 - `docs/current-overview.md`: technischer und produktlicher Kurzueberblick
 - `docs/product-flow-and-feature-plan.md`: roter Faden, Produktbild und Feature-Bausteine
 - `docs/visual-direction.md`: gewaehlte visuelle Richtung fuer den Buddy-Redesign-Schnitt
@@ -35,6 +36,10 @@ Vorhanden ist:
 
 ## Aktuelle Hauptprioritaet
 
+Die grobe Arbeit wird ab jetzt ueber Kapitel geplant:
+
+- `docs/chapter-plan.md`
+
 Die bisherige technische Umsetzungsreihenfolge steht im detaillierten Abschlussplan:
 
 - `docs/project-completion-plan.md`
@@ -45,6 +50,10 @@ Die naechste Hauptprioritaet ist jetzt der rote Produktfaden:
 
 Grund:
 Der erste manuelle Blick zeigt, dass die App technisch funktioniert, aber noch wie ein Inspector wirkt. Das Ziel ist groesser: ein kraftvoller Security Buddy, der mit dem Nutzer zusammenarbeitet und bei real relevanten Risiken Punch hat.
+
+Das naechste Kapitel ist deshalb:
+
+- Kapitel 1: `Buddy Home`
 
 Der naechste Schnitt soll deshalb:
 

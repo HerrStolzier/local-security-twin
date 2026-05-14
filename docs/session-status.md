@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-14
-- Bereich: Visuelle Richtung und Buddy-Redesign
+- Bereich: Kapitelplanung
 
 ## Zuletzt abgeschlossen
 
@@ -100,14 +100,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Screenshot-Review am 2026-05-14 bestaetigt: Der erste `Buddy statt Inspector`-Schnitt hat die Struktur verbessert, aber optisch wirkt die App weiterhin wie ein Inspector/Admin-Tool
 - visuelle Richtung festgelegt: freundliche Mac-Health-App plus native Command-Center-Klarheit plus dezente Gameful-Defender-Schicht
 - `docs/visual-direction.md` angelegt
+- Roadmap in groessere Kapitel aufgeteilt
+- `docs/chapter-plan.md` angelegt
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Phase 0 braucht nach dem Screenshot-Review einen echten Redesign-Schnitt mit `BuddyHomeView`, Missionen und Aktivitaetsfeed statt dominanter Finding-Liste.
+Die sieben Sprints sind umgesetzt; die Roadmap ist jetzt in groessere Kapitel geteilt, und als naechstes ist Kapitel 1 `Buddy Home` dran.
 
 ## Naechster konkreter Schritt
 
-`BuddyHomeView` bauen: Guardian-Status oben, Missionen und Schutzbereiche in der Mitte, Buddy-Aktivitaetsfeed darunter oder daneben, technische Details nur nach bewusster Auswahl.
+Kapitel 1 `Buddy Home` umsetzen: Guardian-Status oben, Missionen und Schutzbereiche in der Mitte, Buddy-Aktivitaetsfeed darunter oder daneben, technische Details nur nach bewusster Auswahl.
 
 ## Danach sinnvoll
 
@@ -253,6 +255,12 @@ Zusaetzlich nach der Planerweiterung fuer Security-Hygiene und adversarial Revie
 Der Lauf war erfolgreich.
 
 Zusaetzlich nach Festlegung der visuellen Richtung am 2026-05-14:
+
+- `./scripts/checks.sh`
+
+Der Lauf war erfolgreich.
+
+Zusaetzlich nach Anlegen des Kapitelplans am 2026-05-14:
 
 - `./scripts/checks.sh`
 
