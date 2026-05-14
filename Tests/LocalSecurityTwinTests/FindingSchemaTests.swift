@@ -98,6 +98,10 @@ struct FindingSchemaTests {
         #expect(presentation.nextStepText.contains("Pruefe zuerst"))
         #expect(presentation.visibilityText.contains("kein Beweis"))
         #expect(presentation.showsRememberCurrentStartupStateAction)
+        #expect(presentation.guardianTone == "Aufmerksam")
+        #expect(presentation.missions.first?.title == "Autostart einordnen")
+        #expect(presentation.missions.first?.findingID == finding.id)
+        #expect(presentation.activityItems.first?.title.contains("neue Autostart-Aenderung") == true)
     }
 
     @Test func dashboardPresentationSummarizesRepeatedKnownStartupHints() throws {
@@ -140,5 +144,20 @@ struct FindingSchemaTests {
         #expect(presentation.primaryActionTitle == "Hinweise ansehen")
         #expect(presentation.buddyMessageText.contains("bekannte Autostart-Hinweise"))
         #expect(presentation.knownStartupSummaryText == "2 bekannte Autostart-Hinweise zusammengefasst. Oeffne die Einzelhinweise nur, wenn du eine bestimmte App genauer ansehen willst.")
+        #expect(presentation.guardianTone == "Beobachtet")
+        #expect(presentation.missions.first?.title == "Autostart verstehen")
+        #expect(presentation.missions.first?.findingID == first.id)
+        #expect(presentation.activityItems.contains { $0.id == "known-startup" })
+    }
+
+    @Test func dashboardPresentationCreatesCalmBuddyHomeWhenNoFindingsExist() {
+        let presentation = DashboardPresentation(findings: [])
+
+        #expect(presentation.statusTitle == "Alles ruhig")
+        #expect(presentation.guardianTone == "Stabil")
+        #expect(presentation.primaryActionTitle == "Nichts zu tun")
+        #expect(presentation.missions.first?.status == "Ruhig")
+        #expect(presentation.missions.first?.findingID == nil)
+        #expect(presentation.activityItems.first?.id == "startup-stable")
     }
 }

@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-14
-- Bereich: Kapitelplanung
+- Bereich: Kapitel 1 Buddy Home
 
 ## Zuletzt abgeschlossen
 
@@ -102,14 +102,18 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - `docs/visual-direction.md` angelegt
 - Roadmap in groessere Kapitel aufgeteilt
 - `docs/chapter-plan.md` angelegt
+- Kapitel 1 `Buddy Home` als erster Code-Schnitt umgesetzt: Startansicht ist jetzt Buddy-Home statt Finding-Sidebar
+- Guardian-Status, Buddy-Nachricht, Missionen, Aktivitaetsfeed und Sichtbarkeitsnotiz sind auf der Startseite sichtbar
+- technische Details oeffnen erst nach bewusster Auswahl rechts im Detailbereich
+- Presentation-Tests fuer Buddy-Home-Missionen, Aktivitaetsmeldungen und ruhigen Leerzustand ergaenzt
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; die Roadmap ist jetzt in groessere Kapitel geteilt, und als naechstes ist Kapitel 1 `Buddy Home` dran.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` hat jetzt einen ersten funktionierenden Code-Schnitt.
 
 ## Naechster konkreter Schritt
 
-Kapitel 1 `Buddy Home` umsetzen: Guardian-Status oben, Missionen und Schutzbereiche in der Mitte, Buddy-Aktivitaetsfeed darunter oder daneben, technische Details nur nach bewusster Auswahl.
+Kapitel 1 manuell als App-Screenshot pruefen und danach Kapitel 2 `Visual System` beginnen: Abstaende, Farben, Mission-Badges und ein modernerer Mac-Buddy-Look.
 
 ## Danach sinnvoll
 
@@ -137,6 +141,8 @@ Kapitel 1 `Buddy Home` umsetzen: Guardian-Status oben, Missionen und Schutzberei
 - Die neue Phase-0-UI ist automatisiert ueber Presentation-/E2E-nahe Tests abgedeckt; echte visuelle macOS-UI-Automation fehlt weiterhin.
 - Security-Hygiene ist geplant, aber noch nicht implementiert; 2FA, Passwortmanager, VPN und Security-Tool-Status duerfen vorerst nicht als automatisch geprueft dargestellt werden.
 - Adversarial Review ist als Produkt-Routine dokumentiert, aber noch nicht als wiederholbare Vorlage oder Checkliste im Repo umgesetzt.
+- Kapitel 1 ist strukturell umgesetzt, aber noch nicht vom Nutzer visuell abgenommen; ein Screenshot-Check sollte als naechster Schritt folgen.
+- Kapitel 2 muss die neue Struktur optisch deutlich staerker machen, damit sie nicht weiter wie ein schlichtes Admin-Tool wirkt.
 
 ## Letzte Validierung
 

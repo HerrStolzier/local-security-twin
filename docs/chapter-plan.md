@@ -28,7 +28,7 @@ Ein Kapitel ist fertig, wenn:
 
 ## Kapitel 1: Buddy Home
 
-Status: als naechstes bearbeiten.
+Status: erster Schnitt umgesetzt.
 
 Ziel:
 Die App bekommt eine echte Startseite.
@@ -53,16 +53,25 @@ Inhalt:
 - Buddy-Aktivitaetsmeldungen
 - Detailmodus fuer Autostart/Systemhinweise
 
+Umgesetzt:
+
+- Die App startet jetzt mit einer breiten Buddy-Home-Ansicht statt einer Sidebar-Liste.
+- Oben steht ein Guardian-Status mit kurzer Buddy-Nachricht und einer Hauptaktion.
+- Die lokalen Bereiche werden als Missionen gezeigt: Autostart, Mac-Schutzsignale und geplante Security-Hygiene.
+- Buddy-Aktivitaet fasst zusammen, was gerade lokal sichtbar ist.
+- Details oeffnen erst nach bewusster Auswahl rechts in einem Detailbereich.
+- Bekannte Autostart-Hinweise dominieren nicht mehr als lange Startliste.
+
 Abnahme:
 
-- Ein Screenshot muss sofort anders wirken als der aktuelle Inspector.
-- Der Nutzer sieht zuerst "Was ist gerade los?" und nicht 17 technische Eintraege.
-- Autostart-Hinweise erscheinen als zusammengefasste Mission oder Meldung.
-- Technische Belege bleiben erreichbar, dominieren aber nicht.
+- Ein Screenshot muss sofort anders wirken als der aktuelle Inspector. Erster Code-Schnitt ist vorhanden; manuelle Screenshot-Pruefung bleibt sinnvoll.
+- Der Nutzer sieht zuerst "Was ist gerade los?" und nicht 17 technische Eintraege. Erfuellt durch Buddy-Home statt Auto-Auswahl der ersten Finding-Details.
+- Autostart-Hinweise erscheinen als zusammengefasste Mission oder Meldung. Erfuellt.
+- Technische Belege bleiben erreichbar, dominieren aber nicht. Erfuellt durch Detailbereich nach Auswahl.
 
 ## Kapitel 2: Visual System
 
-Status: nach Kapitel 1.
+Status: als naechstes.
 
 Ziel:
 Die neue Startseite bekommt eine klare visuelle Sprache.

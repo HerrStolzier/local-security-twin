@@ -104,6 +104,19 @@ Produktstatus:
 
 Das ist kein Build-Blocker mehr, aber ein Produkt-/UX-Blocker fuer den Security-Buddy-Anspruch.
 
+## Buddy-Home-Schnitt 2026-05-14
+
+Kapitel 1 setzt die Startstruktur bewusst um:
+
+- Start ist jetzt ein Buddy-Home, keine automatisch geoeffnete Finding-Detailansicht.
+- Guardian-Status, kurze Buddy-Nachricht und eine Hauptaktion stehen oben.
+- Missionen ersetzen die Rohdatenliste als erste Orientierung.
+- Buddy-Aktivitaet fasst sichtbare lokale Ereignisse kurz zusammen.
+- Details und Belege bleiben erreichbar, aber erst nach bewusster Auswahl.
+
+Damit ist der rote Faden besser, aber die visuelle Gestaltung ist noch nicht fertig.
+Kapitel 2 muss daraus jetzt eine wirklich moderne, ruhige und kraftvolle Mac-Oberflaeche machen.
+
 Settings-Feedback aus dem manuellen Test:
 
 - Gemerkte Entscheidungen erscheinen korrekt.

@@ -51,16 +51,27 @@ Die naechste Hauptprioritaet ist jetzt der rote Produktfaden:
 Grund:
 Der erste manuelle Blick zeigt, dass die App technisch funktioniert, aber noch wie ein Inspector wirkt. Das Ziel ist groesser: ein kraftvoller Security Buddy, der mit dem Nutzer zusammenarbeitet und bei real relevanten Risiken Punch hat.
 
-Das naechste Kapitel ist deshalb:
+Kapitel 1 ist als erster Code-Schnitt umgesetzt:
 
 - Kapitel 1: `Buddy Home`
 
-Der naechste Schnitt soll deshalb:
+Das bedeutet:
 
-1. die Startansicht als Buddy-Status statt Finding-Liste fuehren
-2. nur die wichtigste Meldung und den naechsten Schritt zuerst zeigen
-3. bekannte Autostart-Hinweise zusammenfassen
-4. technische Belege einklappbar oder nachrangig machen
+1. die Startansicht fuehrt jetzt ueber Buddy-Status statt Finding-Liste
+2. eine Hauptmeldung und ein naechster Schritt stehen vorne
+3. Autostart- und Systemsignale erscheinen als Missionen und Aktivitaetsmeldungen
+4. technische Belege erscheinen erst nach bewusster Auswahl
+
+Das naechste Kapitel ist deshalb:
+
+- Kapitel 2: `Visual System`
+
+Der naechste Schnitt soll:
+
+1. die neue Buddy-Home-Struktur visuell staerker machen
+2. Status, Missionen und Aktivitaet klarer gewichten
+3. eine moderne Mac-Buddy-Oberflaeche schaffen, die nicht wie ein Admin-Inspector wirkt
+4. dezente Gameful-Defender-Elemente einfuehren, ohne falsche Sicherheitswerte zu behaupten
 5. spaeter Online-Intelligence wie SOFA, CISA KEV und EPSS anbinden
 6. LLM-Erklaerungen erst als Erklaerhilfe planen, nicht als alleinige Wahrheit
 7. Security-Hygiene-Themen wie 2FA, Passwortmanager, VPN, Antivirus/Security-Tools, Firewall, FileVault und System Extensions als eigene, ehrlich begrenzte Schicht planen

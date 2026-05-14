@@ -99,6 +99,90 @@ struct DashboardPresentation {
         return "\(knownStartupCount) bekannte Autostart-Hinweise zusammengefasst. Oeffne die Einzelhinweise nur, wenn du eine bestimmte App genauer ansehen willst."
     }
 
+    var guardianTone: String {
+        if startupChangeCount > 0 {
+            return "Aufmerksam"
+        }
+
+        if findings.isEmpty {
+            return "Stabil"
+        }
+
+        return "Beobachtet"
+    }
+
+    var guardianProgress: Double {
+        if startupChangeCount > 0 {
+            return 0.45
+        }
+
+        if findings.isEmpty {
+            return 0.9
+        }
+
+        return 0.68
+    }
+
+    var missions: [BuddyMission] {
+        [
+            startupMission,
+            systemMission,
+            hygieneMission,
+        ]
+    }
+
+    var activityItems: [BuddyActivityItem] {
+        var items: [BuddyActivityItem] = []
+
+        if startupChangeCount > 0 {
+            items.append(
+                BuddyActivityItem(
+                    id: "startup-change",
+                    systemImage: "exclamationmark.shield",
+                    title: "\(startupChangeCount) neue Autostart-Aenderung(en)",
+                    message: "Diese Aenderung sollte kurz eingeordnet werden.",
+                    findingID: findings(in: .changes).first?.id
+                )
+            )
+        } else {
+            items.append(
+                BuddyActivityItem(
+                    id: "startup-stable",
+                    systemImage: "checkmark.shield",
+                    title: "Keine neue Autostart-Aenderung",
+                    message: "Der aktuelle lokale Blick zeigt keine neue Startup-Ueberraschung.",
+                    findingID: nil
+                )
+            )
+        }
+
+        if knownStartupCount > 0 {
+            items.append(
+                BuddyActivityItem(
+                    id: "known-startup",
+                    systemImage: "rectangle.stack",
+                    title: "\(knownStartupCount) bekannte Autostart-Hinweise",
+                    message: "Zusammengefasst, damit du zuerst das Wichtige siehst.",
+                    findingID: findings(in: .knownStartupHints).first?.id
+                )
+            )
+        }
+
+        if reviewCount > 0 {
+            items.append(
+                BuddyActivityItem(
+                    id: "system-context",
+                    systemImage: "desktopcomputer",
+                    title: "\(reviewCount) Systemsignal(e)",
+                    message: "Diese Hinweise helfen beim Einordnen, sind aber kein Gesamturteil.",
+                    findingID: findings(in: .review).first?.id
+                )
+            )
+        }
+
+        return items
+    }
+
     var showsRememberCurrentStartupStateAction: Bool {
         startupChangeCount > 0
     }
@@ -158,6 +242,81 @@ struct DashboardPresentation {
     func findings(in group: FindingGroup) -> [Finding] {
         findings.filter { $0.displayGroup == group }
     }
+
+    private var startupMission: BuddyMission {
+        if startupChangeCount > 0 {
+            return BuddyMission(
+                id: "startup",
+                title: "Autostart einordnen",
+                status: "Bitte pruefen",
+                summary: "Es gibt neue oder verschwundene Autostart-Hinweise seit dem gemerkten Zustand.",
+                systemImage: "bolt.horizontal.circle",
+                progress: 0.35,
+                primaryActionTitle: "Neue Aenderung ansehen",
+                findingID: findings(in: .changes).first?.id
+            )
+        }
+
+        return BuddyMission(
+            id: "startup",
+            title: "Autostart verstehen",
+            status: knownStartupCount > 0 ? "\(knownStartupCount) bekannt" : "Ruhig",
+            summary: knownStartupCount > 0
+                ? "Bekannte Autostart-Hinweise sind zusammengefasst und nur bei Bedarf im Detail sichtbar."
+                : "Aktuell gibt es keine sichtbaren Autostart-Hinweise, die deine Aufmerksamkeit brauchen.",
+            systemImage: "bolt.horizontal.circle",
+            progress: knownStartupCount > 0 ? 0.7 : 0.9,
+            primaryActionTitle: knownStartupCount > 0 ? "Zusammenfassung ansehen" : "Keine Aktion noetig",
+            findingID: findings(in: .knownStartupHints).first?.id
+        )
+    }
+
+    private var systemMission: BuddyMission {
+        BuddyMission(
+            id: "system",
+            title: "Mac-Schutzsignale",
+            status: reviewCount > 0 ? "\(reviewCount) sichtbar" : "Noch leer",
+            summary: reviewCount > 0
+                ? "Lokale Systemsignale sind sichtbar. Sie helfen beim Einordnen, ohne ein Gesamturteil zu behaupten."
+                : "Systemschutzsignale erscheinen hier, sobald der lokale Sensor etwas anzeigen kann.",
+            systemImage: "desktopcomputer",
+            progress: reviewCount > 0 ? 0.6 : 0.25,
+            primaryActionTitle: reviewCount > 0 ? "Systemhinweis ansehen" : "Spaeter pruefen",
+            findingID: findings(in: .review).first?.id
+        )
+    }
+
+    private var hygieneMission: BuddyMission {
+        BuddyMission(
+            id: "hygiene",
+            title: "Security-Hygiene",
+            status: "Geplant",
+            summary: "Hier landen spaeter FileVault, Firewall, Updates, 2FA, Passwortmanager und VPN-Fragen.",
+            systemImage: "checklist.checked",
+            progress: 0.15,
+            primaryActionTitle: "Noch nicht aktiv",
+            findingID: nil
+        )
+    }
+}
+
+struct BuddyMission: Identifiable, Equatable {
+    let id: String
+    let title: String
+    let status: String
+    let summary: String
+    let systemImage: String
+    let progress: Double
+    let primaryActionTitle: String
+    let findingID: Finding.ID?
+}
+
+struct BuddyActivityItem: Identifiable, Equatable {
+    let id: String
+    let systemImage: String
+    let title: String
+    let message: String
+    let findingID: Finding.ID?
 }
 
 extension Finding {

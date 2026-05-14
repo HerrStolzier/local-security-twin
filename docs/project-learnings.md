@@ -49,6 +49,9 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Der Phase-0-UI-Schnitt hat strukturell geholfen, aber optisch nicht genug. Die App braucht eine echte `BuddyHomeView`: Guardian-Status, Missionen, Aktivitaetsfeed und Details erst auf bewusste Auswahl.
 - Die gewaehlte visuelle Richtung ist: freundliche Mac-Health-App plus native Command-Center-Klarheit plus dezente Gamification. Kein Cyberpunk-SIEM als Hauptoberflaeche.
 - Die Roadmap soll ab 2026-05-14 in groesseren Kapiteln bearbeitet werden. Erst ein Kapitel abschliessen, dann das naechste beginnen; der naechste Fokus ist Kapitel 1 `Buddy Home`.
+- Die erste echte Buddy-Home-Struktur soll keine Finding automatisch auswaehlen. Details sind bewusst geoeffnete Vertiefung, nicht der Startzustand.
+- Missionen sind fuer dieses Produkt hilfreicher als eine rohe Hinweis-Liste: Sie zeigen Schutzbereiche und Prioritaet, ohne technische Belege zu verstecken.
+- Gamification darf Orientierung geben, aber keine falsche Sicherheitszahl behaupten. Fortschrittsanzeigen muessen deshalb als Produktmetapher vorsichtig bleiben.
 
 ## Workflow Gotchas
 
