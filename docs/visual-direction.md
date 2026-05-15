@@ -141,6 +141,7 @@ Erlaubt:
 - "naechster Verteidigungsschritt"
 - freundlichere semantische Farben
 - leichte Health-/Gameful-Defender-Anmutung
+- Lila als freundlicher Akzent fuer geplante/ruhige Buddy-Bereiche, wenn Gruen auf hellem Grund zu weich wirkt
 
 Nicht erlaubt:
 

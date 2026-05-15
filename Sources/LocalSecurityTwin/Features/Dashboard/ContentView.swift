@@ -263,23 +263,13 @@ private struct GuardianStatusCard: View {
 
                 DefenseMetric(value: presentation.startupChangeCount, label: "neu", color: .orange)
                 DefenseMetric(value: presentation.knownStartupCount, label: "bekannt", color: .cyan)
-                DefenseMetric(value: presentation.reviewCount, label: "System", color: .green)
+                DefenseMetric(value: presentation.reviewCount, label: "System", color: .purple)
             }
         }
         .padding(28)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            LinearGradient(
-                colors: [
-                    toneColor.opacity(0.16),
-                    Color.green.opacity(0.10),
-                    Color(nsColor: .controlBackgroundColor).opacity(0.72),
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            ),
-            in: RoundedRectangle(cornerRadius: 8)
-        )
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(toneColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(toneColor.opacity(0.32), lineWidth: 1)
@@ -310,9 +300,9 @@ private struct DefenseMetric: View {
     let color: Color
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text("\(value)")
-                .font(.headline)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("\(value)")
+                    .font(.headline)
                 .fontWeight(.semibold)
                 .foregroundStyle(color)
 
@@ -323,7 +313,7 @@ private struct DefenseMetric: View {
         .frame(width: 72, alignment: .leading)
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
-        .background(color.opacity(0.12), in: RoundedRectangle(cornerRadius: 8))
+        .background(.background.opacity(0.72), in: RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(color.opacity(0.16))
@@ -370,7 +360,7 @@ private struct MissionCard: View {
         case "system":
             return .cyan
         case "hygiene":
-            return .green
+            return .purple
         default:
             return .secondary
         }
@@ -399,6 +389,7 @@ private struct MissionCard: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(mission.title)
                     .font(.headline)
+                    .foregroundStyle(.primary)
 
                 Text(mission.summary)
                     .font(.subheadline)
@@ -422,17 +413,8 @@ private struct MissionCard: View {
         }
         .padding(16)
         .frame(maxWidth: .infinity, minHeight: 210, alignment: .topLeading)
-        .background(
-            LinearGradient(
-                colors: [
-                    accentColor.opacity(0.16),
-                    Color(nsColor: .controlBackgroundColor).opacity(0.72),
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            ),
-            in: RoundedRectangle(cornerRadius: 8)
-        )
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(accentColor.opacity(0.07), in: RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(accentColor.opacity(0.28))
@@ -466,7 +448,7 @@ private struct ActivityFeedRow: View {
     let openFinding: (Finding.ID) -> Void
 
     private var accentColor: Color {
-        item.findingID == nil ? .green : .cyan
+        item.findingID == nil ? .purple : .cyan
     }
 
     var body: some View {
@@ -495,17 +477,8 @@ private struct ActivityFeedRow: View {
             }
         }
         .padding(14)
-        .background(
-            LinearGradient(
-                colors: [
-                    accentColor.opacity(0.10),
-                    Color(nsColor: .controlBackgroundColor).opacity(0.7),
-                ],
-                startPoint: .leading,
-                endPoint: .trailing
-            ),
-            in: RoundedRectangle(cornerRadius: 8)
-        )
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(accentColor.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(accentColor.opacity(0.16))
