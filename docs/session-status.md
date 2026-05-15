@@ -10,7 +10,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-14
-- Bereich: Kapitel 1 Buddy Home
+- Bereich: Kapitel 2 Visual System
 
 ## Zuletzt abgeschlossen
 
@@ -107,14 +107,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - technische Details oeffnen erst nach bewusster Auswahl rechts im Detailbereich
 - Presentation-Tests fuer Buddy-Home-Missionen, Aktivitaetsmeldungen und ruhigen Leerzustand ergaenzt
 - manuelle Nutzerabnahme am 2026-05-15: neue Buddy-Home-Ansicht wirkt deutlich ruhiger, uebersichtlicher und ansprechender
+- Kapitel 2 `Visual System` als erster Schnitt umgesetzt: systemadaptive Hintergrundflaeche, staerkerer Guardian-Status, semantische Statusfarben, Mission-Badges und ruhigere Aktivitaetszeilen
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` hat jetzt einen ersten funktionierenden Code-Schnitt.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, und Kapitel 2 `Visual System` hat einen ersten Code-Schnitt.
 
 ## Naechster konkreter Schritt
 
-Kapitel 2 `Visual System` beginnen: Abstaende, Farben, Mission-Badges und ein modernerer Mac-Buddy-Look.
+Kapitel 2 manuell in der App pruefen: wirkt die neue Oberflaeche moderner und klarer, ohne zu verspielt oder alarmistisch zu werden?
 
 ## Danach sinnvoll
 
@@ -144,6 +145,7 @@ Kapitel 2 `Visual System` beginnen: Abstaende, Farben, Mission-Badges und ein mo
 - Adversarial Review ist als Produkt-Routine dokumentiert, aber noch nicht als wiederholbare Vorlage oder Checkliste im Repo umgesetzt.
 - Kapitel 1 ist strukturell umgesetzt und vom Nutzer visuell positiv abgenommen; ein Screenshot-Artefakt wurde im Chat referenziert, war fuer Codex aber nicht lesbar.
 - Kapitel 2 muss die neue Struktur optisch deutlich staerker machen, damit sie nicht weiter wie ein schlichtes Admin-Tool wirkt.
+- Kapitel 2 ist technisch umgesetzt, aber noch nicht vom Nutzer visuell abgenommen.
 
 ## Letzte Validierung
 

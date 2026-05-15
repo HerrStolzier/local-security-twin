@@ -52,6 +52,8 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Die erste echte Buddy-Home-Struktur soll keine Finding automatisch auswaehlen. Details sind bewusst geoeffnete Vertiefung, nicht der Startzustand.
 - Missionen sind fuer dieses Produkt hilfreicher als eine rohe Hinweis-Liste: Sie zeigen Schutzbereiche und Prioritaet, ohne technische Belege zu verstecken.
 - Gamification darf Orientierung geben, aber keine falsche Sicherheitszahl behaupten. Fortschrittsanzeigen muessen deshalb als Produktmetapher vorsichtig bleiben.
+- Fuer den Visual-System-Schnitt sollen Farben semantisch bleiben: Orange fuer Pruefbedarf, Gruen fuer ruhig/stabil, Blau fuer beobachtete Orientierung. Farbe ist Bedeutung, nicht Dekoration.
+- Die App soll systemadaptive macOS-Materialien nutzen, damit sie in Hell- und Dunkelmodus nativer wirkt und nicht wie ein harter Web-Dashboard-Port.
 
 ## Workflow Gotchas
 

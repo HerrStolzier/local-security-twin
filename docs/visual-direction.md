@@ -145,14 +145,19 @@ Nicht erlaubt:
 
 ## Naechste Design-Iteration
 
-Der naechste konkrete UI-Schritt ist:
+Der erste konkrete UI-Schritt wurde umgesetzt:
 
-1. `BuddyHomeView` als echte Startseite bauen.
-2. Die linke Finding-Liste aus der ersten Wahrnehmung entfernen oder stark zurueckstufen.
-3. Findings in wenige Missionen und Buddy-Meldungen uebersetzen.
-4. Detailansicht nur nach aktiver Auswahl zeigen.
-5. Danach Screenshot pruefen.
-6. Danach erst Liquid-Glass-/visueller Feinschliff.
+1. `BuddyHomeView` ist eine echte Startseite.
+2. Die Finding-Liste ist aus der ersten Wahrnehmung entfernt.
+3. Findings werden in Missionen und Buddy-Meldungen uebersetzt.
+4. Detailansicht erscheint erst nach aktiver Auswahl.
+5. Kapitel 2 hat den ersten visuellen Feinschliff: systemadaptive Flaechen, semantische Farben, staerkere Mission-Badges und ruhigere Aktivitaetszeilen.
+
+Naechster Schritt:
+
+1. App manuell ansehen.
+2. Pruefen, ob der Look moderner wirkt, ohne spielerisch oder alarmistisch zu werden.
+3. Danach entscheiden, ob weiterer Liquid-Glass-Feinschliff noetig ist oder Kapitel 3 `Update Awareness` starten kann.
 
 ## Build-Skills fuer die Umsetzung
 

@@ -68,42 +68,59 @@ private struct BuddyHomeView: View {
     let rememberCurrentStartupState: () -> Void
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 22) {
-                GuardianStatusCard(
-                    presentation: presentation,
-                    primaryAction: {
-                        if let findingID = presentation.findings(in: .changes).first?.id
-                            ?? presentation.findings.first?.id {
-                            openFinding(findingID)
+        ZStack {
+            BuddyHomeBackground()
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    GuardianStatusCard(
+                        presentation: presentation,
+                        primaryAction: {
+                            if let findingID = presentation.findings(in: .changes).first?.id
+                                ?? presentation.findings.first?.id {
+                                openFinding(findingID)
+                            }
                         }
-                    }
-                )
-
-                if presentation.showsRememberCurrentStartupStateAction {
-                    RememberStartupStateBanner(
-                        error: lastBaselineRefreshError,
-                        onConfirm: rememberCurrentStartupState
                     )
+
+                    if presentation.showsRememberCurrentStartupStateAction {
+                        RememberStartupStateBanner(
+                            error: lastBaselineRefreshError,
+                            onConfirm: rememberCurrentStartupState
+                        )
+                    }
+
+                    MissionSection(
+                        missions: presentation.missions,
+                        openFinding: openFinding
+                    )
+
+                    ActivityFeedSection(
+                        items: presentation.activityItems,
+                        openFinding: openFinding
+                    )
+
+                    VisibilityNote(text: presentation.visibilityText)
                 }
-
-                MissionSection(
-                    missions: presentation.missions,
-                    openFinding: openFinding
-                )
-
-                ActivityFeedSection(
-                    items: presentation.activityItems,
-                    openFinding: openFinding
-                )
-
-                VisibilityNote(text: presentation.visibilityText)
+                .padding(32)
+                .frame(maxWidth: 1080, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .topLeading)
             }
-            .padding(32)
-            .frame(maxWidth: 1040, alignment: .leading)
-            .frame(maxWidth: .infinity, alignment: .topLeading)
         }
-        .background(.background)
+    }
+}
+
+private struct BuddyHomeBackground: View {
+    var body: some View {
+        LinearGradient(
+            colors: [
+                Color(nsColor: .windowBackgroundColor),
+                Color(nsColor: .controlBackgroundColor),
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
     }
 }
 
@@ -151,41 +168,55 @@ private struct GuardianStatusCard: View {
     let presentation: DashboardPresentation
     let primaryAction: () -> Void
 
+    private var toneColor: Color {
+        if presentation.startupChangeCount > 0 {
+            return .orange
+        }
+
+        if presentation.findings.isEmpty {
+            return .green
+        }
+
+        return .blue
+    }
+
     var body: some View {
-        HStack(alignment: .center, spacing: 24) {
-            ZStack {
-                Circle()
-                    .stroke(.quaternary, lineWidth: 12)
-                    .frame(width: 132, height: 132)
+        VStack(alignment: .leading, spacing: 24) {
+            HStack(alignment: .center, spacing: 26) {
+                ZStack {
+                    Circle()
+                        .stroke(.quaternary, lineWidth: 12)
+                        .frame(width: 140, height: 140)
 
-                Circle()
-                    .trim(from: 0, to: presentation.guardianProgress)
-                    .stroke(.blue, style: StrokeStyle(lineWidth: 12, lineCap: .round))
-                    .rotationEffect(.degrees(-90))
-                    .frame(width: 132, height: 132)
+                    Circle()
+                        .trim(from: 0, to: presentation.guardianProgress)
+                        .stroke(toneColor, style: StrokeStyle(lineWidth: 12, lineCap: .round))
+                        .rotationEffect(.degrees(-90))
+                        .frame(width: 140, height: 140)
 
-                VStack(spacing: 2) {
-                    Image(systemName: "shield.lefthalf.filled")
-                        .font(.title2)
-                        .foregroundStyle(.blue)
+                    VStack(spacing: 6) {
+                        Image(systemName: "shield.lefthalf.filled")
+                            .font(.system(size: 30, weight: .semibold))
+                            .foregroundStyle(toneColor)
 
-                    Text(presentation.guardianTone)
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
+                        Text(presentation.guardianTone)
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.secondary)
+                    }
                 }
-            }
 
-            VStack(alignment: .leading, spacing: 12) {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(presentation.statusTitle)
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
+                VStack(alignment: .leading, spacing: 14) {
+                    StatusBadge(
+                        text: presentation.statusTitle,
+                        systemImage: presentation.startupChangeCount > 0 ? "exclamationmark.shield" : "checkmark.shield",
+                        color: toneColor
+                    )
 
                     Text(presentation.headlineText)
                         .font(.largeTitle)
                         .fontWeight(.bold)
+                        .lineSpacing(2)
                         .fixedSize(horizontal: false, vertical: true)
 
                     Text(presentation.buddyMessageText)
@@ -193,22 +224,76 @@ private struct GuardianStatusCard: View {
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
+            }
 
-                HStack(spacing: 10) {
-                    Button(presentation.primaryActionTitle, action: primaryAction)
-                        .buttonStyle(.borderedProminent)
-                        .disabled(presentation.findings.isEmpty)
+            Divider()
 
-                    Text(presentation.nextStepText)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+            HStack(alignment: .center, spacing: 14) {
+                Button(presentation.primaryActionTitle, action: primaryAction)
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                    .tint(toneColor)
+                    .disabled(presentation.findings.isEmpty)
+
+                Text(presentation.nextStepText)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Spacer(minLength: 8)
+
+                DefenseMetric(value: presentation.startupChangeCount, label: "neu", color: .orange)
+                DefenseMetric(value: presentation.knownStartupCount, label: "bekannt", color: .blue)
+                DefenseMetric(value: presentation.reviewCount, label: "System", color: .green)
             }
         }
         .padding(28)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.quinary, in: RoundedRectangle(cornerRadius: 8))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(toneColor.opacity(0.22), lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.08), radius: 18, x: 0, y: 10)
+    }
+}
+
+private struct StatusBadge: View {
+    let text: String
+    let systemImage: String
+    let color: Color
+
+    var body: some View {
+        Label(text, systemImage: systemImage)
+            .font(.caption)
+            .fontWeight(.semibold)
+            .foregroundStyle(color)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(color.opacity(0.12), in: Capsule())
+    }
+}
+
+private struct DefenseMetric: View {
+    let value: Int
+    let label: String
+    let color: Color
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("\(value)")
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundStyle(color)
+
+            Text(label)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .frame(width: 72, alignment: .leading)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 8))
     }
 }
 
@@ -244,13 +329,27 @@ private struct MissionCard: View {
     let mission: BuddyMission
     let openFinding: (Finding.ID) -> Void
 
+    private var accentColor: Color {
+        switch mission.id {
+        case "startup":
+            return .orange
+        case "system":
+            return .blue
+        case "hygiene":
+            return .green
+        default:
+            return .secondary
+        }
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top) {
                 Image(systemName: mission.systemImage)
                     .font(.title3)
-                    .foregroundStyle(.blue)
-                    .frame(width: 24)
+                    .foregroundStyle(accentColor)
+                    .frame(width: 34, height: 34)
+                    .background(accentColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 8))
 
                 Spacer()
 
@@ -259,7 +358,8 @@ private struct MissionCard: View {
                     .fontWeight(.semibold)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
-                    .background(.quaternary, in: Capsule())
+                    .foregroundStyle(accentColor)
+                    .background(accentColor.opacity(0.12), in: Capsule())
             }
 
             VStack(alignment: .leading, spacing: 5) {
@@ -275,6 +375,7 @@ private struct MissionCard: View {
 
             ProgressView(value: mission.progress)
                 .controlSize(.small)
+                .tint(accentColor)
 
             Button(mission.primaryActionTitle) {
                 if let findingID = mission.findingID {
@@ -282,14 +383,15 @@ private struct MissionCard: View {
                 }
             }
             .buttonStyle(.bordered)
+            .tint(accentColor)
             .disabled(mission.findingID == nil)
         }
         .padding(16)
         .frame(maxWidth: .infinity, minHeight: 210, alignment: .topLeading)
-        .background(.background, in: RoundedRectangle(cornerRadius: 8))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(.quaternary)
+                .stroke(accentColor.opacity(0.18))
         )
     }
 }
@@ -318,11 +420,16 @@ private struct ActivityFeedRow: View {
     let item: BuddyActivityItem
     let openFinding: (Finding.ID) -> Void
 
+    private var accentColor: Color {
+        item.findingID == nil ? .green : .blue
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: item.systemImage)
-                .foregroundStyle(.secondary)
-                .frame(width: 22)
+                .foregroundStyle(accentColor)
+                .frame(width: 28, height: 28)
+                .background(accentColor.opacity(0.1), in: RoundedRectangle(cornerRadius: 8))
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(item.title)
@@ -343,7 +450,7 @@ private struct ActivityFeedRow: View {
             }
         }
         .padding(14)
-        .background(.quinary, in: RoundedRectangle(cornerRadius: 8))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
     }
 }
 
@@ -411,6 +518,10 @@ private struct RememberStartupStateBanner: View {
             }
         }
         .padding(14)
-        .background(.quinary)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.orange.opacity(0.2))
+        )
     }
 }

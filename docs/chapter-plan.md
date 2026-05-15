@@ -71,7 +71,7 @@ Abnahme:
 
 ## Kapitel 2: Visual System
 
-Status: als naechstes.
+Status: erster Schnitt umgesetzt.
 
 Ziel:
 Die neue Startseite bekommt eine klare visuelle Sprache.
@@ -91,11 +91,20 @@ Inhalt:
 - Icons und Mission-Badges
 - spaeter Liquid-Glass-Feinschliff
 
+Umgesetzt:
+
+- Startseite nutzt jetzt eine ruhigere, systemadaptive Hintergrundflaeche.
+- Guardian-Status wirkt staerker wie ein Health-/Defender-Status mit semantischer Farbe.
+- Primaere Aktion und naechster Schritt sind klarer gruppiert.
+- Missionen haben eigene Icon-Badges, Status-Badges und dezente Fortschrittsbalken.
+- Buddy-Aktivitaet nutzt kompaktere, ruhigere Zeilen mit klarer visueller Gewichtung.
+- Die Gestaltung bleibt macOS-nativ und vermeidet Neon-/SIEM-Optik.
+
 Abnahme:
 
-- UI wirkt wie ein moderner Mac-Buddy, nicht wie ein Admin-Tool.
-- Missionen wirken motivierend, aber nicht kindisch.
-- Keine Rohdaten-Kartenflut auf der Startseite.
+- UI wirkt staerker wie ein moderner Mac-Buddy, nicht wie ein Admin-Tool. Erster Code-Schnitt umgesetzt; manuelle Sichtpruefung folgt.
+- Missionen wirken motivierender, aber nicht kindisch. Erster Schnitt umgesetzt.
+- Keine Rohdaten-Kartenflut auf der Startseite. Weiterhin erfuellt durch Buddy-Home-Struktur.
 
 ## Kapitel 3: Update Awareness
 
