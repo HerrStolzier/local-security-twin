@@ -28,7 +28,7 @@ Ein Kapitel ist fertig, wenn:
 
 ## Kapitel 1: Buddy Home
 
-Status: erster Schnitt umgesetzt.
+Status: erster Schnitt umgesetzt und manuell positiv abgenommen.
 
 Ziel:
 Die App bekommt eine echte Startseite.
@@ -64,7 +64,7 @@ Umgesetzt:
 
 Abnahme:
 
-- Ein Screenshot muss sofort anders wirken als der aktuelle Inspector. Erster Code-Schnitt ist vorhanden; manuelle Screenshot-Pruefung bleibt sinnvoll.
+- Ein Screenshot muss sofort anders wirken als der aktuelle Inspector. Erfuellt; Nutzerfeedback am 2026-05-15: ruhiger, uebersichtlicher und ansprechender.
 - Der Nutzer sieht zuerst "Was ist gerade los?" und nicht 17 technische Eintraege. Erfuellt durch Buddy-Home statt Auto-Auswahl der ersten Finding-Details.
 - Autostart-Hinweise erscheinen als zusammengefasste Mission oder Meldung. Erfuellt.
 - Technische Belege bleiben erreichbar, dominieren aber nicht. Erfuellt durch Detailbereich nach Auswahl.

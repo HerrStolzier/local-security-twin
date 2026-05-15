@@ -106,6 +106,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Guardian-Status, Buddy-Nachricht, Missionen, Aktivitaetsfeed und Sichtbarkeitsnotiz sind auf der Startseite sichtbar
 - technische Details oeffnen erst nach bewusster Auswahl rechts im Detailbereich
 - Presentation-Tests fuer Buddy-Home-Missionen, Aktivitaetsmeldungen und ruhigen Leerzustand ergaenzt
+- manuelle Nutzerabnahme am 2026-05-15: neue Buddy-Home-Ansicht wirkt deutlich ruhiger, uebersichtlicher und ansprechender
 
 ## Aktueller Stand in einem Satz
 
@@ -113,7 +114,7 @@ Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` hat jetzt einen ersten
 
 ## Naechster konkreter Schritt
 
-Kapitel 1 manuell als App-Screenshot pruefen und danach Kapitel 2 `Visual System` beginnen: Abstaende, Farben, Mission-Badges und ein modernerer Mac-Buddy-Look.
+Kapitel 2 `Visual System` beginnen: Abstaende, Farben, Mission-Badges und ein modernerer Mac-Buddy-Look.
 
 ## Danach sinnvoll
 
@@ -141,7 +142,7 @@ Kapitel 1 manuell als App-Screenshot pruefen und danach Kapitel 2 `Visual System
 - Die neue Phase-0-UI ist automatisiert ueber Presentation-/E2E-nahe Tests abgedeckt; echte visuelle macOS-UI-Automation fehlt weiterhin.
 - Security-Hygiene ist geplant, aber noch nicht implementiert; 2FA, Passwortmanager, VPN und Security-Tool-Status duerfen vorerst nicht als automatisch geprueft dargestellt werden.
 - Adversarial Review ist als Produkt-Routine dokumentiert, aber noch nicht als wiederholbare Vorlage oder Checkliste im Repo umgesetzt.
-- Kapitel 1 ist strukturell umgesetzt, aber noch nicht vom Nutzer visuell abgenommen; ein Screenshot-Check sollte als naechster Schritt folgen.
+- Kapitel 1 ist strukturell umgesetzt und vom Nutzer visuell positiv abgenommen; ein Screenshot-Artefakt wurde im Chat referenziert, war fuer Codex aber nicht lesbar.
 - Kapitel 2 muss die neue Struktur optisch deutlich staerker machen, damit sie nicht weiter wie ein schlichtes Admin-Tool wirkt.
 
 ## Letzte Validierung
