@@ -12,36 +12,20 @@ struct FindingDetailView: View {
                         .font(.title)
                         .fontWeight(.semibold)
 
-                    HStack(spacing: 12) {
-                        Label(finding.displaySourceTitle, systemImage: "dot.scope")
-                        Label(finding.severity.displayTitle, systemImage: "shield")
-                        Label(finding.confidence.displayTitle, systemImage: "checkmark.seal")
-                    }
-                    .foregroundStyle(.secondary)
-                    .font(.subheadline)
+                    DetailStatusRow(finding: finding)
                 }
 
                 DetailGuidancePanel(finding: finding)
 
                 if finding.source.kind == .baselineDiff || finding.source.kind == .launchAgentInventory {
-                    StartupDetailOverview(finding: finding)
+                    StartupSimpleOverview(finding: finding)
                 }
 
                 RecommendationSection(
                     finding: finding,
                     policyStore: policyStore
                 )
-                FindingSection(title: "Was wurde gefunden?", text: finding.displaySummary)
-                EvidenceSection(evidence: finding.evidence)
-
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Produkt-Hinweis")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-
-                    Text("Diese Ansicht erklaert zuerst, was sichtbar ist. Sie aendert keine Systemeinstellungen und beweist nicht, dass ein Hinweis gefaehrlich ist.")
-                        .foregroundStyle(.secondary)
-                }
+                TechnicalDetailSection(finding: finding)
             }
             .padding(28)
             .frame(maxWidth: 920, alignment: .leading)
@@ -51,38 +35,109 @@ struct FindingDetailView: View {
     }
 }
 
+private struct DetailStatusRow: View {
+    let finding: Finding
+
+    var body: some View {
+        HStack(spacing: 8) {
+            DetailPill(text: finding.displaySourceTitle, systemImage: "dot.scope")
+            DetailPill(text: finding.severity.displayTitle, systemImage: "shield")
+            DetailPill(text: finding.confidence.displayTitle, systemImage: "checkmark.seal")
+        }
+    }
+}
+
+private struct DetailPill: View {
+    let text: String
+    let systemImage: String
+
+    var body: some View {
+        Label(text, systemImage: systemImage)
+            .font(.caption)
+            .fontWeight(.semibold)
+            .foregroundStyle(.secondary)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 5)
+            .background(.quaternary, in: Capsule())
+    }
+}
+
 private struct DetailGuidancePanel: View {
     let finding: Finding
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            DetailGuidanceItem(
-                title: "Kurz gesagt",
-                text: finding.plainLanguageAssessment,
-                systemImage: "text.bubble"
-            )
+        VStack(alignment: .leading, spacing: 16) {
+            Label("Kurz gesagt", systemImage: "text.bubble")
+                .font(.headline)
+                .foregroundStyle(.primary)
 
-            DetailGuidanceItem(
-                title: "Warum das wichtig ist",
-                text: finding.userImpact,
-                systemImage: "questionmark.circle"
-            )
+            Text(finding.plainLanguageAssessment)
+                .font(.title3)
+                .foregroundStyle(.primary)
+                .fixedSize(horizontal: false, vertical: true)
 
-            DetailGuidanceItem(
-                title: "Naechster sicherer Schritt",
-                text: finding.nextStep,
-                systemImage: "checkmark.seal"
-            )
+            Divider()
+
+            VStack(alignment: .leading, spacing: 6) {
+                Label("Was du jetzt tun solltest", systemImage: "checkmark.seal")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+
+                Text(finding.nextStep)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
         .padding(16)
-        .background(.quinary, in: RoundedRectangle(cornerRadius: 8))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.quaternary)
+        )
     }
 }
 
-private struct DetailGuidanceItem: View {
+private struct StartupSimpleOverview: View {
+    let finding: Finding
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Was heisst das fuer dich?")
+                .font(.title3)
+                .fontWeight(.semibold)
+
+            SimpleFactRow(
+                systemImage: "app.badge",
+                title: "Erkannte Datei",
+                text: finding.displaySubject
+            )
+
+            SimpleFactRow(
+                systemImage: "arrow.clockwise",
+                title: "Bedeutung",
+                text: "Diese Datei kann macOS sagen, dass etwas automatisch im Hintergrund starten darf."
+            )
+
+            SimpleFactRow(
+                systemImage: "shield",
+                title: "Wichtig",
+                text: "Das ist ein Hinweis, kein Alarm. Neu oder unerwartet waere wichtiger als nur sichtbar."
+            )
+        }
+        .padding(16)
+        .background(.background, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.quaternary)
+        )
+    }
+}
+
+private struct SimpleFactRow: View {
+    let systemImage: String
     let title: String
     let text: String
-    let systemImage: String
 
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
@@ -90,7 +145,7 @@ private struct DetailGuidanceItem: View {
                 .foregroundStyle(.secondary)
                 .frame(width: 18)
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(title)
                     .font(.subheadline)
                     .fontWeight(.semibold)
@@ -104,51 +159,35 @@ private struct DetailGuidanceItem: View {
     }
 }
 
-private struct StartupDetailOverview: View {
+private struct StartupTechnicalOverview: View {
     let finding: Finding
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Autostart kurz erklaert")
-                .font(.title3)
-                .fontWeight(.semibold)
+        VStack(alignment: .leading, spacing: 8) {
+            StartupDetailLine(label: "Datei", value: finding.displaySubject)
 
-            VStack(alignment: .leading, spacing: 8) {
-                StartupDetailLine(label: "Datei", value: finding.displaySubject)
-
-                if let label = finding.startupLabel {
-                    StartupDetailLine(label: "Interner Name", value: label)
-                }
-
-                if let program = finding.startupProgram {
-                    StartupDetailLine(label: "Programm", value: program)
-                } else if let arguments = finding.startupProgramArguments {
-                    StartupDetailLine(label: "Startbefehl", value: arguments)
-                }
-
-                if let runAtLoad = finding.startupRunAtLoadText {
-                    StartupDetailLine(label: "Startverhalten", value: runAtLoad)
-                }
-
-                if let keepAlive = finding.startupKeepAliveText {
-                    StartupDetailLine(label: "Hintergrundverhalten", value: keepAlive)
-                }
-
-                if let path = finding.startupFilePath {
-                    StartupDetailLine(label: "Pfad", value: path)
-                }
+            if let label = finding.startupLabel {
+                StartupDetailLine(label: "Interner Name", value: label)
             }
 
-            Text("Das sind Belege aus einer sichtbaren plist-Datei. Sie zeigen, was macOS verwenden kann, aber nicht, ob der Dienst gerade aktiv laeuft.")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            if let program = finding.startupProgram {
+                StartupDetailLine(label: "Programm", value: program)
+            } else if let arguments = finding.startupProgramArguments {
+                StartupDetailLine(label: "Startbefehl", value: arguments)
+            }
+
+            if let runAtLoad = finding.startupRunAtLoadText {
+                StartupDetailLine(label: "Startverhalten", value: runAtLoad)
+            }
+
+            if let keepAlive = finding.startupKeepAliveText {
+                StartupDetailLine(label: "Hintergrundverhalten", value: keepAlive)
+            }
+
+            if let path = finding.startupFilePath {
+                StartupDetailLine(label: "Pfad", value: path)
+            }
         }
-        .padding(16)
-        .background(.background, in: RoundedRectangle(cornerRadius: 8))
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(.quaternary)
-        )
     }
 }
 
@@ -199,6 +238,39 @@ private struct EvidenceSection: View {
                     .fontWeight(.semibold)
 
                 Text("Aufklappen, wenn du Pfade, plist-Details und Rohbelege sehen willst.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+}
+
+private struct TechnicalDetailSection: View {
+    let finding: Finding
+
+    var body: some View {
+        DisclosureGroup {
+            VStack(alignment: .leading, spacing: 16) {
+                FindingSection(title: "Was wurde gefunden?", text: finding.displaySummary)
+
+                if finding.source.kind == .baselineDiff || finding.source.kind == .launchAgentInventory {
+                    StartupTechnicalOverview(finding: finding)
+                }
+
+                EvidenceSection(evidence: finding.evidence)
+
+                Text("Diese technischen Daten sind nur Belege. Sie beweisen nicht, dass etwas gefaehrlich ist oder gerade aktiv laeuft.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.top, 8)
+        } label: {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Technische Details")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+
+                Text("Nur oeffnen, wenn du Pfade, plist-Daten und Rohbelege sehen willst.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }

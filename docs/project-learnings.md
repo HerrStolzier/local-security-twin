@@ -55,6 +55,7 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Fuer den Visual-System-Schnitt sollen Farben semantisch bleiben: Orange fuer Pruefbedarf, Gruen fuer ruhig/stabil, Blau fuer beobachtete Orientierung. Farbe ist Bedeutung, nicht Dekoration.
 - Die App soll systemadaptive macOS-Materialien nutzen, damit sie in Hell- und Dunkelmodus nativer wirkt und nicht wie ein harter Web-Dashboard-Port.
 - Das Produkt darf optisch freundlicher und spielerischer werden als ein klassisches Security-Tool. Gerade weil Cybersecurity schwer wirkt, soll die UI die Schwere abfedern, ohne falsche Sicherheit oder unserioese Spielmechaniken einzubauen.
+- Detailseiten sollen den Nutzer nicht zum Analysten machen. Erst muss die App selbst einordnen: kurze Bedeutung, naechster Schritt, wenige einfache Fakten; Rohdaten und Pfade gehoeren in nachrangige technische Details.
 
 ## Workflow Gotchas
 

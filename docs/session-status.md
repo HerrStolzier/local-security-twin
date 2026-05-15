@@ -9,7 +9,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-14
+- Datum: 2026-05-15
 - Bereich: Kapitel 2 Visual System
 
 ## Zuletzt abgeschlossen
@@ -110,6 +110,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Kapitel 2 `Visual System` als erster Schnitt umgesetzt: systemadaptive Hintergrundflaeche, staerkerer Guardian-Status, semantische Statusfarben, Mission-Badges und ruhigere Aktivitaetszeilen
 - Nutzerfeedback zu Kapitel 2: Farben und Verspieltheit duerfen bewusst hoeher, weil die freundliche Optik die Schwere des Security-Themas abfedert
 - Visual-System-Schnitt entsprechend farbiger gemacht: freundlicher Hintergrund, staerkerer Guardian-Verlauf, farbigere Missionen und Aktivitaetszeilen
+- Detailseite nach Nutzerfeedback reduziert: rechts stehen jetzt zuerst Kurzurteil, naechster Schritt und wenige einfache Autostart-Fakten; Pfade, plist-Daten und Rohbelege sind nachrangig in technischen Details
 
 ## Aktueller Stand in einem Satz
 
@@ -117,7 +118,7 @@ Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen
 
 ## Naechster konkreter Schritt
 
-Kapitel 2 manuell in der App pruefen: trifft die farbigere Version den Sweet Spot zwischen freundlich/gameful und serioes?
+Kapitel 2 manuell in der App pruefen: ist die rechte Detailseite jetzt leicht genug, ohne wichtige Belege zu verstecken?
 
 ## Danach sinnvoll
 

@@ -117,6 +117,25 @@ Kapitel 1 setzt die Startstruktur bewusst um:
 Damit ist der rote Faden besser, aber die visuelle Gestaltung ist noch nicht fertig.
 Kapitel 2 muss daraus jetzt eine wirklich moderne, ruhige und kraftvolle Mac-Oberflaeche machen.
 
+## Detailseiten-Schnitt 2026-05-15
+
+Nutzerfeedback:
+Die rechte Detailseite war nach dem Oeffnen wieder zu nah am alten Problem:
+zu viele technische Informationen, zu viel Denkarbeit beim Nutzer.
+
+Neue Richtung:
+
+- zuerst ein kurzes Buddy-Urteil
+- danach ein klarer naechster Schritt
+- fuer Autostart nur wenige einfache Fakten:
+  - erkannte Datei
+  - was das im Alltag bedeutet
+  - warum es Hinweis statt Alarm ist
+- Pfade, plist-Daten und Rohbelege bleiben erreichbar, aber nur in technischen Details
+
+Produktregel:
+Ein Cybersecurity-Buddy darf technische Belege haben, aber er soll die Last der Einordnung nicht an den Nutzer weiterreichen.
+
 Settings-Feedback aus dem manuellen Test:
 
 - Gemerkte Entscheidungen erscheinen korrekt.
