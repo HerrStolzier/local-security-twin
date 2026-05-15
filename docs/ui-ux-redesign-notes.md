@@ -136,6 +136,10 @@ Neue Richtung:
 Produktregel:
 Ein Cybersecurity-Buddy darf technische Belege haben, aber er soll die Last der Einordnung nicht an den Nutzer weiterreichen.
 
+Visuelle Folge:
+Die Detailseite darf nicht wie ein anderer Inspector wirken.
+Sie soll denselben Buddy-Look wie die Startseite nutzen: weiche Flaechen, semantische Akzentfarbe, kurze Hero-Zone und nachrangige technische Details.
+
 Settings-Feedback aus dem manuellen Test:
 
 - Gemerkte Entscheidungen erscheinen korrekt.

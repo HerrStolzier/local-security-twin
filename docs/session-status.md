@@ -111,6 +111,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Nutzerfeedback zu Kapitel 2: Farben und Verspieltheit duerfen bewusst hoeher, weil die freundliche Optik die Schwere des Security-Themas abfedert
 - Visual-System-Schnitt entsprechend farbiger gemacht: freundlicher Hintergrund, staerkerer Guardian-Verlauf, farbigere Missionen und Aktivitaetszeilen
 - Detailseite nach Nutzerfeedback reduziert: rechts stehen jetzt zuerst Kurzurteil, naechster Schritt und wenige einfache Autostart-Fakten; Pfade, plist-Daten und Rohbelege sind nachrangig in technischen Details
+- Detailbereich visuell an Buddy-Home angepasst: weicher Hintergrund, Hero-Karte, farbige Akzente je Hinweis-Typ und Material-Karten statt grauer Inspector-Flaechen
 
 ## Aktueller Stand in einem Satz
 
@@ -118,7 +119,7 @@ Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen
 
 ## Naechster konkreter Schritt
 
-Kapitel 2 manuell in der App pruefen: ist die rechte Detailseite jetzt leicht genug, ohne wichtige Belege zu verstecken?
+Kapitel 2 manuell in der App pruefen: passt die rechte Detailseite jetzt visuell und inhaltlich zur Buddy-Home-Oberflaeche?
 
 ## Danach sinnvoll
 

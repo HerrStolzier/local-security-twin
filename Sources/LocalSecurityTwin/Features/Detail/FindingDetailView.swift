@@ -4,45 +4,108 @@ struct FindingDetailView: View {
     @EnvironmentObject private var policyStore: PolicyStore
     let finding: Finding
 
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(finding.displayTitle)
-                        .font(.title)
-                        .fontWeight(.semibold)
-
-                    DetailStatusRow(finding: finding)
-                }
-
-                DetailGuidancePanel(finding: finding)
-
-                if finding.source.kind == .baselineDiff || finding.source.kind == .launchAgentInventory {
-                    StartupSimpleOverview(finding: finding)
-                }
-
-                RecommendationSection(
-                    finding: finding,
-                    policyStore: policyStore
-                )
-                TechnicalDetailSection(finding: finding)
-            }
-            .padding(28)
-            .frame(maxWidth: 920, alignment: .leading)
-            .frame(maxWidth: .infinity, alignment: .leading)
+    private var accentColor: Color {
+        switch finding.displayGroup {
+        case .changes:
+            return .orange
+        case .knownStartupHints:
+            return .cyan
+        case .review:
+            return .purple
         }
-        .background(.background)
+    }
+
+    var body: some View {
+        ZStack {
+            DetailBackground()
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    DetailHeroCard(finding: finding, accentColor: accentColor)
+
+                    DetailGuidancePanel(finding: finding, accentColor: accentColor)
+
+                    if finding.source.kind == .baselineDiff || finding.source.kind == .launchAgentInventory {
+                        StartupSimpleOverview(finding: finding, accentColor: accentColor)
+                    }
+
+                    RecommendationSection(
+                        finding: finding,
+                        policyStore: policyStore,
+                        accentColor: accentColor
+                    )
+                    TechnicalDetailSection(finding: finding, accentColor: accentColor)
+                }
+                .padding(28)
+                .frame(maxWidth: 920, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+    }
+}
+
+private struct DetailBackground: View {
+    var body: some View {
+        LinearGradient(
+            colors: [
+                Color.cyan.opacity(0.08),
+                Color.purple.opacity(0.06),
+                Color(nsColor: .windowBackgroundColor),
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
+    }
+}
+
+private struct DetailHeroCard: View {
+    let finding: Finding
+    let accentColor: Color
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .center, spacing: 12) {
+                Image(systemName: "shield.lefthalf.filled")
+                    .font(.title2)
+                    .foregroundStyle(accentColor)
+                    .frame(width: 44, height: 44)
+                    .background(accentColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 8))
+
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Buddy-Check")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(accentColor)
+
+                    Text(finding.displayTitle)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
+            DetailStatusRow(finding: finding, accentColor: accentColor)
+        }
+        .padding(18)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(accentColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(accentColor.opacity(0.24))
+        )
     }
 }
 
 private struct DetailStatusRow: View {
     let finding: Finding
+    let accentColor: Color
 
     var body: some View {
         HStack(spacing: 8) {
-            DetailPill(text: finding.displaySourceTitle, systemImage: "dot.scope")
-            DetailPill(text: finding.severity.displayTitle, systemImage: "shield")
-            DetailPill(text: finding.confidence.displayTitle, systemImage: "checkmark.seal")
+            DetailPill(text: finding.displaySourceTitle, systemImage: "dot.scope", color: accentColor)
+            DetailPill(text: finding.severity.displayTitle, systemImage: "shield", color: accentColor)
+            DetailPill(text: finding.confidence.displayTitle, systemImage: "checkmark.seal", color: accentColor)
         }
     }
 }
@@ -50,26 +113,28 @@ private struct DetailStatusRow: View {
 private struct DetailPill: View {
     let text: String
     let systemImage: String
+    let color: Color
 
     var body: some View {
         Label(text, systemImage: systemImage)
             .font(.caption)
             .fontWeight(.semibold)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(color)
             .padding(.horizontal, 8)
             .padding(.vertical, 5)
-            .background(.quaternary, in: Capsule())
+            .background(color.opacity(0.12), in: Capsule())
     }
 }
 
 private struct DetailGuidancePanel: View {
     let finding: Finding
+    let accentColor: Color
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Label("Kurz gesagt", systemImage: "text.bubble")
                 .font(.headline)
-                .foregroundStyle(.primary)
+                .foregroundStyle(accentColor)
 
             Text(finding.plainLanguageAssessment)
                 .font(.title3)
@@ -91,15 +156,17 @@ private struct DetailGuidancePanel: View {
         }
         .padding(16)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(accentColor.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(.quaternary)
+                .stroke(accentColor.opacity(0.18))
         )
     }
 }
 
 private struct StartupSimpleOverview: View {
     let finding: Finding
+    let accentColor: Color
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -126,10 +193,11 @@ private struct StartupSimpleOverview: View {
             )
         }
         .padding(16)
-        .background(.background, in: RoundedRectangle(cornerRadius: 8))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(accentColor.opacity(0.05), in: RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(.quaternary)
+                .stroke(accentColor.opacity(0.16))
         )
     }
 }
@@ -247,6 +315,7 @@ private struct EvidenceSection: View {
 
 private struct TechnicalDetailSection: View {
     let finding: Finding
+    let accentColor: Color
 
     var body: some View {
         DisclosureGroup {
@@ -275,12 +344,19 @@ private struct TechnicalDetailSection: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .padding(14)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(accentColor.opacity(0.14))
+        )
     }
 }
 
 private struct RecommendationSection: View {
     let finding: Finding
     let policyStore: PolicyStore
+    let accentColor: Color
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -295,7 +371,8 @@ private struct RecommendationSection: View {
                 RecommendationCard(
                     recommendation: primaryRecommendation,
                     request: finding.policyRequest(for: primaryRecommendation),
-                    policyStore: policyStore
+                    policyStore: policyStore,
+                    accentColor: accentColor
                 )
             }
 
@@ -306,7 +383,8 @@ private struct RecommendationSection: View {
                         RecommendationCard(
                             recommendation: recommendation,
                             request: finding.policyRequest(for: recommendation),
-                            policyStore: policyStore
+                            policyStore: policyStore,
+                            accentColor: accentColor
                         )
                     }
                 }
@@ -319,6 +397,7 @@ private struct RecommendationCard: View {
     let recommendation: FindingRecommendation
     let request: PolicyRequest
     let policyStore: PolicyStore
+    let accentColor: Color
 
     @State private var localError: String?
     @State private var pendingDecision: PendingPolicyDecision?
@@ -376,10 +455,11 @@ private struct RecommendationCard: View {
             }
         }
         .padding(14)
-        .background(.background, in: RoundedRectangle(cornerRadius: 8))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(accentColor.opacity(0.05), in: RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(.quaternary)
+                .stroke(accentColor.opacity(0.16))
         )
         .confirmationDialog(
             confirmationTitle,
