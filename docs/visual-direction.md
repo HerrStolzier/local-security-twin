@@ -128,6 +128,10 @@ Der Nutzer geht bewusst dorthin.
 
 Gamification soll Verhalten erleichtern, nicht Druck erzeugen.
 
+Nach Nutzerfeedback vom 2026-05-15 darf die App bewusst farbiger und etwas verspielter wirken.
+Grund:
+Das Thema ist ernst; die Oberflaeche darf diese Schwere abfedern, solange sie weiter ehrlich und vertrauenswuerdig bleibt.
+
 Erlaubt:
 
 - Missionen
@@ -135,6 +139,8 @@ Erlaubt:
 - Schutzbereiche
 - ruhige Badges
 - "naechster Verteidigungsschritt"
+- freundlichere semantische Farben
+- leichte Health-/Gameful-Defender-Anmutung
 
 Nicht erlaubt:
 
@@ -142,6 +148,7 @@ Nicht erlaubt:
 - manipulative Streaks
 - Scheinsicherheit durch Score
 - Punkte fuer Dinge, die die App nicht sicher messen kann
+- bunte Dekoration ohne Bedeutung
 
 ## Naechste Design-Iteration
 

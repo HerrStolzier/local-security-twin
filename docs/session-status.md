@@ -108,6 +108,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Presentation-Tests fuer Buddy-Home-Missionen, Aktivitaetsmeldungen und ruhigen Leerzustand ergaenzt
 - manuelle Nutzerabnahme am 2026-05-15: neue Buddy-Home-Ansicht wirkt deutlich ruhiger, uebersichtlicher und ansprechender
 - Kapitel 2 `Visual System` als erster Schnitt umgesetzt: systemadaptive Hintergrundflaeche, staerkerer Guardian-Status, semantische Statusfarben, Mission-Badges und ruhigere Aktivitaetszeilen
+- Nutzerfeedback zu Kapitel 2: Farben und Verspieltheit duerfen bewusst hoeher, weil die freundliche Optik die Schwere des Security-Themas abfedert
+- Visual-System-Schnitt entsprechend farbiger gemacht: freundlicher Hintergrund, staerkerer Guardian-Verlauf, farbigere Missionen und Aktivitaetszeilen
 
 ## Aktueller Stand in einem Satz
 
@@ -115,7 +117,7 @@ Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen
 
 ## Naechster konkreter Schritt
 
-Kapitel 2 manuell in der App pruefen: wirkt die neue Oberflaeche moderner und klarer, ohne zu verspielt oder alarmistisch zu werden?
+Kapitel 2 manuell in der App pruefen: trifft die farbigere Version den Sweet Spot zwischen freundlich/gameful und serioes?
 
 ## Danach sinnvoll
 

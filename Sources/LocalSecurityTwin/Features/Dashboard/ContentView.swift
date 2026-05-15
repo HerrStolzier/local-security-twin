@@ -114,8 +114,10 @@ private struct BuddyHomeBackground: View {
     var body: some View {
         LinearGradient(
             colors: [
+                Color.blue.opacity(0.10),
+                Color.green.opacity(0.08),
+                Color.orange.opacity(0.07),
                 Color(nsColor: .windowBackgroundColor),
-                Color(nsColor: .controlBackgroundColor),
             ],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
@@ -177,7 +179,7 @@ private struct GuardianStatusCard: View {
             return .green
         }
 
-        return .blue
+        return .cyan
     }
 
     var body: some View {
@@ -190,14 +192,31 @@ private struct GuardianStatusCard: View {
 
                     Circle()
                         .trim(from: 0, to: presentation.guardianProgress)
-                        .stroke(toneColor, style: StrokeStyle(lineWidth: 12, lineCap: .round))
+                        .stroke(
+                            AngularGradient(
+                                colors: [
+                                    toneColor,
+                                    .green,
+                                    .blue,
+                                    toneColor,
+                                ],
+                                center: .center
+                            ),
+                            style: StrokeStyle(lineWidth: 12, lineCap: .round)
+                        )
                         .rotationEffect(.degrees(-90))
                         .frame(width: 140, height: 140)
 
                     VStack(spacing: 6) {
-                        Image(systemName: "shield.lefthalf.filled")
+                        Image(systemName: presentation.startupChangeCount > 0 ? "shield.righthalf.filled" : "shield.lefthalf.filled")
                             .font(.system(size: 30, weight: .semibold))
-                            .foregroundStyle(toneColor)
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [toneColor, .blue],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
 
                         Text(presentation.guardianTone)
                             .font(.caption)
@@ -243,18 +262,29 @@ private struct GuardianStatusCard: View {
                 Spacer(minLength: 8)
 
                 DefenseMetric(value: presentation.startupChangeCount, label: "neu", color: .orange)
-                DefenseMetric(value: presentation.knownStartupCount, label: "bekannt", color: .blue)
+                DefenseMetric(value: presentation.knownStartupCount, label: "bekannt", color: .cyan)
                 DefenseMetric(value: presentation.reviewCount, label: "System", color: .green)
             }
         }
         .padding(28)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(
+            LinearGradient(
+                colors: [
+                    toneColor.opacity(0.16),
+                    Color.green.opacity(0.10),
+                    Color(nsColor: .controlBackgroundColor).opacity(0.72),
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            ),
+            in: RoundedRectangle(cornerRadius: 8)
+        )
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(toneColor.opacity(0.22), lineWidth: 1)
+                .stroke(toneColor.opacity(0.32), lineWidth: 1)
         )
-        .shadow(color: .black.opacity(0.08), radius: 18, x: 0, y: 10)
+        .shadow(color: toneColor.opacity(0.18), radius: 22, x: 0, y: 12)
     }
 }
 
@@ -293,7 +323,11 @@ private struct DefenseMetric: View {
         .frame(width: 72, alignment: .leading)
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
-        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(color.opacity(0.12), in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(color.opacity(0.16))
+        )
     }
 }
 
@@ -334,7 +368,7 @@ private struct MissionCard: View {
         case "startup":
             return .orange
         case "system":
-            return .blue
+            return .cyan
         case "hygiene":
             return .green
         default:
@@ -388,11 +422,22 @@ private struct MissionCard: View {
         }
         .padding(16)
         .frame(maxWidth: .infinity, minHeight: 210, alignment: .topLeading)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(
+            LinearGradient(
+                colors: [
+                    accentColor.opacity(0.16),
+                    Color(nsColor: .controlBackgroundColor).opacity(0.72),
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            ),
+            in: RoundedRectangle(cornerRadius: 8)
+        )
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(accentColor.opacity(0.18))
+                .stroke(accentColor.opacity(0.28))
         )
+        .shadow(color: accentColor.opacity(0.08), radius: 12, x: 0, y: 8)
     }
 }
 
@@ -421,7 +466,7 @@ private struct ActivityFeedRow: View {
     let openFinding: (Finding.ID) -> Void
 
     private var accentColor: Color {
-        item.findingID == nil ? .green : .blue
+        item.findingID == nil ? .green : .cyan
     }
 
     var body: some View {
@@ -450,7 +495,21 @@ private struct ActivityFeedRow: View {
             }
         }
         .padding(14)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(
+            LinearGradient(
+                colors: [
+                    accentColor.opacity(0.10),
+                    Color(nsColor: .controlBackgroundColor).opacity(0.7),
+                ],
+                startPoint: .leading,
+                endPoint: .trailing
+            ),
+            in: RoundedRectangle(cornerRadius: 8)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(accentColor.opacity(0.16))
+        )
     }
 }
 
