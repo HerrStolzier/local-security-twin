@@ -12,6 +12,7 @@ Sie ersetzt nicht die Detaildokumente, sondern ordnet sie:
 - `docs/product-flow-and-feature-plan.md`: roter Faden, Produktbild und Feature-Bausteine
 - `docs/visual-direction.md`: gewaehlte visuelle Richtung fuer den Buddy-Redesign-Schnitt
 - `docs/adversarial-review-and-best-practices.md`: Black-Hat-Gegenpruefung und Best-Practice-Monitoring
+- `docs/privacy-footprint-cleanup.md`: spaeteres Modul fuer digitalen Fussabdruck, Data Broker, alte Accounts und Breach-Hygiene
 - `docs/project-completion-plan.md`: detaillierter Weg vom aktuellen Prototyp zum MVP
 - `docs/ui-ux-redesign-notes.md`: naechster UI-/UX-Schnitt
 - `docs/background-task-management-spike.md`: spaeterer macOS-Startup-Spike
@@ -76,6 +77,7 @@ Der naechste Schnitt soll:
 6. LLM-Erklaerungen erst als Erklaerhilfe planen, nicht als alleinige Wahrheit
 7. Security-Hygiene-Themen wie 2FA, Passwortmanager, VPN, Antivirus/Security-Tools, Firewall, FileVault und System Extensions als eigene, ehrlich begrenzte Schicht planen
 8. eine feste adversarial Review-Perspektive nutzen: "Welche realistische Angriffskette wuerde ein Verteidiger hier sichtbar machen wollen?"
+9. spaeter digitalen Fussabdruck als gefuehrten Privacy-Cleanup aufnehmen, aber nicht als heimliche Vollautomatik
 
 Nicht-Ziel dieses Schnitts:
 
@@ -86,6 +88,7 @@ Nicht-Ziel dieses Schnitts:
 - keine LLM-Entscheidungen ohne belegbare lokale oder externe Daten
 - keine Exploit-Automation und keine offensiven Tests gegen reale Systeme
 - keine pauschalen Versprechen zu 2FA, VPN, Antivirus oder Passwortmanagern, wenn die App es nicht lokal oder per Integration belegen kann
+- keine automatische Personensuche, keine automatischen Loeschanfragen und keine Verarbeitung von Identitaetsdokumenten ohne bewusste Produktentscheidung
 
 ## Neue Phasen nach dem roten Faden
 
@@ -201,6 +204,36 @@ Regeln:
 - Keine echten Angriffe, keine fremden Ziele, keine destruktiven Tests.
 - Ergebnis ist eine bessere Sensor-/UX-Entscheidung oder eine ehrliche Grenze in `docs/known-limits.md`.
 - Hohe Rechte werden erst vorgeschlagen, wenn der Nutzen konkret und verstaendlich ist.
+
+### Phase 2d: Digitaler Fussabdruck und Privacy Cleanup
+
+Status: geplant.
+
+Ziel:
+Der Buddy soll spaeter helfen, oeffentlich sichtbare personenbezogene Spuren zu reduzieren und echte Risiken daraus verstaendlich zu priorisieren.
+
+Erste Bausteine:
+
+1. Data-Broker- und People-Search-Treffer als vom Nutzer bestaetigte Aufgabenliste erfassen
+2. alte Accounts mit JustDeleteMe-aehnlichen Quellen in Loeschaufgaben verwandeln
+3. Breach-Hygiene ueber Have I Been Pwned oder manuelle Importliste einordnen
+4. Loesch- und Opt-out-Textvorlagen fuer DSGVO, CCPA/CPRA und optional KVKK vorbereiten
+5. E-Mail-Alias-Hygiene mit SimpleLogin/Proton/Fuer-spaeter-Integrationen als Empfehlung fuehren
+
+Kritische Grenzen:
+
+- Keine heimliche Suche nach Name, Telefonnummer oder E-Mail.
+- Keine automatischen Loeschanfragen.
+- Keine Identitaetsdokumente in der App speichern oder weiterleiten.
+- Keine SEO-Manipulation als Produktkern.
+- Rechtliche Texte sind Hilfen, keine Rechtsberatung.
+
+Akzeptanzkriterien:
+
+- Jede externe Abfrage braucht bewusste Zustimmung.
+- Die App zeigt den Status lokal: gefunden, geprueft, vorbereitet, gesendet, bestaetigt, nachfassen.
+- Der Buddy priorisiert nach Risiko: Datenlecks und Account-Sicherheit zuerst, kosmetische Suchergebnisse spaeter.
+- Der Nutzer sieht immer, welche Daten an wen gehen koennten.
 
 ### Phase 3: App-Inventur
 

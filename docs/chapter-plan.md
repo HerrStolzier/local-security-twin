@@ -245,7 +245,44 @@ Abnahme:
 - Jede Aktion sagt vorher, was passiert.
 - Entscheidungen sind sichtbar und ruecksetzbar.
 
-## Kapitel 9: Packaging and Trust
+## Kapitel 9: Digitaler Fussabdruck
+
+Status: geplant.
+
+Ziel:
+Der Buddy hilft spaeter nicht nur beim lokalen Mac, sondern auch beim Reduzieren sichtbarer persoenlicher Spuren im Internet.
+
+Nicht als Vollautomatik:
+Die App soll keine heimlichen Online-Suchen starten, keine Loeschanfragen automatisch versenden und keine Identitaetsdokumente verarbeiten.
+
+Stattdessen:
+
+- gefuehrter Privacy-Cleanup-Workflow
+- lokale Aufgabenliste
+- Quellen und Fundstellen vom Nutzer bestaetigen lassen
+- Data-Broker-/Opt-out-Anleitungen strukturieren
+- Account-Loeschungen vorbereiten
+- Datenlecks einordnen
+- E-Mail-Alias- und Passwortmanager-Hygiene erklaeren
+- DSGVO-/CCPA-/KVKK-Textvorlagen vorbereiten
+- Status lokal verfolgen: gefunden, geprueft, Anfrage vorbereitet, gesendet, bestaetigt, nachfassen
+
+Moegliche Quellen und Inspiration:
+
+- Data-Broker-Verzeichnisse wie Big Ass Data Broker Opt-Out List und Optery Data Broker Directory
+- JustDeleteMe fuer Account-Loeschlinks
+- Have I Been Pwned fuer Breach-Hygiene, mit API-Key-Grenzen fuer E-Mail-Abfragen
+- SimpleLogin als Open-Source-Inspiration fuer E-Mail-Alias-Hygiene
+
+Abnahme:
+
+- Die App erklaert klar, welche Daten der Nutzer freiwillig eingibt.
+- Der Nutzer bestaetigt jede externe Suche oder Anfrage bewusst.
+- Keine sensiblen personenbezogenen Daten werden ohne ausdrueckliche Zustimmung versendet.
+- Der Buddy priorisiert und erklaert, statt blind Formulare abzuarbeiten.
+- Rechtliche Vorlagen sind als Hilfstexte gekennzeichnet, nicht als Rechtsberatung.
+
+## Kapitel 10: Packaging and Trust
 
 Status: teilweise vorbereitet.
 
@@ -276,8 +313,10 @@ Abnahme:
 6. Kapitel 5: Threat Intelligence
 7. Kapitel 6: App Inventory
 8. Kapitel 8: Guided Actions
-9. Kapitel 9: Packaging and Trust
+9. Kapitel 9: Digitaler Fussabdruck
+10. Kapitel 10: Packaging and Trust
 
 Warum diese Reihenfolge:
 Erst muss die App verstaendlich und angenehm werden.
 Danach lohnt sich mehr Intelligenz, mehr Sensorik und mehr Handlungskraft.
+Der digitale Fussabdruck kommt nach den lokalen Grundlagen, weil dort personenbezogene Daten, externe Dienste und rechtliche Workflows beruehrt werden.

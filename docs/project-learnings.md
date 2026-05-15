@@ -56,6 +56,8 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Die App soll systemadaptive macOS-Materialien nutzen, damit sie in Hell- und Dunkelmodus nativer wirkt und nicht wie ein harter Web-Dashboard-Port.
 - Das Produkt darf optisch freundlicher und spielerischer werden als ein klassisches Security-Tool. Gerade weil Cybersecurity schwer wirkt, soll die UI die Schwere abfedern, ohne falsche Sicherheit oder unserioese Spielmechaniken einzubauen.
 - Detailseiten sollen den Nutzer nicht zum Analysten machen. Erst muss die App selbst einordnen: kurze Bedeutung, naechster Schritt, wenige einfache Fakten; Rohdaten und Pfade gehoeren in nachrangige technische Details.
+- Digitaler Fussabdruck passt als spaeterer Produktarm zum Security Buddy, aber nur als gefuehrter Privacy-Cleanup: priorisieren, Vorlagen erstellen, Fortschritt lokal merken. Keine heimliche Personensuche, keine automatischen Loeschanfragen und keine Verarbeitung von Identitaetsdokumenten im MVP.
+- Fuer Privacy-Footprint-Cleanup sind vorhandene Quellen eher Verzeichnisse und APIs als fertige Loesung: Data-Broker-Opt-out-Listen, JustDeleteMe, Have I Been Pwned und SimpleLogin koennen helfen, aber die Buddy-Schicht und die sichere Zustimmung muessen wir selbst bauen.
 
 ## Workflow Gotchas
 

@@ -145,6 +145,28 @@ Wichtig:
 Viele dieser Punkte sind zuerst keine automatischen Sensoren, sondern gefuehrte Fragen.
 Die App soll ehrlich unterscheiden zwischen "gesehen", "vom Nutzer bestaetigt" und "noch nicht pruefbar".
 
+### 8. Digitaler Fussabdruck und externe Privatsphaere
+
+Ziel:
+Der Buddy soll spaeter auch dort helfen, wo reale Angriffe oft vorbereitet werden:
+oeffentlich sichtbare persoenliche Daten, alte Accounts, Datenlecks und wiederverwendete Kontaktinformationen.
+
+Beispiele:
+
+- Data-Broker- und People-Search-Listings als Aufgaben erfassen
+- alte Accounts finden und Loeschwege vorbereiten
+- Datenlecks priorisieren: Passwort aendern, 2FA aktivieren, Account loeschen, Alias ersetzen
+- DSGVO-/CCPA-/KVKK-Loeschanfragen als Hilfstext vorbereiten
+- E-Mail-Alias-Hygiene erklaeren, zum Beispiel mit SimpleLogin oder vergleichbaren Diensten
+
+Wichtig:
+Das ist kein Autopilot.
+Die App soll nicht heimlich nach dem Nutzer suchen, keine Loeschanfragen automatisch verschicken und keine Identitaetsdokumente verwalten.
+Der Buddy soll vorbereiten, priorisieren und lokal nachhalten; der Nutzer entscheidet bewusst.
+
+Kritischer Produktpunkt:
+Der harte Teil ist nicht nur Textgenerierung, sondern Verifikation, Follow-up, erneute Listings und das Risiko, bei unserioesen Anbietern noch mehr Daten preiszugeben.
+
 ## Der rote Nutzerfluss
 
 Der Nutzer soll die App nicht wie ein Admin-Dashboard bedienen muessen.
@@ -345,6 +367,34 @@ Wichtig:
 Was die App nicht lokal sicher messen kann, darf sie nicht behaupten.
 Solche Themen werden als Buddy-Frage oder Checkliste behandelt.
 
+### H. Privacy-Footprint-Cleanup
+
+Aufgabe:
+Der Buddy begleitet einen gefuehrten Cleanup des digitalen Fussabdrucks.
+
+Moegliche Quellen:
+
+- Data-Broker-Verzeichnisse und Opt-out-Listen
+- JustDeleteMe fuer Account-Loeschwege
+- Have I Been Pwned fuer Breach-Hygiene, mit klarer API-Key-/Datenschutzgrenze
+- SimpleLogin als Vorbild oder spaetere Integration fuer E-Mail-Aliase
+
+Frueher MVP-Schnitt:
+
+- lokale Aufgabenliste
+- manuelle Fundstellen erfassen
+- Loesch-/Opt-out-Vorlagen erzeugen
+- Nachfassfristen merken
+- Status je Aufgabe sichtbar machen
+
+Nicht bauen:
+
+- automatische Personensuche ohne Zustimmung
+- automatische Opt-out-Formular-Automation
+- Upload oder Speicherung von Ausweisdokumenten
+- SEO-"Begraben" als automatisierte Manipulation
+- Rechtsberatung statt klar markierter Vorlage
+
 ## Bauen, integrieren oder inspirieren lassen
 
 ### Direkt bauen
@@ -361,6 +411,10 @@ Solche Themen werden als Buddy-Frage oder Checkliste behandelt.
 - CISA KEV fuer aktiv ausgenutzte Schwachstellen
 - FIRST EPSS fuer Ausnutzungswahrscheinlichkeit
 - NVD spaeter fuer breitere CVE-Abdeckung
+- Have I Been Pwned spaeter fuer Breach-Hygiene, wenn API-Key-/Datenschutzmodell geklaert ist
+- JustDeleteMe-Daten fuer gefuehrte Account-Loeschwege
+- Data-Broker-Verzeichnisse fuer Opt-out-Aufgaben, sofern Lizenz und Pflegezustand passen
+- SimpleLogin oder vergleichbare Alias-Dienste als Empfehlung oder spaetere optionale Integration
 
 ### Als Inspiration nutzen
 

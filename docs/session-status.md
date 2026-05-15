@@ -112,6 +112,9 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Visual-System-Schnitt entsprechend farbiger gemacht: freundlicher Hintergrund, staerkerer Guardian-Verlauf, farbigere Missionen und Aktivitaetszeilen
 - Detailseite nach Nutzerfeedback reduziert: rechts stehen jetzt zuerst Kurzurteil, naechster Schritt und wenige einfache Autostart-Fakten; Pfade, plist-Daten und Rohbelege sind nachrangig in technischen Details
 - Detailbereich visuell an Buddy-Home angepasst: weicher Hintergrund, Hero-Karte, farbige Akzente je Hinweis-Typ und Material-Karten statt grauer Inspector-Flaechen
+- Off-topic Research-Runde zu digitalem Fussabdruck eingeordnet und dokumentiert
+- `docs/privacy-footprint-cleanup.md` angelegt
+- Roadmap, Kapitelplan und Produktfaden um spaeteres Modul `Digitaler Fussabdruck / Privacy Cleanup` erweitert
 
 ## Aktueller Stand in einem Satz
 
@@ -119,7 +122,7 @@ Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen
 
 ## Naechster konkreter Schritt
 
-Kapitel 2 manuell in der App pruefen: passt die rechte Detailseite jetzt visuell und inhaltlich zur Buddy-Home-Oberflaeche?
+Zurueck zu Kapitel 2: rechte Detailseite in der App manuell pruefen und entscheiden, ob der Visual-System-Schnitt fuer diese Phase abgenommen ist.
 
 ## Danach sinnvoll
 
