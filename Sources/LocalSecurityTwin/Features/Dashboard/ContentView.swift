@@ -283,6 +283,8 @@ private struct BuddyHomeView: View {
                         openFinding: openFinding
                     )
 
+                    HygieneOverviewSection(items: presentation.hygieneOverviewItems)
+
                     ActivityFeedSection(
                         items: presentation.activityItems,
                         openFinding: openFinding
@@ -932,6 +934,81 @@ private struct SentoLocalPromiseCard: View {
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(.cyan.opacity(0.16))
+        )
+    }
+}
+
+private struct HygieneOverviewSection: View {
+    let items: [HygieneOverviewItem]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(
+                title: "Security-Hygiene",
+                subtitle: "Diese Punkte sind vorbereitet, aber nicht alle automatisch geprüft."
+            )
+
+            LazyVGrid(
+                columns: [
+                    GridItem(.adaptive(minimum: 250), spacing: 14),
+                ],
+                spacing: 14
+            ) {
+                ForEach(items) { item in
+                    HygieneOverviewCard(item: item)
+                }
+            }
+        }
+    }
+}
+
+private struct HygieneOverviewCard: View {
+    let item: HygieneOverviewItem
+
+    private var accentColor: Color {
+        switch item.id {
+        case SecurityHygieneEvidenceKind.observedLocally.rawValue:
+            return .green
+        case SecurityHygieneEvidenceKind.userAnswered.rawValue:
+            return .purple
+        case SecurityHygieneEvidenceKind.notVerifiable.rawValue:
+            return .secondary
+        default:
+            return .cyan
+        }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .top, spacing: 10) {
+                Circle()
+                    .fill(accentColor.opacity(0.22))
+                    .frame(width: 10, height: 10)
+                    .padding(.top, 5)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(item.title)
+                        .font(.headline)
+
+                    Text(item.explanation)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
+            Text(item.checkTitles.joined(separator: " · "))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(3)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(accentColor.opacity(0.16))
         )
     }
 }

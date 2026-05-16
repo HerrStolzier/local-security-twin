@@ -143,6 +143,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Kapitel 3 `Update Awareness` gilt damit als ausreichender erster Prototyp-Schnitt; spätere Feinarbeit bleibt bei echter UI-Automation und spezifischeren Detailaktionen offen.
 - Kapitel 4 `Security Hygiene` begonnen: `docs/security-hygiene-plan.md` legt Belegtypen, Startkategorien, Grenzen und Akzeptanzkriterien fest, damit automatisch prüfbare Signale und geführte Nutzerfragen sauber getrennt bleiben.
 - Erstes Hygiene-Modell ergänzt: `SecurityHygieneEvidenceKind`, `SecurityHygieneCategory`, `SecurityHygieneCheckID` und `SecurityHygieneCheck.initialCatalog` trennen lokale Signale, abgeleitete Hinweise, Nutzerangaben und nicht prüfbare Bereiche.
+- Hygiene-Modell in die Buddy-Home-Presentation eingebunden: Die Security-Hygiene-Mission zeigt jetzt vorbereitete Belegtypen statt nur `Geplant`, und eine kompakte Übersicht gruppiert lokale Schutzsignale, geführte Nutzerfragen und nicht automatisch prüfbare Punkte.
 
 ## Aktueller Stand in einem Satz
 
@@ -150,7 +151,7 @@ Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Gua
 
 ## Nächster konkreter Schritt
 
-Kapitel 4 als ersten UI-/Presentation-Schnitt fortsetzen: die bestehende Mission `Security-Hygiene` an das neue Hygiene-Modell anbinden, dabei alle Belegtypen sichtbar machen und geplante Fragen weiter klar als Nutzerangabe markieren.
+Kapitel 4 visuell prüfen: App starten und beurteilen, ob die neue Security-Hygiene-Übersicht verständlich wirkt, ohne 2FA, Passwortmanager, FileVault, Firewall oder VPN als bereits geprüft erscheinen zu lassen.
 
 ## Danach sinnvoll
 
@@ -222,6 +223,10 @@ Kapitel 4 als ersten UI-/Presentation-Schnitt fortsetzen: die bestehende Mission
 - `swift test` am 2026-05-16 nach erstem Hygiene-Modell; 51 Tests erfolgreich
 - `./scripts/checks.sh` am 2026-05-16 nach erstem Hygiene-Modell
 - `./scripts/build-app-bundle.sh` am 2026-05-16 nach erstem Hygiene-Modell
+- `swift test --filter FindingSchemaTests` am 2026-05-16 nach Hygiene-Presentation-Schnitt; 9 Tests erfolgreich
+- `swift test` am 2026-05-16 nach Hygiene-Presentation-Schnitt; 53 Tests erfolgreich
+- `./scripts/checks.sh` am 2026-05-16 nach Hygiene-Presentation-Schnitt
+- `./scripts/build-app-bundle.sh` am 2026-05-16 nach Hygiene-Presentation-Schnitt
 - `swift test` am 2026-05-16 nach Persistenz-Sichtbarkeits-Regressionen; 49 Tests erfolgreich
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`

@@ -145,6 +145,32 @@ struct DashboardPresentation {
         ]
     }
 
+    var hygieneOverviewItems: [HygieneOverviewItem] {
+        let orderedKinds: [SecurityHygieneEvidenceKind] = [
+            .observedLocally,
+            .userAnswered,
+            .notVerifiable,
+            .inferredFromLocalSignal,
+        ]
+
+        return orderedKinds.compactMap { kind in
+            let checks = SecurityHygieneCheck.initialCatalog
+                .filter { $0.evidenceKind == kind }
+                .sorted { $0.title.localizedCaseInsensitiveCompare($1.title) == .orderedAscending }
+
+            guard !checks.isEmpty else {
+                return nil
+            }
+
+            return HygieneOverviewItem(
+                id: kind.rawValue,
+                title: kind.title,
+                explanation: kind.explanation,
+                checkTitles: checks.map(\.title)
+            )
+        }
+    }
+
     var activityItems: [BuddyActivityItem] {
         var items: [BuddyActivityItem] = []
 
@@ -326,14 +352,19 @@ struct DashboardPresentation {
     }
 
     private var hygieneMission: BuddyMission {
-        BuddyMission(
+        let catalog = SecurityHygieneCheck.initialCatalog
+        let locallyObservedCount = catalog.count { $0.evidenceKind == .observedLocally }
+        let userAnsweredCount = catalog.count { $0.evidenceKind == .userAnswered }
+        let notVerifiableCount = catalog.count { $0.evidenceKind == .notVerifiable }
+
+        return BuddyMission(
             id: "hygiene",
             title: "Security-Hygiene",
-            status: "Geplant",
-            summary: "Hier landen später FileVault, Firewall, Updates, 2FA, Passwortmanager und VPN-Fragen.",
+            status: "Belegtypen geplant",
+            summary: "\(locallyObservedCount) lokale Schutzsignale, \(userAnsweredCount) geführte Nutzerfragen und \(notVerifiableCount) noch nicht automatisch prüfbare Punkte sind vorbereitet.",
             systemImage: "checklist",
-            progress: 0.15,
-            primaryActionTitle: "Noch nicht aktiv",
+            progress: 0.28,
+            primaryActionTitle: "Noch begrenzt",
             findingID: nil
         )
     }
@@ -382,6 +413,13 @@ struct BuddyActivityItem: Identifiable, Equatable {
     let title: String
     let message: String
     let findingID: Finding.ID?
+}
+
+struct HygieneOverviewItem: Identifiable, Equatable {
+    let id: String
+    let title: String
+    let explanation: String
+    let checkTitles: [String]
 }
 
 extension Finding {

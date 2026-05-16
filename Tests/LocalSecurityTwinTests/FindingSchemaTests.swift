@@ -163,6 +163,34 @@ struct FindingSchemaTests {
         #expect(presentation.activityItems.first?.id == "startup-stable")
     }
 
+    @Test func dashboardPresentationSurfacesHygieneEvidenceTypesWithoutClaimingChecks() throws {
+        let presentation = DashboardPresentation(findings: [])
+        let hygieneMission = try #require(presentation.missions.first { $0.id == "hygiene" })
+
+        #expect(hygieneMission.status == "Belegtypen geplant")
+        #expect(hygieneMission.summary.contains("lokale Schutzsignale"))
+        #expect(hygieneMission.summary.contains("geführte Nutzerfragen"))
+        #expect(hygieneMission.summary.contains("noch nicht automatisch prüfbare Punkte"))
+        #expect(hygieneMission.findingID == nil)
+    }
+
+    @Test func dashboardPresentationGroupsHygieneOverviewByEvidenceKind() throws {
+        let presentation = DashboardPresentation(findings: [])
+
+        let local = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.observedLocally.rawValue })
+        #expect(local.checkTitles.contains("macOS-Updates"))
+        #expect(local.checkTitles.contains("Gatekeeper"))
+        #expect(local.checkTitles.contains("System Integrity Protection"))
+
+        let userAnswered = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.userAnswered.rawValue })
+        #expect(userAnswered.checkTitles.contains("2FA für wichtige Konten"))
+        #expect(userAnswered.checkTitles.contains("Passwortmanager"))
+
+        let notVerifiable = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.notVerifiable.rawValue })
+        #expect(notVerifiable.checkTitles.contains("FileVault"))
+        #expect(notVerifiable.checkTitles.contains("System Extensions"))
+    }
+
     @Test func dashboardPresentationHighlightsUpdateAwarenessAfterRefresh() throws {
         let finding = Finding(
             id: "update-awareness::macos-15",
