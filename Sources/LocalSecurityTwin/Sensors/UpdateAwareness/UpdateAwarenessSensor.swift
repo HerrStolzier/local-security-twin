@@ -289,9 +289,20 @@ struct CachedSOFAUpdateProvider: UpdateAwarenessProviding {
             .appendingPathComponent(cacheFileName, isDirectory: false)
 
         guard allowsNetworkFetch else {
-            return cachedCatalog(from: cacheURL) ?? .unavailable(
-                note: "SOFA-Netzwerkabruf ist noch nicht aktiviert; lokaler Cache war nicht verfügbar.",
-                errorMessage: "Kein lokaler SOFA-Cache vorhanden."
+            if let cachedResult = cachedCatalog(from: cacheURL) {
+                return cachedResult
+            }
+
+            guard FileManager.default.fileExists(atPath: cacheURL.path) else {
+                return .unavailable(
+                    note: "SOFA-Netzwerkabruf ist noch nicht aktiviert; lokaler Cache war nicht verfügbar.",
+                    errorMessage: "Kein lokaler SOFA-Cache vorhanden."
+                )
+            }
+
+            return .unavailable(
+                note: "Lokaler SOFA-Cache war nicht lesbar; daher wurde ohne SOFA-Vergleich gearbeitet.",
+                errorMessage: "Lokaler SOFA-Cache konnte nicht dekodiert werden."
             )
         }
 
@@ -319,12 +330,19 @@ struct CachedSOFAUpdateProvider: UpdateAwarenessProviding {
         } catch {
             if let cachedResult = cachedCatalog(from: cacheURL) {
                 return cachedResult
-            } else {
+            }
+
+            if FileManager.default.fileExists(atPath: cacheURL.path) {
                 return .unavailable(
-                    note: "SOFA-Quelle und lokaler Cache waren nicht verfügbar.",
+                    note: "SOFA-Quelle war nicht verfügbar und der lokale SOFA-Cache war nicht lesbar.",
                     errorMessage: error.localizedDescription
                 )
             }
+
+            return .unavailable(
+                note: "SOFA-Quelle und lokaler Cache waren nicht verfügbar.",
+                errorMessage: error.localizedDescription
+            )
         }
     }
 

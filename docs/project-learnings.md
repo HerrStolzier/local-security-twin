@@ -21,6 +21,7 @@ Kurzlebige To-dos gehören nicht hierher, sondern in `docs/session-status.md`.
 - Der Startup-Sensor darf in Nutzertexten nicht als vollständige Startup- oder Persistenzanalyse verkauft werden; er sieht aktuell nur sichtbare `plist`-Hinweise.
 - Moderne macOS-Versionen haben Background Task Management rund um Login Items, LaunchAgents und LaunchDaemons; das sollte später separat geprüft werden.
 - Baseline-Probleme sollen sichtbar statt still sein, weil sonst gerade die Vertrauensfunktion der App schwerer nachvollziehbar wird.
+- Dasselbe gilt für andere lokale Vertrauensdaten: kaputte Policy- oder SOFA-Cache-Dateien müssen als ruhige Sichtgrenze sichtbar werden, nicht still wie "keine Daten" wirken.
 - Ein Baseline-Refresh darf nur als explizite Nutzerentscheidung passieren; normale Sensorläufe dürfen den bekannten Zustand nicht still ersetzen.
 - Einfache `.plist`-Details sind nützliche Evidence, bleiben aber Hinweise: sie beweisen weder, dass ein Eintrag aktiv läuft, noch dass er gefährlich ist.
 - Die aktuelle App-UI muss für den MVP zuerst deutsch, priorisiert und erklärend werden; eine reine Finding-Liste ohne roten Faden fuehlt sich trotz korrekter Daten unübersichtlich an.
@@ -68,6 +69,7 @@ Kurzlebige To-dos gehören nicht hierher, sondern in `docs/session-status.md`.
 - Externe Update-Awareness darf im Live-Produkt nicht heimlich beim Start ins Netzwerk gehen. Bis ein sichtbarer Zustimmungs- oder Aktualisieren-Flow existiert, darf der Sensor nur lokalen Cache nutzen oder eine ehrliche Sichtgrenze anzeigen.
 - Der SOFA-Abruf ist als bewusste Nutzeraktion vertretbar: vorher erklären, einmalig online laden, lokal speichern, Quellenstand zeigen und keine Updates installieren oder Systemeinstellungen verändern.
 - Nach einer bewussten Online-Aktualisierung braucht die UI einen klaren Nachher-Zustand. Ein still aktualisierter Cache reicht nicht; Banner, Mission, Aktivitätsfeed oder Detailhinweis müssen in einfacher Sprache zeigen, was verglichen wurde und was ausdrücklich nicht verändert wurde.
+- Kaputte lokale Persistenz ist in einem Security-Produkt eine Sichtgrenze, kein Nebengeräusch. Policy-Dateien, Baselines und externe Quellen-Caches dürfen weiter robust fehlschlagen, sollen aber ruhig sichtbar machen, welcher Vergleich oder welche gespeicherte Entscheidung gerade nicht genutzt wurde.
 
 ## Workflow Gotchas
 

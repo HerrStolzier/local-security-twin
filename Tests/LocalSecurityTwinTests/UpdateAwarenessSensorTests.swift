@@ -111,6 +111,40 @@ struct UpdateAwarenessSensorTests {
         #expect(result.note == "Lokaler SOFA-Cache wurde genutzt.")
     }
 
+    @Test func unreadableLocalCacheCreatesCalmVisibilityNote() throws {
+        let workspaceURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let cacheURL = Self.cacheURL(in: workspaceURL)
+        try FileManager.default.createDirectory(at: cacheURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try Data("{ kaputt".utf8).write(to: cacheURL)
+
+        let provider = CachedSOFAUpdateProvider(fetcher: FailingIfCalledFetcher(), allowsNetworkFetch: false)
+        let result = provider.latestCatalog(
+            in: SensorContext(homeDirectoryURL: workspaceURL, now: Date(timeIntervalSince1970: 1_000))
+        )
+
+        #expect(result.catalog == nil)
+        #expect(result.note?.contains("nicht lesbar") == true)
+        #expect(result.errorMessage?.contains("Cache") == true)
+    }
+
+    @Test func sensorKeepsUnreadableLocalCacheVisibleAsNote() throws {
+        let sensor = UpdateAwarenessSensor(
+            provider: StubUpdateProvider(
+                result: .unavailable(
+                    note: "Lokaler SOFA-Cache war nicht lesbar; daher wurde ohne SOFA-Vergleich gearbeitet.",
+                    errorMessage: "Lokaler SOFA-Cache konnte nicht dekodiert werden."
+                )
+            ),
+            localVersionProvider: StubLocalVersionProvider(productVersion: "15.7.7")
+        )
+
+        let run = sensor.run(in: Self.context)
+
+        #expect(run.notes.contains(where: { $0.contains("nicht lesbar") }))
+        #expect(run.findings.first?.id == "update-awareness::source-unavailable")
+    }
+
     @Test func cacheProviderFetchesAndStoresSOFAFeedWhenNetworkIsExplicitlyAllowed() throws {
         let workspaceURL = FileManager.default.temporaryDirectory
             .appendingPathComponent(UUID().uuidString, isDirectory: true)

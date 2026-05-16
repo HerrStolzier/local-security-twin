@@ -10,11 +10,12 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 ## Letztes Update
 
 - Datum: 2026-05-16
-- Bereich: Kapitel 2b Sento Guard Shell
+- Bereich: Persistenz-Sichtbarkeit und Regressionstests
 
 ## Zuletzt abgeschlossen
 
 - lokales Consent-/Policy-Modell mit Speicherung und Reset-Logik gebaut
+- Regressionstests ergänzt, damit kaputte lokale Policy- und SOFA-Cache-Dateien nicht still verschwinden, sondern als ruhige Sichtbarkeitsgrenze sichtbar bleiben
 - normalisiertes Findings-Schema mit Severity, Confidence, Evidence und Recommendations gebaut
 - Detailansicht so erweitert, dass Empfehlungen schon gegen die Policy-Schicht laufen
 - lokaler Workflow für Refactor-/Regression-Pass, Security Checks und E2E-Smoke-Tests dokumentiert und angelegt
@@ -136,14 +137,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Regressionstest ergänzt, der nach bewusstem SOFA-Refresh die Sichtbarkeit des aktualisierten Update-Hinweises in `DashboardPresentation` prüft.
 - Nutzerfeedback zum manuellen SOFA-Klick eingearbeitet: Nach dem Aktualisieren ist jetzt deutlicher sichtbar, dass der SOFA-Stand geladen, lokal gespeichert und mit der sichtbaren macOS-Version verglichen wurde.
 - Dashboard-Presentation hebt Update-Awareness jetzt als eigenen Aktivitätsfeed-Eintrag, System-Mission `Update geprüft` und Buddy-Text hervor, ohne daraus ein vollständiges Sicherheitsurteil zu machen.
+- Trust-Härtung für lokale Persistenz umgesetzt: kaputte gemerkte Policy-Entscheidungen werden in den Settings als ruhige lokale Speicher-Notiz sichtbar, statt still wie „keine Entscheidungen“ zu wirken.
+- Kaputter lokaler SOFA-Cache wird jetzt von „kein Cache vorhanden“ unterschieden und als ruhige Sensor-Note gemeldet: Der Lauf arbeitet dann ohne SOFA-Vergleich weiter.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, Kapitel 2b ist als Prototyp-Stand ausreichend, und Kapitel 3 `Update Awareness` zeigt nach bewusstem SOFA-Abruf nun sichtbar, was aktualisiert und eingeordnet wurde.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, Kapitel 2b ist als Prototyp-Stand ausreichend, und Kapitel 3 `Update Awareness` zeigt nach bewusstem SOFA-Abruf sowie bei kaputtem SOFA-Cache ehrlicher, was geprüft werden konnte und was nicht.
 
 ## Nächster konkreter Schritt
 
-Kapitel 3 erneut visuell prüfen: App starten, `SOFA-Stand aktualisieren` einmal manuell auslösen und beurteilen, ob Banner, Mission `Update geprüft`, Aktivitätsfeed und Detailöffnung jetzt klar genug wirken.
+Kapitel 3 erneut visuell prüfen: App starten, `SOFA-Stand aktualisieren` einmal manuell auslösen und beurteilen, ob Banner, Mission `Update geprüft`, Aktivitätsfeed und Detailöffnung jetzt klar genug wirken; danach entscheiden, ob Update-Awareness in Kapitel 3 als ausreichend gilt.
 
 ## Danach sinnvoll
 
@@ -203,7 +206,12 @@ Kapitel 3 erneut visuell prüfen: App starten, `SOFA-Stand aktualisieren` einmal
 - `swift test` am 2026-05-16 nach sichtbarerem SOFA-Refresh-Ergebnis; 46 Tests erfolgreich
 - `./scripts/checks.sh` am 2026-05-16 nach sichtbarerem SOFA-Refresh-Ergebnis
 - `./scripts/build-app-bundle.sh` am 2026-05-16 nach sichtbarerem SOFA-Refresh-Ergebnis
-- `swift test`
+- `swift test --filter UpdateAwarenessSensorTests` am 2026-05-16 nach SOFA-Cache-Trust-Härtung; 11 Tests erfolgreich
+- `swift test --filter PolicyStoreTests` am 2026-05-16 nach Policy-Trust-Härtung; 9 Tests erfolgreich
+- `swift test` am 2026-05-16 nach Trust-Härtung für lokale Persistenz; 49 Tests erfolgreich
+- `./scripts/checks.sh` am 2026-05-16 nach Trust-Härtung für lokale Persistenz
+- `./scripts/build-app-bundle.sh` am 2026-05-16 nach Trust-Härtung für lokale Persistenz
+- `swift test` am 2026-05-16 nach Persistenz-Sichtbarkeits-Regressionen; 49 Tests erfolgreich
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`
 - `./scripts/checks.sh`

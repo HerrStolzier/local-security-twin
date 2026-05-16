@@ -38,6 +38,18 @@ struct PolicyStoreTests {
         #expect(reloadedStore.rememberedPolicies.count == 1)
     }
 
+    @Test func unreadableRememberedPoliciesCreateCalmLocalNote() throws {
+        let storageURL = makeStorageURL()
+        try FileManager.default.createDirectory(at: storageURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try Data("{ kaputt".utf8).write(to: storageURL)
+
+        let store = PolicyStore(storageURL: storageURL)
+
+        #expect(store.rememberedPolicies.isEmpty)
+        #expect(store.localPersistenceNote?.contains("konnten nicht gelesen werden") == true)
+        #expect(store.resolution(for: makeRequest(risk: .medium)) == .needsConsent(.standard))
+    }
+
     @Test func highRiskRememberedApprovalsNeedExplicitConfirmation() throws {
         let store = makeStore()
         let request = makeRequest(risk: .high, action: .runSafeValidation)

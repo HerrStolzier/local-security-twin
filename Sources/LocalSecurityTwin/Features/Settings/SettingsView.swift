@@ -7,6 +7,11 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Section("Vertrauen und Entscheidungen") {
+                if let localPersistenceNote = policyStore.localPersistenceNote {
+                    Text(localPersistenceNote)
+                        .foregroundStyle(.secondary)
+                }
+
                 if policyStore.rememberedPolicies.isEmpty {
                     Text("Noch keine gemerkten Entscheidungen.")
                     Text("Die App kann erlaubte oder abgelehnte Schritte lokal merken. Spätere geführte Aktionen werden diese Entscheidungen nutzen.")

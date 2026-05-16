@@ -4,6 +4,7 @@ import Foundation
 @MainActor
 final class PolicyStore: ObservableObject {
     @Published private(set) var rememberedPolicies: [PolicyRecord]
+    @Published private(set) var localPersistenceNote: String?
 
     private var sessionPolicies: [PolicyKey: PolicyRecord]
     private let storageURL: URL
@@ -21,6 +22,7 @@ final class PolicyStore: ObservableObject {
         self.fileManager = fileManager
         self.now = now
         self.rememberedPolicies = []
+        self.localPersistenceNote = nil
         self.sessionPolicies = [:]
         self.encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         self.encoder.dateEncodingStrategy = .iso8601
@@ -106,6 +108,7 @@ final class PolicyStore: ObservableObject {
     private func loadRememberedPolicies() {
         guard fileManager.fileExists(atPath: storageURL.path) else {
             rememberedPolicies = []
+            localPersistenceNote = nil
             return
         }
 
@@ -113,8 +116,10 @@ final class PolicyStore: ObservableObject {
             let data = try Data(contentsOf: storageURL)
             rememberedPolicies = try decoder.decode([PolicyRecord].self, from: data)
                 .sorted { $0.updatedAt > $1.updatedAt }
+            localPersistenceNote = nil
         } catch {
             rememberedPolicies = []
+            localPersistenceNote = "Gespeicherte Entscheidungen konnten nicht gelesen werden. Sento fragt lieber erneut nach, statt eine alte Entscheidung still zu übernehmen."
         }
     }
 
