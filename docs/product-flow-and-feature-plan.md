@@ -487,6 +487,9 @@ Offen:
 
 ### Phase 1: Update-Awareness
 
+Status:
+Als erster Prototyp-Schnitt umgesetzt und am 2026-05-16 lokal sichtbar geprüft.
+
 Ziel:
 Der Buddy erkennt, ob macOS-Sicherheitsupdates für diesen Mac relevant sind.
 

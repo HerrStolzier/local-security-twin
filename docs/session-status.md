@@ -139,14 +139,18 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Dashboard-Presentation hebt Update-Awareness jetzt als eigenen Aktivitätsfeed-Eintrag, System-Mission `Update geprüft` und Buddy-Text hervor, ohne daraus ein vollständiges Sicherheitsurteil zu machen.
 - Trust-Härtung für lokale Persistenz umgesetzt: kaputte gemerkte Policy-Entscheidungen werden in den Settings als ruhige lokale Speicher-Notiz sichtbar, statt still wie „keine Entscheidungen“ zu wirken.
 - Kaputter lokaler SOFA-Cache wird jetzt von „kein Cache vorhanden“ unterschieden und als ruhige Sensor-Note gemeldet: Der Lauf arbeitet dann ohne SOFA-Vergleich weiter.
+- Kapitel 3 am 2026-05-16 per lokaler App-Automation visuell geprüft: Nach `SOFA-Stand aktualisieren` erscheinen Bestätigung, Banner `SOFA-Stand aktualisiert`, Mission `Update geprüft`, Aktivitätsfeed `macOS-Update-Stand eingeordnet` und bewusst öffnbarer Update-Detailbereich.
+- Kapitel 3 `Update Awareness` gilt damit als ausreichender erster Prototyp-Schnitt; spätere Feinarbeit bleibt bei echter UI-Automation und spezifischeren Detailaktionen offen.
+- Kapitel 4 `Security Hygiene` begonnen: `docs/security-hygiene-plan.md` legt Belegtypen, Startkategorien, Grenzen und Akzeptanzkriterien fest, damit automatisch prüfbare Signale und geführte Nutzerfragen sauber getrennt bleiben.
+- Erstes Hygiene-Modell ergänzt: `SecurityHygieneEvidenceKind`, `SecurityHygieneCategory`, `SecurityHygieneCheckID` und `SecurityHygieneCheck.initialCatalog` trennen lokale Signale, abgeleitete Hinweise, Nutzerangaben und nicht prüfbare Bereiche.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, Kapitel 2b ist als Prototyp-Stand ausreichend, und Kapitel 3 `Update Awareness` zeigt nach bewusstem SOFA-Abruf sowie bei kaputtem SOFA-Cache ehrlicher, was geprüft werden konnte und was nicht.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, inklusive sichtbarem SOFA-Abruf und ehrlichen lokalen Persistenz-Notes.
 
 ## Nächster konkreter Schritt
 
-Kapitel 3 erneut visuell prüfen: App starten, `SOFA-Stand aktualisieren` einmal manuell auslösen und beurteilen, ob Banner, Mission `Update geprüft`, Aktivitätsfeed und Detailöffnung jetzt klar genug wirken; danach entscheiden, ob Update-Awareness in Kapitel 3 als ausreichend gilt.
+Kapitel 4 als ersten UI-/Presentation-Schnitt fortsetzen: die bestehende Mission `Security-Hygiene` an das neue Hygiene-Modell anbinden, dabei alle Belegtypen sichtbar machen und geplante Fragen weiter klar als Nutzerangabe markieren.
 
 ## Danach sinnvoll
 
@@ -211,6 +215,13 @@ Kapitel 3 erneut visuell prüfen: App starten, `SOFA-Stand aktualisieren` einmal
 - `swift test` am 2026-05-16 nach Trust-Härtung für lokale Persistenz; 49 Tests erfolgreich
 - `./scripts/checks.sh` am 2026-05-16 nach Trust-Härtung für lokale Persistenz
 - `./scripts/build-app-bundle.sh` am 2026-05-16 nach Trust-Härtung für lokale Persistenz
+- `./scripts/build-app-bundle.sh` am 2026-05-16 vor lokaler Kapitel-3-Sichtprüfung
+- lokale App-Automation mit `cua-driver` am 2026-05-16 zur Kapitel-3-Sichtprüfung: SOFA-Bestätigung, Banner, Mission, Aktivitätsfeed und Detailöffnung sichtbar
+- Doku-Schnitt `docs/security-hygiene-plan.md` am 2026-05-16 angelegt; keine Code-Checks nötig, weil nur Planungsdokument
+- `swift test --filter SecurityHygieneModelTests` am 2026-05-16 nach erstem Hygiene-Modell; 2 Tests erfolgreich
+- `swift test` am 2026-05-16 nach erstem Hygiene-Modell; 51 Tests erfolgreich
+- `./scripts/checks.sh` am 2026-05-16 nach erstem Hygiene-Modell
+- `./scripts/build-app-bundle.sh` am 2026-05-16 nach erstem Hygiene-Modell
 - `swift test` am 2026-05-16 nach Persistenz-Sichtbarkeits-Regressionen; 49 Tests erfolgreich
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`

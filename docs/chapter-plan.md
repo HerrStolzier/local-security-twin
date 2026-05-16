@@ -148,7 +148,7 @@ Abnahme:
 
 ## Kapitel 3: Update Awareness
 
-Status: erster Sensor-/Cache-Schnitt und sichtbarer Netzwerk-Aktualisieren-Flow umgesetzt; visuelle manuelle Abnahme offen.
+Status: erster Sensor-/Cache-Schnitt und sichtbarer Netzwerk-Aktualisieren-Flow umgesetzt; lokale Sichtprüfung am 2026-05-16 als ausreichender Prototyp-Schnitt abgeschlossen.
 
 Ziel:
 Der Buddy erkennt, ob macOS-Sicherheitsupdates für diesen Mac relevant sind.
@@ -183,6 +183,7 @@ Abnahme:
   - "Dieses Update ist wichtig"
   - "Ich kann es gerade nicht prüfen"
 - Kein aktueller Schutzstatus wird behauptet, wenn Feed oder Cache unsicher sind.
+- Nach bewusstem `SOFA-Stand aktualisieren` sind Bestätigung, Aktualisierungsbanner, Mission `Update geprüft`, Aktivitätsfeed und Update-Detailbereich sichtbar.
 
 ## Kapitel 4: Security Hygiene
 
