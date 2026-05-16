@@ -61,6 +61,8 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Der aktuelle Arbeits-Brand ist `Sento Guard`. Der Name passt besser als `Kito Guard`, weil er im ersten Screening weniger offensichtlich belegt wirkte; trotzdem braucht er vor echter Veroeffentlichung eine tiefere Marken-/Domain-/App-Store-Pruefung.
 - Die helle Mockup-Richtung ist die neue Leitlinie: freundliche Sidebar, Sento als Buddy-Figur, Statuskarten, Missionen und Activity-Feed. Die dunkle Cyberpunk-Variante bleibt nur Inspirationsquelle, nicht Standardlook.
 - Geplante Missionen duerfen in der UI sichtbar sein, muessen aber klar als geplant erscheinen. Besonders `Digitaler Fussabdruck` und `App-Risiken pruefen` duerfen keine echten Pruefungen behaupten, solange dahinter keine Sensoren oder gefuehrte Flows gebaut sind.
+- Sento darf als SwiftUI-Prototypfigur sichtbar sein, solange die Figur nicht falsche Sicherheit ausdrueckt. Der Charakter muss Produktlogik tragen: priorisieren, erklaeren, nachfragen und Entscheidungen lokal merken.
+- Die sieben Anti-Scheiter-Regeln sind Produktleitplanken: ehrliche Schutzversprechen, Kernloop vor Breite, einfache Handlung, echtes Threat-Matching, fruehe macOS-Rechteplanung, Sento als Logik statt Deko und taeglicher Nutzen vor Dashboard-Fuelle.
 
 ## Workflow Gotchas
 

@@ -129,13 +129,14 @@ Umgesetzt:
 
 - Sidebar mit `Sento Guard` Branding und Mission-/Buddy-Navigation.
 - Hero-Bereich begruesst den Nutzer als Sento Guard.
+- Sento ist als sichtbare SwiftUI-Figur mit Koerper, Augen und Schild umgesetzt.
 - Statuszahlen sind als ruhige Karten sichtbar.
 - Missionsraster enthaelt jetzt Autostart, Mac-Schutz, Security-Hygiene, Digitaler Fussabdruck und App-Risiken.
 - Lokale Datenschutzbotschaft ist als eigene Karte sichtbar.
 
 Noch offen:
 
-- echtes Maskottchen-/Charakter-Asset statt SF-Symbol-Platzhalter
+- finales Maskottchen-/Character-Asset statt SwiftUI-Prototypfigur
 - finaler Markencheck fuer `Sento Guard`
 - visuelle manuelle Abnahme durch Nutzer
 - spaeter echte Navigation hinter den Sidebar-Punkten

@@ -167,6 +167,32 @@ Der Buddy soll vorbereiten, priorisieren und lokal nachhalten; der Nutzer entsch
 Kritischer Produktpunkt:
 Der harte Teil ist nicht nur Textgenerierung, sondern Verifikation, Follow-up, erneute Listings und das Risiko, bei unserioesen Anbietern noch mehr Daten preiszugeben.
 
+## Anti-Scheiter-Regeln
+
+Dieses Projekt kann scheitern, wenn es schoener aussieht, als es wirklich schuetzt.
+Deshalb gelten ab jetzt diese Gegenmassnahmen:
+
+1. **Nicht mehr Schutz versprechen, als belegt ist.**
+   Jede Statusaussage muss klar machen, ob sie auf lokal gesehenen Daten, Nutzerangabe, externer Quelle oder Planung beruht.
+
+2. **Kernloop vor Feature-Breite.**
+   Neue Module duerfen erst wachsen, wenn der Grundablauf sitzt: Sento sieht etwas, erklaert es einfach, priorisiert es, bietet genau einen naechsten Schritt an und merkt die Entscheidung lokal.
+
+3. **Die App denkt vor, der Nutzer bestaetigt.**
+   Technische Details bleiben erreichbar, aber Sento muss zuerst Bedeutung und sichere Handlung in Alltagssprache liefern.
+
+4. **Threat Intelligence braucht Relevanz-Matching.**
+   Externe Bedrohungsdaten sind erst wertvoll, wenn sie auf macOS-Version, App-Version, lokale Belege oder klare Betroffenheit gemappt werden koennen.
+
+5. **macOS-Rechte und Packaging frueh mitdenken.**
+   Jede neue starke Funktion braucht vorher eine Rechte-, Sandbox-, Signing- und Notarization-Notiz, damit der spaetere Build nicht blockiert.
+
+6. **Sento ist Produktlogik, nicht Deko.**
+   Der Charakter darf freundlich sein, aber seine Aufgabe ist Priorisierung, Erklaerung, Rueckfrage und Erinnerung. Wenn er nur Schmuck ist, verfehlt er den Zweck.
+
+7. **Taeglicher Nutzen vor Dashboard-Fuelle.**
+   Die App muss regelmaessig eine klare, kurze Lage liefern: ruhig, pruefen oder handeln. Mehr Karten sind nur sinnvoll, wenn sie diese Lage leichter machen.
+
 ## Der rote Nutzerfluss
 
 Der Nutzer soll die App nicht wie ein Admin-Dashboard bedienen muessen.

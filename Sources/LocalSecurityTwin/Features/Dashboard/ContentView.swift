@@ -431,15 +431,107 @@ private struct SentoCharacterBadge: View {
     var body: some View {
         ZStack {
             Circle()
-                .fill(.cyan.opacity(0.16))
+                .fill(.cyan.opacity(0.12))
                 .frame(width: size, height: size)
 
-            Circle()
-                .stroke(.blue.opacity(0.18), lineWidth: size * 0.055)
-                .frame(width: size * 0.88, height: size * 0.88)
+            Ellipse()
+                .fill(.blue.opacity(0.10))
+                .frame(width: size * 0.72, height: size * 0.16)
+                .offset(y: size * 0.34)
+
+            RoundedRectangle(cornerRadius: size * 0.16)
+                .fill(
+                    LinearGradient(
+                        colors: [.white.opacity(0.92), .cyan.opacity(0.24)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .frame(width: size * 0.48, height: size * 0.50)
+                .overlay(
+                    RoundedRectangle(cornerRadius: size * 0.16)
+                        .stroke(.blue.opacity(0.22), lineWidth: max(1, size * 0.015))
+                )
+                .offset(y: size * 0.12)
+
+            SentoCape(size: size)
+                .fill(
+                    LinearGradient(
+                        colors: [.purple.opacity(0.45), .blue.opacity(0.22)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .frame(width: size * 0.58, height: size * 0.50)
+                .offset(x: -size * 0.12, y: size * 0.18)
+
+            RoundedRectangle(cornerRadius: size * 0.20)
+                .fill(
+                    LinearGradient(
+                        colors: [.white.opacity(0.98), .blue.opacity(0.22)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .frame(width: size * 0.55, height: size * 0.42)
+                .overlay(
+                    RoundedRectangle(cornerRadius: size * 0.20)
+                        .stroke(.cyan.opacity(0.42), lineWidth: max(1, size * 0.018))
+                )
+                .offset(y: -size * 0.12)
+
+            RoundedRectangle(cornerRadius: size * 0.14)
+                .fill(
+                    LinearGradient(
+                        colors: [.indigo.opacity(0.90), .black.opacity(0.75)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .frame(width: size * 0.36, height: size * 0.22)
+                .offset(y: -size * 0.10)
+
+            HStack(spacing: size * 0.08) {
+                RoundedRectangle(cornerRadius: size * 0.015)
+                    .fill(.cyan)
+                    .frame(width: size * 0.055, height: size * 0.055)
+                    .shadow(color: .cyan.opacity(0.8), radius: size * 0.025)
+
+                RoundedRectangle(cornerRadius: size * 0.015)
+                    .fill(.cyan)
+                    .frame(width: size * 0.055, height: size * 0.055)
+                    .shadow(color: .cyan.opacity(0.8), radius: size * 0.025)
+            }
+            .offset(y: -size * 0.10)
+
+            Image(systemName: "shield.lefthalf.filled")
+                .font(.system(size: size * 0.16, weight: .bold))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [.cyan, .blue, .purple],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .offset(y: size * 0.12)
+
+            SentoShield(size: size)
+                .fill(
+                    LinearGradient(
+                        colors: [.cyan.opacity(0.92), .blue.opacity(0.88), .purple.opacity(0.72)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .frame(width: size * 0.24, height: size * 0.30)
+                .overlay(
+                    SentoShield(size: size)
+                        .stroke(.white.opacity(0.72), lineWidth: max(1, size * 0.012))
+                )
+                .offset(x: size * 0.27, y: size * 0.10)
 
             Circle()
-                .trim(from: 0.05, to: 0.78)
+                .trim(from: 0.02, to: 0.72)
                 .stroke(
                     AngularGradient(
                         colors: [.cyan, .blue, .purple, .cyan],
@@ -449,24 +541,47 @@ private struct SentoCharacterBadge: View {
                 )
                 .rotationEffect(.degrees(-86))
                 .frame(width: size * 0.88, height: size * 0.88)
-
-            VStack(spacing: size * 0.05) {
-                Image(systemName: "shield.lefthalf.filled")
-                    .font(.system(size: size * 0.28, weight: .bold))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [.cyan, .blue, .purple],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-
-                Text("Sento")
-                    .font(.system(size: max(10, size * 0.09), weight: .bold))
-                    .foregroundStyle(.secondary)
-            }
         }
         .frame(width: size, height: size)
+    }
+}
+
+private struct SentoCape: Shape {
+    let size: CGFloat
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX * 0.62, y: rect.minY + size * 0.04))
+        path.addLine(to: CGPoint(x: rect.minX + size * 0.04, y: rect.maxY - size * 0.02))
+        path.addQuadCurve(
+            to: CGPoint(x: rect.maxX - size * 0.10, y: rect.maxY - size * 0.10),
+            control: CGPoint(x: rect.midX, y: rect.maxY + size * 0.05)
+        )
+        path.addLine(to: CGPoint(x: rect.maxX - size * 0.12, y: rect.minY + size * 0.12))
+        path.closeSubpath()
+        return path
+    }
+}
+
+private struct SentoShield: Shape {
+    let size: CGFloat
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY + rect.height * 0.18))
+        path.addLine(to: CGPoint(x: rect.maxX - rect.width * 0.10, y: rect.midY))
+        path.addQuadCurve(
+            to: CGPoint(x: rect.midX, y: rect.maxY),
+            control: CGPoint(x: rect.maxX - rect.width * 0.14, y: rect.maxY * 0.84)
+        )
+        path.addQuadCurve(
+            to: CGPoint(x: rect.minX + rect.width * 0.10, y: rect.midY),
+            control: CGPoint(x: rect.minX + rect.width * 0.14, y: rect.maxY * 0.84)
+        )
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.minY + rect.height * 0.18))
+        path.closeSubpath()
+        return path
     }
 }
 

@@ -111,6 +111,28 @@ Nicht uebernehmen:
 - "0 Bedrohungen" als harte Aussage, solange die App keine echte Bedrohungserkennung hat
 - visuelle Elemente, die mehr Sicherheitsgewissheit ausdruecken als die Daten hergeben
 
+## Sento Charakter
+
+Sento soll sichtbar sein, aber nicht nur als Deko.
+
+Der Charakter hat drei Aufgaben:
+
+- Orientierung geben: Der Nutzer erkennt sofort, dass die App ein Buddy ist, kein Rohdaten-Inspector.
+- Ton setzen: freundlich, wachsam, ruhig, nicht panisch.
+- Produktlogik verkoerpern: Sento erklaert, priorisiert, fragt nach und merkt Entscheidungen lokal.
+
+Aktueller Stand:
+
+- Sento ist als skalierbare SwiftUI-Figur im Code umgesetzt.
+- Die Figur nutzt einfache Formen, einen hellen Koerper, leuchtende Augen und ein Schild.
+- Das ist ein Prototyp-Charakter, noch kein finales Marken-Asset.
+
+Spaeter:
+
+- echtes Character-Asset oder kleine Illustrationsserie
+- mehrere Zustaende wie ruhig, aufmerksam, prueft, braucht Zustimmung
+- klare Regel: Der visuelle Zustand darf nur anzeigen, was die App auch fachlich belegen kann.
+
 ## Moegliche Startseiten-Struktur
 
 ### Oben: Guardian Status
@@ -204,9 +226,9 @@ Der erste konkrete UI-Schritt wurde umgesetzt:
 
 Naechster Schritt:
 
-1. Kapitel 2b `Sento Guard Shell` manuell ansehen.
-2. Pruefen, ob die App jetzt eher wie ein freundlicher Security Buddy wirkt.
-3. Danach entscheiden, ob wir zuerst ein echtes Sento-Maskottchen-Asset erzeugen oder Kapitel 3 `Update Awareness` starten.
+1. Kapitel 2b `Sento Guard Shell` mit sichtbarer SwiftUI-Figur manuell ansehen.
+2. Pruefen, ob Sento freundlich und wachsam wirkt, ohne kindisch oder zu dekorativ zu werden.
+3. Danach entscheiden, ob zuerst ein finales Character-Asset entsteht oder Kapitel 3 `Update Awareness` startet.
 
 ## Build-Skills fuer die Umsetzung
 

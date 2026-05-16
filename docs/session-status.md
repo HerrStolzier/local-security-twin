@@ -119,14 +119,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Kapitel 2b `Sento Guard Shell` umgesetzt: linke Brand-/Mission-Sidebar, persoenlicher Sento-Hero, fuenf Missionskarten, Statuskarten und lokale Datenschutzkarte
 - Dashboard-Presentation erweitert um geplante Missionen `Digitaler Fussabdruck` und `App-Risiken pruefen`, ohne echte Pruefungen zu behaupten
 - Presentation-Test ergaenzt, damit die neuen geplanten Missionen erhalten bleiben
+- Sento-Charakter als sichtbare SwiftUI-Prototypfigur gebaut: heller Koerper, leuchtende Augen, Schild und ruhiger Schutzring
+- Sieben Anti-Scheiter-Regeln im Produktplan dokumentiert: ehrliche Schutzversprechen, Kernloop vor Breite, einfache Handlung, echtes Threat-Matching, fruehe macOS-Rechteplanung, Sento als Logik statt Deko und taeglicher Nutzen vor Dashboard-Fuelle
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, und Kapitel 2b fuehrt die helle `Sento Guard` Produkt-Shell ein.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, und Kapitel 2b fuehrt die helle `Sento Guard` Produkt-Shell mit sichtbarem Sento-Charakter ein.
 
 ## Naechster konkreter Schritt
 
-Kapitel 2b manuell in der App pruefen: Wir muessen sehen, ob Sidebar, Sento-Hero, Missionen und Activity-Feed ruhig, lesbar und passend zum hellen Mockup wirken.
+Kapitel 2b manuell in der App pruefen: Wir muessen sehen, ob der neue Sento-Charakter freundlich, wachsam und nicht zu dekorativ wirkt.
 
 ## Danach sinnvoll
 
@@ -158,7 +160,7 @@ Kapitel 2b manuell in der App pruefen: Wir muessen sehen, ob Sidebar, Sento-Hero
 - Kapitel 2 muss die neue Struktur optisch deutlich staerker machen, damit sie nicht weiter wie ein schlichtes Admin-Tool wirkt.
 - Kapitel 2 ist technisch umgesetzt, aber noch nicht vom Nutzer visuell abgenommen.
 - `Sento Guard` ist nur ein Arbeits-Brand; vor echter Veroeffentlichung braucht der Name einen tieferen Marken-, Domain- und App-Store-Check.
-- Der Sento-Charakter ist aktuell noch ein SwiftUI-/SF-Symbol-Platzhalter, kein finales Maskottchen-Asset.
+- Der Sento-Charakter ist aktuell eine SwiftUI-Prototypfigur, noch kein finales Maskottchen-Asset.
 - Die neuen Missionen `Digitaler Fussabdruck` und `App-Risiken pruefen` sind bewusst geplant/visuell vorhanden, aber noch keine echten Sensoren.
 
 ## Letzte Validierung
@@ -166,6 +168,7 @@ Kapitel 2b manuell in der App pruefen: Wir muessen sehen, ob Sidebar, Sento-Hero
 - `swift test` am 2026-05-16 nach Kapitel 2b
 - `./scripts/checks.sh` am 2026-05-16 nach Kapitel 2b
 - `./scripts/app-bundle-smoke.sh` am 2026-05-16 nach Kapitel 2b
+- `./scripts/checks.sh` am 2026-05-16 nach sichtbarem Sento-Charakter
 - `swift test`
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`
