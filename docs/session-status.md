@@ -123,6 +123,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sieben Anti-Scheiter-Regeln im Produktplan dokumentiert: ehrliche Schutzversprechen, Kernloop vor Breite, einfache Handlung, echtes Threat-Matching, frühe macOS-Rechteplanung, Sento als Logik statt Deko und täglicher Nutzen vor Dashboard-Fülle
 - Deutsche Nutzertexte und Dokumentation auf echte Umlaute umgestellt; Umschreibungen wie `fuer`, `pruefen`, `moeglich` bleiben nur noch als technische Beispiele/Bezeichner zulässig.
 - Nutzerfeedback zu Sento und Missionskarten eingearbeitet: Sento sitzt jetzt ruhiger im Hero, das Schild überlagert die Figur weniger, und geplante Missionskarten nutzen robustere Symbole sowie sichtbarere Aktionsflächen.
+- Nach weiterem Nutzerfeedback Sento deutlicher umgebaut: der dominante Schutzring ist aus dem Avatar verschwunden, Sento wirkt jetzt mehr wie eine eigenständige kleine Figur mit Körper, Kopf, Cape, Schild und kleinen Lichtdetails.
 
 ## Aktueller Stand in einem Satz
 
@@ -130,7 +131,7 @@ Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen
 
 ## Nächster konkreter Schritt
 
-Kapitel 2b erneut manuell in der App prüfen: Sento-Positionierung und Missionskarten sind nachjustiert, aber der Charakter bleibt bewusst ein Prototyp und braucht später ein finales Asset-/Animationskapitel.
+Kapitel 2b erneut manuell in der App prüfen: Sento wurde sichtbar anders aufgebaut, bleibt aber bewusst ein Prototyp und braucht später ein finales Asset-/Animationskapitel.
 
 ## Danach sinnvoll
 
@@ -175,6 +176,7 @@ Kapitel 2b erneut manuell in der App prüfen: Sento-Positionierung und Missionsk
 - `./scripts/checks.sh` am 2026-05-16 nach Umlaut-Korrektur
 - `./scripts/checks.sh` am 2026-05-16 nach finaler Umlaut-Nachkorrektur
 - `./scripts/checks.sh` am 2026-05-16 nach Sento-/Missionskarten-Nachjustierung
+- `swift build` und `./scripts/checks.sh` am 2026-05-16 nach deutlicherem Sento-Avatar-Umbau
 - `swift test`
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`

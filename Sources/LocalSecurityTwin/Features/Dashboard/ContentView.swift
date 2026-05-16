@@ -430,103 +430,132 @@ private struct SentoCharacterBadge: View {
 
     var body: some View {
         ZStack {
-            Circle()
+            Ellipse()
                 .fill(
                     RadialGradient(
-                        colors: [.cyan.opacity(0.22), .blue.opacity(0.10), .clear],
+                        colors: [.cyan.opacity(0.24), .blue.opacity(0.10), .clear],
                         center: .center,
-                        startRadius: size * 0.04,
-                        endRadius: size * 0.62
+                        startRadius: size * 0.06,
+                        endRadius: size * 0.46
                     )
                 )
-                .frame(width: size * 1.06, height: size * 1.06)
+                .frame(width: size * 0.98, height: size * 0.80)
+                .offset(y: size * 0.02)
+
+            SentoSpark(size: size * 0.055)
+                .fill(.cyan.opacity(0.55))
+                .frame(width: size * 0.10, height: size * 0.10)
+                .offset(x: -size * 0.34, y: -size * 0.24)
+
+            SentoSpark(size: size * 0.040)
+                .fill(.purple.opacity(0.50))
+                .frame(width: size * 0.08, height: size * 0.08)
+                .offset(x: size * 0.32, y: -size * 0.28)
 
             Ellipse()
-                .fill(.blue.opacity(0.12))
-                .frame(width: size * 0.70, height: size * 0.13)
-                .offset(y: size * 0.37)
-
-            Circle()
-                .trim(from: 0.05, to: 0.78)
-                .stroke(
-                    AngularGradient(
-                        colors: [.cyan, .blue, .purple, .cyan],
-                        center: .center
-                    ),
-                    style: StrokeStyle(lineWidth: size * 0.045, lineCap: .round)
-                )
-                .rotationEffect(.degrees(-96))
-                .frame(width: size * 0.86, height: size * 0.86)
-                .opacity(0.9)
+                .fill(.blue.opacity(0.16))
+                .frame(width: size * 0.64, height: size * 0.12)
+                .offset(y: size * 0.39)
 
             ZStack {
                 SentoCape(size: size)
                     .fill(
                         LinearGradient(
-                            colors: [.purple.opacity(0.45), .blue.opacity(0.25)],
+                            colors: [.purple.opacity(0.54), .blue.opacity(0.22)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
-                    .frame(width: size * 0.62, height: size * 0.52)
-                    .offset(x: -size * 0.10, y: size * 0.19)
+                    .frame(width: size * 0.62, height: size * 0.56)
+                    .offset(x: -size * 0.18, y: size * 0.14)
+
+                RoundedRectangle(cornerRadius: size * 0.08)
+                    .fill(.blue.opacity(0.72))
+                    .frame(width: size * 0.09, height: size * 0.22)
+                    .offset(x: -size * 0.12, y: size * 0.32)
+
+                RoundedRectangle(cornerRadius: size * 0.08)
+                    .fill(.blue.opacity(0.72))
+                    .frame(width: size * 0.09, height: size * 0.22)
+                    .offset(x: size * 0.12, y: size * 0.32)
+
+                RoundedRectangle(cornerRadius: size * 0.18)
+                    .fill(
+                        LinearGradient(
+                            colors: [.white.opacity(0.96), .cyan.opacity(0.28), .blue.opacity(0.22)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: size * 0.48, height: size * 0.50)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: size * 0.18)
+                            .stroke(.blue.opacity(0.30), lineWidth: max(1, size * 0.014))
+                    )
+                    .shadow(color: .cyan.opacity(0.16), radius: size * 0.08, x: 0, y: size * 0.03)
+                    .offset(y: size * 0.13)
+
+                RoundedRectangle(cornerRadius: size * 0.24)
+                    .fill(
+                        LinearGradient(
+                            colors: [.white.opacity(0.98), .blue.opacity(0.28), .purple.opacity(0.12)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: size * 0.58, height: size * 0.42)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: size * 0.24)
+                            .stroke(.cyan.opacity(0.46), lineWidth: max(1, size * 0.018))
+                    )
+                    .offset(y: -size * 0.15)
 
                 RoundedRectangle(cornerRadius: size * 0.16)
                     .fill(
                         LinearGradient(
-                            colors: [.white.opacity(0.94), .cyan.opacity(0.24)],
+                            colors: [.indigo.opacity(0.94), .black.opacity(0.78)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
-                    .frame(width: size * 0.42, height: size * 0.50)
+                    .frame(width: size * 0.40, height: size * 0.19)
                     .overlay(
                         RoundedRectangle(cornerRadius: size * 0.16)
-                            .stroke(.blue.opacity(0.24), lineWidth: max(1, size * 0.014))
+                            .stroke(.cyan.opacity(0.34), lineWidth: max(1, size * 0.008))
                     )
-                    .offset(y: size * 0.14)
+                    .offset(y: -size * 0.14)
 
-                RoundedRectangle(cornerRadius: size * 0.20)
-                    .fill(
-                        LinearGradient(
-                            colors: [.white.opacity(0.98), .blue.opacity(0.22)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(width: size * 0.52, height: size * 0.40)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: size * 0.20)
-                            .stroke(.cyan.opacity(0.44), lineWidth: max(1, size * 0.018))
-                    )
-                    .offset(y: -size * 0.12)
-
-                RoundedRectangle(cornerRadius: size * 0.13)
-                    .fill(
-                        LinearGradient(
-                            colors: [.indigo.opacity(0.92), .black.opacity(0.76)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(width: size * 0.34, height: size * 0.20)
-                    .offset(y: -size * 0.10)
-
-                HStack(spacing: size * 0.08) {
-                    RoundedRectangle(cornerRadius: size * 0.015)
+                HStack(spacing: size * 0.075) {
+                    RoundedRectangle(cornerRadius: size * 0.018)
                         .fill(.cyan)
-                        .frame(width: size * 0.055, height: size * 0.055)
-                        .shadow(color: .cyan.opacity(0.8), radius: size * 0.025)
+                        .frame(width: size * 0.07, height: size * 0.055)
+                        .shadow(color: .cyan.opacity(0.9), radius: size * 0.03)
 
-                    RoundedRectangle(cornerRadius: size * 0.015)
+                    RoundedRectangle(cornerRadius: size * 0.018)
                         .fill(.cyan)
-                        .frame(width: size * 0.055, height: size * 0.055)
-                        .shadow(color: .cyan.opacity(0.8), radius: size * 0.025)
+                        .frame(width: size * 0.07, height: size * 0.055)
+                        .shadow(color: .cyan.opacity(0.9), radius: size * 0.03)
                 }
-                .offset(y: -size * 0.10)
+                .offset(y: -size * 0.14)
+
+                SentoShield(size: size)
+                    .fill(
+                        LinearGradient(
+                            colors: [.cyan.opacity(0.98), .blue.opacity(0.88), .purple.opacity(0.74)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: size * 0.24, height: size * 0.30)
+                    .overlay(
+                        SentoShield(size: size)
+                            .stroke(.white.opacity(0.78), lineWidth: max(1, size * 0.012))
+                    )
+                    .shadow(color: .blue.opacity(0.24), radius: size * 0.04, x: 0, y: size * 0.025)
+                    .offset(x: size * 0.31, y: size * 0.16)
 
                 Image(systemName: "shield.lefthalf.filled")
-                    .font(.system(size: size * 0.15, weight: .bold))
+                    .font(.system(size: size * 0.13, weight: .bold))
                     .foregroundStyle(
                         LinearGradient(
                             colors: [.cyan, .blue, .purple],
@@ -534,27 +563,43 @@ private struct SentoCharacterBadge: View {
                             endPoint: .bottomTrailing
                         )
                     )
-                    .offset(y: size * 0.13)
-
-                SentoShield(size: size)
-                    .fill(
-                        LinearGradient(
-                            colors: [.cyan.opacity(0.96), .blue.opacity(0.90), .purple.opacity(0.76)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(width: size * 0.22, height: size * 0.28)
-                    .overlay(
-                        SentoShield(size: size)
-                            .stroke(.white.opacity(0.75), lineWidth: max(1, size * 0.012))
-                    )
-                    .shadow(color: .blue.opacity(0.22), radius: size * 0.035, x: 0, y: size * 0.02)
-                    .offset(x: size * 0.22, y: size * 0.18)
+                    .offset(y: size * 0.12)
             }
-            .offset(x: -size * 0.02)
+            .offset(x: -size * 0.03)
+
+            RoundedRectangle(cornerRadius: size * 0.16)
+                .stroke(
+                    LinearGradient(
+                        colors: [.cyan.opacity(0.42), .blue.opacity(0.18), .purple.opacity(0.24)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: max(1, size * 0.010)
+                )
+                .frame(width: size * 0.76, height: size * 0.82)
+                .offset(y: size * 0.02)
+                .opacity(0.28)
         }
         .frame(width: size, height: size)
+    }
+}
+
+private struct SentoSpark: Shape {
+    let size: CGFloat
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let center = CGPoint(x: rect.midX, y: rect.midY)
+        path.move(to: CGPoint(x: center.x, y: rect.minY))
+        path.addLine(to: CGPoint(x: center.x + size * 0.18, y: center.y - size * 0.18))
+        path.addLine(to: CGPoint(x: rect.maxX, y: center.y))
+        path.addLine(to: CGPoint(x: center.x + size * 0.18, y: center.y + size * 0.18))
+        path.addLine(to: CGPoint(x: center.x, y: rect.maxY))
+        path.addLine(to: CGPoint(x: center.x - size * 0.18, y: center.y + size * 0.18))
+        path.addLine(to: CGPoint(x: rect.minX, y: center.y))
+        path.addLine(to: CGPoint(x: center.x - size * 0.18, y: center.y - size * 0.18))
+        path.closeSubpath()
+        return path
     }
 }
 
