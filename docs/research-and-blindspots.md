@@ -2,11 +2,11 @@
 
 ## Zweck
 
-Diese Datei haelt eine kritische Rechercherunde vom 2026-05-06 fest.
+Diese Datei hält eine kritische Rechercherunde vom 2026-05-06 fest.
 
 Die Frage war:
 
-Haben wir beim aktuellen MVP-Plan fuer `local-security-twin` wichtige Annahmen uebersehen, vor allem bei macOS-Startup-Sichtbarkeit, Berechtigungen, Baselines und Nutzervertrauen?
+Haben wir beim aktuellen MVP-Plan für `local-security-twin` wichtige Annahmen übersehen, vor allem bei macOS-Startup-Sichtbarkeit, Berechtigungen, Baselines und Nutzervertrauen?
 
 ## Kurzfazit
 
@@ -14,25 +14,25 @@ Die Grundrichtung ist weiterhin richtig:
 
 - local-first
 - sichtbare, risikoarme Belege zuerst
-- erklaeren vor handeln
-- keine stillen Systemaenderungen
+- erklären vor handeln
+- keine stillen Systemänderungen
 - minimale macOS-Rechte im MVP
 
 Aber es gibt wichtige Blindspots:
 
 1. Der aktuelle Startup-Sensor sieht nur einen Teil der modernen macOS-Startup-Realitaet.
 2. Baseline-Fehler werden im Sensor noch zu still behandelt.
-3. Die App darf sichtbare `.plist`-Dateien nicht als Beweis fuer "laeuft wirklich" oder "ist boese" darstellen.
-4. Der Begriff `Baseline` ist fuer normale Nutzer wahrscheinlich zu technisch.
-5. Packaging, Sandbox und Notarization muessen frueher mitgedacht werden, bevor echte Distribution startet.
+3. Die App darf sichtbare `.plist`-Dateien nicht als Beweis für "läuft wirklich" oder "ist boese" darstellen.
+4. Der Begriff `Baseline` ist für normale Nutzer wahrscheinlich zu technisch.
+5. Packaging, Sandbox und Notarization müssen früher mitgedacht werden, bevor echte Distribution startet.
 
-## Gepruefte Annahmen
+## Geprüfte Annahmen
 
 ### Annahme: LaunchAgents und LaunchDaemons sind ein sinnvoller erster Sensor
 
-Status: bestaetigt, aber begrenzt.
+Status: bestätigt, aber begrenzt.
 
-Apple dokumentiert, dass `launchd` systemweite Daemons aus `/System/Library/LaunchDaemons/` und `/Library/LaunchDaemons/` laedt. Fuer per-user Agents nennt Apple `/System/Library/LaunchAgents`, `/Library/LaunchAgents` und das `Library/LaunchAgents`-Verzeichnis des Nutzers.
+Apple dokumentiert, dass `launchd` systemweite Daemons aus `/System/Library/LaunchDaemons/` und `/Library/LaunchDaemons/` laedt. Für per-user Agents nennt Apple `/System/Library/LaunchAgents`, `/Library/LaunchAgents` und das `Library/LaunchAgents`-Verzeichnis des Nutzers.
 
 Unsere aktuelle Auswahl ist deshalb ein guter erster Schnitt:
 
@@ -49,7 +49,7 @@ Was fehlt bewusst:
 - Inhalt der `.plist`-Dateien wie `Label`, `Program`, `ProgramArguments`, `KeepAlive`, `RunAtLoad`
 
 Bewertung:
-Der Sensor sollte im Produkt weiter als "sichtbare Startup-Hinweise" beschrieben werden, nicht als vollstaendige Startup-Analyse.
+Der Sensor sollte im Produkt weiter als "sichtbare Startup-Hinweise" beschrieben werden, nicht als vollständige Startup-Analyse.
 
 Quelle:
 Apple Developer, "Creating Launch Daemons and Agents":
@@ -57,15 +57,15 @@ https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSy
 
 ### Annahme: Moderne macOS-Versionen machen Login-/Background-Items relevanter
 
-Status: bestaetigt.
+Status: bestätigt.
 
-Apple beschreibt fuer macOS 13 und neuer ein neueres Background Task Management rund um Login Items, LaunchAgents und LaunchDaemons. Apple nennt unter anderem `SMAppService`, System Settings > General > Login Items, `sfltool dumpbtm` und BackgroundTaskManagement-Logs als Wege, diese moderne Sicht zu untersuchen.
+Apple beschreibt für macOS 13 und neuer ein neueres Background Task Management rund um Login Items, LaunchAgents und LaunchDaemons. Apple nennt unter anderem `SMAppService`, System Settings > General > Login Items, `sfltool dumpbtm` und BackgroundTaskManagement-Logs als Wege, diese moderne Sicht zu untersuchen.
 
-Was das fuer uns bedeutet:
-Der erste Dateisystem-Sensor ist richtig, aber nicht genug fuer die spaetere MVP-Erklaerung "was startet automatisch". Eine spaetere Recherche-/Sensorstufe sollte Background Task Management gezielt einplanen.
+Was das für uns bedeutet:
+Der erste Dateisystem-Sensor ist richtig, aber nicht genug für die spätere MVP-Erklärung "was startet automatisch". Eine spätere Recherche-/Sensorstufe sollte Background Task Management gezielt einplanen.
 
 Wichtig:
-`sfltool dumpbtm` ist fuer Diagnose und Tests interessant, aber vor Produktintegration muss geprueft werden, ob Ausgabeformat, Stabilitaet und App-Store-/Distribution-Kontext tragfaehig sind.
+`sfltool dumpbtm` ist für Diagnose und Tests interessant, aber vor Produktintegration muss geprüft werden, ob Ausgabeformat, Stabilität und App-Store-/Distribution-Kontext tragfähig sind.
 
 Quelle:
 Apple Support, "Manage login items and background tasks on Mac", published 2025-12-17:
@@ -79,28 +79,28 @@ https://developer.apple.com/documentation/ServiceManagement
 
 Status: aktuell weiterhin plausibel.
 
-Apple beschreibt Full Disk Access als explizite Nutzerentscheidung fuer Apps, die Zugriff auf die gesamte Speichergeraete-Sicht brauchen. Unser aktueller MVP liest sichtbare Startup-Pfade und speichert lokale Entscheidungen in Application Support. Dafuer waere Full Disk Access ein zu grosser Vertrauenspreis.
+Apple beschreibt Full Disk Access als explizite Nutzerentscheidung für Apps, die Zugriff auf die gesamte Speichergeräte-Sicht brauchen. Unser aktueller MVP liest sichtbare Startup-Pfade und speichert lokale Entscheidungen in Application Support. Dafür wäre Full Disk Access ein zu großer Vertrauenspreis.
 
 Was das praktisch bedeutet:
-Die App sollte lieber offen sagen "eingeschraenkte lokale Sicht" als frueh Full Disk Access zu verlangen.
+Die App sollte lieber offen sagen "eingeschränkte lokale Sicht" als früh Full Disk Access zu verlangen.
 
 Quelle:
 Apple Platform Security, "Controlling app access to files in macOS":
 https://support.apple.com/en-mide/guide/security/secddd1d86a6/web
 
-### Annahme: Sandbox und Notarization koennen spaeter geklaert werden
+### Annahme: Sandbox und Notarization können später geklärt werden
 
 Status: teilweise riskant.
 
-Fuer lokale Entwicklung ist das okay. Fuer Distribution sollte es aber nicht zu spaet passieren.
+Für lokale Entwicklung ist das okay. Für Distribution sollte es aber nicht zu spaet passieren.
 
-Apple beschreibt, dass App Sandbox Zugriff auf geschuetzte Ressourcen einschraenkt und dass Apps fuer notarized Distribution Hardened Runtime brauchen. Das kann die Dateisystem-Sicht und spaetere Sensoren beeinflussen.
+Apple beschreibt, dass App Sandbox Zugriff auf geschützte Ressourcen einschraenkt und dass Apps für notarized Distribution Hardened Runtime brauchen. Das kann die Dateisystem-Sicht und spätere Sensoren beeinflussen.
 
-Was das fuer uns bedeutet:
+Was das für uns bedeutet:
 Vor echten UI-Sensoren mit Dateisystemzugriff sollte ein kleiner Packaging-/Signing-Spike kommen:
 
-- SwiftPM-App weiter ausreichend oder Xcode-Projekt noetig?
-- Sandbox ja/nein fuer erste Distribution?
+- SwiftPM-App weiter ausreichend oder Xcode-Projekt nötig?
+- Sandbox ja/nein für erste Distribution?
 - Welche Pfade bleiben ohne Sandbox erreichbar?
 - Hardened Runtime ohne Ausnahmen?
 - Keine Network-/Automation-/Apple-Events-Entitlements ohne echten Nutzen.
@@ -119,19 +119,19 @@ https://developer.apple.com/documentation/security/hardened-runtime
 Ort:
 `Sources/LocalSecurityTwin/Sensors/LaunchAgents/LaunchAgentInventorySensor.swift`
 
-Der Sensor faellt bei Baseline-Load-/Save-Fehlern auf Inventar-Findings zurueck. Das ist robust, aber zu leise.
+Der Sensor fällt bei Baseline-Load-/Save-Fehlern auf Inventar-Findings zurück. Das ist robust, aber zu leise.
 
 Risiko:
-Die App koennte Change-Detection verlieren, ohne dass der Nutzer oder Entwickler es klar sieht.
+Die App könnte Change-Detection verlieren, ohne dass der Nutzer oder Entwickler es klar sieht.
 
 Empfehlung:
 Vor oder zusammen mit dem Trusted-Baseline-Refresh sollte ein sichtbarer interner Sensorhinweis entstehen:
 
 - "Lokale Baseline konnte nicht geladen werden"
 - keine dramatische Warnung
-- aber klar genug, dass Change-Detection in diesem Lauf eingeschraenkt ist
+- aber klar genug, dass Change-Detection in diesem Lauf eingeschränkt ist
 
-### Baseline gehoert nicht hart genug zum Sensor
+### Baseline gehört nicht hart genug zum Sensor
 
 Ort:
 `Sources/LocalSecurityTwin/Core/Baseline/StartupItemBaselineStore.swift`
@@ -139,12 +139,12 @@ Ort:
 Beim Laden wird die gespeicherte `sensorID` nicht gegen die aktuelle Sensor-ID validiert.
 
 Risiko:
-Wenn spaeter mehrere Baseline-Quellen entstehen, koennte eine falsche Baseline versehentlich akzeptiert werden.
+Wenn später mehrere Baseline-Quellen entstehen, könnte eine falsche Baseline versehentlich akzeptiert werden.
 
 Empfehlung:
-Baseline-Store sollte beim Initialisieren oder Laden pruefen koennen, ob die gespeicherte Baseline zum erwarteten Sensor gehoert.
+Baseline-Store sollte beim Initialisieren oder Laden prüfen können, ob die gespeicherte Baseline zum erwarteten Sensor gehört.
 
-### `.plist` sichtbar heisst nicht "aktiv" und nicht "gefaehrlich"
+### `.plist` sichtbar heißt nicht "aktiv" und nicht "gefährlich"
 
 Ort:
 `Sources/LocalSecurityTwin/Sensors/LaunchAgents/LaunchAgentInventorySensor.swift`
@@ -158,19 +158,19 @@ Der aktuelle Sensor liest Dateinamen und Pfade, aber nicht:
 - ob der Eintrag deaktiviert oder durch Background Task Management blockiert ist
 
 Empfehlung:
-UI- und Finding-Texte muessen konsequent "sichtbar" und "Hinweis" sagen.
+UI- und Finding-Texte müssen konsequent "sichtbar" und "Hinweis" sagen.
 
 ## UX-Blindspots
 
 ### `Baseline` ist intern gut, extern zu technisch
 
-Fuer Nutzer besser:
+Für Nutzer besser:
 
 - "bekannter Ausgangszustand"
 - "gemerkter Normalzustand"
 - "als erwartet merken"
 
-Nicht ideal fuer primaere UI:
+Nicht ideal für primäre UI:
 
 - "Baseline refresh"
 - "Snapshot"
@@ -181,25 +181,25 @@ Nicht ideal fuer primaere UI:
 Ein verschwundenes Startup-Item ist meist weniger alarmierend als ein neues.
 
 Empfehlung:
-Verschwundene Items sollten eher als "Startup-Verhalten hat sich geaendert" erscheinen, nicht als klassische Warnung.
+Verschwundene Items sollten eher als "Startup-Verhalten hat sich geändert" erscheinen, nicht als klassische Warnung.
 
 ### Safe Validation darf nicht nach Angriff klingen
 
-`Run Safe Validation` ist als internes Policy-Action-Konzept okay, aber fuer Nutzer wahrscheinlich zu abstrakt.
+`Run Safe Validation` ist als internes Policy-Action-Konzept okay, aber für Nutzer wahrscheinlich zu abstrakt.
 
-Moegliche UI-Sprache:
+Mögliche UI-Sprache:
 
-- "Vorsichtig pruefen"
+- "Vorsichtig prüfen"
 - "Mehr Belege sammeln"
 - "Sichere Zusatzpruefung starten"
 
 ## Roadmap-Anpassung
 
-Die naechste Reihenfolge sollte jetzt so aussehen:
+Die nächste Reihenfolge sollte jetzt so aussehen:
 
 1. Baseline-Fehler sichtbar machen und Sensor-ID-Validierung einbauen.
 2. Trusted-Baseline-Refresh in der Domain-Logik bauen.
-3. UI-Sprache fuer "als erwartet merken" entwerfen.
+3. UI-Sprache für "als erwartet merken" entwerfen.
 4. Danach Startup-`.plist`-Inhalte vorsichtig lesen.
 5. Danach modernen Background-Task-Management-Sensor oder Research-Spike planen.
 6. Vor Distribution einen Packaging-/Signing-/Sandbox-Spike einbauen.
@@ -213,7 +213,7 @@ Die naechste Reihenfolge sollte jetzt so aussehen:
 - keine Behauptung, dass alle Persistenzmechanismen abgedeckt sind
 - keine stille Baseline-Erneuerung
 
-## Konkreter naechster Schnitt
+## Konkreter nächster Schnitt
 
 Vor dem Trusted-Baseline-Refresh sollte ein kleiner technischer Sauberkeitsschnitt kommen:
 
@@ -221,7 +221,7 @@ Vor dem Trusted-Baseline-Refresh sollte ein kleiner technischer Sauberkeitsschni
 - Baseline-Fehler werden als klare Sensor-Note oder Finding-Evidence sichtbar
 - Tests decken korrupten/falschen Baseline-Zustand ab
 
-Danach ist der Trusted-Baseline-Refresh deutlich vertrauenswuerdiger.
+Danach ist der Trusted-Baseline-Refresh deutlich vertrauenswürdiger.
 
 ## Umsetzungsstand nach der Runde
 
@@ -234,6 +234,6 @@ Dieser Sauberkeitsschnitt wurde inzwischen umgesetzt:
 
 Weiter offen bleibt:
 
-- echte macOS-UI-Automation fuer den `Remember as Expected`-Klickpfad
+- echte macOS-UI-Automation für den `Remember as Expected`-Klickpfad
 - moderne Login-/Background-Items
 - Packaging, Signing, Sandbox und Notarization

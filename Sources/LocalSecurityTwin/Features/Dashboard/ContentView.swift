@@ -60,7 +60,7 @@ struct ContentView: View {
 
             Button("Abbrechen", role: .cancel) {}
         } message: {
-            Text("Die App behandelt die aktuell sichtbaren Autostart-Hinweise danach als erwartet. Sie aendert dabei keine Systemeinstellungen.")
+            Text("Die App behandelt die aktuell sichtbaren Autostart-Hinweise danach als erwartet. Sie ändert dabei keine Systemeinstellungen.")
         }
     }
 
@@ -98,7 +98,7 @@ private struct SentoSidebar: View {
             SidebarGroup(
                 title: "Buddy",
                 items: [
-                    SidebarItem(title: "Aktivitaet", value: "\(presentation.activityItems.count)", systemImage: "sparkles", color: .blue),
+                    SidebarItem(title: "Aktivität", value: "\(presentation.activityItems.count)", systemImage: "sparkles", color: .blue),
                     SidebarItem(title: "Hinweise", value: "\(presentation.findings.count)", systemImage: "bell", color: .indigo),
                     SidebarItem(title: "Systemsignale", value: "\(presentation.reviewCount)", systemImage: "display", color: .cyan),
                 ]
@@ -138,7 +138,7 @@ private struct SentoMark: View {
 
 private struct SidebarPrimaryRow: View {
     var body: some View {
-        Label("Uebersicht", systemImage: "house")
+        Label("Übersicht", systemImage: "house")
             .font(.subheadline.weight(.semibold))
             .foregroundStyle(.blue)
             .padding(.horizontal, 12)
@@ -322,7 +322,7 @@ private struct DetailPane: View {
             ContentUnavailableView(
                 "Noch keine Hinweise",
                 systemImage: "checkmark.shield",
-                description: Text("Die lokalen Sensoren bleiben ruhig, solange sie keine Hinweise anzeigen muessen.")
+                description: Text("Die lokalen Sensoren bleiben ruhig, solange sie keine Hinweise anzeigen müssen.")
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else if let selectedFinding = findings.first(where: { $0.id == selection }) ?? findings.first {
@@ -343,9 +343,9 @@ private struct DetailPane: View {
             }
         } else {
             ContentUnavailableView(
-                "Hinweis auswaehlen",
+                "Hinweis auswählen",
                 systemImage: "shield",
-                description: Text("Waehle links einen Hinweis aus, um Einordnung, Belege und sichere naechste Schritte zu sehen.")
+                description: Text("Wähle links einen Hinweis aus, um Einordnung, Belege und sichere nächste Schritte zu sehen.")
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -745,7 +745,7 @@ private struct SentoLocalPromiseCard: View {
                     .font(.title3)
                     .fontWeight(.semibold)
 
-                Text("Aktuell pruefe ich lokale Hinweise beim Start und zeige dir ruhig, was ich einordnen kann.")
+                Text("Aktuell prüfe ich lokale Hinweise beim Start und zeige dir ruhig, was ich einordnen kann.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -777,7 +777,7 @@ private struct ActivityFeedSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             SectionHeader(
-                title: "Buddy-Aktivitaet",
+                title: "Buddy-Aktivität",
                 subtitle: "Was ich gerade lokal eingeordnet habe."
             )
 
@@ -877,9 +877,9 @@ private struct RememberStartupStateBanner: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .center, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Autostart-Aenderungen sichtbar")
+                    Text("Autostart-Änderungen sichtbar")
                         .font(.headline)
-                    Text("Wenn diese Aenderungen erwartet sind, kannst du den aktuellen Zustand merken. Die App bleibt dann beim naechsten Lauf ruhiger.")
+                    Text("Wenn diese Änderungen erwartet sind, kannst du den aktuellen Zustand merken. Die App bleibt dann beim nächsten Lauf ruhiger.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

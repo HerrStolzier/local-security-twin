@@ -2,81 +2,82 @@
 
 ## Overview
 
-Diese Datei sammelt nur Dinge, die wahrscheinlich auch in spaeteren Sessions noch wichtig bleiben.
-Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
+Diese Datei sammelt nur Dinge, die wahrscheinlich auch in späteren Sessions noch wichtig bleiben.
+Kurzlebige To-dos gehören nicht hierher, sondern in `docs/session-status.md`.
 
 ## Stable Learnings
 
-- Das Projekt soll nach jedem abgeschlossenen Schritt an einem sauberen Uebergabepunkt enden koennen.
-- `AGENTS.md` enthaelt die stabilen Regeln; `docs/session-status.md` enthaelt den letzten Arbeitsstand.
-- `docs/project-learnings.md` ist fuer dauerhafte Erkenntnisse gedacht, nicht fuer Tagesnotizen.
-- Die Produktlogik soll weiter `local-first`, erklaerend und zustimmungsbasiert bleiben.
+- Das Projekt soll nach jedem abgeschlossenen Schritt an einem sauberen Übergabepunkt enden können.
+- `AGENTS.md` enthält die stabilen Regeln; `docs/session-status.md` enthält den letzten Arbeitsstand.
+- `docs/project-learnings.md` ist für dauerhafte Erkenntnisse gedacht, nicht für Tagesnotizen.
+- Die Produktlogik soll weiter `local-first`, erklärend und zustimmungsbasiert bleiben.
 - Policy vor echter Aktion ist hier keine Nebensache, sondern Kernarchitektur.
 - Findings sollen nicht nur Warntexte sein, sondern immer auf gemeinsamer Struktur mit Evidence und Recommendations beruhen.
-- Fuer den aktuellen Projektstand ist eine synchrone Sensor-Pipeline die ruhigere und passendere Basis als vorschnelle Async-Komplexitaet.
+- Für den aktuellen Projektstand ist eine synchrone Sensor-Pipeline die ruhigere und passendere Basis als vorschnelle Async-Komplexität.
 - Der erste echte Sensor sollte auf sichtbaren, risikoarmen lokalen Belegen aufbauen, bevor tiefere Systemintegration dazukommt.
-- Kleine lokale JSON-Snapshots in `Application Support` sind eine gute erste Baseline-Form, solange spaetere Diff-Logik auf stabilen Kennungen wie Scope plus Pfad aufsetzt.
-- Fuer lokale Dateisystem-Vergleiche muessen Pfade vor der ID-Bildung normalisiert werden, damit macOS-Aliase wie `/var` und `/private/var` nicht falsche Baseline-Diffs erzeugen.
-- Fuer den MVP sollen macOS-Berechtigungen minimal bleiben: normale App-Ausfuehrung und lokaler Application-Support-Speicher reichen aktuell; staerkere Rechte brauchen erst einen konkreten, erklaerten Nutzen.
-- Der Startup-Sensor darf in Nutzertexten nicht als vollstaendige Startup- oder Persistenzanalyse verkauft werden; er sieht aktuell nur sichtbare `plist`-Hinweise.
-- Moderne macOS-Versionen haben Background Task Management rund um Login Items, LaunchAgents und LaunchDaemons; das sollte spaeter separat geprueft werden.
+- Kleine lokale JSON-Snapshots in `Application Support` sind eine gute erste Baseline-Form, solange spätere Diff-Logik auf stabilen Kennungen wie Scope plus Pfad aufsetzt.
+- Für lokale Dateisystem-Vergleiche müssen Pfade vor der ID-Bildung normalisiert werden, damit macOS-Aliase wie `/var` und `/private/var` nicht falsche Baseline-Diffs erzeugen.
+- Für den MVP sollen macOS-Berechtigungen minimal bleiben: normale App-Ausführung und lokaler Application-Support-Speicher reichen aktuell; stärkere Rechte brauchen erst einen konkreten, erklärten Nutzen.
+- Der Startup-Sensor darf in Nutzertexten nicht als vollständige Startup- oder Persistenzanalyse verkauft werden; er sieht aktuell nur sichtbare `plist`-Hinweise.
+- Moderne macOS-Versionen haben Background Task Management rund um Login Items, LaunchAgents und LaunchDaemons; das sollte später separat geprüft werden.
 - Baseline-Probleme sollen sichtbar statt still sein, weil sonst gerade die Vertrauensfunktion der App schwerer nachvollziehbar wird.
-- Ein Baseline-Refresh darf nur als explizite Nutzerentscheidung passieren; normale Sensorlaeufe duerfen den bekannten Zustand nicht still ersetzen.
-- Einfache `.plist`-Details sind nuetzliche Evidence, bleiben aber Hinweise: sie beweisen weder, dass ein Eintrag aktiv laeuft, noch dass er gefaehrlich ist.
-- Die aktuelle App-UI muss fuer den MVP zuerst deutsch, priorisiert und erklaerend werden; eine reine Finding-Liste ohne roten Faden fuehlt sich trotz korrekter Daten unuebersichtlich an.
-- Fuer den ersten UI-Schnitt reicht es nicht, Texte zu uebersetzen; die App braucht einen Ueberblick und Gruppen, damit neue Aenderungen nicht zwischen bekannten Autostart-Hinweisen untergehen.
-- Startup-Details sind fuer normale Nutzer nur hilfreich, wenn `Label`, Startbefehl, Startverhalten und Hintergrundverhalten vor den Roh-Belegen kurz eingeordnet werden.
-- `sfltool dumpbtm` ist relevant fuer Background Task Management, wirkte im ersten lokalen Test aber nicht robust genug fuer eine direkte MVP-Datenquelle.
-- Der zweite Sensor wurde erst nach Packaging-/Sandbox-Klaerung gewaehlt; diese Reihenfolge bleibt als Muster sinnvoll, weil Distribution und Sandbox die lokale Sichtbarkeit stark beeinflussen koennen.
-- Der aktuelle SwiftPM-Build ist ein ad-hoc signiertes Executable ohne `.app`-Bundle, Entitlements und TeamIdentifier; fuer Nutzer-Testbuilds braucht das Projekt einen App-Bundle-/Xcode-Projekt-Spike.
-- Ein lokales `.app`-Bundle kann aus dem SwiftPM-Executable erzeugt und ad-hoc signiert werden; das reicht fuer lokale Start- und UI-Automation-Spikes, aber nicht fuer echte Distribution.
-- Der App-Bundle-Smoke sollte vor echter UI-Automation laufen, weil er zuerst klaert, ob das `.app`-Artefakt ueberhaupt sauber baut, signiert und startet.
-- Die App startet lokal auch mit ad-hoc Hardened-Runtime-Signatur; echte Distribution braucht trotzdem spaeter Developer ID und Notarization.
-- Der weitere MVP-Weg wurde in `docs/project-completion-plan.md` als Sprint-Plan umgesetzt; fuer den naechsten Schnitt ist `docs/mvp-release-checklist.md` massgeblich.
-- Nutzertexte sollen moeglichst an der Datenquelle geglaettet werden, nicht nur in der SwiftUI-Darstellung, weil Findings, Evidence, Recommendations und Sensor-Notizen sonst unterschiedlich klingen.
-- Ein Xcode-Projekt wird erst bei konkretem Bedarf angelegt; aktuell reichen SwiftPM plus lokale Bundle-, Sandbox- und Runtime-Smokes fuer den naechsten MVP-Abschnitt.
-- Der zweite MVP-Sensor ist bewusst ein Systemprofil-Sensor: Er liefert lokale Kontextdaten und sichtbare Schutzsignale, darf daraus aber kein Gesamturteil ueber die Sicherheit des Macs ableiten.
-- Optionale Systemschutz-Abfragen wie Gatekeeper oder SIP muessen weich behandelt werden: feste Tool-Pfade, keine Shell, Fehler als Notes statt Crash oder lauter Alarm.
-- Gefuehrte Aktionen brauchen eine sichtbare Aktionsart, bevor sie ausgefuehrt oder gemerkt werden; Nutzer muessen unterscheiden koennen zwischen lokalem Merken, Anleitung, externem Oeffnen und spaeterem Belegesammeln.
-- Distribution bleibt zweistufig: lokale Beta-Smokes duerfen ad-hoc signiert sein, echte Nutzerverteilung braucht spaeter Developer ID, Hardened Runtime, Notarization und Secrets ausserhalb des Repos.
-- Der MVP-Schnitt braucht eine eigene Known-Limits-Doku, weil die wichtigste Sicherheitsqualitaet des Produkts darin liegt, sichtbare Belege nicht als vollstaendige Wahrheit zu verkaufen.
-- Das Produktbild wurde am 2026-05-13 geschaerft: Die App soll ein kraftvoller Security Buddy mit Punch werden. Ruhige Sprache bleibt wichtig, aber die Verteidigungsambition ist staerker: lokale Beobachtung, echte Threat Intelligence, klare Priorisierung und gefuehrte naechste Schritte.
-- LLMs sind fuer dieses Projekt eher Erklaer-, Recherche- und Assistenzschicht, nicht alleinige Sicherheitsinstanz. Sicherheitsentscheidungen brauchen belegbare lokale Daten, kuratierte externe Quellen und nachvollziehbare Regeln.
-- Adversarial thinking gehoert dauerhaft als defensive Review-Perspektive ins Projekt: Es soll helfen, realistische Missbrauchswege in harmlose Sensorideen, Checklisten, Guided Actions oder dokumentierte Grenzen zu uebersetzen, aber nicht in Exploit-Automation.
-- Security-Hygiene-Themen wie 2FA, Passwortmanager, VPN, Antivirus/Security-Tools, Firewall, FileVault und System Extensions muessen klar nach Belegtyp getrennt werden: automatisch gesehen, Nutzerangabe, abgeleitet oder nicht pruefbar.
-- Jede groessere neue Funktion soll ab jetzt eine defensive Black-Hat-Pruefung bekommen: Wie koennte ein Angreifer die Funktion, ihre Daten, ihre Rechte oder ihre Nutzertexte missbrauchen?
-- Best-Practice-Monitoring muss lokale Messbarkeit von gefuehrten Buddy-Fragen trennen. Dinge wie 2FA oder Passwort-Hygiene sind wichtig, aber oft nicht direkt lokal beweisbar.
-- Der Phase-0-UI-Schnitt hat strukturell geholfen, aber optisch nicht genug. Die App braucht eine echte `BuddyHomeView`: Guardian-Status, Missionen, Aktivitaetsfeed und Details erst auf bewusste Auswahl.
-- Die gewaehlte visuelle Richtung ist: freundliche Mac-Health-App plus native Command-Center-Klarheit plus dezente Gamification. Kein Cyberpunk-SIEM als Hauptoberflaeche.
-- Die Roadmap soll ab 2026-05-14 in groesseren Kapiteln bearbeitet werden. Erst ein Kapitel abschliessen, dann das naechste beginnen; der naechste Fokus ist Kapitel 1 `Buddy Home`.
-- Die erste echte Buddy-Home-Struktur soll keine Finding automatisch auswaehlen. Details sind bewusst geoeffnete Vertiefung, nicht der Startzustand.
-- Missionen sind fuer dieses Produkt hilfreicher als eine rohe Hinweis-Liste: Sie zeigen Schutzbereiche und Prioritaet, ohne technische Belege zu verstecken.
-- Gamification darf Orientierung geben, aber keine falsche Sicherheitszahl behaupten. Fortschrittsanzeigen muessen deshalb als Produktmetapher vorsichtig bleiben.
-- Fuer den Visual-System-Schnitt sollen Farben semantisch bleiben: Orange fuer Pruefbedarf, Gruen fuer ruhig/stabil, Blau fuer beobachtete Orientierung. Farbe ist Bedeutung, nicht Dekoration.
+- Ein Baseline-Refresh darf nur als explizite Nutzerentscheidung passieren; normale Sensorläufe dürfen den bekannten Zustand nicht still ersetzen.
+- Einfache `.plist`-Details sind nützliche Evidence, bleiben aber Hinweise: sie beweisen weder, dass ein Eintrag aktiv läuft, noch dass er gefährlich ist.
+- Die aktuelle App-UI muss für den MVP zuerst deutsch, priorisiert und erklärend werden; eine reine Finding-Liste ohne roten Faden fuehlt sich trotz korrekter Daten unübersichtlich an.
+- Für den ersten UI-Schnitt reicht es nicht, Texte zu übersetzen; die App braucht einen Überblick und Gruppen, damit neue Änderungen nicht zwischen bekannten Autostart-Hinweisen untergehen.
+- Startup-Details sind für normale Nutzer nur hilfreich, wenn `Label`, Startbefehl, Startverhalten und Hintergrundverhalten vor den Roh-Belegen kurz eingeordnet werden.
+- `sfltool dumpbtm` ist relevant für Background Task Management, wirkte im ersten lokalen Test aber nicht robust genug für eine direkte MVP-Datenquelle.
+- Der zweite Sensor wurde erst nach Packaging-/Sandbox-Klaerung gewählt; diese Reihenfolge bleibt als Muster sinnvoll, weil Distribution und Sandbox die lokale Sichtbarkeit stark beeinflussen können.
+- Der aktuelle SwiftPM-Build ist ein ad-hoc signiertes Executable ohne `.app`-Bundle, Entitlements und TeamIdentifier; für Nutzer-Testbuilds braucht das Projekt einen App-Bundle-/Xcode-Projekt-Spike.
+- Ein lokales `.app`-Bundle kann aus dem SwiftPM-Executable erzeugt und ad-hoc signiert werden; das reicht für lokale Start- und UI-Automation-Spikes, aber nicht für echte Distribution.
+- Der App-Bundle-Smoke sollte vor echter UI-Automation laufen, weil er zuerst klärt, ob das `.app`-Artefakt überhaupt sauber baut, signiert und startet.
+- Die App startet lokal auch mit ad-hoc Hardened-Runtime-Signatur; echte Distribution braucht trotzdem später Developer ID und Notarization.
+- Der weitere MVP-Weg wurde in `docs/project-completion-plan.md` als Sprint-Plan umgesetzt; für den nächsten Schnitt ist `docs/mvp-release-checklist.md` massgeblich.
+- Nutzertexte sollen möglichst an der Datenquelle geglättet werden, nicht nur in der SwiftUI-Darstellung, weil Findings, Evidence, Recommendations und Sensor-Notizen sonst unterschiedlich klingen.
+- Ein Xcode-Projekt wird erst bei konkretem Bedarf angelegt; aktuell reichen SwiftPM plus lokale Bundle-, Sandbox- und Runtime-Smokes für den nächsten MVP-Abschnitt.
+- Der zweite MVP-Sensor ist bewusst ein Systemprofil-Sensor: Er liefert lokale Kontextdaten und sichtbare Schutzsignale, darf daraus aber kein Gesamturteil über die Sicherheit des Macs ableiten.
+- Optionale Systemschutz-Abfragen wie Gatekeeper oder SIP müssen weich behandelt werden: feste Tool-Pfade, keine Shell, Fehler als Notes statt Crash oder lauter Alarm.
+- Geführte Aktionen brauchen eine sichtbare Aktionsart, bevor sie ausgeführt oder gemerkt werden; Nutzer müssen unterscheiden können zwischen lokalem Merken, Anleitung, externem Öffnen und späterem Belegesammeln.
+- Distribution bleibt zweistufig: lokale Beta-Smokes dürfen ad-hoc signiert sein, echte Nutzerverteilung braucht später Developer ID, Hardened Runtime, Notarization und Secrets außerhalb des Repos.
+- Der MVP-Schnitt braucht eine eigene Known-Limits-Doku, weil die wichtigste Sicherheitsqualität des Produkts darin liegt, sichtbare Belege nicht als vollständige Wahrheit zu verkaufen.
+- Das Produktbild wurde am 2026-05-13 geschärft: Die App soll ein kraftvoller Security Buddy mit Punch werden. Ruhige Sprache bleibt wichtig, aber die Verteidigungsambition ist stärker: lokale Beobachtung, echte Threat Intelligence, klare Priorisierung und geführte nächste Schritte.
+- LLMs sind für dieses Projekt eher Erklär-, Recherche- und Assistenzschicht, nicht alleinige Sicherheitsinstanz. Sicherheitsentscheidungen brauchen belegbare lokale Daten, kuratierte externe Quellen und nachvollziehbare Regeln.
+- Adversarial thinking gehört dauerhaft als defensive Review-Perspektive ins Projekt: Es soll helfen, realistische Missbrauchswege in harmlose Sensorideen, Checklisten, Guided Actions oder dokumentierte Grenzen zu übersetzen, aber nicht in Exploit-Automation.
+- Security-Hygiene-Themen wie 2FA, Passwortmanager, VPN, Antivirus/Security-Tools, Firewall, FileVault und System Extensions müssen klar nach Belegtyp getrennt werden: automatisch gesehen, Nutzerangabe, abgeleitet oder nicht prüfbar.
+- Jede größere neue Funktion soll ab jetzt eine defensive Black-Hat-Prüfung bekommen: Wie könnte ein Angreifer die Funktion, ihre Daten, ihre Rechte oder ihre Nutzertexte missbrauchen?
+- Best-Practice-Monitoring muss lokale Messbarkeit von geführten Buddy-Fragen trennen. Dinge wie 2FA oder Passwort-Hygiene sind wichtig, aber oft nicht direkt lokal beweisbar.
+- Der Phase-0-UI-Schnitt hat strukturell geholfen, aber optisch nicht genug. Die App braucht eine echte `BuddyHomeView`: Guardian-Status, Missionen, Aktivitätsfeed und Details erst auf bewusste Auswahl.
+- Die gewählte visuelle Richtung ist: freundliche Mac-Health-App plus native Command-Center-Klarheit plus dezente Gamification. Kein Cyberpunk-SIEM als Hauptoberfläche.
+- Die Roadmap soll ab 2026-05-14 in größeren Kapiteln bearbeitet werden. Erst ein Kapitel abschliessen, dann das nächste beginnen; der nächste Fokus ist Kapitel 1 `Buddy Home`.
+- Die erste echte Buddy-Home-Struktur soll keine Finding automatisch auswählen. Details sind bewusst geöffnete Vertiefung, nicht der Startzustand.
+- Missionen sind für dieses Produkt hilfreicher als eine rohe Hinweis-Liste: Sie zeigen Schutzbereiche und Priorität, ohne technische Belege zu verstecken.
+- Gamification darf Orientierung geben, aber keine falsche Sicherheitszahl behaupten. Fortschrittsanzeigen müssen deshalb als Produktmetapher vorsichtig bleiben.
+- Für den Visual-System-Schnitt sollen Farben semantisch bleiben: Orange für Prüfbedarf, Grün für ruhig/stabil, Blau für beobachtete Orientierung. Farbe ist Bedeutung, nicht Dekoration.
 - Die App soll systemadaptive macOS-Materialien nutzen, damit sie in Hell- und Dunkelmodus nativer wirkt und nicht wie ein harter Web-Dashboard-Port.
-- Das Produkt darf optisch freundlicher und spielerischer werden als ein klassisches Security-Tool. Gerade weil Cybersecurity schwer wirkt, soll die UI die Schwere abfedern, ohne falsche Sicherheit oder unserioese Spielmechaniken einzubauen.
-- Detailseiten sollen den Nutzer nicht zum Analysten machen. Erst muss die App selbst einordnen: kurze Bedeutung, naechster Schritt, wenige einfache Fakten; Rohdaten und Pfade gehoeren in nachrangige technische Details.
-- Digitaler Fussabdruck passt als spaeterer Produktarm zum Security Buddy, aber nur als gefuehrter Privacy-Cleanup: priorisieren, Vorlagen erstellen, Fortschritt lokal merken. Keine heimliche Personensuche, keine automatischen Loeschanfragen und keine Verarbeitung von Identitaetsdokumenten im MVP.
-- Fuer Privacy-Footprint-Cleanup sind vorhandene Quellen eher Verzeichnisse und APIs als fertige Loesung: Data-Broker-Opt-out-Listen, JustDeleteMe, Have I Been Pwned und SimpleLogin koennen helfen, aber die Buddy-Schicht und die sichere Zustimmung muessen wir selbst bauen.
-- Der aktuelle Arbeits-Brand ist `Sento Guard`. Der Name passt besser als `Kito Guard`, weil er im ersten Screening weniger offensichtlich belegt wirkte; trotzdem braucht er vor echter Veroeffentlichung eine tiefere Marken-/Domain-/App-Store-Pruefung.
+- Das Produkt darf optisch freundlicher und spielerischer werden als ein klassisches Security-Tool. Gerade weil Cybersecurity schwer wirkt, soll die UI die Schwere abfedern, ohne falsche Sicherheit oder unseriöse Spielmechaniken einzubauen.
+- Detailseiten sollen den Nutzer nicht zum Analysten machen. Erst muss die App selbst einordnen: kurze Bedeutung, nächster Schritt, wenige einfache Fakten; Rohdaten und Pfade gehören in nachrangige technische Details.
+- Digitaler Fußabdruck passt als späterer Produktarm zum Security Buddy, aber nur als geführter Privacy-Cleanup: priorisieren, Vorlagen erstellen, Fortschritt lokal merken. Keine heimliche Personensuche, keine automatischen Löschanfragen und keine Verarbeitung von Identitätsdokumenten im MVP.
+- Für Privacy-Footprint-Cleanup sind vorhandene Quellen eher Verzeichnisse und APIs als fertige Lösung: Data-Broker-Opt-out-Listen, JustDeleteMe, Have I Been Pwned und SimpleLogin können helfen, aber die Buddy-Schicht und die sichere Zustimmung müssen wir selbst bauen.
+- Der aktuelle Arbeits-Brand ist `Sento Guard`. Der Name passt besser als `Kito Guard`, weil er im ersten Screening weniger offensichtlich belegt wirkte; trotzdem braucht er vor echter Veröffentlichung eine tiefere Marken-/Domain-/App-Store-Prüfung.
 - Die helle Mockup-Richtung ist die neue Leitlinie: freundliche Sidebar, Sento als Buddy-Figur, Statuskarten, Missionen und Activity-Feed. Die dunkle Cyberpunk-Variante bleibt nur Inspirationsquelle, nicht Standardlook.
-- Geplante Missionen duerfen in der UI sichtbar sein, muessen aber klar als geplant erscheinen. Besonders `Digitaler Fussabdruck` und `App-Risiken pruefen` duerfen keine echten Pruefungen behaupten, solange dahinter keine Sensoren oder gefuehrte Flows gebaut sind.
-- Sento darf als SwiftUI-Prototypfigur sichtbar sein, solange die Figur nicht falsche Sicherheit ausdrueckt. Der Charakter muss Produktlogik tragen: priorisieren, erklaeren, nachfragen und Entscheidungen lokal merken.
-- Die sieben Anti-Scheiter-Regeln sind Produktleitplanken: ehrliche Schutzversprechen, Kernloop vor Breite, einfache Handlung, echtes Threat-Matching, fruehe macOS-Rechteplanung, Sento als Logik statt Deko und taeglicher Nutzen vor Dashboard-Fuelle.
+- Geplante Missionen dürfen in der UI sichtbar sein, müssen aber klar als geplant erscheinen. Besonders `Digitaler Fußabdruck` und `App-Risiken prüfen` dürfen keine echten Prüfungen behaupten, solange dahinter keine Sensoren oder geführte Flows gebaut sind.
+- Sento darf als SwiftUI-Prototypfigur sichtbar sein, solange die Figur nicht falsche Sicherheit ausdrückt. Der Charakter muss Produktlogik tragen: priorisieren, erklären, nachfragen und Entscheidungen lokal merken.
+- Die sieben Anti-Scheiter-Regeln sind Produktleitplanken: ehrliche Schutzversprechen, Kernloop vor Breite, einfache Handlung, echtes Threat-Matching, frühe macOS-Rechteplanung, Sento als Logik statt Deko und täglicher Nutzen vor Dashboard-Fülle.
+- Deutsche Nutzertexte und Dokumentation sollen echte Umlaute verwenden. Umschreibungen wie `fuer`, `pruefen`, `moeglich`, `Aenderung` oder `Bestaetigung` sind nur in technischen Bezeichnern akzeptabel, nicht in sichtbaren Texten.
 
 ## Workflow Gotchas
 
-- Vor Session-Ende nicht nur Code, sondern auch die Uebergabe-Dokumente aktualisieren.
-- Ein Schritt ist erst wirklich fertig, wenn die passenden Checks gelaufen sind und der Uebergabestand dokumentiert wurde.
-- Wenn die Zeit knapp wird, lieber einen kleineren Schnitt fertig dokumentieren als einen grossen halb offen lassen.
-- Wenn Swift-Concurrency keinen echten Nutzen bringt, lieber die Architektur zuerst einfacher halten und spaeter gezielt erweitern.
+- Vor Session-Ende nicht nur Code, sondern auch die Übergabe-Dokumente aktualisieren.
+- Ein Schritt ist erst wirklich fertig, wenn die passenden Checks gelaufen sind und der Übergabestand dokumentiert wurde.
+- Wenn die Zeit knapp wird, lieber einen kleineren Schnitt fertig dokumentieren als einen großen halb offen lassen.
+- Wenn Swift-Concurrency keinen echten Nutzen bringt, lieber die Architektur zuerst einfacher halten und später gezielt erweitern.
 
 ## Infra / Build Notes
 
-- Der lokale Standardlauf fuer Qualitaet ist `./scripts/checks.sh`.
+- Der lokale Standardlauf für Qualität ist `./scripts/checks.sh`.
 - Darin stecken Refactor-/Regression-Pass, Security Checks und E2E-Smoke-Tests.
 - Ein lokales Entwicklungs-Bundle entsteht mit `./scripts/build-app-bundle.sh` unter `.build/app/LocalSecurityTwin.app`.
-- Der lokale App-Bundle-Smoke laeuft mit `./scripts/app-bundle-smoke.sh`.
-- Der lokale Hardened-Runtime-Smoke laeuft mit `./scripts/hardened-runtime-smoke.sh`.
-- Die jetzigen E2E-Tests pruefen noch keinen echten UI-Flow, sondern das aktuelle Integrationsfundament.
-- Der erste reale Sensor liest aktuell sichtbare `LaunchAgents`- und `LaunchDaemons`-`plist`-Dateien aus dem Dateisystem und interpretiert einfache Felder wie `Label`, `ProgramArguments`, `RunAtLoad` und `KeepAlive`, ohne daraus Aktivitaet oder Gefahr zu behaupten.
+- Der lokale App-Bundle-Smoke läuft mit `./scripts/app-bundle-smoke.sh`.
+- Der lokale Hardened-Runtime-Smoke läuft mit `./scripts/hardened-runtime-smoke.sh`.
+- Die jetzigen E2E-Tests prüfen noch keinen echten UI-Flow, sondern das aktuelle Integrationsfundament.
+- Der erste reale Sensor liest aktuell sichtbare `LaunchAgents`- und `LaunchDaemons`-`plist`-Dateien aus dem Dateisystem und interpretiert einfache Felder wie `Label`, `ProgramArguments`, `RunAtLoad` und `KeepAlive`, ohne daraus Aktivität oder Gefahr zu behaupten.

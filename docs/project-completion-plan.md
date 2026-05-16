@@ -11,8 +11,8 @@ Der Weg zur vervollstaendigten MVP-Version besteht nicht darin, schnell viele Se
 
 1. erst die Nutzerfuehrung stabilisieren,
 2. dann Packaging, Sandbox und UI-Automation absichern,
-3. danach den zweiten Sensor bewusst auswaehlen,
-4. erst spaeter echte Guided Actions und Distribution vorbereiten.
+3. danach den zweiten Sensor bewusst auswählen,
+4. erst später echte Guided Actions und Distribution vorbereiten.
 
 Das Ziel ist ein ruhiger Sicherheitsbegleiter, kein lauter Scanner.
 
@@ -20,15 +20,15 @@ Das Ziel ist ein ruhiger Sicherheitsbegleiter, kein lauter Scanner.
 
 Das Projekt gilt als MVP-fertig, wenn:
 
-- ein normaler Nutzer den Startbildschirm ohne Erklaerung versteht
-- mindestens zwei lokale, read-only Sensoren verstaendliche Hinweise liefern
-- neue und erwartete Aenderungen nachvollziehbar getrennt sind
+- ein normaler Nutzer den Startbildschirm ohne Erklärung versteht
+- mindestens zwei lokale, read-only Sensoren verständliche Hinweise liefern
+- neue und erwartete Änderungen nachvollziehbar getrennt sind
 - Baseline-/Trust-Entscheidungen bewusst und reversibel wirken
 - die App als lokales `.app`-Bundle stabil startet
 - Sandbox-/Signing-Entscheidungen dokumentiert und getestet sind
 - zentrale UI-Flows automatisiert oder bewusst als manuelle Checks dokumentiert sind
-- keine unerklaerten macOS-Rechte angefordert werden
-- alle Uebergabe-Dokumente aktuell sind
+- keine unerklärten macOS-Rechte angefordert werden
+- alle Übergabe-Dokumente aktuell sind
 
 ## Prerequisites
 
@@ -46,19 +46,19 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 **Status**: umgesetzt am 2026-05-13.
 
-**Goal**: Die App soll fuer normale Nutzer in einem Blick erklaeren, was gerade wichtig ist.
+**Goal**: Die App soll für normale Nutzer in einem Blick erklären, was gerade wichtig ist.
 
 **Demo/Validation**:
 
 - `swift run LocalSecurityTwin`
 - oder `.build/app/LocalSecurityTwin.app` nach `./scripts/app-bundle-smoke.sh`
-- Manuell pruefen:
+- Manuell prüfen:
   - Startbildschirm ist deutsch
-  - neue Aenderungen sind sofort sichtbar
+  - neue Änderungen sind sofort sichtbar
   - bekannte Hinweise wirken nicht wie Panikmeldungen
   - Detailansicht beginnt mit Einordnung, nicht Rohdaten
 
-### Task 1.1: UI-Texte vollstaendig inventarisieren
+### Task 1.1: UI-Texte vollständig inventarisieren
 
 **Status**: umgesetzt am 2026-05-13.
 
@@ -70,7 +70,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Dependencies**: keine
 - **Acceptance Criteria**:
   - Liste der noch offenen Nutzertexte ist dokumentiert
-  - interne Code-Namen werden nicht unnoetig umbenannt
+  - interne Code-Namen werden nicht unnötig umbenannt
 - **Validation**:
   - `rg '"[A-Za-z][^"]*"' Sources/LocalSecurityTwin`
 
@@ -81,30 +81,30 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Dashboard/ContentView.swift`
   - `Sources/LocalSecurityTwin/Features/Dashboard/FindingPresentation.swift`
-- **Description**: Startbereich so umbauen, dass er die drei Fragen beantwortet: Was ist neu? Was ist bekannt? Was ist der naechste sichere Schritt?
+- **Description**: Startbereich so umbauen, dass er die drei Fragen beantwortet: Was ist neu? Was ist bekannt? Was ist der nächste sichere Schritt?
 - **Complexity**: 5/10
 - **Dependencies**: Task 1.1
 - **Acceptance Criteria**:
   - Dashboard zeigt eine kurze Statuszusammenfassung
-  - neue Startup-Aenderungen stehen vor bekannten Hinweisen
-  - begrenzte Sichtbarkeit des Sensors wird ruhig erklaert
+  - neue Startup-Änderungen stehen vor bekannten Hinweisen
+  - begrenzte Sichtbarkeit des Sensors wird ruhig erklärt
 - **Validation**:
   - `swift test`
   - manueller App-Start
 
-### Task 1.3: Detailansicht als Erklaerfluss gliedern
+### Task 1.3: Detailansicht als Erklärfluss gliedern
 
 **Status**: umgesetzt am 2026-05-13.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Detail/FindingDetailView.swift`
-- **Description**: Detailansicht in klare Abschnitte bringen: kurze Einordnung, sichtbare Details, Belege, naechster Schritt.
+- **Description**: Detailansicht in klare Abschnitte bringen: kurze Einordnung, sichtbare Details, Belege, nächster Schritt.
 - **Complexity**: 5/10
 - **Dependencies**: Task 1.2
 - **Acceptance Criteria**:
   - Nutzer sieht zuerst eine alltagstaugliche Einordnung
   - Belege bleiben sichtbar, aber dominieren nicht die Seite
-  - Texte behaupten nicht, dass ein sichtbarer Eintrag aktiv oder gefaehrlich ist
+  - Texte behaupten nicht, dass ein sichtbarer Eintrag aktiv oder gefährlich ist
 - **Validation**:
   - `swift test`
   - manueller Vergleich gegen Screenshot-Befund in `docs/ui-ux-redesign-notes.md`
@@ -116,7 +116,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Dashboard/FindingRowView.swift`
   - `Sources/LocalSecurityTwin/Features/Dashboard/FindingPresentation.swift`
-- **Description**: Severity nicht als Alarm verkaufen, sondern als Einordnung. Neue Aenderungen duerfen wichtiger wirken als normale bekannte Daemons.
+- **Description**: Severity nicht als Alarm verkaufen, sondern als Einordnung. Neue Änderungen dürfen wichtiger wirken als normale bekannte Daemons.
 - **Complexity**: 4/10
 - **Dependencies**: Task 1.2
 - **Acceptance Criteria**:
@@ -131,27 +131,27 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 **Status**: umgesetzt am 2026-05-13.
 
-**Goal**: Der Nutzer kann Startup-Aenderungen bewusst als erwartet merken, und dieser Flow ist testbar.
+**Goal**: Der Nutzer kann Startup-Änderungen bewusst als erwartet merken, und dieser Flow ist testbar.
 
 **Demo/Validation**:
 
 - App mit vorbereitetem Startup-Diff starten
 - Aktion `Als erwartet merken` ausloesen
-- pruefen, dass Diff-Hinweise danach verschwinden oder als bekannt eingeordnet werden
+- prüfen, dass Diff-Hinweise danach verschwinden oder als bekannt eingeordnet werden
 
-### Task 2.1: Testdaten fuer Startup-Diff-App-Start standardisieren
+### Task 2.1: Testdaten für Startup-Diff-App-Start standardisieren
 
 **Status**: umgesetzt am 2026-05-13 als Store-/Presentation-naher E2E-Test. Echte macOS-Klickautomation bleibt nach Sandbox-/Xcode-Entscheidung offen.
 
 - **Location**:
   - `scripts/`
   - `Tests/LocalSecurityTwinE2ETests`
-- **Description**: Einen wiederholbaren Testaufbau fuer lokale Startup-Diffs definieren, ohne echte Systemordner zu veraendern.
+- **Description**: Einen wiederholbaren Testaufbau für lokale Startup-Diffs definieren, ohne echte Systemordner zu verändern.
 - **Complexity**: 5/10
 - **Dependencies**: Sprint 1
 - **Acceptance Criteria**:
-  - Test nutzt temporaere HOME-/Application-Support-Pfade
-  - keine echten LaunchAgent-Dateien werden veraendert
+  - Test nutzt temporäre HOME-/Application-Support-Pfade
+  - keine echten LaunchAgent-Dateien werden verändert
 - **Validation**:
   - `swift test --filter E2E`
 
@@ -162,7 +162,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Location**:
   - `docs/development-workflow.md`
   - `docs/packaging-signing-plan.md`
-- **Description**: Festlegen, ob UI-nahe Tests zuerst ueber Bundle-Smoke, XCTest, Accessibility oder manuelle Checkliste laufen.
+- **Description**: Festlegen, ob UI-nahe Tests zuerst über Bundle-Smoke, XCTest, Accessibility oder manuelle Checkliste laufen.
 - **Complexity**: 3/10
 - **Dependencies**: Task 2.1
 - **Acceptance Criteria**:
@@ -178,11 +178,11 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Location**:
   - `Tests/LocalSecurityTwinE2ETests`
   - `scripts/start-startup-diff-demo.sh`
-- **Description**: Den wichtigsten Flow testen: Findings geladen, Startup-Diff sichtbar, Merken-Aktion verfuegbar, Folgezustand ruhig.
+- **Description**: Den wichtigsten Flow testen: Findings geladen, Startup-Diff sichtbar, Merken-Aktion verfügbar, Folgezustand ruhig.
 - **Complexity**: 6/10
 - **Dependencies**: Task 2.1, Task 2.2
 - **Acceptance Criteria**:
-  - Test laeuft reproduzierbar lokal
+  - Test läuft reproduzierbar lokal
   - bei fehlender echter UI-Automation existiert mindestens ein Store-/Presentation-naher Ersatztest plus manuelle Checkliste
 - **Validation**:
   - `./scripts/checks.sh`
@@ -191,7 +191,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 **Status**: umgesetzt am 2026-05-13.
 
-**Goal**: Das Projekt weiss, ob Sandbox fuer den MVP realistisch ist und ob SwiftPM-Bundling reicht.
+**Goal**: Das Projekt weiss, ob Sandbox für den MVP realistisch ist und ob SwiftPM-Bundling reicht.
 
 **Demo/Validation**:
 
@@ -199,19 +199,19 @@ Das Projekt gilt als MVP-fertig, wenn:
 - App startet mit Sandbox-Testsignatur oder dokumentiertem Gegenbeweis
 - Startup-Sensor-Sichtbarkeit wird verglichen
 
-### Task 3.1: Minimale Entitlements-Datei fuer lokale Sandbox-Tests anlegen
+### Task 3.1: Minimale Entitlements-Datei für lokale Sandbox-Tests anlegen
 
 **Status**: umgesetzt am 2026-05-13.
 
 - **Location**:
   - `Packaging/LocalSecurityTwin.entitlements`
   - `scripts/build-app-bundle.sh`
-- **Description**: Optionales lokales Signing mit Entitlements ermoeglichen, ohne Sandbox standardmaessig zu aktivieren.
+- **Description**: Optionales lokales Signing mit Entitlements ermöglichen, ohne Sandbox standardmaessig zu aktivieren.
 - **Complexity**: 5/10
 - **Dependencies**: Sprint 2 nicht zwingend, aber empfohlen
 - **Acceptance Criteria**:
   - Standard-Bundle bleibt ohne Sandbox
-  - Sandbox kann explizit fuer Tests aktiviert werden
+  - Sandbox kann explizit für Tests aktiviert werden
   - keine Network-, Accessibility-, Apple-Events- oder Full-Disk-Access-Entitlements
 - **Validation**:
   - `codesign -d --entitlements :- .build/app/LocalSecurityTwin.app`
@@ -228,7 +228,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Dependencies**: Task 3.1
 - **Acceptance Criteria**:
   - Ergebnis ist eindeutig dokumentiert
-  - bei eingeschraenkter Sicht gibt es eine ruhige Sensor-Note oder Produktentscheidung
+  - bei eingeschränkter Sicht gibt es eine ruhige Sensor-Note oder Produktentscheidung
 - **Validation**:
   - `./scripts/sandbox-smoke.sh`
   - `./scripts/checks.sh`
@@ -240,30 +240,30 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Location**:
   - `docs/packaging-signing-plan.md`
   - `docs/xcode-project-decision.md`
-- **Description**: Entscheiden, ob fuer UI-Tests, Signing und spaetere Distribution ein Xcode-Projekt noetig wird.
+- **Description**: Entscheiden, ob für UI-Tests, Signing und spätere Distribution ein Xcode-Projekt nötig wird.
 - **Complexity**: 4/10
 - **Dependencies**: Task 3.2
 - **Acceptance Criteria**:
-  - Entscheidung mit Gruenden dokumentiert
-  - naechster Packaging-Schritt ist eindeutig
+  - Entscheidung mit Gründen dokumentiert
+  - nächster Packaging-Schritt ist eindeutig
 - **Validation**:
   - Doku-Review
 
-## Sprint 4: Zweiten Sensor bewusst auswaehlen und bauen
+## Sprint 4: Zweiten Sensor bewusst auswählen und bauen
 
 **Status**: in Arbeit seit 2026-05-13.
 
-**Goal**: Der MVP bekommt eine zweite lokale Sicht, ohne Rechteumfang unnoetig zu vergroessern.
+**Goal**: Der MVP bekommt eine zweite lokale Sicht, ohne Rechteumfang unnötig zu vergroessern.
 
 **Demo/Validation**:
 
 - Dashboard zeigt Hinweise aus zwei Sensoren
-- beide Sensoren erklaeren ihre Grenzen
-- keine zusaetzlichen macOS-Rechte werden still gefordert
+- beide Sensoren erklären ihre Grenzen
+- keine zusätzlichen macOS-Rechte werden still gefordert
 
 ### Task 4.1: Sensor-Kandidaten final bewerten
 
-**Status**: umgesetzt am 2026-05-13. Gewaehlt wurde ein kleiner Systemprofil-Sensor; Privacy-Permissions und moderne Background Items bleiben bewusst spaeter.
+**Status**: umgesetzt am 2026-05-13. Gewählt wurde ein kleiner Systemprofil-Sensor; Privacy-Permissions und moderne Background Items bleiben bewusst später.
 
 - **Location**:
   - `docs/next-sensor-selection.md`
@@ -271,8 +271,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Complexity**: 3/10
 - **Dependencies**: Sprint 3
 - **Acceptance Criteria**:
-  - ein Sensor wird fuer MVP 2 ausgewaehlt
-  - nicht gewaehlte Kandidaten haben klare Gruende
+  - ein Sensor wird für MVP 2 ausgewählt
+  - nicht gewählte Kandidaten haben klare Gründe
 - **Validation**:
   - Doku-Review
 
@@ -304,20 +304,20 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Dependencies**: Task 4.2
 - **Acceptance Criteria**:
   - Sensor liefert Findings mit Evidence und Recommendation
-  - Sensor erklaert eingeschraenkte Sicht
-  - Tests fuer positive, leere und Fehlerfaelle
+  - Sensor erklärt eingeschränkte Sicht
+  - Tests für positive, leere und Fehlerfälle
 - **Validation**:
   - `swift test`
   - `./scripts/checks.sh`
 
-### Task 4.4: UI-Gruppierung fuer mehrere Sensoren
+### Task 4.4: UI-Gruppierung für mehrere Sensoren
 
 **Status**: umgesetzt am 2026-05-13. Dashboard-Texte und System-Finding-Darstellung sind nicht mehr nur auf Autostart-Hinweise zugeschnitten.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Dashboard`
   - `Sources/LocalSecurityTwin/Features/Detail`
-- **Description**: Dashboard so erweitern, dass mehrere Sensorbereiche nicht unuebersichtlich werden.
+- **Description**: Dashboard so erweitern, dass mehrere Sensorbereiche nicht unübersichtlich werden.
 - **Complexity**: 6/10
 - **Dependencies**: Task 4.3
 - **Acceptance Criteria**:
@@ -331,41 +331,41 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 **Status**: umgesetzt am 2026-05-13.
 
-**Goal**: Empfehlungen werden nuetzlicher, ohne echte Systemaenderungen zu verstecken.
+**Goal**: Empfehlungen werden nützlicher, ohne echte Systemänderungen zu verstecken.
 
 **Demo/Validation**:
 
-- Detailansicht zeigt sichere naechste Schritte
-- Aktion erklaert, ob sie nur merkt, oeffnet oder spaeter etwas aendern koennte
+- Detailansicht zeigt sichere nächste Schritte
+- Aktion erklärt, ob sie nur merkt, öffnet oder später etwas ändern könnte
 
 ### Task 5.1: Aktionsarten definieren
 
-**Status**: umgesetzt am 2026-05-13. `PolicyActionKind` trennt lokale Entscheidung, externes Oeffnen, Anleitung und spaeteres Belegesammeln.
+**Status**: umgesetzt am 2026-05-13. `PolicyActionKind` trennt lokale Entscheidung, externes Öffnen, Anleitung und späteres Belegesammeln.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Core/Policy/`
   - `docs/safety-policy.md`
-- **Description**: Klare Typen fuer Aktionen: nur merken, extern oeffnen, Anleitung anzeigen, spaeter validieren.
+- **Description**: Klare Typen für Aktionen: nur merken, extern öffnen, Anleitung anzeigen, später validieren.
 - **Complexity**: 5/10
 - **Dependencies**: Sprint 4
 - **Acceptance Criteria**:
-  - keine Aktion fuehrt still Systemaenderungen aus
+  - keine Aktion führt still Systemänderungen aus
   - jede Aktion hat Consent-Anforderung
 - **Validation**:
   - `swift test`
 
-### Task 5.2: Erklaer-Dialog fuer vertrauensrelevante Aktionen
+### Task 5.2: Erklär-Dialog für vertrauensrelevante Aktionen
 
-**Status**: umgesetzt am 2026-05-13. Empfehlungsbuttons zeigen vor dem Speichern eine kurze Bestaetigung, was lokal passiert und was nicht.
+**Status**: umgesetzt am 2026-05-13. Empfehlungsbuttons zeigen vor dem Speichern eine kurze Bestätigung, was lokal passiert und was nicht.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Detail`
   - `Sources/LocalSecurityTwin/Core/Policy`
-- **Description**: Vor dem Merken oder spaeteren Handeln kurz erklaeren, was die App tut und was nicht.
+- **Description**: Vor dem Merken oder späteren Handeln kurz erklären, was die App tut und was nicht.
 - **Complexity**: 6/10
 - **Dependencies**: Task 5.1
 - **Acceptance Criteria**:
-  - Nutzer bestaetigt bewusst
+  - Nutzer bestätigt bewusst
   - Text vermeidet technische Woerter wie Baseline und Diff
 - **Validation**:
   - Store-/Presentation-Test
@@ -373,17 +373,17 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 ### Task 5.3: Policy-Historie sichtbar machen
 
-**Status**: bereits vorhanden und am 2026-05-13 geglaettet. Settings zeigen gemerkte Entscheidungen mit Reset; Labels sind deutscher.
+**Status**: bereits vorhanden und am 2026-05-13 geglättet. Settings zeigen gemerkte Entscheidungen mit Reset; Labels sind deutscher.
 
 - **Location**:
   - `Sources/LocalSecurityTwin/Features/Settings/SettingsView.swift`
   - `Sources/LocalSecurityTwin/Core/Policy`
-- **Description**: Settings zeigen, welche Entscheidungen lokal gemerkt wurden, mit Reset-Moeglichkeit.
+- **Description**: Settings zeigen, welche Entscheidungen lokal gemerkt wurden, mit Reset-Möglichkeit.
 - **Complexity**: 6/10
 - **Dependencies**: Task 5.2
 - **Acceptance Criteria**:
-  - Nutzer kann lokale Entscheidungen sehen und loeschen
-  - keine Cloud-Abhaengigkeit
+  - Nutzer kann lokale Entscheidungen sehen und löschen
+  - keine Cloud-Abhängigkeit
 - **Validation**:
   - `swift test`
   - manueller Settings-Smoke
@@ -412,7 +412,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Dependencies**: Sprint 3
 - **Acceptance Criteria**:
   - keine hart verstreuten Metadaten
-  - Bundle-Info bleibt per `plutil` gueltig
+  - Bundle-Info bleibt per `plutil` gültig
 - **Validation**:
   - `./scripts/app-bundle-smoke.sh`
 
@@ -423,7 +423,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Location**:
   - `docs/packaging-signing-plan.md`
   - optional `docs/distribution-checklist.md`
-- **Description**: Voraussetzungen, Befehle und Geheimnisse fuer echte Signierung dokumentieren, ohne Zertifikate ins Repo zu legen.
+- **Description**: Voraussetzungen, Befehle und Geheimnisse für echte Signierung dokumentieren, ohne Zertifikate ins Repo zu legen.
 - **Complexity**: 3/10
 - **Dependencies**: Task 6.1
 - **Acceptance Criteria**:
@@ -439,12 +439,12 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Location**:
   - `docs/distribution-checklist.md`
   - optional `scripts/notarization-preflight.sh`
-- **Description**: Vorbedingungen und lokale Checks fuer spaetere Notarization dokumentieren.
+- **Description**: Vorbedingungen und lokale Checks für spätere Notarization dokumentieren.
 - **Complexity**: 5/10
 - **Dependencies**: Task 6.2
 - **Acceptance Criteria**:
   - Notarization wird nicht als Debug-Anforderung missverstanden
-  - Preflight prueft Bundle, Signatur, Runtime und fehlende Secrets
+  - Preflight prüft Bundle, Signatur, Runtime und fehlende Secrets
 - **Validation**:
   - `./scripts/hardened-runtime-smoke.sh`
   - Doku-Review
@@ -458,8 +458,8 @@ Das Projekt gilt als MVP-fertig, wenn:
 **Demo/Validation**:
 
 - neue Person kann Repo lesen, App starten und Hauptfluss verstehen
-- App erklaert ihre Grenzen in UI und Doku
-- Checks laufen gruen
+- App erklärt ihre Grenzen in UI und Doku
+- Checks laufen grün
 
 ### Task 7.1: README auf echten Stand bringen
 
@@ -467,7 +467,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 - **Location**:
   - `README.md`
-- **Description**: README aktualisieren: aktueller Funktionsumfang, Startwege, Checks, Grenzen, naechste Schritte.
+- **Description**: README aktualisieren: aktueller Funktionsumfang, Startwege, Checks, Grenzen, nächste Schritte.
 - **Complexity**: 3/10
 - **Dependencies**: Sprint 6
 - **Acceptance Criteria**:
@@ -488,7 +488,7 @@ Das Projekt gilt als MVP-fertig, wenn:
 - **Acceptance Criteria**:
   - Startup-Sensor-Grenzen sind klar
   - Sandbox-/Rechte-Grenzen sind klar
-  - keine ueberzogenen Security-Versprechen
+  - keine überzogenen Security-Versprechen
 - **Validation**:
   - Review gegen `docs/project-learnings.md`
 
@@ -498,12 +498,12 @@ Das Projekt gilt als MVP-fertig, wenn:
 
 - **Location**:
   - neues `docs/mvp-release-checklist.md`
-- **Description**: Eine konkrete Checkliste fuer einen Beta-Schnitt erstellen.
+- **Description**: Eine konkrete Checkliste für einen Beta-Schnitt erstellen.
 - **Complexity**: 4/10
 - **Dependencies**: Sprint 6, Task 7.1, Task 7.2
 - **Acceptance Criteria**:
   - Build-, Test-, Doku-, Security- und Packaging-Schritte sind enthalten
-  - klare Stop-Kriterien fuer riskante Veraenderungen
+  - klare Stop-Kriterien für riskante Veränderungen
 - **Validation**:
   - `./scripts/checks.sh`
   - `./scripts/app-bundle-smoke.sh`
@@ -519,27 +519,27 @@ Jeder Sprint endet mit:
 - `./scripts/e2e-smoke.sh`
 - bevorzugt komplett: `./scripts/checks.sh`
 
-Zusaetzlich je nach Sprint:
+Zusätzlich je nach Sprint:
 
 - Packaging:
   - `./scripts/app-bundle-smoke.sh`
   - `./scripts/hardened-runtime-smoke.sh`
-  - spaeter neu: `./scripts/sandbox-smoke.sh`
+  - später neu: `./scripts/sandbox-smoke.sh`
 - UI:
   - Store-/Presentation-Tests
   - manueller App-Smoke
-  - spaeter echte UI-Automation
+  - später echte UI-Automation
 - Sensoren:
-  - Tests fuer leere Datenquelle
-  - Tests fuer gueltige Daten
-  - Tests fuer kaputte/unlesbare Daten
-  - Tests fuer eingeschraenkte Sicht
+  - Tests für leere Datenquelle
+  - Tests für gültige Daten
+  - Tests für kaputte/unlesbare Daten
+  - Tests für eingeschränkte Sicht
 
 ## Documentation Strategy
 
 Die Doku bleibt bewusst in drei Ebenen:
 
-- `docs/session-status.md`: letzter Uebergabestand und naechster Schritt
+- `docs/session-status.md`: letzter Übergabestand und nächster Schritt
 - `docs/project-learnings.md`: dauerhafte Erkenntnisse
 - thematische Detaildokumente:
   - `docs/ui-ux-redesign-notes.md`
@@ -557,26 +557,26 @@ Nach jedem Sprint:
 
 ## Potential Risks & Gotchas
 
-- **Sandbox kann den ersten Sensor entwerten**: Wenn Sandbox die Startup-Pfade unsichtbar macht, muss das Produkt entweder ohne Sandbox starten oder den Sensor anders erklaeren.
-- **UI-Automation kann ohne Xcode-Projekt schwer bleiben**: Falls SwiftPM-Bundling nicht reicht, muss ein Xcode-Projekt als bewusstes Packaging-Artefakt ergaenzt werden.
-- **Mehr Sensoren koennen die UI wieder unuebersichtlich machen**: Zweiter Sensor erst nach Dashboard-Struktur und Gruppierung.
-- **Severity kann Nutzer erschrecken**: Neue Aenderungen sind wichtig, aber nicht automatisch gefaehrlich.
+- **Sandbox kann den ersten Sensor entwerten**: Wenn Sandbox die Startup-Pfade unsichtbar macht, muss das Produkt entweder ohne Sandbox starten oder den Sensor anders erklären.
+- **UI-Automation kann ohne Xcode-Projekt schwer bleiben**: Falls SwiftPM-Bundling nicht reicht, muss ein Xcode-Projekt als bewusstes Packaging-Artefakt ergänzt werden.
+- **Mehr Sensoren können die UI wieder unübersichtlich machen**: Zweiter Sensor erst nach Dashboard-Struktur und Gruppierung.
+- **Severity kann Nutzer erschrecken**: Neue Änderungen sind wichtig, aber nicht automatisch gefährlich.
 - **Baseline-Sprache ist technisch**: Nutzertexte sollen von "gemerktem Zustand" sprechen, nicht von Baseline oder Diff.
 - **Distribution braucht echte Identitaet**: Ad-hoc-Signing ist nur lokal; Developer ID und Notarization bleiben separate Schritte.
-- **Keine stillen Systemaenderungen**: Guided Actions duerfen erst nach klarer Policy- und Consent-Schicht kommen.
+- **Keine stillen Systemänderungen**: Guided Actions dürfen erst nach klarer Policy- und Consent-Schicht kommen.
 
 ## Rollback Plan
 
-- UI-Aenderungen:
+- UI-Änderungen:
   - kleine, separate Commits pro View
   - bei Problemen letzten UI-Commit revertieren
-- Sensor-Aenderungen:
+- Sensor-Änderungen:
   - Sensor hinter Pipeline-Registrierung entfernen
-  - Tests fuer alten Sensor muessen weiter gruen bleiben
-- Packaging-Aenderungen:
+  - Tests für alten Sensor müssen weiter grün bleiben
+- Packaging-Änderungen:
   - neue Scripts isoliert halten
-  - Standard `swift build` und `swift test` duerfen nicht vom Packaging-Pfad abhaengen
-- Sandbox-/Signing-Aenderungen:
+  - Standard `swift build` und `swift test` dürfen nicht vom Packaging-Pfad abhängen
+- Sandbox-/Signing-Änderungen:
   - Sandbox nur explizit aktivieren, nie als stiller Standard
   - Entitlements-Dateien klein und reviewbar halten
 
@@ -585,9 +585,9 @@ Nach jedem Sprint:
 1. Sprint 1: Orientierung und UX-Fokus
 2. Sprint 2: Trust-Flow und UI-nahe Tests
 3. Sprint 3: Sandbox- und Packaging-Entscheidung
-4. Sprint 4: Zweiten Sensor bewusst auswaehlen und bauen
+4. Sprint 4: Zweiten Sensor bewusst auswählen und bauen
 5. Sprint 5: Guided Actions ohne Systemrisiko
 6. Sprint 6: Produktreife und Distribution
 7. Sprint 7: MVP-Abschluss und Beta-Readiness
 
-Die sieben Sprints sind umgesetzt. Der naechste konkrete Arbeitsschritt ist kein weiterer Roadmap-Sprint, sondern ein Beta-Schnitt nach `docs/mvp-release-checklist.md` und danach die Entscheidung ueber echte macOS-UI-Automation.
+Die sieben Sprints sind umgesetzt. Der nächste konkrete Arbeitsschritt ist kein weiterer Roadmap-Sprint, sondern ein Beta-Schnitt nach `docs/mvp-release-checklist.md` und danach die Entscheidung über echte macOS-UI-Automation.

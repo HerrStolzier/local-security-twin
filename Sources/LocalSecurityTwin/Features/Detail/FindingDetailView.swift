@@ -170,7 +170,7 @@ private struct StartupSimpleOverview: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Was heisst das fuer dich?")
+            Text("Was heißt das für dich?")
                 .font(.title3)
                 .fontWeight(.semibold)
 
@@ -189,7 +189,7 @@ private struct StartupSimpleOverview: View {
             SimpleFactRow(
                 systemImage: "shield",
                 title: "Wichtig",
-                text: "Das ist ein Hinweis, kein Alarm. Neu oder unerwartet waere wichtiger als nur sichtbar."
+                text: "Das ist ein Hinweis, kein Alarm. Neu oder unerwartet wäre wichtiger als nur sichtbar."
             )
         }
         .padding(16)
@@ -328,7 +328,7 @@ private struct TechnicalDetailSection: View {
 
                 EvidenceSection(evidence: finding.evidence)
 
-                Text("Diese technischen Daten sind nur Belege. Sie beweisen nicht, dass etwas gefaehrlich ist oder gerade aktiv laeuft.")
+                Text("Diese technischen Daten sind nur Belege. Sie beweisen nicht, dass etwas gefährlich ist oder gerade aktiv läuft.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -339,7 +339,7 @@ private struct TechnicalDetailSection: View {
                     .font(.title3)
                     .fontWeight(.semibold)
 
-                Text("Nur oeffnen, wenn du Pfade, plist-Daten und Rohbelege sehen willst.")
+                Text("Nur öffnen, wenn du Pfade, plist-Daten und Rohbelege sehen willst.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -360,11 +360,11 @@ private struct RecommendationSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Naechster Schritt")
+            Text("Nächster Schritt")
                 .font(.title3)
                 .fontWeight(.semibold)
 
-            Text("Die App fuehrt dich erst durch eine bewusste Entscheidung. Sie aendert dabei keine Systemeinstellungen.")
+            Text("Die App führt dich erst durch eine bewusste Entscheidung. Sie ändert dabei keine Systemeinstellungen.")
                 .foregroundStyle(.secondary)
 
             if let primaryRecommendation = finding.recommendations.first {
@@ -378,7 +378,7 @@ private struct RecommendationSection: View {
 
             let remainingRecommendations = Array(finding.recommendations.dropFirst())
             if !remainingRecommendations.isEmpty {
-                DisclosureGroup("Weitere moegliche Schritte") {
+                DisclosureGroup("Weitere mögliche Schritte") {
                     ForEach(remainingRecommendations) { recommendation in
                         RecommendationCard(
                             recommendation: recommendation,
@@ -466,7 +466,7 @@ private struct RecommendationCard: View {
             isPresented: $isShowingConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Bestaetigen") {
+            Button("Bestätigen") {
                 if let pendingDecision {
                     record(pendingDecision.decision, scope: pendingDecision.scope)
                 }
@@ -503,23 +503,23 @@ private struct RecommendationCard: View {
     private var requirementText: String {
         switch request.confirmationRequirement {
         case .standard:
-            return "Das ist ein normaler gefuehrter Schritt. Er passiert erst nach deiner Bestaetigung."
+            return "Das ist ein normaler geführter Schritt. Er passiert erst nach deiner Bestätigung."
         case .explicitApproval:
-            return "Dieser Schritt braucht eine bewusste Zustimmung, weil er mehr Belege sammeln koennte."
+            return "Dieser Schritt braucht eine bewusste Zustimmung, weil er mehr Belege sammeln könnte."
         }
     }
 
     private var confirmationTitle: String {
-        "Schritt bestaetigen?"
+        "Schritt bestätigen?"
     }
 
     private func confirmationMessage(for pendingDecision: PendingPolicyDecision) -> String {
         let persistenceText =
             pendingDecision.scope == .remembered
-            ? "Diese Entscheidung wird lokal gespeichert und kann in den Einstellungen wieder geloescht werden."
-            : "Diese Entscheidung gilt nur fuer diese Sitzung."
+            ? "Diese Entscheidung wird lokal gespeichert und kann in den Einstellungen wieder gelöscht werden."
+            : "Diese Entscheidung gilt nur für diese Sitzung."
 
-        return "\(request.action.kind.consentSummary) \(persistenceText) Die App aendert dabei keine Systemeinstellungen."
+        return "\(request.action.kind.consentSummary) \(persistenceText) Die App ändert dabei keine Systemeinstellungen."
     }
 
     private func record(_ decision: PolicyDecision, scope: PolicyPersistenceScope) {

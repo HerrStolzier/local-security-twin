@@ -5,7 +5,7 @@
 Aktuelle Entscheidung:
 Noch kein Xcode-Projekt anlegen.
 
-SwiftPM plus die lokalen Bundle-Scripts reichen fuer den naechsten MVP-Abschnitt.
+SwiftPM plus die lokalen Bundle-Scripts reichen für den nächsten MVP-Abschnitt.
 
 ## Warum
 
@@ -14,10 +14,10 @@ Der aktuelle Stand kann bereits:
 - mit `swift build` und `swift test` schnell bauen und testen
 - mit `./scripts/build-app-bundle.sh` ein lokales `.app`-Bundle erzeugen
 - mit `./scripts/app-bundle-smoke.sh` das Bundle starten
-- mit `./scripts/hardened-runtime-smoke.sh` Hardened Runtime lokal pruefen
-- mit `./scripts/sandbox-smoke.sh` Sandbox-Signing und Startfaehigkeit pruefen
+- mit `./scripts/hardened-runtime-smoke.sh` Hardened Runtime lokal prüfen
+- mit `./scripts/sandbox-smoke.sh` Sandbox-Signing und Startfähigkeit prüfen
 
-Ein Xcode-Projekt wuerde jetzt vor allem Projektpflege und Metadaten-Komplexitaet hinzufuegen, ohne den naechsten Produktnutzen direkt zu verbessern.
+Ein Xcode-Projekt würde jetzt vor allem Projektpflege und Metadaten-Komplexität hinzufügen, ohne den nächsten Produktnutzen direkt zu verbessern.
 
 ## Wann die Entscheidung kippt
 
@@ -31,10 +31,10 @@ Ein Xcode-Projekt wird sinnvoll, wenn mindestens einer dieser Punkte eintritt:
 
 ## Praktische Konsequenz
 
-Naechste Schritte bleiben:
+Nächste Schritte bleiben:
 
-1. UI-/UX und Trust-Flow weiter ueber SwiftPM, Store-/Presentation-Tests und Bundle-Smokes absichern.
-2. Zweiten Sensor erst nach der aktuellen Sandbox-/Packaging-Einordnung auswaehlen.
+1. UI-/UX und Trust-Flow weiter über SwiftPM, Store-/Presentation-Tests und Bundle-Smokes absichern.
+2. Zweiten Sensor erst nach der aktuellen Sandbox-/Packaging-Einordnung auswählen.
 3. Xcode-Projekt nicht aus Gewohnheit anlegen, sondern erst bei konkretem Bedarf.
 
 ## Bekannte Grenze
@@ -42,12 +42,12 @@ Naechste Schritte bleiben:
 Der Sandbox-Smoke beweist aktuell:
 
 - Bundle baut mit Sandbox-Entitlement
-- Signatur ist gueltig
-- App startet mit vorbereitetem temporaerem HOME
+- Signatur ist gültig
+- App startet mit vorbereitetem temporärem HOME
 
 Er beweist noch nicht vollautomatisch:
 
 - dass ein bestimmter SwiftUI-Button klickbar ist
 - dass die sichtbaren Startup-Hinweise im echten Fenster erscheinen
 
-Diese Luecke bleibt bewusst offen bis zur UI-Automation-Entscheidung.
+Diese Lücke bleibt bewusst offen bis zur UI-Automation-Entscheidung.

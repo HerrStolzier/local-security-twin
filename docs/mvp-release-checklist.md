@@ -4,7 +4,7 @@
 
 Diese Checkliste beschreibt einen ehrlichen Beta-/MVP-Schnitt.
 
-Ein Punkt gilt nur dann als erledigt, wenn der Zustand reproduzierbar ist und die Doku nicht mehr vom Chatverlauf abhaengt.
+Ein Punkt gilt nur dann als erledigt, wenn der Zustand reproduzierbar ist und die Doku nicht mehr vom Chatverlauf abhängt.
 
 Der konkrete Ablauf steht in `docs/beta-validation-plan.md`.
 
@@ -12,9 +12,9 @@ Der konkrete Ablauf steht in `docs/beta-validation-plan.md`.
 
 - `AGENTS.md` lesen
 - `docs/session-status.md` aktualisieren
-- `docs/project-learnings.md` pruefen
-- `docs/known-limits.md` pruefen
-- `README.md` auf Startwege und Grenzen pruefen
+- `docs/project-learnings.md` prüfen
+- `docs/known-limits.md` prüfen
+- `README.md` auf Startwege und Grenzen prüfen
 
 ## Build und Tests
 
@@ -26,16 +26,16 @@ Der konkrete Ablauf steht in `docs/beta-validation-plan.md`.
 - `./scripts/sandbox-smoke.sh`
 - `./scripts/notarization-preflight.sh`
 
-## UI-Pruefung
+## UI-Prüfung
 
-Manuell pruefen:
+Manuell prüfen:
 
 - Dashboard startet deutsch
 - Hinweise sind gruppiert
-- Detailansicht erklaert zuerst, dann zeigt sie Belege
-- Startup-Aenderungen koennen bewusst als erwartet gemerkt werden
+- Detailansicht erklärt zuerst, dann zeigt sie Belege
+- Startup-Änderungen können bewusst als erwartet gemerkt werden
 - Settings zeigen gemerkte Entscheidungen und erlauben Reset
-- Systemprofil-Hinweise klingen nicht wie ein Gesamturteil ueber den Mac
+- Systemprofil-Hinweise klingen nicht wie ein Gesamturteil über den Mac
 
 ## Security-Grenzen
 
@@ -43,15 +43,15 @@ Stop-Kriterien:
 
 - neue Entitlements ohne dokumentierten Nutzen
 - Full Disk Access als Standardanforderung
-- automatische Systemaenderung ohne explizite Zustimmung
-- Shell-/AppleScript-/privilegierte Ausfuehrung fuer UI-Komfort
+- automatische Systemänderung ohne explizite Zustimmung
+- Shell-/AppleScript-/privilegierte Ausführung für UI-Komfort
 - Finding-Texte behaupten Gefahr ohne Beleg
 - Zertifikate, Secrets oder echte Nutzerlogs im Repo
 
 ## Packaging
 
-- `Packaging/AppMetadata.env` enthaelt korrekte Version und Bundle-ID
-- `Packaging/Info.plist.template` erzeugt gueltige Bundle-Metadaten
+- `Packaging/AppMetadata.env` enthält korrekte Version und Bundle-ID
+- `Packaging/Info.plist.template` erzeugt gültige Bundle-Metadaten
 - lokaler Build ist klar als ad-hoc signiert dokumentiert
 - Developer-ID-Distribution ist nicht mit lokalem Debug-Build verwechselt
 - Notarization ist vorbereitet, aber ohne echte Credentials nicht Teil des lokalen Standardlaufs
@@ -68,7 +68,7 @@ Stop-Kriterien:
 
 Ein MVP-Schnitt ist akzeptabel, wenn:
 
-- alle lokalen Checks gruen sind
+- alle lokalen Checks grün sind
 - README und Known Limits ehrlich sind
-- keine neue Berechtigung still eingefuehrt wurde
-- der Nutzer die Hauptansicht ohne Chat-Erklaerung versteht
+- keine neue Berechtigung still eingeführt wurde
+- der Nutzer die Hauptansicht ohne Chat-Erklärung versteht

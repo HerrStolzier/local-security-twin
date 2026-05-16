@@ -2,22 +2,22 @@
 
 ## Zweck
 
-Diese Datei haelt die gewaehlte visuelle Richtung fuer den Security Buddy fest.
+Diese Datei hält die gewählte visuelle Richtung für den Security Buddy fest.
 
 Der Screenshot-Test am 2026-05-14 hat gezeigt:
 Der erste `Buddy statt Inspector`-Schnitt hat die Struktur verbessert, aber optisch wirkt die App weiterhin wie ein Inspector/Admin-Tool.
 
 Wir brauchen deshalb einen echten visuellen und informationellen Neuschnitt.
 
-## Gewaehlte Richtung
+## Gewählte Richtung
 
-Die App soll eine Mischung aus drei Gefuehlen bekommen:
+Die App soll eine Mischung aus drei Gefühlen bekommen:
 
 1. **Friendly Mac Health App**
    - einfach
    - klar
-   - ein grosser Zustand
-   - eine dominante naechste Aktion
+   - ein großer Zustand
+   - eine dominante nächste Aktion
    - normale Nutzer verstehen sofort, ob etwas wichtig ist
 
 2. **Native Mac Command Center**
@@ -30,26 +30,26 @@ Die App soll eine Mischung aus drei Gefuehlen bekommen:
 3. **Gameful Defender Layer**
    - Missionen statt Rohlisten
    - Schutzfortschritt statt reiner Warnungen
-   - naechster Verteidigungsschritt
-   - sichtbarer Fortschritt fuer Best Practices
+   - nächster Verteidigungsschritt
+   - sichtbarer Fortschritt für Best Practices
    - motivierend, aber nicht kindisch
 
 ## Arbeits-Brand
 
-Der aktuelle Arbeitsname fuer die App ist:
+Der aktuelle Arbeitsname für die App ist:
 
 `Sento Guard`
 
 Warum diese Richtung passt:
 
 - kurz und merkbar
-- freundlich genug fuer normale Nutzer
-- wachsam genug fuer Security
+- freundlich genug für normale Nutzer
+- wachsam genug für Security
 - weniger offensichtlich belegt als `Kito Guard` im ersten Screening
-- funktioniert auf Deutsch und Englisch ohne harte Aussprache-Huerde
+- funktioniert auf Deutsch und Englisch ohne harte Aussprache-Hürde
 
 Wichtig:
-Das ist noch keine juristische Markenfreigabe. Vor echter Veroeffentlichung braucht `Sento Guard` einen tieferen Check in Markenregistern, App Stores, Domains und Produktdatenbanken.
+Das ist noch keine juristische Markenfreigabe. Vor echter Veröffentlichung braucht `Sento Guard` einen tieferen Check in Markenregistern, App Stores, Domains und Produktdatenbanken.
 
 ## Inspirationsquellen
 
@@ -57,8 +57,8 @@ Diese Quellen sind Inspiration, keine Kopiervorlagen:
 
 - Raycast: Command-Center-Klarheit, schnelle Aktionen, native Mac-Anmutung
 - CleanMyMac: freundlicher Health-Screen, einfache Statuskommunikation
-- Little Snitch / TinyShield: starke Security-Visualisierung fuer spaetere Detailmodi
-- Pareto Cyber / gamified Security-Dashboards: Missionen, Risikoebenen, Fortschrittsgefuehl
+- Little Snitch / TinyShield: starke Security-Visualisierung für spätere Detailmodi
+- Pareto Cyber / gamified Security-Dashboards: Missionen, Risikoebenen, Fortschrittsgefühl
 
 ## Nicht-Richtung
 
@@ -67,8 +67,8 @@ Nicht bauen:
 - Cyberpunk-Neon-Hacker-Dashboard als Standardansicht
 - SIEM-artige Tabellenlandschaft
 - 17 gleich laute Einzelkarten
-- dauerhafte Rot/Gelb/Gruen-Alarmoptik
-- spielerische Optik, die unserioes oder kindlich wirkt
+- dauerhafte Rot/Gelb/Grün-Alarmoptik
+- spielerische Optik, die unseriös oder kindlich wirkt
 
 ## Zielbild der Startseite
 
@@ -77,39 +77,39 @@ Die Startseite soll nicht mit Findings beginnen.
 Sie soll mit einer Aussage beginnen:
 
 - `Alles ruhig`
-- `Bitte kurz pruefen`
+- `Bitte kurz prüfen`
 - `Dringend empfohlen`
 
 Danach:
 
 - eine kurze Buddy-Nachricht
-- ein klarer naechster Schritt
+- ein klarer nächster Schritt
 - wenige Missionen oder Schutzbereiche
 - technisches Material nur auf Wunsch
 
 ## Helles Mockup als neue Leitlinie
 
-Das dunkle Cybersecurity-Mockup bleibt nur als Ideenquelle fuer Charakter, Missionen und Schutzstatus.
+Das dunkle Cybersecurity-Mockup bleibt nur als Ideenquelle für Charakter, Missionen und Schutzstatus.
 Die eigentliche App soll in eine helle, freundliche Richtung gehen:
 
 - linke Sidebar mit Brand und Missionen
-- oben ein persoenlicher Buddy-Einstieg
+- oben ein persönlicher Buddy-Einstieg
 - klare Statuskarten
-- fuenf Missionskarten:
+- fünf Missionskarten:
   - Autostart verstehen
   - Mac aktuell halten / Mac-Schutzsignale
   - Security-Hygiene
-  - Digitaler Fussabdruck
-  - App-Risiken pruefen
+  - Digitaler Fußabdruck
+  - App-Risiken prüfen
 - Activity-Feed als roter Faden
-- spaeter ein Chat-/Hilfe-Einstieg, aber erst wenn dahinter echte Funktion steckt
+- später ein Chat-/Hilfe-Einstieg, aber erst wenn dahinter echte Funktion steckt
 
-Nicht uebernehmen:
+Nicht übernehmen:
 
 - dunkler Hauptmodus als Standard
-- Neon-Ueberladung
+- Neon-Überladung
 - "0 Bedrohungen" als harte Aussage, solange die App keine echte Bedrohungserkennung hat
-- visuelle Elemente, die mehr Sicherheitsgewissheit ausdruecken als die Daten hergeben
+- visuelle Elemente, die mehr Sicherheitsgewissheit ausdrücken als die Daten hergeben
 
 ## Sento Charakter
 
@@ -119,32 +119,32 @@ Der Charakter hat drei Aufgaben:
 
 - Orientierung geben: Der Nutzer erkennt sofort, dass die App ein Buddy ist, kein Rohdaten-Inspector.
 - Ton setzen: freundlich, wachsam, ruhig, nicht panisch.
-- Produktlogik verkoerpern: Sento erklaert, priorisiert, fragt nach und merkt Entscheidungen lokal.
+- Produktlogik verkörpern: Sento erklärt, priorisiert, fragt nach und merkt Entscheidungen lokal.
 
 Aktueller Stand:
 
 - Sento ist als skalierbare SwiftUI-Figur im Code umgesetzt.
-- Die Figur nutzt einfache Formen, einen hellen Koerper, leuchtende Augen und ein Schild.
+- Die Figur nutzt einfache Formen, einen hellen Körper, leuchtende Augen und ein Schild.
 - Das ist ein Prototyp-Charakter, noch kein finales Marken-Asset.
 
-Spaeter:
+Später:
 
 - echtes Character-Asset oder kleine Illustrationsserie
-- mehrere Zustaende wie ruhig, aufmerksam, prueft, braucht Zustimmung
+- mehrere Zustände wie ruhig, aufmerksam, prüft, braucht Zustimmung
 - klare Regel: Der visuelle Zustand darf nur anzeigen, was die App auch fachlich belegen kann.
 
-## Moegliche Startseiten-Struktur
+## Mögliche Startseiten-Struktur
 
 ### Oben: Guardian Status
 
-- grosser Schutzstatus
+- großer Schutzstatus
 - kurzer Satz in Alltagssprache
-- eine primaere Aktion
+- eine primäre Aktion
 - optional ein ruhiger Fortschrittsring oder Schutzlevel
 
 Beispiel:
 
-> Dein Mac sieht im lokalen Blick stabil aus. Zwei Schutzbereiche koennen wir als naechstes staerken.
+> Dein Mac sieht im lokalen Blick stabil aus. Zwei Schutzbereiche können wir als nächstes stärken.
 
 ### Mitte: Missionen
 
@@ -154,24 +154,24 @@ Beispiele:
 
 - `Autostart verstehen`
 - `macOS aktuell halten`
-- `FileVault pruefen`
+- `FileVault prüfen`
 - `Firewall einordnen`
 - `Passwort- und 2FA-Check`
 
 Jede Mission hat:
 
 - Status
-- kurze Erklaerung
-- eine naechste Aktion
+- kurze Erklärung
+- eine nächste Aktion
 - Details nur auf Klick
 
-### Unten oder rechts: Aktivitaetsfeed
+### Unten oder rechts: Aktivitätsfeed
 
 Kurze Buddy-Meldungen:
 
 - `17 bekannte Autostart-Hinweise zusammengefasst`
 - `2 Systemsignale sichtbar`
-- `Keine neue Autostart-Aenderung`
+- `Keine neue Autostart-Änderung`
 
 ## Detailmodus
 
@@ -193,7 +193,7 @@ Gamification soll Verhalten erleichtern, nicht Druck erzeugen.
 
 Nach Nutzerfeedback vom 2026-05-15 darf die App bewusst farbiger und etwas verspielter wirken.
 Grund:
-Das Thema ist ernst; die Oberflaeche darf diese Schwere abfedern, solange sie weiter ehrlich und vertrauenswuerdig bleibt.
+Das Thema ist ernst; die Oberfläche darf diese Schwere abfedern, solange sie weiter ehrlich und vertrauenswürdig bleibt.
 
 Erlaubt:
 
@@ -201,38 +201,38 @@ Erlaubt:
 - Fortschritt
 - Schutzbereiche
 - ruhige Badges
-- "naechster Verteidigungsschritt"
+- "nächster Verteidigungsschritt"
 - freundlichere semantische Farben
 - leichte Health-/Gameful-Defender-Anmutung
-- Lila als freundlicher Akzent fuer geplante/ruhige Buddy-Bereiche, wenn Gruen auf hellem Grund zu weich wirkt
+- Lila als freundlicher Akzent für geplante/ruhige Buddy-Bereiche, wenn Grün auf hellem Grund zu weich wirkt
 
 Nicht erlaubt:
 
 - Angstpunkte
 - manipulative Streaks
 - Scheinsicherheit durch Score
-- Punkte fuer Dinge, die die App nicht sicher messen kann
+- Punkte für Dinge, die die App nicht sicher messen kann
 - bunte Dekoration ohne Bedeutung
 
-## Naechste Design-Iteration
+## Nächste Design-Iteration
 
 Der erste konkrete UI-Schritt wurde umgesetzt:
 
 1. `BuddyHomeView` ist eine echte Startseite.
 2. Die Finding-Liste ist aus der ersten Wahrnehmung entfernt.
-3. Findings werden in Missionen und Buddy-Meldungen uebersetzt.
+3. Findings werden in Missionen und Buddy-Meldungen übersetzt.
 4. Detailansicht erscheint erst nach aktiver Auswahl.
-5. Kapitel 2 hat den ersten visuellen Feinschliff: systemadaptive Flaechen, semantische Farben, staerkere Mission-Badges und ruhigere Aktivitaetszeilen.
+5. Kapitel 2 hat den ersten visuellen Feinschliff: systemadaptive Flächen, semantische Farben, stärkere Mission-Badges und ruhigere Aktivitätszeilen.
 
-Naechster Schritt:
+Nächster Schritt:
 
 1. Kapitel 2b `Sento Guard Shell` mit sichtbarer SwiftUI-Figur manuell ansehen.
-2. Pruefen, ob Sento freundlich und wachsam wirkt, ohne kindisch oder zu dekorativ zu werden.
+2. Prüfen, ob Sento freundlich und wachsam wirkt, ohne kindisch oder zu dekorativ zu werden.
 3. Danach entscheiden, ob zuerst ein finales Character-Asset entsteht oder Kapitel 3 `Update Awareness` startet.
 
-## Build-Skills fuer die Umsetzung
+## Build-Skills für die Umsetzung
 
-Fuer den naechsten UI-Schnitt nutzen wir:
+Für den nächsten UI-Schnitt nutzen wir:
 
 - `build-macos-apps:view-refactor`
 - `build-macos-apps:swiftui-patterns`

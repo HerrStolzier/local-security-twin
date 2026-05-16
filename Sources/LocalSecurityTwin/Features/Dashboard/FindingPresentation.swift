@@ -12,7 +12,7 @@ enum FindingGroup: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .changes:
-            return "Neue Aenderungen"
+            return "Neue Änderungen"
         case .knownStartupHints:
             return "Bekannte Autostart-Hinweise"
         case .review:
@@ -23,7 +23,7 @@ enum FindingGroup: String, CaseIterable, Identifiable {
     var emptyText: String {
         switch self {
         case .changes:
-            return "Keine neuen Startup-Aenderungen sichtbar."
+            return "Keine neuen Startup-Änderungen sichtbar."
         case .knownStartupHints:
             return "Noch keine bekannten Autostart-Hinweise geladen."
         case .review:
@@ -49,7 +49,7 @@ struct DashboardPresentation {
 
     var statusTitle: String {
         if startupChangeCount > 0 {
-            return "Bitte kurz pruefen"
+            return "Bitte kurz prüfen"
         }
 
         if findings.isEmpty {
@@ -65,7 +65,7 @@ struct DashboardPresentation {
         }
 
         if startupChangeCount > 0 {
-            return "Ich habe eine Veraenderung im Autostart gesehen. Das ist nicht automatisch gefaehrlich, aber wir sollten kurz klaeren, ob du sie erwartest."
+            return "Ich habe eine Veränderung im Autostart gesehen. Das ist nicht automatisch gefährlich, aber wir sollten kurz klären, ob du sie erwartest."
         }
 
         if knownStartupCount > 0 && reviewCount > 0 {
@@ -73,15 +73,15 @@ struct DashboardPresentation {
         }
 
         if knownStartupCount > 0 {
-            return "Ich sehe bekannte Autostart-Hinweise. Sie sind nicht automatisch kritisch, aber sie erklaeren, was im Hintergrund starten kann."
+            return "Ich sehe bekannte Autostart-Hinweise. Sie sind nicht automatisch kritisch, aber sie erklären, was im Hintergrund starten kann."
         }
 
-        return "Ich sehe lokale Systemsignale. Sie helfen uns, den Mac einzuordnen, ersetzen aber kein vollstaendiges Sicherheitsurteil."
+        return "Ich sehe lokale Systemsignale. Sie helfen uns, den Mac einzuordnen, ersetzen aber kein vollständiges Sicherheitsurteil."
     }
 
     var primaryActionTitle: String {
         if startupChangeCount > 0 {
-            return "Neue Aenderung ansehen"
+            return "Neue Änderung ansehen"
         }
 
         if findings.isEmpty {
@@ -96,7 +96,7 @@ struct DashboardPresentation {
             return nil
         }
 
-        return "\(knownStartupCount) bekannte Autostart-Hinweise zusammengefasst. Oeffne die Einzelhinweise nur, wenn du eine bestimmte App genauer ansehen willst."
+        return "\(knownStartupCount) bekannte Autostart-Hinweise zusammengefasst. Öffne die Einzelhinweise nur, wenn du eine bestimmte App genauer ansehen willst."
     }
 
     var guardianTone: String {
@@ -141,8 +141,8 @@ struct DashboardPresentation {
                 BuddyActivityItem(
                     id: "startup-change",
                     systemImage: "exclamationmark.shield",
-                    title: "\(startupChangeCount) neue Autostart-Aenderung(en)",
-                    message: "Diese Aenderung sollte kurz eingeordnet werden.",
+                    title: "\(startupChangeCount) neue Autostart-Änderung(en)",
+                    message: "Diese Änderung sollte kurz eingeordnet werden.",
                     findingID: findings(in: .changes).first?.id
                 )
             )
@@ -151,8 +151,8 @@ struct DashboardPresentation {
                 BuddyActivityItem(
                     id: "startup-stable",
                     systemImage: "checkmark.shield",
-                    title: "Keine neue Autostart-Aenderung",
-                    message: "Der aktuelle lokale Blick zeigt keine neue Startup-Ueberraschung.",
+                    title: "Keine neue Autostart-Änderung",
+                    message: "Der aktuelle lokale Blick zeigt keine neue Startup-Überraschung.",
                     findingID: nil
                 )
             )
@@ -195,7 +195,7 @@ struct DashboardPresentation {
         }
 
         if startupChangeCount > 0 {
-            return "\(startupChangeCount) Autostart-Aenderung(en) brauchen deine Einordnung"
+            return "\(startupChangeCount) Autostart-Änderung(en) brauchen deine Einordnung"
         }
 
         if knownStartupCount == 0 && reviewCount > 0 {
@@ -211,34 +211,34 @@ struct DashboardPresentation {
         }
 
         if startupChangeCount > 0 {
-            return "Wichtig sind zuerst die Aenderungen seit dem gemerkten Zustand. Bekannte Hinweise kannst du danach in Ruhe pruefen."
+            return "Wichtig sind zuerst die Änderungen seit dem gemerkten Zustand. Bekannte Hinweise kannst du danach in Ruhe prüfen."
         }
 
         if knownStartupCount == 0 && reviewCount > 0 {
-            return "Die App sieht lokale Systemhinweise. Das ist Orientierung, kein vollstaendiges Sicherheitsurteil."
+            return "Die App sieht lokale Systemhinweise. Das ist Orientierung, kein vollständiges Sicherheitsurteil."
         }
 
-        return "Es sind sichtbare Autostart-Hinweise vorhanden. Das ist nicht automatisch gefaehrlich, sondern zuerst eine lokale Orientierung."
+        return "Es sind sichtbare Autostart-Hinweise vorhanden. Das ist nicht automatisch gefährlich, sondern zuerst eine lokale Orientierung."
     }
 
     var nextStepText: String {
         if findings.isEmpty {
-            return "Du musst gerade nichts tun. Beim naechsten Lauf vergleicht die App wieder den sichtbaren Zustand."
+            return "Du musst gerade nichts tun. Beim nächsten Lauf vergleicht die App wieder den sichtbaren Zustand."
         }
 
         if startupChangeCount > 0 {
-            return "Pruefe zuerst die neuen oder verschwundenen Hinweise. Wenn sie erwartet sind, merke den aktuellen Zustand bewusst als normal."
+            return "Prüfe zuerst die neuen oder verschwundenen Hinweise. Wenn sie erwartet sind, merke den aktuellen Zustand bewusst als normal."
         }
 
         if knownStartupCount == 0 && reviewCount > 0 {
             return "Lies die Systemhinweise als Kontext. Wichtig ist, ob eine Einstellung anders wirkt, als du sie erwartest."
         }
 
-        return "Schau dir bekannte Hinweise in Ruhe an. Wichtig ist vor allem, ob du die zugehoerige App erkennst."
+        return "Schau dir bekannte Hinweise in Ruhe an. Wichtig ist vor allem, ob du die zugehörige App erkennst."
     }
 
     var visibilityText: String {
-        "Aktuell sieht die App sichtbare Autostart-Dateien und lokale Systemprofil-Daten. Das sind Belege zur Einordnung, kein Beweis fuer aktive oder gefaehrliche Software und kein vollstaendiges Urteil ueber den Mac."
+        "Aktuell sieht die App sichtbare Autostart-Dateien und lokale Systemprofil-Daten. Das sind Belege zur Einordnung, kein Beweis für aktive oder gefährliche Software und kein vollständiges Urteil über den Mac."
     }
 
     func findings(in group: FindingGroup) -> [Finding] {
@@ -250,11 +250,11 @@ struct DashboardPresentation {
             return BuddyMission(
                 id: "startup",
                 title: "Autostart einordnen",
-                status: "Bitte pruefen",
+                status: "Bitte prüfen",
                 summary: "Es gibt neue oder verschwundene Autostart-Hinweise seit dem gemerkten Zustand.",
                 systemImage: "bolt.horizontal.circle",
                 progress: 0.35,
-                primaryActionTitle: "Neue Aenderung ansehen",
+                primaryActionTitle: "Neue Änderung ansehen",
                 findingID: findings(in: .changes).first?.id
             )
         }
@@ -268,7 +268,7 @@ struct DashboardPresentation {
                 : "Aktuell gibt es keine sichtbaren Autostart-Hinweise, die deine Aufmerksamkeit brauchen.",
             systemImage: "bolt.horizontal.circle",
             progress: knownStartupCount > 0 ? 0.7 : 0.9,
-            primaryActionTitle: knownStartupCount > 0 ? "Zusammenfassung ansehen" : "Keine Aktion noetig",
+            primaryActionTitle: knownStartupCount > 0 ? "Zusammenfassung ansehen" : "Keine Aktion nötig",
             findingID: findings(in: .knownStartupHints).first?.id
         )
     }
@@ -283,7 +283,7 @@ struct DashboardPresentation {
                 : "Systemschutzsignale erscheinen hier, sobald der lokale Sensor etwas anzeigen kann.",
             systemImage: "desktopcomputer",
             progress: reviewCount > 0 ? 0.6 : 0.25,
-            primaryActionTitle: reviewCount > 0 ? "Systemhinweis ansehen" : "Spaeter pruefen",
+            primaryActionTitle: reviewCount > 0 ? "Systemhinweis ansehen" : "Später prüfen",
             findingID: findings(in: .review).first?.id
         )
     }
@@ -293,7 +293,7 @@ struct DashboardPresentation {
             id: "hygiene",
             title: "Security-Hygiene",
             status: "Geplant",
-            summary: "Hier landen spaeter FileVault, Firewall, Updates, 2FA, Passwortmanager und VPN-Fragen.",
+            summary: "Hier landen später FileVault, Firewall, Updates, 2FA, Passwortmanager und VPN-Fragen.",
             systemImage: "checklist.checked",
             progress: 0.15,
             primaryActionTitle: "Noch nicht aktiv",
@@ -304,12 +304,12 @@ struct DashboardPresentation {
     private var privacyMission: BuddyMission {
         BuddyMission(
             id: "privacy",
-            title: "Digitaler Fussabdruck",
+            title: "Digitaler Fußabdruck",
             status: "Geplant",
-            summary: "Spaeter helfe ich dir, sichtbare Daten, alte Accounts und Datenbroker-Funde geordnet anzugehen.",
+            summary: "Später helfe ich dir, sichtbare Daten, alte Accounts und Datenbroker-Funde geordnet anzugehen.",
             systemImage: "fingerprint",
             progress: 0.1,
-            primaryActionTitle: "Spaeter",
+            primaryActionTitle: "Später",
             findingID: nil
         )
     }
@@ -317,12 +317,12 @@ struct DashboardPresentation {
     private var appRiskMission: BuddyMission {
         BuddyMission(
             id: "app-risk",
-            title: "App-Risiken pruefen",
+            title: "App-Risiken prüfen",
             status: "Geplant",
-            summary: "Hier soll spaeter sichtbar werden, welche Apps ungewoehnliche Rechte, alte Versionen oder riskante Muster zeigen.",
+            summary: "Hier soll später sichtbar werden, welche Apps ungewöhnliche Rechte, alte Versionen oder riskante Muster zeigen.",
             systemImage: "app.badge.checkmark",
             progress: 0.12,
-            primaryActionTitle: "Spaeter",
+            primaryActionTitle: "Später",
             findingID: nil
         )
     }
@@ -378,7 +378,7 @@ extension Finding {
                 return "Gemeinsamer Autostart-Hinweis"
             }
 
-            return "Autostart-Hinweis fuer diesen Benutzer"
+            return "Autostart-Hinweis für diesen Benutzer"
         case .privacyPermissions:
             return "Datenschutz-Berechtigung"
         case .systemInventory:
@@ -395,7 +395,7 @@ extension Finding {
 
             return "\(displaySubject) ist seit dem gemerkten Zustand neu sichtbar."
         case .launchAgentInventory:
-            return "\(displaySubject) liegt an einem Ort, den macOS fuer automatischen Hintergrundstart nutzen kann."
+            return "\(displaySubject) liegt an einem Ort, den macOS für automatischen Hintergrundstart nutzen kann."
         case .privacyPermissions, .systemInventory:
             return summary
         }
@@ -404,7 +404,7 @@ extension Finding {
     var displaySourceTitle: String {
         switch source.kind {
         case .baselineDiff:
-            return "Aenderung seit gemerktem Zustand"
+            return "Änderung seit gemerktem Zustand"
         case .launchAgentInventory:
             return "Sichtbarer Autostart-Hinweis"
         case .privacyPermissions:
@@ -430,9 +430,9 @@ extension Finding {
         case .low:
             return "Zur Info"
         case .medium:
-            return "Pruefen"
+            return "Prüfen"
         case .high:
-            return "Genauer pruefen"
+            return "Genauer prüfen"
         }
     }
 
@@ -440,16 +440,16 @@ extension Finding {
         switch source.kind {
         case .baselineDiff:
             if id.contains("::removed::") {
-                return "Wichtig ist hier vor allem die Aenderung: Dieser Hinweis war frueher sichtbar und ist jetzt weg. Das ist oft normal nach Updates oder Deinstallationen."
+                return "Wichtig ist hier vor allem die Änderung: Dieser Hinweis war früher sichtbar und ist jetzt weg. Das ist oft normal nach Updates oder Deinstallationen."
             }
 
-            return "Wichtig ist hier vor allem die Aenderung: Dieser Hinweis war beim letzten gemerkten Zustand noch nicht sichtbar. Wenn du die App kennst, kannst du ihn als erwartet merken."
+            return "Wichtig ist hier vor allem die Änderung: Dieser Hinweis war beim letzten gemerkten Zustand noch nicht sichtbar. Wenn du die App kennst, kannst du ihn als erwartet merken."
         case .launchAgentInventory:
-            return "Dieser Hinweis ist nicht automatisch gefaehrlich. Er zeigt nur, dass macOS diese Datei fuer Hintergrundstart verwenden kann."
+            return "Dieser Hinweis ist nicht automatisch gefährlich. Er zeigt nur, dass macOS diese Datei für Hintergrundstart verwenden kann."
         case .privacyPermissions:
             return "Diese Berechtigung kann sensibel sein. Entscheidend ist, ob du die App kennst und ihr diesen Zugriff geben wolltest."
         case .systemInventory:
-            return "Dieser Systemhinweis soll dir helfen, lokale Veraenderungen besser einzuordnen."
+            return "Dieser Systemhinweis soll dir helfen, lokale Veränderungen besser einzuordnen."
         }
     }
 
@@ -491,12 +491,12 @@ extension Finding {
 
         if value.localizedCaseInsensitiveContains("dauerhaft")
             || value.localizedCaseInsensitiveContains("always") {
-            return "Soll im Hintergrund verfuegbar bleiben"
+            return "Soll im Hintergrund verfügbar bleiben"
         }
 
         if value.localizedCaseInsensitiveContains("bedingungen")
             || value.localizedCaseInsensitiveContains("conditional") {
-            return "Nutzt Bedingungen, um bei Bedarf verfuegbar zu bleiben"
+            return "Nutzt Bedingungen, um bei Bedarf verfügbar zu bleiben"
         }
 
         return value
@@ -545,11 +545,11 @@ extension FindingEvidence {
         case "path", "current-path":
             return "Aktuell beobachtete Datei"
         case "previous-path":
-            return "Frueher beobachtete Datei"
+            return "Früher beobachtete Datei"
         case "scope":
             return "Bereich"
         case "baseline-comparison":
-            return "Aenderung seit gemerktem Zustand"
+            return "Änderung seit gemerktem Zustand"
         default:
             return title
         }
@@ -592,7 +592,7 @@ extension FindingSeverity {
         case .medium:
             return "Mittel"
         case .high:
-            return "Erhoeht"
+            return "Erhöht"
         }
     }
 }
@@ -601,7 +601,7 @@ extension FindingConfidence {
     var displayTitle: String {
         switch self {
         case .tentative:
-            return "Erste Einschaetzung"
+            return "Erste Einschätzung"
         case .supported:
             return "Mit Beleg"
         case .strong:

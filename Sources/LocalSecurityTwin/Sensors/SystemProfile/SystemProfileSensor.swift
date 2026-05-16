@@ -38,8 +38,8 @@ struct SystemProfileSensor: FindingSensor {
             severity: .low,
             confidence: .supported,
             summary: "Die App konnte lokale Basisdaten dieses Macs lesen.",
-            userImpact: "Diese Angaben helfen, spaetere Hinweise richtig einzuordnen. Sie beweisen nicht, dass der Mac vollstaendig geschuetzt ist.",
-            nextStep: "Keine schnelle Aktion noetig. Behalte die Hinweise im Blick und pruefe Abweichungen in Ruhe.",
+            userImpact: "Diese Angaben helfen, spätere Hinweise richtig einzuordnen. Sie beweisen nicht, dass der Mac vollständig geschützt ist.",
+            nextStep: "Keine schnelle Aktion nötig. Behalte die Hinweise im Blick und prüfe Abweichungen in Ruhe.",
             evidence: [
                 FindingEvidence(
                     id: "system-profile",
@@ -51,8 +51,8 @@ struct SystemProfileSensor: FindingSensor {
             recommendations: [
                 FindingRecommendation(
                     id: "review-system-profile",
-                    title: "Systemprofil in Ruhe pruefen",
-                    explanation: "Nutze das, wenn du die lokalen Basisdaten als Orientierung ansehen moechtest. Die App aendert dabei nichts am System.",
+                    title: "Systemprofil in Ruhe prüfen",
+                    explanation: "Nutze das, wenn du die lokalen Basisdaten als Orientierung ansehen möchtest. Die App ändert dabei nichts am System.",
                     action: .runSafeValidation
                 ),
             ]
@@ -69,19 +69,19 @@ struct SystemProfileSensor: FindingSensor {
             return [
                 Finding(
                     id: "system-profile::gatekeeper-enabled",
-                    title: "Mac-App-Pruefung ist aktiv",
+                    title: "Mac-App-Prüfung ist aktiv",
                     source: source,
                     severity: .low,
                     confidence: .supported,
-                    summary: "macOS meldet, dass die App-Pruefung fuer heruntergeladene Apps aktiv ist.",
-                    userImpact: "Diese Pruefung kann helfen, bekannte unsichere oder nicht vertrauenswuerdige Apps vor dem Oeffnen zu blockieren. Sie ist aber kein vollstaendiger Schutz fuer alles, was auf dem Mac passiert.",
-                    nextStep: "Keine schnelle Aktion noetig. Wichtig ist nur, dass diese Sicht ein Schutzsignal ist, kein Gesamturteil ueber den Mac.",
+                    summary: "macOS meldet, dass die App-Prüfung für heruntergeladene Apps aktiv ist.",
+                    userImpact: "Diese Prüfung kann helfen, bekannte unsichere oder nicht vertrauenswürdige Apps vor dem Öffnen zu blockieren. Sie ist aber kein vollständiger Schutz für alles, was auf dem Mac passiert.",
+                    nextStep: "Keine schnelle Aktion nötig. Wichtig ist nur, dass diese Sicht ein Schutzsignal ist, kein Gesamturteil über den Mac.",
                     evidence: [gatekeeperEvidence(from: gatekeeperStatus)],
                     recommendations: [
                         FindingRecommendation(
                             id: "review-gatekeeper-status",
-                            title: "App-Pruefung als sichtbares Schutzsignal merken",
-                            explanation: "Nutze das als lokale Einordnung. Die App aendert die Gatekeeper-Einstellung nicht.",
+                            title: "App-Prüfung als sichtbares Schutzsignal merken",
+                            explanation: "Nutze das als lokale Einordnung. Die App ändert die Gatekeeper-Einstellung nicht.",
                             action: .runSafeValidation
                         ),
                     ]
@@ -91,19 +91,19 @@ struct SystemProfileSensor: FindingSensor {
             return [
                 Finding(
                     id: "system-profile::gatekeeper-disabled",
-                    title: "Mac-App-Pruefung ist deaktiviert",
+                    title: "Mac-App-Prüfung ist deaktiviert",
                     source: source,
                     severity: .high,
                     confidence: .supported,
-                    summary: "macOS meldet, dass die App-Pruefung fuer heruntergeladene Apps nicht aktiv ist.",
-                    userImpact: "Wenn diese Einstellung nicht bewusst so gewaehlt wurde, koennen heruntergeladene Apps weniger stark vor dem Oeffnen eingeordnet werden.",
-                    nextStep: "Pruefe in den macOS-Systemeinstellungen, ob diese Einstellung bewusst so gewaehlt wurde. Die App aendert sie nicht automatisch.",
+                    summary: "macOS meldet, dass die App-Prüfung für heruntergeladene Apps nicht aktiv ist.",
+                    userImpact: "Wenn diese Einstellung nicht bewusst so gewählt wurde, können heruntergeladene Apps weniger stark vor dem Öffnen eingeordnet werden.",
+                    nextStep: "Prüfe in den macOS-Systemeinstellungen, ob diese Einstellung bewusst so gewählt wurde. Die App ändert sie nicht automatisch.",
                     evidence: [gatekeeperEvidence(from: gatekeeperStatus)],
                     recommendations: [
                         FindingRecommendation(
                             id: "review-disabled-gatekeeper",
-                            title: "Einstellung manuell pruefen",
-                            explanation: "Nutze das, um die sichtbare Einstellung bewusst einzuordnen. Die App nimmt keine Systemaenderung vor.",
+                            title: "Einstellung manuell prüfen",
+                            explanation: "Nutze das, um die sichtbare Einstellung bewusst einzuordnen. Die App nimmt keine Systemänderung vor.",
                             action: .runSafeValidation
                         ),
                     ]
@@ -113,13 +113,13 @@ struct SystemProfileSensor: FindingSensor {
             return [
                 Finding(
                     id: "system-profile::gatekeeper-unknown",
-                    title: "Mac-App-Pruefung konnte nicht eindeutig gelesen werden",
+                    title: "Mac-App-Prüfung konnte nicht eindeutig gelesen werden",
                     source: source,
                     severity: .low,
                     confidence: .tentative,
-                    summary: "Die lokale Gatekeeper-Meldung war sichtbar, aber nicht eindeutig genug fuer eine klare Einordnung.",
-                    userImpact: "Das ist zuerst nur eine Sichtgrenze. Es bedeutet nicht automatisch, dass die App-Pruefung aus ist.",
-                    nextStep: "Behandle diesen Hinweis als eingeschraenkte Sicht und pruefe ihn spaeter erneut, wenn er wichtig wird.",
+                    summary: "Die lokale Gatekeeper-Meldung war sichtbar, aber nicht eindeutig genug für eine klare Einordnung.",
+                    userImpact: "Das ist zuerst nur eine Sichtgrenze. Es bedeutet nicht automatisch, dass die App-Prüfung aus ist.",
+                    nextStep: "Behandle diesen Hinweis als eingeschränkte Sicht und prüfe ihn später erneut, wenn er wichtig wird.",
                     evidence: [gatekeeperEvidence(from: gatekeeperStatus)],
                     recommendations: []
                 ),
@@ -150,7 +150,7 @@ struct SystemProfileSensor: FindingSensor {
         }
 
         if !snapshot.unavailableChecks.isEmpty {
-            lines.append("Nicht verfuegbar: \(snapshot.unavailableChecks.joined(separator: ", "))")
+            lines.append("Nicht verfügbar: \(snapshot.unavailableChecks.joined(separator: ", "))")
         }
 
         return lines.joined(separator: "\n")
@@ -171,7 +171,7 @@ struct SystemProfileSensor: FindingSensor {
         ]
 
         if !snapshot.unavailableChecks.isEmpty {
-            notes.append("Einige optionale Systemprofil-Checks waren nicht verfuegbar: \(snapshot.unavailableChecks.joined(separator: ", ")).")
+            notes.append("Einige optionale Systemprofil-Checks waren nicht verfügbar: \(snapshot.unavailableChecks.joined(separator: ", ")).")
         }
 
         return notes
@@ -204,9 +204,9 @@ struct GatekeeperStatus: Hashable, Sendable {
     var summary: String {
         switch state {
         case .enabled:
-            return "Gatekeeper meldet: App-Pruefung aktiv."
+            return "Gatekeeper meldet: App-Prüfung aktiv."
         case .disabled:
-            return "Gatekeeper meldet: App-Pruefung deaktiviert."
+            return "Gatekeeper meldet: App-Prüfung deaktiviert."
         case .unknown:
             return "Gatekeeper meldet keinen eindeutig verstandenen Status."
         }

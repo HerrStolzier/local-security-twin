@@ -67,7 +67,7 @@ struct FindingSchemaTests {
         #expect(finding.startupLabel == "com.example.agent")
         #expect(finding.startupProgramArguments == "/usr/bin/true --background")
         #expect(finding.startupRunAtLoadText == "Kann beim Laden automatisch starten")
-        #expect(finding.startupKeepAliveText == "Soll im Hintergrund verfuegbar bleiben")
+        #expect(finding.startupKeepAliveText == "Soll im Hintergrund verfügbar bleiben")
         #expect(finding.startupFilePath == "/Library/LaunchDaemons/com.example.agent.plist")
     }
 
@@ -77,7 +77,7 @@ struct FindingSchemaTests {
             title: "Systemweit Autostart-Hinweis ist seit dem gemerkten Zustand neu",
             source: FindingSource(
                 kind: .baselineDiff,
-                title: "Autostart-Aenderung seit gemerktem Zustand",
+                title: "Autostart-Änderung seit gemerktem Zustand",
                 detail: "Test"
             ),
             severity: .high,
@@ -91,17 +91,17 @@ struct FindingSchemaTests {
 
         let presentation = DashboardPresentation(findings: [finding])
 
-        #expect(presentation.headlineText.contains("Autostart-Aenderung"))
-        #expect(presentation.statusTitle == "Bitte kurz pruefen")
-        #expect(presentation.buddyMessageText.contains("Veraenderung im Autostart"))
-        #expect(presentation.primaryActionTitle == "Neue Aenderung ansehen")
-        #expect(presentation.nextStepText.contains("Pruefe zuerst"))
+        #expect(presentation.headlineText.contains("Autostart-Änderung"))
+        #expect(presentation.statusTitle == "Bitte kurz prüfen")
+        #expect(presentation.buddyMessageText.contains("Veränderung im Autostart"))
+        #expect(presentation.primaryActionTitle == "Neue Änderung ansehen")
+        #expect(presentation.nextStepText.contains("Prüfe zuerst"))
         #expect(presentation.visibilityText.contains("kein Beweis"))
         #expect(presentation.showsRememberCurrentStartupStateAction)
         #expect(presentation.guardianTone == "Aufmerksam")
         #expect(presentation.missions.first?.title == "Autostart einordnen")
         #expect(presentation.missions.first?.findingID == finding.id)
-        #expect(presentation.activityItems.first?.title.contains("neue Autostart-Aenderung") == true)
+        #expect(presentation.activityItems.first?.title.contains("neue Autostart-Änderung") == true)
     }
 
     @Test func dashboardPresentationSummarizesRepeatedKnownStartupHints() throws {
@@ -115,7 +115,7 @@ struct FindingSchemaTests {
             ),
             severity: .medium,
             confidence: .supported,
-            summary: "com.example.one.plist liegt an einem Ort, den macOS fuer automatischen Hintergrundstart nutzen kann.",
+            summary: "com.example.one.plist liegt an einem Ort, den macOS für automatischen Hintergrundstart nutzen kann.",
             userImpact: "Test",
             nextStep: "Test",
             evidence: [],
@@ -131,7 +131,7 @@ struct FindingSchemaTests {
             ),
             severity: .medium,
             confidence: .supported,
-            summary: "com.example.two.plist liegt an einem Ort, den macOS fuer automatischen Hintergrundstart nutzen kann.",
+            summary: "com.example.two.plist liegt an einem Ort, den macOS für automatischen Hintergrundstart nutzen kann.",
             userImpact: "Test",
             nextStep: "Test",
             evidence: [],
@@ -143,12 +143,12 @@ struct FindingSchemaTests {
         #expect(presentation.statusTitle == "Zur Beobachtung")
         #expect(presentation.primaryActionTitle == "Hinweise ansehen")
         #expect(presentation.buddyMessageText.contains("bekannte Autostart-Hinweise"))
-        #expect(presentation.knownStartupSummaryText == "2 bekannte Autostart-Hinweise zusammengefasst. Oeffne die Einzelhinweise nur, wenn du eine bestimmte App genauer ansehen willst.")
+        #expect(presentation.knownStartupSummaryText == "2 bekannte Autostart-Hinweise zusammengefasst. Öffne die Einzelhinweise nur, wenn du eine bestimmte App genauer ansehen willst.")
         #expect(presentation.guardianTone == "Beobachtet")
         #expect(presentation.missions.first?.title == "Autostart verstehen")
         #expect(presentation.missions.first?.findingID == first.id)
-        #expect(presentation.missions.map(\.title).contains("Digitaler Fussabdruck"))
-        #expect(presentation.missions.map(\.title).contains("App-Risiken pruefen"))
+        #expect(presentation.missions.map(\.title).contains("Digitaler Fußabdruck"))
+        #expect(presentation.missions.map(\.title).contains("App-Risiken prüfen"))
         #expect(presentation.activityItems.contains { $0.id == "known-startup" })
     }
 

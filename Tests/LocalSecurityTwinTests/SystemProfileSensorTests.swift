@@ -32,7 +32,7 @@ struct SystemProfileSensorTests {
         #expect(run.findings.allSatisfy { $0.source.kind == .systemInventory })
         #expect(run.findings.contains(where: { $0.id == "system-profile::local-context" }))
         #expect(run.findings.contains(where: { $0.id == "system-profile::gatekeeper-enabled" }))
-        #expect(run.findings.allSatisfy { !$0.userImpact.contains("vollstaendig geschuetzt ist.") || $0.severity == .low })
+        #expect(run.findings.allSatisfy { !$0.userImpact.contains("vollständig geschützt ist.") || $0.severity == .low })
         #expect(run.notes.contains(where: { $0.contains("Lokales Systemprofil gelesen") }))
     }
 
@@ -62,8 +62,8 @@ struct SystemProfileSensorTests {
         )
         #expect(gatekeeperFinding.severity == .high)
         #expect(gatekeeperFinding.confidence == .supported)
-        #expect(gatekeeperFinding.title == "Mac-App-Pruefung ist deaktiviert")
-        #expect(gatekeeperFinding.nextStep.contains("Die App aendert sie nicht automatisch"))
+        #expect(gatekeeperFinding.title == "Mac-App-Prüfung ist deaktiviert")
+        #expect(gatekeeperFinding.nextStep.contains("Die App ändert sie nicht automatisch"))
         #expect(!gatekeeperFinding.summary.localizedCaseInsensitiveContains("kompromittiert"))
         #expect(run.notes.contains(where: { $0.contains("SIP-Status") }))
     }
@@ -122,7 +122,7 @@ struct SystemProfileSensorTests {
         let presentation = DashboardPresentation(findings: [finding])
 
         #expect(presentation.headlineText.contains("lokale Systemhinweis"))
-        #expect(presentation.summaryText.contains("kein vollstaendiges Sicherheitsurteil"))
+        #expect(presentation.summaryText.contains("kein vollständiges Sicherheitsurteil"))
         #expect(finding.displayTitle == "Mac-Grunddaten sind sichtbar")
         #expect(finding.displaySourceTitle == "Mac-Systemprofil")
     }

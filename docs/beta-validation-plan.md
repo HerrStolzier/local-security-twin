@@ -2,12 +2,12 @@
 
 ## Ziel
 
-Dieser Plan beschreibt den naechsten Schritt nach der umgesetzten Roadmap.
+Dieser Plan beschreibt den nächsten Schritt nach der umgesetzten Roadmap.
 
-Es geht jetzt nicht darum, sofort neue Features zu bauen. Es geht darum, den aktuellen MVP ehrlich zu pruefen:
+Es geht jetzt nicht darum, sofort neue Features zu bauen. Es geht darum, den aktuellen MVP ehrlich zu prüfen:
 
-- laeuft die App stabil?
-- versteht man die App ohne Chat-Erklaerung?
+- läuft die App stabil?
+- versteht man die App ohne Chat-Erklärung?
 - sind die Grenzen klar?
 - gibt es einen Beta-Stand, den man verantworten kann?
 
@@ -15,7 +15,7 @@ Es geht jetzt nicht darum, sofort neue Features zu bauen. Es geht darum, den akt
 
 ### Codex
 
-Codex prueft alles, was reproduzierbar und technisch messbar ist:
+Codex prüft alles, was reproduzierbar und technisch messbar ist:
 
 - Build
 - Unit-Tests
@@ -29,7 +29,7 @@ Codex prueft alles, was reproduzierbar und technisch messbar ist:
 
 ### Nutzer
 
-Du pruefst alles, was echte Nutzerwahrnehmung braucht:
+Du prüfst alles, was echte Nutzerwahrnehmung braucht:
 
 - verstehst du die Startansicht?
 - ist die App ruhig genug?
@@ -40,7 +40,7 @@ Du pruefst alles, was echte Nutzerwahrnehmung braucht:
 
 ## Phase 1: Technischer Beta-Check
 
-Codex fuehrt aus:
+Codex führt aus:
 
 ```bash
 swift build
@@ -54,8 +54,8 @@ swift test
 
 Ergebnis:
 
-- alle Checks gruen: weiter zu Phase 2
-- ein Check rot: erst fixen, dann erneut pruefen
+- alle Checks grün: weiter zu Phase 2
+- ein Check rot: erst fixen, dann erneut prüfen
 
 ## Phase 2: App manuell starten
 
@@ -66,7 +66,7 @@ Du startest die App lokal als Bundle:
 open .build/app/LocalSecurityTwin.app
 ```
 
-Bitte pruefen:
+Bitte prüfen:
 
 - startet die App sichtbar?
 - wirkt der erste Bildschirm deutsch?
@@ -81,7 +81,7 @@ Notiere kurz:
 - welcher Text klingt noch zu technisch?
 - wo fehlt Orientierung?
 
-## Phase 3: Startup-Aenderung testen
+## Phase 3: Startup-Änderung testen
 
 Du startest den vorbereiteten Demo-Flow:
 
@@ -89,44 +89,44 @@ Du startest den vorbereiteten Demo-Flow:
 ./scripts/start-startup-diff-demo.sh
 ```
 
-Bitte pruefen:
+Bitte prüfen:
 
-- zeigt das Dashboard eine Autostart-Aenderung?
+- zeigt das Dashboard eine Autostart-Änderung?
 - erscheint die Aktion `Als erwartet merken`?
-- erklaert der Dialog, dass keine Systemeinstellungen geaendert werden?
+- erklärt der Dialog, dass keine Systemeinstellungen geändert werden?
 - wird die Ansicht danach ruhiger?
-- ist der Ablauf fuer dich logisch?
+- ist der Ablauf für dich logisch?
 
 Stop-Kriterium:
 
-Wenn du nicht verstehst, was "als erwartet merken" bedeutet, ist das ein UX-Blocker fuer Beta.
+Wenn du nicht verstehst, was "als erwartet merken" bedeutet, ist das ein UX-Blocker für Beta.
 
-## Phase 4: Detailansicht pruefen
+## Phase 4: Detailansicht prüfen
 
-Du oeffnest mehrere Hinweise und pruefst:
+Du öffnest mehrere Hinweise und prüfst:
 
-- steht zuerst eine einfache Erklaerung?
+- steht zuerst eine einfache Erklärung?
 - kommen Belege erst danach?
-- ist klar, dass sichtbar nicht automatisch gefaehrlich heisst?
-- klingt der Systemprofil-Hinweis nicht wie ein Gesamturteil ueber deinen Mac?
-- ist der naechste sichere Schritt konkret genug?
+- ist klar, dass sichtbar nicht automatisch gefährlich heißt?
+- klingt der Systemprofil-Hinweis nicht wie ein Gesamturteil über deinen Mac?
+- ist der nächste sichere Schritt konkret genug?
 
 Stop-Kriterium:
 
-Wenn ein Finding Angst macht, obwohl nur ein sichtbarer Hinweis vorliegt, muss der Text vor Beta geaendert werden.
+Wenn ein Finding Angst macht, obwohl nur ein sichtbarer Hinweis vorliegt, muss der Text vor Beta geändert werden.
 
 ## Phase 5: Settings und gemerkte Entscheidungen
 
-Du pruefst die Settings:
+Du prüfst die Settings:
 
 - siehst du gemerkte Entscheidungen?
-- kannst du einzelne Entscheidungen zuruecksetzen?
-- kannst du alle gemerkten Entscheidungen loeschen?
+- kannst du einzelne Entscheidungen zurücksetzen?
+- kannst du alle gemerkten Entscheidungen löschen?
 - ist klar, dass alles lokal bleibt?
 
 Stop-Kriterium:
 
-Wenn eine gemerkte Entscheidung nicht sichtbar oder nicht loeschbar ist, ist das ein Beta-Blocker.
+Wenn eine gemerkte Entscheidung nicht sichtbar oder nicht löschbar ist, ist das ein Beta-Blocker.
 
 ## Phase 6: Grenzen gegenlesen
 
@@ -136,11 +136,11 @@ Du liest:
 - `docs/known-limits.md`
 - `docs/mvp-release-checklist.md`
 
-Bitte pruefen:
+Bitte prüfen:
 
 - ist klar, was die App kann?
 - ist klar, was sie nicht kann?
-- wirkt irgendwo ein Sicherheitsversprechen zu gross?
+- wirkt irgendwo ein Sicherheitsversprechen zu groß?
 - fehlt ein wichtiger Warnhinweis?
 
 Stop-Kriterium:
@@ -149,18 +149,18 @@ Wenn die Doku mehr verspricht als die App wirklich sieht, muss die Doku vor Beta
 
 ## Phase 7: Entscheidung
 
-Nach den Checks gibt es drei moegliche Ergebnisse.
+Nach den Checks gibt es drei mögliche Ergebnisse.
 
 ### Ergebnis A: Beta bereit
 
 Voraussetzungen:
 
-- alle technischen Checks gruen
-- du verstehst die Hauptansicht ohne Erklaerung
+- alle technischen Checks grün
+- du verstehst die Hauptansicht ohne Erklärung
 - Trust-Flow wirkt sicher
 - Known Limits sind ehrlich
 
-Naechster Schritt:
+Nächster Schritt:
 
 - Beta-Tag oder Release-Branch vorbereiten
 - optional Screenshot-/Demo-Doku erstellen
@@ -169,13 +169,13 @@ Naechster Schritt:
 
 Typisch:
 
-- Checks gruen
+- Checks grün
 - aber UI-Texte oder Orientierung brauchen Feinschliff
 
-Naechster Schritt:
+Nächster Schritt:
 
 - kleine UX-Korrekturen
-- danach Phasen 2 bis 6 erneut pruefen
+- danach Phasen 2 bis 6 erneut prüfen
 
 ### Ergebnis C: Nicht beta-bereit
 
@@ -184,9 +184,9 @@ Typisch:
 - technische Checks rot
 - Trust-Flow unklar
 - App wirkt weiterhin wie Rohdaten
-- Grenzen sind nicht verstaendlich
+- Grenzen sind nicht verständlich
 
-Naechster Schritt:
+Nächster Schritt:
 
 - kein Beta-Schnitt
 - Blocker in `docs/session-status.md` dokumentieren
@@ -194,7 +194,7 @@ Naechster Schritt:
 
 ## Danach
 
-Erst nach dieser Beta-Pruefung entscheiden wir ueber:
+Erst nach dieser Beta-Prüfung entscheiden wir über:
 
 - echte macOS-UI-Automation
 - Xcode-Projekt
@@ -203,7 +203,7 @@ Erst nach dieser Beta-Pruefung entscheiden wir ueber:
 - Privacy-/TCC-Sensor
 - moderne Background Items
 
-## Ergebnisnotizen fuer den Nutzer
+## Ergebnisnotizen für den Nutzer
 
 Beim manuellen Test reicht diese kurze Vorlage:
 
@@ -214,7 +214,7 @@ Startbild:
 - Verstanden:
 - Unklar:
 
-Startup-Aenderung:
+Startup-Änderung:
 - Flow verstanden: ja/nein
 - Text "Als erwartet merken" klar: ja/nein
 - Was war unklar:
@@ -222,7 +222,7 @@ Startup-Aenderung:
 Detailansicht:
 - Wirkt ruhig: ja/nein
 - Zu technisch:
-- Fehlender naechster Schritt:
+- Fehlender nächster Schritt:
 
 Settings:
 - Entscheidungen sichtbar: ja/nein

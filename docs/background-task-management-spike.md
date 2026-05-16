@@ -2,12 +2,12 @@
 
 ## Zweck
 
-Diese Notiz haelt fest, wie moderne macOS-Login- und Background-Items spaeter geprueft werden sollen.
+Diese Notiz hält fest, wie moderne macOS-Login- und Background-Items später geprüft werden sollen.
 
 ## Kurzfazit
 
 Der bestehende LaunchAgent-Sensor bleibt ein guter erster Schritt, aber er sieht nur sichtbare `.plist`-Dateien.
-Fuer macOS 13 und neuer sollte ein eigener Spike pruefen, ob Background Task Management eine stabile Quelle fuer die App sein kann.
+Für macOS 13 und neuer sollte ein eigener Spike prüfen, ob Background Task Management eine stabile Quelle für die App sein kann.
 
 Update 2026-05-12:
 Der Spike wurde auf einem lokalen macOS-System begonnen.
@@ -15,51 +15,51 @@ Der Spike wurde auf einem lokalen macOS-System begonnen.
 - System: macOS 26.5, Build 25F71
 - `sfltool` ist vorhanden unter `/usr/bin/sfltool`
 - `sfltool dumpbtm` lieferte im einfachen Testlauf nicht schnell eine kurze, stabile Ausgabe und musste beendet werden
-- Ergebnis: `sfltool dumpbtm` ist fuer den MVP noch keine direkte Produktquelle
+- Ergebnis: `sfltool dumpbtm` ist für den MVP noch keine direkte Produktquelle
 
-## Zu pruefende Quellen
+## Zu prüfende Quellen
 
-- `SMAppService` fuer eigene oder registrierte Helper-Statusinformationen
-- `sfltool dumpbtm` als Diagnosequelle fuer Login- und Background-Items
+- `SMAppService` für eigene oder registrierte Helper-Statusinformationen
+- `sfltool dumpbtm` als Diagnosequelle für Login- und Background-Items
 - System Settings > General > Login Items als manuelle Referenzsicht
-- BackgroundTaskManagement-Logs nur fuer Entwicklung und Diagnose, nicht als MVP-Produktquelle
+- BackgroundTaskManagement-Logs nur für Entwicklung und Diagnose, nicht als MVP-Produktquelle
 
-## Entscheidung fuer jetzt
+## Entscheidung für jetzt
 
 Noch keinen produktiven Sensor auf `sfltool dumpbtm` bauen.
 
-Gruende:
+Gründe:
 
-- Ausgabeformat und Stabilitaet muessen erst getestet werden.
-- Die App soll nicht frueh von einem Diagnosekommando abhaengen.
-- Der MVP soll ruhig erklaeren, was sichtbar ist, statt Vollstaendigkeit zu behaupten.
-- Ein einfacher lokaler Aufruf war nicht robust genug fuer eine direkte UI-Integration.
+- Ausgabeformat und Stabilität müssen erst getestet werden.
+- Die App soll nicht früh von einem Diagnosekommando abhängen.
+- Der MVP soll ruhig erklären, was sichtbar ist, statt Vollständigkeit zu behaupten.
+- Ein einfacher lokaler Aufruf war nicht robust genug für eine direkte UI-Integration.
 
 ## Quellenlage
 
 Apple beschreibt `SMAppService` als API zum Registrieren und Steuern eigener Login Items, LaunchAgents und LaunchDaemons innerhalb einer App.
-Das ist wertvoll fuer eigene Helper, aber keine offensichtliche vollstaendige Leseschnittstelle fuer alle fremden Background Items.
+Das ist wertvoll für eigene Helper, aber keine offensichtliche vollständige Leseschnittstelle für alle fremden Background Items.
 
 Apple Platform Deployment beschreibt Background Task Management und nennt unter anderem System Settings, `sfltool dumpbtm` und BackgroundTaskManagement-Logs als Diagnose- und Verwaltungsumfeld.
-Das bestaetigt die Relevanz, aber nicht automatisch die Eignung als stabile App-Datenquelle.
+Das bestätigt die Relevanz, aber nicht automatisch die Eignung als stabile App-Datenquelle.
 
-## Naechster Spike
+## Nächster Spike
 
-Ein spaeterer Agent soll auf mindestens einem aktuellen macOS-Testsystem pruefen:
+Ein späterer Agent soll auf mindestens einem aktuellen macOS-Testsystem prüfen:
 
-- ob `sfltool dumpbtm` ohne Zusatzrechte laeuft
+- ob `sfltool dumpbtm` ohne Zusatzrechte läuft
 - welche Daten es liefert
-- ob persoenliche Daten oder volatile IDs enthalten sind
+- ob persönliche Daten oder volatile IDs enthalten sind
 - ob die Ausgabe maschinenlesbar genug ist
-- wie sich Eintraege zu sichtbaren `.plist`-Dateien verhalten
-- ob ein zeitbegrenzter, nicht haengender Aufruf reproduzierbar moeglich ist
+- wie sich Einträge zu sichtbaren `.plist`-Dateien verhalten
+- ob ein zeitbegrenzter, nicht hängender Aufruf reproduzierbar möglich ist
 
 ## Empfehlung
 
-Fuer die naechsten Produktiterationen nicht auf Background Task Management springen.
+Für die nächsten Produktiterationen nicht auf Background Task Management springen.
 
 Stattdessen:
 
-1. vorhandene Startup-Hinweise weiter verstaendlich machen
-2. Packaging-/Signing-Fragen klaeren
-3. Background Task Management spaeter erneut mit einem dedizierten Diagnose-Harness pruefen
+1. vorhandene Startup-Hinweise weiter verständlich machen
+2. Packaging-/Signing-Fragen klären
+3. Background Task Management später erneut mit einem dedizierten Diagnose-Harness prüfen

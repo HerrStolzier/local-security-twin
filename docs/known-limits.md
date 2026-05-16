@@ -4,7 +4,7 @@
 
 Diese Datei beschreibt ehrlich, was Local Security Twin aktuell sieht und was nicht.
 
-Das ist wichtig, weil Vertrauen hier nicht aus grossen Versprechen entsteht, sondern aus klaren Grenzen.
+Das ist wichtig, weil Vertrauen hier nicht aus großen Versprechen entsteht, sondern aus klaren Grenzen.
 
 ## Startup-Sensor
 
@@ -24,10 +24,10 @@ Er kann einfache Felder lesen:
 
 Grenzen:
 
-- sichtbar heisst nicht aktiv
-- neu heisst nicht gefaehrlich
-- verschwunden heisst nicht automatisch problematisch
-- moderne Login-/Background-Items sind noch nicht vollstaendig abgedeckt
+- sichtbar heißt nicht aktiv
+- neu heißt nicht gefährlich
+- verschwunden heißt nicht automatisch problematisch
+- moderne Login-/Background-Items sind noch nicht vollständig abgedeckt
 - `sfltool dumpbtm` ist noch keine robuste Produktquelle
 
 ## Systemprofil-Sensor
@@ -43,9 +43,9 @@ Der Systemprofil-Sensor liest lokale Basisdaten und optionale Schutzsignale:
 Grenzen:
 
 - er bewertet nicht den ganzen Mac
-- ein aktives Schutzsignal beweist nicht vollstaendige Sicherheit
+- ein aktives Schutzsignal beweist nicht vollständige Sicherheit
 - ein nicht lesbares Schutzsignal ist zuerst eine Sichtgrenze
-- optionale Abfragen duerfen fehlschlagen und werden dann ruhig als Note behandelt
+- optionale Abfragen dürfen fehlschlagen und werden dann ruhig als Note behandelt
 
 ## Rechte und Sandbox
 
@@ -77,7 +77,7 @@ Noch offen:
 - echte macOS-Klickautomation
 - notarized Release-Artefakt
 - Developer-ID-signierter Build
-- vollstaendige visuelle Regressionstests
+- vollständige visuelle Regressionstests
 
 ## Produktgrenzen
 
@@ -86,35 +86,35 @@ Die App ist ein lokaler Sicherheitsbegleiter, kein Enterprise-SIEM und kein auto
 Sie soll:
 
 - beobachten
-- erklaeren
+- erklären
 - lokale Entscheidungen merken
-- spaeter begrenzt Belege sammeln
+- später begrenzt Belege sammeln
 
 Sie soll nicht:
 
 - Angst erzeugen
-- automatisch haerten
-- versteckte Aenderungen vornehmen
-- mehr Systemzugriff verlangen als noetig
+- automatisch härten
+- versteckte Änderungen vornehmen
+- mehr Systemzugriff verlangen als nötig
 
 ## Security-Hygiene-Grenzen
 
-Einige wichtige Schutzthemen sind fuer normale Nutzer sehr relevant, aber lokal nicht immer sicher automatisch pruefbar.
+Einige wichtige Schutzthemen sind für normale Nutzer sehr relevant, aber lokal nicht immer sicher automatisch prüfbar.
 
 Aktuell noch nicht automatisch verifiziert:
 
-- 2FA fuer Apple-ID, E-Mail, Banking, Social Media oder andere Konten
+- 2FA für Apple-ID, E-Mail, Banking, Social Media oder andere Konten
 - Nutzung eines Passwortmanagers
-- Qualitaet oder Vollstaendigkeit eines VPN-Schutzes
+- Qualität oder Vollständigkeit eines VPN-Schutzes
 - Schutzleistung eines Antivirus- oder Security-Tools
 - Zustand aller Treiber, System Extensions und Network Extensions
 
 Was das praktisch bedeutet:
 
-- Die App darf diese Themen als gefuehrte Checkliste aufnehmen.
+- Die App darf diese Themen als geführte Checkliste aufnehmen.
 - Sie darf lokale Hinweise nutzen, wenn sie sauber belegbar sind.
-- Sie darf aber ohne Integration nicht behaupten, ein Konto sei wirklich mit 2FA geschuetzt.
+- Sie darf aber ohne Integration nicht behaupten, ein Konto sei wirklich mit 2FA geschützt.
 - Sie darf VPN nicht als Rundumschutz darstellen.
 - Sie darf installierte Security-Tools nicht pauschal bewerten, solange nur deren Existenz sichtbar ist.
 
-Spaetere Sensoren fuer diese Bereiche brauchen eine eigene Rechte-, Datenschutz- und Fehlalarm-Pruefung.
+Spätere Sensoren für diese Bereiche brauchen eine eigene Rechte-, Datenschutz- und Fehlalarm-Prüfung.

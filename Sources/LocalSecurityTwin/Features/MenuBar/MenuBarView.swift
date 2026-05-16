@@ -19,7 +19,7 @@ struct MenuBarView: View {
             Text("Grundhaltung")
                 .font(.subheadline)
                 .fontWeight(.semibold)
-            Text("Erst pruefen und erklaeren. Keine stillen Systemaenderungen.")
+            Text("Erst prüfen und erklären. Keine stillen Systemänderungen.")
                 .foregroundStyle(.secondary)
 
             Divider()

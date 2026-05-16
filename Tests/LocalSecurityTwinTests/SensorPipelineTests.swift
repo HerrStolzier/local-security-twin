@@ -128,7 +128,7 @@ struct SensorPipelineTests {
         )
         #expect(
             run.notes.contains(where: {
-                $0 == "Mit dem lokal gemerkten Zustand verglichen: 1 neue Eintraege, 1 verschwundene Eintraege."
+                $0 == "Mit dem lokal gemerkten Zustand verglichen: 1 neue Einträge, 1 verschwundene Einträge."
             })
         )
     }
@@ -166,7 +166,7 @@ struct SensorPipelineTests {
 
         #expect(run.findings.count == 1)
         #expect(run.findings.first?.source.kind == .launchAgentInventory)
-        #expect(run.notes.contains(where: { $0.contains("Autostart-Aenderungserkennung ist in diesem Lauf eingeschraenkt") }))
+        #expect(run.notes.contains(where: { $0.contains("Autostart-Änderungserkennung ist in diesem Lauf eingeschränkt") }))
     }
 
     @Test func launchAgentInventorySensorKeepsInventoryVisibleWhenBaselineCannotBeSaved() throws {
@@ -201,7 +201,7 @@ struct SensorPipelineTests {
 
         #expect(run.findings.count == 1)
         #expect(run.findings.first?.source.kind == .launchAgentInventory)
-        #expect(run.notes.contains(where: { $0.contains("Autostart-Aenderungserkennung ist in diesem Lauf eingeschraenkt") }))
+        #expect(run.notes.contains(where: { $0.contains("Autostart-Änderungserkennung ist in diesem Lauf eingeschränkt") }))
     }
 
     @Test func launchAgentInventorySensorReadsSimplePlistDetails() throws {

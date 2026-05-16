@@ -4,7 +4,7 @@
 
 Diese Checkliste trennt lokale Entwicklungsbuilds von echter Verteilung.
 
-Aktuell baut das Projekt ein lokales `.app`-Bundle mit ad-hoc Signatur. Das ist gut fuer Entwicklung, Smoke-Tests und interne Spikes. Es ist noch kein notarized Release fuer normale Nutzer.
+Aktuell baut das Projekt ein lokales `.app`-Bundle mit ad-hoc Signatur. Das ist gut für Entwicklung, Smoke-Tests und interne Spikes. Es ist noch kein notarized Release für normale Nutzer.
 
 ## Lokaler Beta-Schnitt
 
@@ -15,11 +15,11 @@ Vor einem lokalen Beta-Schnitt:
 - `./scripts/hardened-runtime-smoke.sh`
 - `./scripts/notarization-preflight.sh`
 - `docs/session-status.md` aktualisieren
-- `docs/known-limits.md` pruefen
+- `docs/known-limits.md` prüfen
 
 ## Developer-ID-Distribution
 
-Fuer echte Verteilung ausserhalb des Mac App Store braucht das Projekt spaeter:
+Für echte Verteilung außerhalb des Mac App Store braucht das Projekt später:
 
 - Apple Developer Team
 - Developer-ID-Application-Zertifikat im lokalen Keychain
@@ -28,7 +28,7 @@ Fuer echte Verteilung ausserhalb des Mac App Store braucht das Projekt spaeter:
 - Notarization mit Apple Notary Service
 - kein Zertifikat, kein Passwort und kein API-Key im Repo
 
-## Was nicht ins Repo gehoert
+## Was nicht ins Repo gehört
 
 - `.p12`-Zertifikate
 - Private Keys
@@ -39,13 +39,13 @@ Fuer echte Verteilung ausserhalb des Mac App Store braucht das Projekt spaeter:
 
 ## Preflight statt Notarization
 
-`scripts/notarization-preflight.sh` fuehrt keine echte Notarization aus.
+`scripts/notarization-preflight.sh` führt keine echte Notarization aus.
 
-Der Preflight prueft nur lokal:
+Der Preflight prüft nur lokal:
 
 - Bundle baut
-- `Info.plist` ist gueltig
-- Code-Signatur ist pruefbar
+- `Info.plist` ist gültig
+- Code-Signatur ist prüfbar
 - Hardened Runtime ist sichtbar
 - Security-Checks finden keine offensichtlichen Repo-Probleme
 

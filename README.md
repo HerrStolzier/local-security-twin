@@ -1,31 +1,31 @@
 # Local Security Twin
 
-Local-first macOS security companion fuer normale Nutzer.
+Local-first macOS security companion für normale Nutzer.
 
-Die App soll lokale Sicherheits- und Privacy-Hinweise ruhig erklaeren: was sichtbar ist, warum es relevant sein kann und was der naechste sichere Schritt ist. Sie ist kein lauter Scanner und nimmt keine stillen Systemaenderungen vor.
+Die App soll lokale Sicherheits- und Privacy-Hinweise ruhig erklären: was sichtbar ist, warum es relevant sein kann und was der nächste sichere Schritt ist. Sie ist kein lauter Scanner und nimmt keine stillen Systemänderungen vor.
 
 ## Aktueller Stand
 
 Der aktuelle MVP-Prototyp ist eine SwiftPM-basierte SwiftUI-macOS-App mit:
 
-- Menueleisten-App, Hauptfenster und Settings
+- Menüleisten-App, Hauptfenster und Settings
 - deutschem Dashboard und deutscher Finding-Detailansicht
 - lokalem Policy-/Consent-Modell mit gemerkten Entscheidungen
 - normalisiertem Finding-Schema mit Evidence und Recommendations
 - Sensor-Pipeline mit zwei read-only Sensorbereichen
-- Startup-Sensor fuer sichtbare `LaunchAgents`-/`LaunchDaemons`-`plist`-Dateien
+- Startup-Sensor für sichtbare `LaunchAgents`-/`LaunchDaemons`-`plist`-Dateien
 - lokaler Startup-Baseline und bewusstem "als erwartet merken"-Flow
-- Systemprofil-Sensor fuer lokale Basisdaten, Gatekeeper und SIP, ohne neue Rechte
+- Systemprofil-Sensor für lokale Basisdaten, Gatekeeper und SIP, ohne neue Rechte
 - lokalen Bundle-, Sandbox-, Hardened-Runtime- und Preflight-Smokes
 
 ## Was die App bewusst nicht macht
 
-- keine stillen Systemaenderungen
+- keine stillen Systemänderungen
 - keine Cloud-Pflicht
 - kein Full Disk Access im MVP
 - keine Accessibility-, Screen-Recording-, Network- oder Apple-Events-Entitlements
 - keine echte Notarization ohne Developer-ID-Zugangsdaten
-- keine Behauptung, dass sichtbare Hinweise automatisch gefaehrlich sind
+- keine Behauptung, dass sichtbare Hinweise automatisch gefährlich sind
 
 Mehr dazu steht in `docs/known-limits.md`.
 
@@ -73,12 +73,12 @@ Packaging-Smokes:
 ./scripts/notarization-preflight.sh
 ```
 
-`notarization-preflight.sh` fuehrt keine echte Apple-Notarization aus. Es prueft lokal Bundle, Signatur, Hardened Runtime und Security-Checks.
+`notarization-preflight.sh` führt keine echte Apple-Notarization aus. Es prüft lokal Bundle, Signatur, Hardened Runtime und Security-Checks.
 
 ## Wichtige Doku
 
 - `AGENTS.md`: stabile Projektregeln und Arbeitsweise
-- `docs/session-status.md`: aktueller Uebergabestand
+- `docs/session-status.md`: aktueller Übergabestand
 - `docs/project-learnings.md`: dauerhafte Erkenntnisse
 - `docs/project-completion-plan.md`: Sprint-Plan zum MVP
 - `docs/known-limits.md`: ehrliche Grenzen der App
@@ -86,11 +86,11 @@ Packaging-Smokes:
 - `docs/packaging-signing-plan.md`: Signing, Sandbox und Distribution
 - `docs/distribution-checklist.md`: lokaler Beta-Schnitt vs. echte Distribution
 
-## Naechste sinnvolle Schritte
+## Nächste sinnvolle Schritte
 
-1. Echte macOS-UI-Automation klaeren.
+1. Echte macOS-UI-Automation klären.
 2. Beta-Schnitt anhand `docs/mvp-release-checklist.md` vorbereiten.
-3. Danach erst neue Sensoren planen, mit denselben Grenzen: read-only, erklaerend, ohne unnoetige Rechte.
+3. Danach erst neue Sensoren planen, mit denselben Grenzen: read-only, erklärend, ohne unnötige Rechte.
 
 ## License
 

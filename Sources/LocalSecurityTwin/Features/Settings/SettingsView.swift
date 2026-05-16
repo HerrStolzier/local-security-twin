@@ -9,7 +9,7 @@ struct SettingsView: View {
             Section("Vertrauen und Entscheidungen") {
                 if policyStore.rememberedPolicies.isEmpty {
                     Text("Noch keine gemerkten Entscheidungen.")
-                    Text("Die App kann erlaubte oder abgelehnte Schritte lokal merken. Spaetere gefuehrte Aktionen werden diese Entscheidungen nutzen.")
+                    Text("Die App kann erlaubte oder abgelehnte Schritte lokal merken. Spätere geführte Aktionen werden diese Entscheidungen nutzen.")
                         .foregroundStyle(.secondary)
                 } else {
                     ForEach(policyStore.rememberedPolicies) { record in
@@ -36,7 +36,7 @@ struct SettingsView: View {
                                     .font(.caption)
                                     .foregroundStyle(.tertiary)
                                 Spacer()
-                                Button("Zuruecksetzen") {
+                                Button("Zurücksetzen") {
                                     reset(record.key)
                                 }
                             }
@@ -44,7 +44,7 @@ struct SettingsView: View {
                         .padding(.vertical, 4)
                     }
 
-                    Button("Alle gemerkten Entscheidungen zuruecksetzen", role: .destructive) {
+                    Button("Alle gemerkten Entscheidungen zurücksetzen", role: .destructive) {
                         resetAll()
                     }
                 }
@@ -52,7 +52,7 @@ struct SettingsView: View {
 
             Section("Verbindung") {
                 Text("Online-Intelligenz ist aktuell nicht aktiviert.")
-                Text("Das Produkt soll auch offline nuetzlich bleiben.")
+                Text("Das Produkt soll auch offline nützlich bleiben.")
                     .foregroundStyle(.secondary)
             }
 

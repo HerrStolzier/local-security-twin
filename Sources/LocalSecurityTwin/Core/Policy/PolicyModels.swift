@@ -16,7 +16,7 @@ enum PolicyRisk: Int, Codable, CaseIterable, Comparable, Sendable {
         case .medium:
             return "Mittel"
         case .high:
-            return "Erhoeht"
+            return "Erhöht"
         }
     }
 }
@@ -69,7 +69,7 @@ enum PolicyConfirmationRequirement: String, Codable, CaseIterable, Comparable, S
     var title: String {
         switch self {
         case .standard:
-            return "Normale Bestaetigung"
+            return "Normale Bestätigung"
         case .explicitApproval:
             return "Bewusste Zustimmung"
         }
@@ -92,7 +92,7 @@ enum PolicyActionKind: String, Codable, CaseIterable, Sendable {
         case .rememberLocalDecision:
             return "Lokale Entscheidung merken"
         case .openExternalLocation:
-            return "Externen Ort oeffnen"
+            return "Externen Ort öffnen"
         case .showGuidance:
             return "Anleitung anzeigen"
         case .gatherEvidence:
@@ -105,11 +105,11 @@ enum PolicyActionKind: String, Codable, CaseIterable, Sendable {
         case .rememberLocalDecision:
             return "Die App speichert nur deine Entscheidung lokal auf diesem Mac."
         case .openExternalLocation:
-            return "Die App wuerde einen sichtbaren Ort ausserhalb dieser Ansicht oeffnen, aber keine Einstellung selbst aendern."
+            return "Die App würde einen sichtbaren Ort außerhalb dieser Ansicht öffnen, aber keine Einstellung selbst ändern."
         case .showGuidance:
-            return "Die App zeigt dir eine Anleitung und nimmt keine Systemaenderung vor."
+            return "Die App zeigt dir eine Anleitung und nimmt keine Systemänderung vor."
         case .gatherEvidence:
-            return "Die App wuerde spaeter nur eng begrenzte Belege sammeln und keine Systemeinstellung veraendern."
+            return "Die App würde später nur eng begrenzte Belege sammeln und keine Systemeinstellung verändern."
         }
     }
 }
@@ -177,8 +177,8 @@ private extension PolicyActionKind {
 extension PolicyAction {
     static let openSensitiveSettings = PolicyAction(
         id: "open-sensitive-settings",
-        title: "Sensible Einstellungen oeffnen",
-        explanation: "Oeffnet einen passenden Bereich der Systemeinstellungen, damit du ihn selbst pruefen kannst.",
+        title: "Sensible Einstellungen öffnen",
+        explanation: "Öffnet einen passenden Bereich der Systemeinstellungen, damit du ihn selbst prüfen kannst.",
         kind: .openExternalLocation,
         minimumConfirmation: .standard
     )
@@ -194,7 +194,7 @@ extension PolicyAction {
     static let showGuidance = PolicyAction(
         id: "show-guidance",
         title: "Anleitung anzeigen",
-        explanation: "Zeigt eine sichere Anleitung, ohne eine Systemeinstellung automatisch zu aendern.",
+        explanation: "Zeigt eine sichere Anleitung, ohne eine Systemeinstellung automatisch zu ändern.",
         kind: .showGuidance,
         minimumConfirmation: .standard
     )
@@ -202,7 +202,7 @@ extension PolicyAction {
     static let runSafeValidation = PolicyAction(
         id: "run-safe-validation",
         title: "Weitere Belege sammeln",
-        explanation: "Fuehrt spaeter einen eng begrenzten Pruefschritt aus, der mehr Belege sammelt, ohne Systemeinstellungen zu aendern.",
+        explanation: "Führt später einen eng begrenzten Prüfschritt aus, der mehr Belege sammelt, ohne Systemeinstellungen zu ändern.",
         kind: .gatherEvidence,
         minimumConfirmation: .explicitApproval
     )
@@ -274,7 +274,7 @@ enum PolicyStoreError: LocalizedError, Equatable {
     var errorDescription: String? {
         switch self {
         case .explicitConfirmationRequired(let actionTitle):
-            return "\(actionTitle) braucht eine bewusste Zustimmung, weil der Schritt erhoehtes Risiko hat."
+            return "\(actionTitle) braucht eine bewusste Zustimmung, weil der Schritt erhöhtes Risiko hat."
         }
     }
 }

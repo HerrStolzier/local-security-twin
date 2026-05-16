@@ -2,21 +2,21 @@
 
 ## Zweck
 
-Diese Datei ist die aktuelle Planungsuebersicht fuer `local-security-twin`.
+Diese Datei ist die aktuelle Planungsübersicht für `local-security-twin`.
 
 Sie ersetzt nicht die Detaildokumente, sondern ordnet sie:
 
-- `docs/session-status.md`: aktueller Uebergabestand
+- `docs/session-status.md`: aktueller Übergabestand
 - `docs/chapter-plan.md`: grobe Kapitel, die nacheinander fertiggestellt werden
 - `docs/current-overview.md`: technischer und produktlicher Kurzueberblick
 - `docs/product-flow-and-feature-plan.md`: roter Faden, Produktbild und Feature-Bausteine
-- `docs/visual-direction.md`: gewaehlte visuelle Richtung fuer den Buddy-Redesign-Schnitt
+- `docs/visual-direction.md`: gewählte visuelle Richtung für den Buddy-Redesign-Schnitt
 - `docs/adversarial-review-and-best-practices.md`: Black-Hat-Gegenpruefung und Best-Practice-Monitoring
-- `docs/privacy-footprint-cleanup.md`: spaeteres Modul fuer digitalen Fussabdruck, Data Broker, alte Accounts und Breach-Hygiene
+- `docs/privacy-footprint-cleanup.md`: späteres Modul für digitalen Fußabdruck, Data Broker, alte Accounts und Breach-Hygiene
 - `docs/project-completion-plan.md`: detaillierter Weg vom aktuellen Prototyp zum MVP
-- `docs/ui-ux-redesign-notes.md`: naechster UI-/UX-Schnitt
-- `docs/background-task-management-spike.md`: spaeterer macOS-Startup-Spike
-- `docs/packaging-signing-plan.md`: spaeterer Distribution-/Signing-Schnitt
+- `docs/ui-ux-redesign-notes.md`: nächster UI-/UX-Schnitt
+- `docs/background-task-management-spike.md`: späterer macOS-Startup-Spike
+- `docs/packaging-signing-plan.md`: späterer Distribution-/Signing-Schnitt
 
 ## Aktueller Stand
 
@@ -24,20 +24,20 @@ Die App ist ein SwiftPM-basiertes macOS-Projekt mit erster echter lokaler Sicher
 
 Vorhanden ist:
 
-- Menueleisten-App, Hauptfenster und Settings
+- Menüleisten-App, Hauptfenster und Settings
 - lokales Consent-/Policy-Modell
 - normalisiertes Finding-Schema mit Evidence und Recommendations
 - Sensor-Vertrag und synchrone Sensor-Pipeline
-- erster Sensor fuer sichtbare Startup-`plist`-Dateien
+- erster Sensor für sichtbare Startup-`plist`-Dateien
 - lokale Startup-Baseline in Application Support
-- Change-Detection fuer neue und verschwundene Startup-Hinweise
+- Change-Detection für neue und verschwundene Startup-Hinweise
 - explizites Merken des aktuellen Startup-Zustands als erwartet
 - einfache `.plist`-Details als Evidence
 - lokale Checks, Security Checks und Smoke-E2E
 
-## Aktuelle Hauptprioritaet
+## Aktuelle Hauptpriorität
 
-Die grobe Arbeit wird ab jetzt ueber Kapitel geplant:
+Die grobe Arbeit wird ab jetzt über Kapitel geplant:
 
 - `docs/chapter-plan.md`
 
@@ -45,7 +45,7 @@ Die bisherige technische Umsetzungsreihenfolge steht im detaillierten Abschlussp
 
 - `docs/project-completion-plan.md`
 
-Die naechste Hauptprioritaet ist jetzt der rote Produktfaden:
+Die nächste Hauptpriorität ist jetzt der rote Produktfaden:
 
 - `docs/product-flow-and-feature-plan.md`
 
@@ -58,80 +58,80 @@ Kapitel 1 ist als erster Code-Schnitt umgesetzt:
 
 Das bedeutet:
 
-1. die Startansicht fuehrt jetzt ueber Buddy-Status statt Finding-Liste
-2. eine Hauptmeldung und ein naechster Schritt stehen vorne
-3. Autostart- und Systemsignale erscheinen als Missionen und Aktivitaetsmeldungen
+1. die Startansicht führt jetzt über Buddy-Status statt Finding-Liste
+2. eine Hauptmeldung und ein nächster Schritt stehen vorne
+3. Autostart- und Systemsignale erscheinen als Missionen und Aktivitätsmeldungen
 4. technische Belege erscheinen erst nach bewusster Auswahl
 
-Das naechste Kapitel ist deshalb:
+Das nächste Kapitel ist deshalb:
 
 - Kapitel 2: `Visual System`
 - Kapitel 2b: `Sento Guard Shell`
 
-Der naechste Schnitt soll:
+Der nächste Schnitt soll:
 
-1. die neue Buddy-Home-Struktur visuell staerker machen
-2. Status, Missionen und Aktivitaet klarer gewichten
-3. eine moderne Mac-Buddy-Oberflaeche schaffen, die nicht wie ein Admin-Inspector wirkt
+1. die neue Buddy-Home-Struktur visuell stärker machen
+2. Status, Missionen und Aktivität klarer gewichten
+3. eine moderne Mac-Buddy-Oberfläche schaffen, die nicht wie ein Admin-Inspector wirkt
 4. dezente Gameful-Defender-Elemente einfuehren, ohne falsche Sicherheitswerte zu behaupten
-5. spaeter Online-Intelligence wie SOFA, CISA KEV und EPSS anbinden
-6. LLM-Erklaerungen erst als Erklaerhilfe planen, nicht als alleinige Wahrheit
+5. später Online-Intelligence wie SOFA, CISA KEV und EPSS anbinden
+6. LLM-Erklärungen erst als Erklärhilfe planen, nicht als alleinige Wahrheit
 7. Security-Hygiene-Themen wie 2FA, Passwortmanager, VPN, Antivirus/Security-Tools, Firewall, FileVault und System Extensions als eigene, ehrlich begrenzte Schicht planen
-8. eine feste adversarial Review-Perspektive nutzen: "Welche realistische Angriffskette wuerde ein Verteidiger hier sichtbar machen wollen?"
-9. spaeter digitalen Fussabdruck als gefuehrten Privacy-Cleanup aufnehmen, aber nicht als heimliche Vollautomatik
+8. eine feste adversarial Review-Perspektive nutzen: "Welche realistische Angriffskette würde ein Verteidiger hier sichtbar machen wollen?"
+9. später digitalen Fußabdruck als geführten Privacy-Cleanup aufnehmen, aber nicht als heimliche Vollautomatik
 10. die App als `Sento Guard` Produkt-Shell sichtbar machen, ohne schon finale Markenfreigabe zu behaupten
 
 Nicht-Ziel dieses Schnitts:
 
 - kein neuer Sensor
-- keine Systemaenderungen
+- keine Systemänderungen
 - keine neuen macOS-Rechte
 - keine wilde Web-Recherche ohne kuratierte Quellen
 - keine LLM-Entscheidungen ohne belegbare lokale oder externe Daten
 - keine Exploit-Automation und keine offensiven Tests gegen reale Systeme
 - keine pauschalen Versprechen zu 2FA, VPN, Antivirus oder Passwortmanagern, wenn die App es nicht lokal oder per Integration belegen kann
-- keine automatische Personensuche, keine automatischen Loeschanfragen und keine Verarbeitung von Identitaetsdokumenten ohne bewusste Produktentscheidung
+- keine automatische Personensuche, keine automatischen Löschanfragen und keine Verarbeitung von Identitätsdokumenten ohne bewusste Produktentscheidung
 
 ## Neue Phasen nach dem roten Faden
 
 ### Phase 0: Buddy statt Inspector
 
-Status: erster Schnitt umgesetzt am 2026-05-13; echter Redesign-Schnitt nach Screenshot-Review am 2026-05-14 noetig.
+Status: erster Schnitt umgesetzt am 2026-05-13; echter Redesign-Schnitt nach Screenshot-Review am 2026-05-14 nötig.
 
 Ziel:
-Die aktuelle UI zeigt zuerst "Was bedeutet das fuer mich?" und erst danach Rohdetails.
+Die aktuelle UI zeigt zuerst "Was bedeutet das für mich?" und erst danach Rohdetails.
 
 Umfang:
 
 - Dashboard als Buddy-Status
-- Aktivitaetsfeed oder Chat-aehnliche Meldungen
+- Aktivitätsfeed oder Chat-ähnliche Meldungen
 - eine klare Hauptaktion pro Meldung
 - technische Details einklappbar
 - wiederholte Autostart-Hinweise zusammenfassen
 
 Umgesetzt:
 
-- Dashboard beginnt mit Buddy-Status statt reiner Uebersicht
+- Dashboard beginnt mit Buddy-Status statt reiner Übersicht
 - bekannte Autostart-Hinweise bekommen eine Zusammenfassung vor den Einzelzeilen
-- Detailansicht zeigt den naechsten Schritt vor den technischen Belegen
+- Detailansicht zeigt den nächsten Schritt vor den technischen Belegen
 - technische Belege sind einklappbar
 - weitere Empfehlungen sind nachrangig einklappbar
 
-Naechster Schritt:
+Nächster Schritt:
 `BuddyHomeView` bauen:
 
 - Guardian-Status oben
 - Missionen und Schutzbereiche statt Finding-Liste als erste Ebene
-- Buddy-Meldungen als Aktivitaetsfeed
+- Buddy-Meldungen als Aktivitätsfeed
 - technische Details nur nach bewusster Auswahl
-- danach visueller Feinschliff mit macOS-nativen Patterns und spaeter Liquid Glass
+- danach visueller Feinschliff mit macOS-nativen Patterns und später Liquid Glass
 
 ### Phase 1: Update-Awareness
 
 Status: geplant.
 
 Ziel:
-Die App erkennt, ob macOS-Sicherheitsupdates fuer diesen Mac relevant sind.
+Die App erkennt, ob macOS-Sicherheitsupdates für diesen Mac relevant sind.
 
 Erste Quelle:
 
@@ -142,18 +142,18 @@ Erste Quelle:
 Status: geplant.
 
 Ziel:
-Der Buddy prueft nicht nur technische Einzelhinweise, sondern begleitet wichtige Sicherheits-Best-Practices.
+Der Buddy prüft nicht nur technische Einzelhinweise, sondern begleitet wichtige Sicherheits-Best-Practices.
 
 Erster Schnitt:
 
 - lokale Checks von Buddy-Fragen trennen
 - Rechtebedarf je Check dokumentieren
-- defensive Angreiferpruefung je Check ergaenzen
+- defensive Angreiferprüfung je Check ergaenzen
 - erste Kandidaten priorisieren: macOS-Updates, FileVault, Firewall, Gatekeeper/SIP, System Extensions
 
 Nicht-Ziel:
 
-- 2FA fuer externe Accounts ungeprueft behaupten
+- 2FA für externe Accounts ungeprueft behaupten
 - VPN pauschal als sicher verkaufen
 - Antivirus-/EDR-Status ohne klare lokale Belege bewerten
 
@@ -168,29 +168,29 @@ Erste Quellen:
 
 - CISA Known Exploited Vulnerabilities
 - FIRST EPSS
-- spaeter NVD
+- später NVD
 
 ### Phase 2b: Security-Hygiene und Nutzer-Schutzgewohnheiten
 
 Status: geplant.
 
 Ziel:
-Die App macht grundlegende Schutzthemen sichtbar, ohne mehr zu behaupten als sie wirklich pruefen kann.
+Die App macht grundlegende Schutzthemen sichtbar, ohne mehr zu behaupten als sie wirklich prüfen kann.
 
 Erste Reihenfolge:
 
-1. macOS-Firewall, FileVault und automatische Updates als lokale Schutzsignale pruefen
-2. 2FA und Passwortmanager als gefuehrte Checklisten starten
+1. macOS-Firewall, FileVault und automatische Updates als lokale Schutzsignale prüfen
+2. 2FA und Passwortmanager als geführte Checklisten starten
 3. VPN mit klarer Alltagserklaerung einordnen: hilfreich in bestimmten Netzen, kein kompletter Schutz
-4. installierte Security-/Antivirus-Tools nur als Inventar zeigen, solange keine verlaessliche Produktintegration besteht
+4. installierte Security-/Antivirus-Tools nur als Inventar zeigen, solange keine verlässliche Produktintegration besteht
 5. Treiber, System Extensions und Network Extensions als eigenen macOS-Rechte-/Sichtbarkeits-Spike planen
 
 Akzeptanzkriterien:
 
-- Jeder Check zeigt den Belegtyp: automatisch gesehen, Nutzerangabe oder nicht pruefbar.
+- Jeder Check zeigt den Belegtyp: automatisch gesehen, Nutzerangabe oder nicht prüfbar.
 - Die App bleibt lokal-first und fragt keine sensiblen Kontodaten ab.
 - Hinweise bleiben handlungsorientiert: "was bedeutet das?", "warum wichtig?", "was kannst du jetzt tun?"
-- Keine stillen Aenderungen an Firewall, FileVault, VPN, Security-Tools oder Extensions.
+- Keine stillen Änderungen an Firewall, FileVault, VPN, Security-Tools oder Extensions.
 
 ### Phase 2c: Adversarial Review als Produkt-Routine
 
@@ -198,84 +198,84 @@ Status: geplant.
 
 Ziel:
 Jeder neue Sicherheitsbaustein bekommt vor Umsetzung eine kurze Gegenperspektive:
-Wie wuerde ein Angreifer das Thema praktisch ausnutzen, und welches harmlose Verteidigungssignal kann die App daraus ableiten?
+Wie würde ein Angreifer das Thema praktisch ausnutzen, und welches harmlose Verteidigungssignal kann die App daraus ableiten?
 
 Regeln:
 
 - Nur Verteidigungsfragen, keine Exploit-Anleitungen.
 - Keine echten Angriffe, keine fremden Ziele, keine destruktiven Tests.
 - Ergebnis ist eine bessere Sensor-/UX-Entscheidung oder eine ehrliche Grenze in `docs/known-limits.md`.
-- Hohe Rechte werden erst vorgeschlagen, wenn der Nutzen konkret und verstaendlich ist.
+- Hohe Rechte werden erst vorgeschlagen, wenn der Nutzen konkret und verständlich ist.
 
-### Phase 2d: Digitaler Fussabdruck und Privacy Cleanup
+### Phase 2d: Digitaler Fußabdruck und Privacy Cleanup
 
 Status: geplant.
 
 Ziel:
-Der Buddy soll spaeter helfen, oeffentlich sichtbare personenbezogene Spuren zu reduzieren und echte Risiken daraus verstaendlich zu priorisieren.
+Der Buddy soll später helfen, öffentlich sichtbare personenbezogene Spuren zu reduzieren und echte Risiken daraus verständlich zu priorisieren.
 
 Erste Bausteine:
 
-1. Data-Broker- und People-Search-Treffer als vom Nutzer bestaetigte Aufgabenliste erfassen
-2. alte Accounts mit JustDeleteMe-aehnlichen Quellen in Loeschaufgaben verwandeln
-3. Breach-Hygiene ueber Have I Been Pwned oder manuelle Importliste einordnen
-4. Loesch- und Opt-out-Textvorlagen fuer DSGVO, CCPA/CPRA und optional KVKK vorbereiten
-5. E-Mail-Alias-Hygiene mit SimpleLogin/Proton/Fuer-spaeter-Integrationen als Empfehlung fuehren
+1. Data-Broker- und People-Search-Treffer als vom Nutzer bestätigte Aufgabenliste erfassen
+2. alte Accounts mit JustDeleteMe-ähnlichen Quellen in Löschaufgaben verwandeln
+3. Breach-Hygiene über Have I Been Pwned oder manuelle Importliste einordnen
+4. Lösch- und Opt-out-Textvorlagen für DSGVO, CCPA/CPRA und optional KVKK vorbereiten
+5. E-Mail-Alias-Hygiene mit SimpleLogin/Proton/Für-später-Integrationen als Empfehlung führen
 
 Kritische Grenzen:
 
 - Keine heimliche Suche nach Name, Telefonnummer oder E-Mail.
-- Keine automatischen Loeschanfragen.
-- Keine Identitaetsdokumente in der App speichern oder weiterleiten.
+- Keine automatischen Löschanfragen.
+- Keine Identitätsdokumente in der App speichern oder weiterleiten.
 - Keine SEO-Manipulation als Produktkern.
 - Rechtliche Texte sind Hilfen, keine Rechtsberatung.
 
 Akzeptanzkriterien:
 
 - Jede externe Abfrage braucht bewusste Zustimmung.
-- Die App zeigt den Status lokal: gefunden, geprueft, vorbereitet, gesendet, bestaetigt, nachfassen.
-- Der Buddy priorisiert nach Risiko: Datenlecks und Account-Sicherheit zuerst, kosmetische Suchergebnisse spaeter.
-- Der Nutzer sieht immer, welche Daten an wen gehen koennten.
+- Die App zeigt den Status lokal: gefunden, geprüft, vorbereitet, gesendet, bestätigt, nachfassen.
+- Der Buddy priorisiert nach Risiko: Datenlecks und Account-Sicherheit zuerst, kosmetische Suchergebnisse später.
+- Der Nutzer sieht immer, welche Daten an wen gehen könnten.
 
 ### Phase 3: App-Inventur
 
 Status: geplant.
 
 Ziel:
-Installierte Apps und Versionen verstehen, damit externe Schwachstelleninfos wirklich auf diesen Mac bezogen werden koennen.
+Installierte Apps und Versionen verstehen, damit externe Schwachstelleninfos wirklich auf diesen Mac bezogen werden können.
 
 ### Phase 4: Optionales Buddy Brain
 
 Status: geplant.
 
 Ziel:
-Ein lokales oder cloudbasiertes LLM hilft beim Erklaeren, aber nicht beim unbelegten Entscheiden.
+Ein lokales oder cloudbasiertes LLM hilft beim Erklären, aber nicht beim unbelegten Entscheiden.
 
-### Phase 5: Staerkere Verteidigung
+### Phase 5: Stärkere Verteidigung
 
-Status: spaeter.
+Status: später.
 
 Ziel:
-Mehr Handlungskraft durch Netzwerk-, Prozess-, Safe-Mode- oder Haertungsfunktionen, aber nur mit klarer Zustimmung und sauberem Rechtekonzept.
+Mehr Handlungskraft durch Netzwerk-, Prozess-, Safe-Mode- oder Härtungsfunktionen, aber nur mit klarer Zustimmung und sauberem Rechtekonzept.
 
 ## Fester Entwicklungscheck: Angreiferperspektive
 
-Ab jetzt soll jede groessere Funktion eine defensive Black-Hat-Pruefung bekommen.
+Ab jetzt soll jede größere Funktion eine defensive Black-Hat-Prüfung bekommen.
 
 Kurzformat:
 
-1. Wie koennte das missbraucht werden?
-2. Welche Daten oder Rechte waeren besonders sensibel?
-3. Wie verhindern wir stille Systemaenderungen oder falsche Sicherheit?
-4. Was muss der Nutzer bewusst bestaetigen?
+1. Wie könnte das missbraucht werden?
+2. Welche Daten oder Rechte wären besonders sensibel?
+3. Wie verhindern wir stille Systemänderungen oder falsche Sicherheit?
+4. Was muss der Nutzer bewusst bestätigen?
 5. Was darf das Feature ausdruecklich nicht tun?
 
-## Iteration 1: Deutsche Orientierung fuer den ersten Sensor
+## Iteration 1: Deutsche Orientierung für den ersten Sensor
 
 Status: umgesetzt am 2026-05-12.
 
 Ziel:
-Die App soll beim ersten echten Blick verstaendlich sein.
+Die App soll beim ersten echten Blick verständlich sein.
 
 Umfang:
 
@@ -286,7 +286,7 @@ Umfang:
 - lange technische Finding-Titel kuerzen
 - Dashboard-Kopf mit kurzer Zusammenfassung ergaenzen
 - Liste in sinnvolle Gruppen teilen:
-  - `Neue Aenderungen`
+  - `Neue Änderungen`
   - `Bekannte Autostart-Hinweise`
   - `Zur Beobachtung`
 
@@ -295,7 +295,7 @@ Ein normaler Nutzer soll in 10 Sekunden verstehen:
 
 - was die App sieht
 - ob etwas neu ist
-- was er als naechstes tun kann
+- was er als nächstes tun kann
 
 ## Iteration 2: Startup-Details besser nutzbar machen
 
@@ -307,16 +307,16 @@ Die gelesenen `.plist`-Details sollen nicht wie ein technischer Textblock wirken
 Umfang:
 
 - Dateiname, Label und Programmpfad klar hervorheben
-- `RunAtLoad` und `KeepAlive` in Alltagssprache erklaeren
+- `RunAtLoad` und `KeepAlive` in Alltagssprache erklären
 - Detailansicht mit kurzer Einordnung starten
-- sichtbar machen, dass ein Hinweis nicht beweist, dass etwas aktiv laeuft oder gefaehrlich ist
+- sichtbar machen, dass ein Hinweis nicht beweist, dass etwas aktiv läuft oder gefährlich ist
 
 Abnahmekriterium:
-Die Detailansicht beantwortet zuerst "Was bedeutet das fuer mich?", bevor sie Rohdetails zeigt.
+Die Detailansicht beantwortet zuerst "Was bedeutet das für mich?", bevor sie Rohdetails zeigt.
 
 ## Iteration 3: UI-nah testen
 
-Status: umgesetzt am 2026-05-12 als Store-/Presentation-naher Test. Echte macOS-Klickautomation bleibt spaeter offen.
+Status: umgesetzt am 2026-05-12 als Store-/Presentation-naher Test. Echte macOS-Klickautomation bleibt später offen.
 
 Ziel:
 Der `Als erwartet merken`-Flow soll nicht nur in Domain-Tests funktionieren.
@@ -324,9 +324,9 @@ Der `Als erwartet merken`-Flow soll nicht nur in Domain-Tests funktionieren.
 Umfang:
 
 - Store-/ViewModel-nahe Tests erweitern
-- pruefen:
-  - Startup-Aenderung sichtbar
-  - Aktion zum Merken verfuegbar
+- prüfen:
+  - Startup-Änderung sichtbar
+  - Aktion zum Merken verfügbar
   - nach dem Merken verschwinden Diff-Hinweise
 - falls echte macOS-UI-Automation im SwiftPM-Setup nicht stabil ist, Packaging-/Xcode-Frage dokumentiert lassen
 
@@ -338,11 +338,11 @@ Der wichtigste Nutzerfluss ist automatisiert oder bewusst als noch nicht automat
 Status: umgesetzt am 2026-05-12 als erster lokaler Spike. Entscheidung: noch keinen produktiven Sensor auf `sfltool dumpbtm` bauen.
 
 Ziel:
-Pruefen, ob moderne macOS-Login-/Background-Items eine stabile Quelle fuer einen spaeteren Sensor sind.
+Prüfen, ob moderne macOS-Login-/Background-Items eine stabile Quelle für einen späteren Sensor sind.
 
 Umfang:
 
-- `SMAppService` pruefen
+- `SMAppService` prüfen
 - `sfltool dumpbtm` auf echter macOS-Umgebung untersuchen
 - Rechtebedarf und Ausgabeformat bewerten
 - keine produktive Integration, solange die Quelle nicht stabil genug ist
@@ -354,12 +354,12 @@ Eine klare Entscheidung:
 - weiter beobachten
 - oder bewusst nicht verwenden
 
-## Iteration 5: Naechsten Sensor auswaehlen
+## Iteration 5: Nächsten Sensor auswählen
 
-Status: umgesetzt am 2026-05-12. Entscheidung: noch keinen neuen Sensor bauen; zuerst Packaging/Signing/Sandbox klaeren.
+Status: umgesetzt am 2026-05-12. Entscheidung: noch keinen neuen Sensor bauen; zuerst Packaging/Signing/Sandbox klären.
 
 Ziel:
-Nach UI-Klarheit entscheiden, welche lokale Sicht als naechstes echten Nutzerwert bringt.
+Nach UI-Klarheit entscheiden, welche lokale Sicht als nächstes echten Nutzerwert bringt.
 
 Kandidaten:
 
@@ -371,36 +371,36 @@ Auswahlkriterien:
 
 - read-only
 - ohne Full Disk Access sinnvoll
-- leicht erklaerbar
+- leicht erklärbar
 - geringe Fehlalarm-Gefahr
 - Evidence statt Behauptungen
 
 ## Iteration 6: Packaging, Signing und Sandbox
 
-Status: umgesetzt am 2026-05-12 als Packaging-Spike. Entscheidung: SwiftPM bleibt kurzfristig fuer Entwicklung; vor Nutzer-Testbuilds braucht es einen App-Bundle-/Xcode-Projekt-Spike.
+Status: umgesetzt am 2026-05-12 als Packaging-Spike. Entscheidung: SwiftPM bleibt kurzfristig für Entwicklung; vor Nutzer-Testbuilds braucht es einen App-Bundle-/Xcode-Projekt-Spike.
 
 Ziel:
-Vor echter Distribution klaeren, wie die App sauber gebaut, signiert und spaeter notarized wird.
+Vor echter Distribution klären, wie die App sauber gebaut, signiert und später notarized wird.
 
 Umfang:
 
 - SwiftPM allein vs. Xcode-Projekt entscheiden
 - Hardened Runtime testen
-- Sandbox-Auswirkung auf Startup-Sensor pruefen
+- Sandbox-Auswirkung auf Startup-Sensor prüfen
 - keine neuen Entitlements ohne konkreten Nutzen
 
 Abnahmekriterium:
-Ein klarer Packaging-Pfad fuer MVP-Testversionen.
+Ein klarer Packaging-Pfad für MVP-Testversionen.
 
-## Bewusst spaeter
+## Bewusst später
 
-- echte Guided Actions, die Systemeinstellungen oeffnen oder aendern
+- echte Guided Actions, die Systemeinstellungen öffnen oder ändern
 - Full Disk Access
 - Adminrechte
 - privilegierte Helper
 - aggressive Live-Validierung
 - Cloud-/Online-Intelligence
-- vollstaendige macOS-Persistenzabdeckung
+- vollständige macOS-Persistenzabdeckung
 
 ## Definition of Done pro Iteration
 

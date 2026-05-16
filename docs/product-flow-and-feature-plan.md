@@ -2,84 +2,84 @@
 
 ## Zweck
 
-Diese Datei beschreibt den roten Faden fuer die App.
+Diese Datei beschreibt den roten Faden für die App.
 
 Sie beantwortet drei Fragen:
 
-1. Was soll die App fuer den Nutzer sein?
+1. Was soll die App für den Nutzer sein?
 2. Wie benutzt der Nutzer sie im Alltag?
-3. Welche Bausteine muessen wir dafuer Schritt fuer Schritt bauen?
+3. Welche Bausteine müssen wir dafür Schritt für Schritt bauen?
 
 ## Produktbild
 
-`local-security-twin` soll als Produkt unter dem Arbeitsnamen `Sento Guard` zu einem kraftvollen Security Buddy fuer normale Mac-Nutzer werden.
+`local-security-twin` soll als Produkt unter dem Arbeitsnamen `Sento Guard` zu einem kraftvollen Security Buddy für normale Mac-Nutzer werden.
 
 Er soll nicht nur eine Hinweis-Liste sein. Er soll wie ein Verteidiger arbeiten:
 
 - lokal beobachten
-- relevante Aenderungen erkennen
-- aus Angreifer-Sicht fragen, welche Wege realistisch missbraucht werden koennten
+- relevante Änderungen erkennen
+- aus Angreifer-Sicht fragen, welche Wege realistisch missbraucht werden könnten
 - aktuelle Bedrohungsinformationen einordnen
 - wichtige Schutzgewohnheiten sichtbar machen
-- einfach erklaeren, was das fuer diesen Mac bedeutet
+- einfach erklären, was das für diesen Mac bedeutet
 - mit dem Nutzer zusammen entscheiden
-- sichere naechste Schritte fuehren
+- sichere nächste Schritte führen
 
 Wichtig:
-Kraftvoll heisst nicht laut, hektisch oder riskant. Kraftvoll heisst: gute Belege, klare Prioritaeten, aktuelle Informationen und handlungsfaehige naechste Schritte.
+Kraftvoll heißt nicht laut, hektisch oder riskant. Kraftvoll heißt: gute Belege, klare Prioritäten, aktuelle Informationen und handlungsfähige nächste Schritte.
 
 Ein wichtiger Teil davon ist eine eingebaute Gegenperspektive:
-Die App soll beim Planen und Bewerten immer auch fragen: "Wenn ich ein vorsichtiger Angreifer waere, was waere der naheliegende Weg?"
-Diese Perspektive ist kein Auftrag fuer echte Angriffe.
-Sie ist ein Sicherheitsfilter, damit die App bessere Verteidigungshinweise gibt und keine einfachen Risiken uebersieht.
+Die App soll beim Planen und Bewerten immer auch fragen: "Wenn ich ein vorsichtiger Angreifer wäre, was wäre der naheliegende Weg?"
+Diese Perspektive ist kein Auftrag für echte Angriffe.
+Sie ist ein Sicherheitsfilter, damit die App bessere Verteidigungshinweise gibt und keine einfachen Risiken übersieht.
 
 ## Was die App nicht ist
 
-Die App ersetzt kein ganzes Security-Team und auch kein vollstaendiges Antiviren- oder EDR-System.
+Die App ersetzt kein ganzes Security-Team und auch kein vollständiges Antiviren- oder EDR-System.
 
-Sie kann nicht jede Ebene schuetzen:
+Sie kann nicht jede Ebene schützen:
 
-- Firmware, BIOS und Boot-Kette sind weitgehend ausserhalb der App-Kontrolle.
+- Firmware, BIOS und Boot-Kette sind weitgehend außerhalb der App-Kontrolle.
 - Phishing und Social Engineering kann sie nicht sicher verhindern.
-- Tiefes Netzwerk-Monitoring, Kernel- oder Endpoint-Security-Funktionen brauchen spaeter starke Rechte und muessen sehr bewusst geplant werden.
-- 2FA-, Passwortmanager-, VPN- oder Antivirus-Nutzung kann sie nur dort pruefen, wo macOS oder die jeweilige App verlaessliche lokale Signale liefert.
-- Cloud-Konten, Browser-Erweiterungen und externe Security-Produkte koennen ohne Integrationen meist nur als gefuehrte Checkliste bewertet werden.
+- Tiefes Netzwerk-Monitoring, Kernel- oder Endpoint-Security-Funktionen brauchen später starke Rechte und müssen sehr bewusst geplant werden.
+- 2FA-, Passwortmanager-, VPN- oder Antivirus-Nutzung kann sie nur dort prüfen, wo macOS oder die jeweilige App verlässliche lokale Signale liefert.
+- Cloud-Konten, Browser-Erweiterungen und externe Security-Produkte können ohne Integrationen meist nur als geführte Checkliste bewertet werden.
 
 Die App soll ehrlich bleiben:
-Sie sieht nicht alles. Aber was sie sieht, soll sie sehr gut erklaeren und mit aktuellen Bedrohungsdaten verbinden.
+Sie sieht nicht alles. Aber was sie sieht, soll sie sehr gut erklären und mit aktuellen Bedrohungsdaten verbinden.
 
 ## Sicherheitsmodell in Schichten
 
-### 1. Geraet und Firmware
+### 1. Gerät und Firmware
 
 Ziel:
-Dem Nutzer erklaeren, dass diese Ebene existiert, aber nicht frueh so tun, als koenne die App sie voll pruefen.
+Dem Nutzer erklären, dass diese Ebene existiert, aber nicht früh so tun, als könne die App sie voll prüfen.
 
-Moegliche spaetere Funktionen:
+Mögliche spätere Funktionen:
 
 - Apple-Sicherheitsupdates und Rapid Security Responses erkennen
-- bekannte macOS-Update-Risiken erklaeren
+- bekannte macOS-Update-Risiken erklären
 - sichere Update-Empfehlungen geben
 
 ### 2. macOS und Schutzsignale
 
 Ziel:
-Lokale Basis-Schutzsignale verstaendlich machen.
+Lokale Basis-Schutzsignale verständlich machen.
 
 Beispiele:
 
 - macOS-Version
 - Gatekeeper
 - SIP
-- spaeter FileVault, Firewall, Update-Status
-- spaeter Treiber-, System-Extension- und Network-Extension-Sichtbarkeit
+- später FileVault, Firewall, Update-Status
+- später Treiber-, System-Extension- und Network-Extension-Sichtbarkeit
 
 ### 3. Apps und Versionen
 
 Ziel:
-Erkennen, ob installierte Software von bekannten realen Schwachstellen betroffen sein koennte.
+Erkennen, ob installierte Software von bekannten realen Schwachstellen betroffen sein könnte.
 
-Moegliche Quellen:
+Mögliche Quellen:
 
 - lokale App-Inventur
 - Apple-Update-Daten
@@ -90,15 +90,15 @@ Moegliche Quellen:
 ### 4. Autostart und Persistenz
 
 Ziel:
-Zeigen, welche Programme automatisch starten koennen und was sich seit dem bekannten Zustand veraendert hat.
+Zeigen, welche Programme automatisch starten können und was sich seit dem bekannten Zustand verändert hat.
 
 Aktueller Stand:
 
 - sichtbare LaunchAgent-/LaunchDaemon-`plist`-Dateien
 - lokale Baseline
-- bewusstes Merken erwarteter Aenderungen
+- bewusstes Merken erwarteter Änderungen
 
-Spaeter:
+Später:
 
 - moderne macOS Background Items
 - stabilere Einordnung nach App, Anbieter und Signatur
@@ -106,26 +106,26 @@ Spaeter:
 ### 5. Verhalten und Netzwerk
 
 Ziel:
-Spaeter erkennen, wenn etwas wirklich auffaellig handelt.
+Später erkennen, wenn etwas wirklich auffällig handelt.
 
 Das ist stark, aber auch riskanter:
 
 - braucht mehr Rechte
 - erzeugt mehr Fehlalarme
-- muss sehr gut erklaert werden
+- muss sehr gut erklärt werden
 
-Deshalb nicht als naechster Bastelschritt.
+Deshalb nicht als nächster Bastelschritt.
 
 ### 6. Menschliche Angriffe
 
 Ziel:
-Der Buddy soll den Nutzer unterstuetzen, aber keine falsche Sicherheit versprechen.
+Der Buddy soll den Nutzer unterstützen, aber keine falsche Sicherheit versprechen.
 
 Beispiele:
 
 - einfache Warnungen bei aktuellen Betrugswellen
-- kurze Erklaerungen im Chat-Stil
-- Checklisten fuer "Was mache ich jetzt?"
+- kurze Erklärungen im Chat-Stil
+- Checklisten für "Was mache ich jetzt?"
 
 ### 7. Schutzgewohnheiten und Security-Hygiene
 
@@ -134,105 +134,105 @@ Der Buddy soll nicht nur technische Findings zeigen, sondern auch grundlegende S
 
 Beispiele:
 
-- 2FA fuer wichtige Konten als gefuehrte Checkliste
-- Passwortmanager-Nutzung als Nutzerentscheidung oder spaetere App-Erkennung
+- 2FA für wichtige Konten als geführte Checkliste
+- Passwortmanager-Nutzung als Nutzerentscheidung oder spätere App-Erkennung
 - VPN nur dort empfehlen, wo es wirklich hilft, etwa unsichere Netze, aber nicht als magischer Rundumschutz
 - Antivirus-/Security-Tool-Status, wenn ein installiertes Tool lokal erkennbar ist
 - macOS-Firewall, FileVault und automatische Updates als lokale Schutzsignale
-- Treiber, System Extensions und Network Extensions als spaetere Sichtbarkeitsquelle fuer tiefer eingreifende Software
+- Treiber, System Extensions und Network Extensions als spätere Sichtbarkeitsquelle für tiefer eingreifende Software
 
 Wichtig:
-Viele dieser Punkte sind zuerst keine automatischen Sensoren, sondern gefuehrte Fragen.
-Die App soll ehrlich unterscheiden zwischen "gesehen", "vom Nutzer bestaetigt" und "noch nicht pruefbar".
+Viele dieser Punkte sind zuerst keine automatischen Sensoren, sondern geführte Fragen.
+Die App soll ehrlich unterscheiden zwischen "gesehen", "vom Nutzer bestätigt" und "noch nicht prüfbar".
 
-### 8. Digitaler Fussabdruck und externe Privatsphaere
+### 8. Digitaler Fußabdruck und externe Privatsphäre
 
 Ziel:
-Der Buddy soll spaeter auch dort helfen, wo reale Angriffe oft vorbereitet werden:
-oeffentlich sichtbare persoenliche Daten, alte Accounts, Datenlecks und wiederverwendete Kontaktinformationen.
+Der Buddy soll später auch dort helfen, wo reale Angriffe oft vorbereitet werden:
+öffentlich sichtbare persönliche Daten, alte Accounts, Datenlecks und wiederverwendete Kontaktinformationen.
 
 Beispiele:
 
 - Data-Broker- und People-Search-Listings als Aufgaben erfassen
-- alte Accounts finden und Loeschwege vorbereiten
-- Datenlecks priorisieren: Passwort aendern, 2FA aktivieren, Account loeschen, Alias ersetzen
-- DSGVO-/CCPA-/KVKK-Loeschanfragen als Hilfstext vorbereiten
-- E-Mail-Alias-Hygiene erklaeren, zum Beispiel mit SimpleLogin oder vergleichbaren Diensten
+- alte Accounts finden und Löschwege vorbereiten
+- Datenlecks priorisieren: Passwort ändern, 2FA aktivieren, Account löschen, Alias ersetzen
+- DSGVO-/CCPA-/KVKK-Löschanfragen als Hilfstext vorbereiten
+- E-Mail-Alias-Hygiene erklären, zum Beispiel mit SimpleLogin oder vergleichbaren Diensten
 
 Wichtig:
 Das ist kein Autopilot.
-Die App soll nicht heimlich nach dem Nutzer suchen, keine Loeschanfragen automatisch verschicken und keine Identitaetsdokumente verwalten.
+Die App soll nicht heimlich nach dem Nutzer suchen, keine Löschanfragen automatisch verschicken und keine Identitätsdokumente verwalten.
 Der Buddy soll vorbereiten, priorisieren und lokal nachhalten; der Nutzer entscheidet bewusst.
 
 Kritischer Produktpunkt:
-Der harte Teil ist nicht nur Textgenerierung, sondern Verifikation, Follow-up, erneute Listings und das Risiko, bei unserioesen Anbietern noch mehr Daten preiszugeben.
+Der harte Teil ist nicht nur Textgenerierung, sondern Verifikation, Follow-up, erneute Listings und das Risiko, bei unseriösen Anbietern noch mehr Daten preiszugeben.
 
 ## Anti-Scheiter-Regeln
 
-Dieses Projekt kann scheitern, wenn es schoener aussieht, als es wirklich schuetzt.
+Dieses Projekt kann scheitern, wenn es schöner aussieht, als es wirklich schützt.
 Deshalb gelten ab jetzt diese Gegenmassnahmen:
 
 1. **Nicht mehr Schutz versprechen, als belegt ist.**
    Jede Statusaussage muss klar machen, ob sie auf lokal gesehenen Daten, Nutzerangabe, externer Quelle oder Planung beruht.
 
 2. **Kernloop vor Feature-Breite.**
-   Neue Module duerfen erst wachsen, wenn der Grundablauf sitzt: Sento sieht etwas, erklaert es einfach, priorisiert es, bietet genau einen naechsten Schritt an und merkt die Entscheidung lokal.
+   Neue Module dürfen erst wachsen, wenn der Grundablauf sitzt: Sento sieht etwas, erklärt es einfach, priorisiert es, bietet genau einen nächsten Schritt an und merkt die Entscheidung lokal.
 
-3. **Die App denkt vor, der Nutzer bestaetigt.**
+3. **Die App denkt vor, der Nutzer bestätigt.**
    Technische Details bleiben erreichbar, aber Sento muss zuerst Bedeutung und sichere Handlung in Alltagssprache liefern.
 
 4. **Threat Intelligence braucht Relevanz-Matching.**
-   Externe Bedrohungsdaten sind erst wertvoll, wenn sie auf macOS-Version, App-Version, lokale Belege oder klare Betroffenheit gemappt werden koennen.
+   Externe Bedrohungsdaten sind erst wertvoll, wenn sie auf macOS-Version, App-Version, lokale Belege oder klare Betroffenheit gemappt werden können.
 
-5. **macOS-Rechte und Packaging frueh mitdenken.**
-   Jede neue starke Funktion braucht vorher eine Rechte-, Sandbox-, Signing- und Notarization-Notiz, damit der spaetere Build nicht blockiert.
+5. **macOS-Rechte und Packaging früh mitdenken.**
+   Jede neue starke Funktion braucht vorher eine Rechte-, Sandbox-, Signing- und Notarization-Notiz, damit der spätere Build nicht blockiert.
 
 6. **Sento ist Produktlogik, nicht Deko.**
-   Der Charakter darf freundlich sein, aber seine Aufgabe ist Priorisierung, Erklaerung, Rueckfrage und Erinnerung. Wenn er nur Schmuck ist, verfehlt er den Zweck.
+   Der Charakter darf freundlich sein, aber seine Aufgabe ist Priorisierung, Erklärung, Rückfrage und Erinnerung. Wenn er nur Schmuck ist, verfehlt er den Zweck.
 
-7. **Taeglicher Nutzen vor Dashboard-Fuelle.**
-   Die App muss regelmaessig eine klare, kurze Lage liefern: ruhig, pruefen oder handeln. Mehr Karten sind nur sinnvoll, wenn sie diese Lage leichter machen.
+7. **Täglicher Nutzen vor Dashboard-Fülle.**
+   Die App muss regelmäßig eine klare, kurze Lage liefern: ruhig, prüfen oder handeln. Mehr Karten sind nur sinnvoll, wenn sie diese Lage leichter machen.
 
 ## Der rote Nutzerfluss
 
-Der Nutzer soll die App nicht wie ein Admin-Dashboard bedienen muessen.
+Der Nutzer soll die App nicht wie ein Admin-Dashboard bedienen müssen.
 
 Der Alltag soll so aussehen:
 
-1. Die App laeuft im Hintergrund.
+1. Die App läuft im Hintergrund.
 2. Der Buddy meldet sich nur, wenn etwas relevant ist.
 3. Die Meldung beginnt mit einer einfachen Aussage:
    - "Alles ruhig."
-   - "Es gibt eine neue Aenderung."
+   - "Es gibt eine neue Änderung."
    - "Dieses Update ist gerade wichtig."
-   - "Diese App koennte betroffen sein."
+   - "Diese App könnte betroffen sein."
 4. Der Nutzer bekommt eine klare Frage oder Handlung:
-   - "Kennst du diese Aenderung?"
+   - "Kennst du diese Änderung?"
    - "Willst du das als erwartet merken?"
    - "Soll ich dir zeigen, wo du das Update startest?"
    - "Soll ich das weiter beobachten?"
 5. Technische Details sind erreichbar, aber nicht zuerst sichtbar.
-6. Die App merkt Entscheidungen lokal und kann spaeter wieder darauf Bezug nehmen.
+6. Die App merkt Entscheidungen lokal und kann später wieder darauf Bezug nehmen.
 
 ## UI-Zielbild
 
-Die Hauptansicht soll eher wie ein Chat oder Aktivitaetsfeed wirken, nicht wie eine lange Liste aus Rohdaten.
+Die Hauptansicht soll eher wie ein Chat oder Aktivitätsfeed wirken, nicht wie eine lange Liste aus Rohdaten.
 
-Die gewaehlte visuelle Richtung steht in `docs/visual-direction.md`.
+Die gewählte visuelle Richtung steht in `docs/visual-direction.md`.
 
 Kurzfassung:
 Die App soll wie eine Mischung aus freundlicher Mac-Health-App, nativem Command Center und dezent gamifiziertem Verteidiger wirken.
-Also: einfach genug fuer normale Nutzer, stark genug fuer einen Security Buddy, aber nicht wie ein Cyberpunk-SIEM.
+Also: einfach genug für normale Nutzer, stark genug für einen Security Buddy, aber nicht wie ein Cyberpunk-SIEM.
 
 Aktuelle UI-Leitlinie:
-Die App orientiert sich an einem hellen `Sento Guard` Mockup mit Sidebar, Buddy-Figur, Statuskarten, Missionen und Aktivitaetsfeed. Der dunkle Neon-Look bleibt nur Referenz fuer Charakterenergie und Schutzsymbolik, nicht fuer den Standardmodus.
+Die App orientiert sich an einem hellen `Sento Guard` Mockup mit Sidebar, Buddy-Figur, Statuskarten, Missionen und Aktivitätsfeed. Der dunkle Neon-Look bleibt nur Referenz für Charakterenergie und Schutzsymbolik, nicht für den Standardmodus.
 
 ### Oben
 
 Ein klarer Status:
 
 - `Alles ruhig`
-- `Bitte pruefen`
+- `Bitte prüfen`
 - `Dringend empfohlen`
 
 ### Mitte
@@ -240,8 +240,8 @@ Ein klarer Status:
 Buddy-Meldungen in einfacher Sprache:
 
 - was passiert ist
-- warum es fuer diesen Mac relevant sein koennte
-- was der sichere naechste Schritt ist
+- warum es für diesen Mac relevant sein könnte
+- was der sichere nächste Schritt ist
 
 ### Unten oder seitlich
 
@@ -252,7 +252,7 @@ Nur bei Bedarf:
 - interne Labels
 - Rohdetails
 
-Diese Details sind wichtig fuer Vertrauen, sollen aber nicht die erste Nutzererfahrung dominieren.
+Diese Details sind wichtig für Vertrauen, sollen aber nicht die erste Nutzererfahrung dominieren.
 
 ## Produktbausteine
 
@@ -266,12 +266,12 @@ Aktuell vorhanden:
 - Autostart-Hinweise
 - Systemprofil-Hinweise
 
-Naechste sinnvolle Sensoren:
+Nächste sinnvolle Sensoren:
 
 - macOS-Update-/Sicherheitsupdate-Status
 - installierte Apps und Versionen
 - FileVault-/Firewall-Sichtbarkeit, falls ohne zu starke Rechte sinnvoll
-- System Extensions, Network Extensions und Login-/Background-Items als eigener spaeterer macOS-Spike
+- System Extensions, Network Extensions und Login-/Background-Items als eigener späterer macOS-Spike
 - Security-Tool- und Antivirus-Sichtbarkeit nur als read-only Inventar, nicht als Bewertung fremder Produkte ohne Beleg
 
 ### B. Threat-Intelligence-Schicht
@@ -281,7 +281,7 @@ Der Buddy soll wissen, was draussen gerade relevant ist.
 
 Gute erste Quellen:
 
-- Apple/macOS-Sicherheitsupdate-Daten ueber SOFA
+- Apple/macOS-Sicherheitsupdate-Daten über SOFA
 - CISA Known Exploited Vulnerabilities
 - FIRST EPSS
 - NVD als breitere CVE-Datenbank
@@ -296,78 +296,78 @@ Lokale Fakten mit externen Bedrohungsdaten verbinden.
 
 Beispiele:
 
-- "Dein macOS ist aelter als die Version, die eine aktiv ausgenutzte Luecke schliesst."
-- "Diese App-Version koennte zu einer bekannten Schwachstelle passen."
-- "Dieser Autostart-Eintrag ist neu, aber nicht automatisch gefaehrlich."
+- "Dein macOS ist älter als die Version, die eine aktiv ausgenutzte Lücke schließt."
+- "Diese App-Version könnte zu einer bekannten Schwachstelle passen."
+- "Dieser Autostart-Eintrag ist neu, aber nicht automatisch gefährlich."
 
 Diese Engine sollte deterministisch sein.
-Das heisst: Sie entscheidet nach klaren Regeln und Belegen, nicht nach Bauchgefuehl eines LLM.
+Das heißt: Sie entscheidet nach klaren Regeln und Belegen, nicht nach Bauchgefühl eines LLM.
 
 ### C2. Adversarial Review Layer
 
 Aufgabe:
-Der Buddy soll jedes groessere Feature aus Verteidiger- und Angreifer-Sicht pruefen.
+Der Buddy soll jedes größere Feature aus Verteidiger- und Angreifer-Sicht prüfen.
 
-Praktisch heisst das:
+Praktisch heißt das:
 
-- Welche einfache Missbrauchskette koennte ein Angreifer versuchen?
-- Welche lokalen Signale wuerden diese Kette sichtbar machen?
-- Welche Rechte braeuchte die App, um das zu sehen?
-- Wie erklaert die App das, ohne Angst zu machen?
+- Welche einfache Missbrauchskette könnte ein Angreifer versuchen?
+- Welche lokalen Signale würden diese Kette sichtbar machen?
+- Welche Rechte bräuchte die App, um das zu sehen?
+- Wie erklärt die App das, ohne Angst zu machen?
 - Wo ist eine Checkliste ehrlicher als ein automatischer Sensor?
 
 Grenze:
 Diese Ebene beschreibt Risiken und Verteidigung.
-Sie liefert keine Schritt-fuer-Schritt-Anleitung fuer echte Angriffe, keine Exploit-Automation und keine verdeckten Tests gegen reale Systeme.
+Sie liefert keine Schritt-für-Schritt-Anleitung für echte Angriffe, keine Exploit-Automation und keine verdeckten Tests gegen reale Systeme.
 Details stehen in `docs/adversarial-review-and-best-practices.md`.
 
 ### D. Buddy Brain
 
 Aufgabe:
-Der Buddy erklaert und priorisiert.
+Der Buddy erklärt und priorisiert.
 
-Moegliche Wege:
+Mögliche Wege:
 
-- regelbasierte Texte fuer den Anfang
-- lokales LLM spaeter fuer private Erklaerungen
-- OpenAI API optional spaeter fuer bessere Sprache und Recherche
+- regelbasierte Texte für den Anfang
+- lokales LLM später für private Erklärungen
+- OpenAI API optional später für bessere Sprache und Recherche
 
 Sicherheitsregel:
 Das LLM darf nicht die einzige Quelle der Wahrheit sein.
-Es bekommt Belege und formuliert sie verstaendlich. Die eigentliche Sicherheitsentscheidung kommt aus Sensoren, Feeds und Regeln.
+Es bekommt Belege und formuliert sie verständlich. Die eigentliche Sicherheitsentscheidung kommt aus Sensoren, Feeds und Regeln.
 
 ### E. Aktionen und Begleitung
 
 Aufgabe:
-Der Nutzer braucht nicht nur Hinweise, sondern sichere naechste Schritte.
+Der Nutzer braucht nicht nur Hinweise, sondern sichere nächste Schritte.
 
-Fruehe Aktionen:
+Frühe Aktionen:
 
 - als erwartet merken
 - weiter beobachten
-- Erklaerung anzeigen
-- System-Einstellungen oeffnen
+- Erklärung anzeigen
+- System-Einstellungen öffnen
 - Update-Schritte anzeigen
 
-Spaetere Aktionen:
+Spätere Aktionen:
 
-- gefuehrte Checks
+- geführte Checks
 - begrenzte Safe-Mode-Validierung
 - optionale Erinnerungen
 
-Keine stillen Systemaenderungen.
+Keine stillen Systemänderungen.
 
-### F. Lokales Gedaechtnis
+### F. Lokales Gedächtnis
 
 Aufgabe:
 Die App soll lernen, was auf diesem Mac normal ist.
 
 Aktuell vorhanden:
 
-- lokale Baseline fuer Startup-Items
+- lokale Baseline für Startup-Items
 - lokale Policy-Entscheidungen
 
-Spaeter:
+Später:
 
 - bekannte Apps
 - akzeptierte Risiken
@@ -377,7 +377,7 @@ Spaeter:
 ### G. Best-Practice-Monitoring
 
 Aufgabe:
-Der Buddy soll spaeter nicht nur einzelne Findings zeigen, sondern wichtige Sicherheits-Best-Practices ueberwachen oder gefuehrt abfragen.
+Der Buddy soll später nicht nur einzelne Findings zeigen, sondern wichtige Sicherheits-Best-Practices überwachen oder geführt abfragen.
 
 Beispiele:
 
@@ -399,20 +399,20 @@ Solche Themen werden als Buddy-Frage oder Checkliste behandelt.
 ### H. Privacy-Footprint-Cleanup
 
 Aufgabe:
-Der Buddy begleitet einen gefuehrten Cleanup des digitalen Fussabdrucks.
+Der Buddy begleitet einen geführten Cleanup des digitalen Fußabdrucks.
 
-Moegliche Quellen:
+Mögliche Quellen:
 
 - Data-Broker-Verzeichnisse und Opt-out-Listen
-- JustDeleteMe fuer Account-Loeschwege
-- Have I Been Pwned fuer Breach-Hygiene, mit klarer API-Key-/Datenschutzgrenze
-- SimpleLogin als Vorbild oder spaetere Integration fuer E-Mail-Aliase
+- JustDeleteMe für Account-Löschwege
+- Have I Been Pwned für Breach-Hygiene, mit klarer API-Key-/Datenschutzgrenze
+- SimpleLogin als Vorbild oder spätere Integration für E-Mail-Aliase
 
-Frueher MVP-Schnitt:
+Früher MVP-Schnitt:
 
 - lokale Aufgabenliste
 - manuelle Fundstellen erfassen
-- Loesch-/Opt-out-Vorlagen erzeugen
+- Lösch-/Opt-out-Vorlagen erzeugen
 - Nachfassfristen merken
 - Status je Aufgabe sichtbar machen
 
@@ -429,32 +429,32 @@ Nicht bauen:
 ### Direkt bauen
 
 - einfache Buddy-UI
-- lokales Policy-/Gedaechtnis-Modell
+- lokales Policy-/Gedächtnis-Modell
 - Matching Engine
-- erklaerende Texte
-- sichere Aktionsfuehrung
+- erklärende Texte
+- sichere Aktionsführung
 
 ### Integrieren
 
-- SOFA fuer Apple/macOS-Update-Informationen
-- CISA KEV fuer aktiv ausgenutzte Schwachstellen
-- FIRST EPSS fuer Ausnutzungswahrscheinlichkeit
-- NVD spaeter fuer breitere CVE-Abdeckung
-- Have I Been Pwned spaeter fuer Breach-Hygiene, wenn API-Key-/Datenschutzmodell geklaert ist
-- JustDeleteMe-Daten fuer gefuehrte Account-Loeschwege
-- Data-Broker-Verzeichnisse fuer Opt-out-Aufgaben, sofern Lizenz und Pflegezustand passen
-- SimpleLogin oder vergleichbare Alias-Dienste als Empfehlung oder spaetere optionale Integration
+- SOFA für Apple/macOS-Update-Informationen
+- CISA KEV für aktiv ausgenutzte Schwachstellen
+- FIRST EPSS für Ausnutzungswahrscheinlichkeit
+- NVD später für breitere CVE-Abdeckung
+- Have I Been Pwned später für Breach-Hygiene, wenn API-Key-/Datenschutzmodell geklärt ist
+- JustDeleteMe-Daten für geführte Account-Löschwege
+- Data-Broker-Verzeichnisse für Opt-out-Aufgaben, sofern Lizenz und Pflegezustand passen
+- SimpleLogin oder vergleichbare Alias-Dienste als Empfehlung oder spätere optionale Integration
 
 ### Als Inspiration nutzen
 
-- Objective-See KnockKnock fuer Persistenz-/Autostart-Denken
-- Objective-See LuLu fuer spaetere Netzwerk-Ideen
-- osquery/Fleet fuer lokales Inventar-Denken
-- Google Santa fuer App-Kontroll- und Vertrauensmodelle
-- Nudge fuer einfache Update-Kommunikation
-- swiftDialog fuer klare macOS-Dialog-UX
+- Objective-See KnockKnock für Persistenz-/Autostart-Denken
+- Objective-See LuLu für spätere Netzwerk-Ideen
+- osquery/Fleet für lokales Inventar-Denken
+- Google Santa für App-Kontroll- und Vertrauensmodelle
+- Nudge für einfache Update-Kommunikation
+- swiftDialog für klare macOS-Dialog-UX
 
-## Naechste Produktphasen
+## Nächste Produktphasen
 
 ### Phase 0: Buddy statt Inspector
 
@@ -464,7 +464,7 @@ Weitere visuelle Verfeinerung bleibt sinnvoll.
 
 Screenshot-Review am 2026-05-14:
 Der erste Schnitt hat die Struktur verbessert, aber optisch wirkt die App weiterhin wie ein Inspector.
-Deshalb braucht Phase 0 jetzt einen echten Redesign-Schnitt, nicht nur weitere Detailaufraeumung.
+Deshalb braucht Phase 0 jetzt einen echten Redesign-Schnitt, nicht nur weitere Detailaufräumung.
 
 Ziel:
 Die aktuelle App wird weniger wie eine technische Fundliste und mehr wie ein Begleiter.
@@ -474,13 +474,13 @@ Aufgaben:
 - Dashboard in Buddy-Status umbauen: umgesetzt
 - nur die wichtigsten Dinge zuerst zeigen: umgesetzt im ersten Schnitt
 - technische Belege einklappbar machen: umgesetzt
-- linke Liste zusammenfassen: fuer bekannte Autostart-Hinweise umgesetzt
+- linke Liste zusammenfassen: für bekannte Autostart-Hinweise umgesetzt
 - eine klare Hauptaktion pro Hinweis zeigen: erste Empfehlung steht jetzt vorne
 
 Offen:
 
 - echte `BuddyHomeView` als Startseite bauen
-- linke Finding-Liste aus der ersten Wahrnehmung entfernen oder stark zurueckstufen
+- linke Finding-Liste aus der ersten Wahrnehmung entfernen oder stark zurückstufen
 - Missionen und Schutzbereiche statt Rohlisten zeigen
 - echte Chat-/Feed-Struktur weiter ausbauen
 - danach Liquid-Glass-/visueller Feinschliff
@@ -488,24 +488,24 @@ Offen:
 ### Phase 1: Update-Awareness
 
 Ziel:
-Der Buddy erkennt, ob macOS-Sicherheitsupdates fuer diesen Mac relevant sind.
+Der Buddy erkennt, ob macOS-Sicherheitsupdates für diesen Mac relevant sind.
 
 Aufgaben:
 
 - SOFA-Feed lesen und cachen
-- lokale macOS-Version dagegen pruefen
+- lokale macOS-Version dagegen prüfen
 - einfache Meldung erzeugen:
   - "Dieses Update ist wichtig"
   - "Du bist aktuell"
-  - "Ich kann es gerade nicht pruefen"
+  - "Ich kann es gerade nicht prüfen"
 
-Akzeptanzkriterien fuer diesen Baustein:
+Akzeptanzkriterien für diesen Baustein:
 
 - Wenn der Feed nicht erreichbar ist, sagt die App das klar und behauptet keinen aktuellen Schutzstatus.
 - Wenn der Cache alt ist, wird die Meldung als veraltet markiert.
 - Netzwerkzugriff wird als eigene Produktentscheidung sichtbar gemacht.
-- Gespeichert werden nur die noetigen Feed-Daten, keine unnoetigen persoenlichen Nutzerdaten.
-- Die App kann offline weiter lokale Hinweise erklaeren.
+- Gespeichert werden nur die nötigen Feed-Daten, keine unnötigen persönlichen Nutzerdaten.
+- Die App kann offline weiter lokale Hinweise erklären.
 
 ### Phase 1.5: Best-Practice-Grundlage
 
@@ -517,14 +517,14 @@ Aufgaben:
 - Best-Practice-Kategorien in der UI planen
 - lokale Checks von Buddy-Fragen trennen
 - Rechtebedarf pro Check dokumentieren
-- Angreifer-Missbrauchsfaelle pro Check notieren
-- ersten lokalen Haertungsblock auswaehlen
+- Angreifer-Missbrauchsfälle pro Check notieren
+- ersten lokalen Härtungsblock auswählen
 
 Erste Kandidaten:
 
 - FileVault
 - Firewall
-- Gatekeeper/SIP besser erklaeren
+- Gatekeeper/SIP besser erklären
 - macOS-Update-Status
 - System Extensions / Treiberzustand
 
@@ -536,29 +536,29 @@ Der Buddy verbindet lokale Daten mit real bekannten Bedrohungen.
 Aufgaben:
 
 - CISA KEV importieren
-- EPSS als Priorisierungssignal pruefen
-- spaeter NVD fuer breitere Abdeckung
-- Regeln bauen, wann etwas wirklich relevant fuer diesen Mac ist
+- EPSS als Priorisierungssignal prüfen
+- später NVD für breitere Abdeckung
+- Regeln bauen, wann etwas wirklich relevant für diesen Mac ist
 
 ### Phase 2b: Security-Hygiene-Checks
 
 Ziel:
-Der Buddy fragt und prueft grundlegende Schutzthemen, die fuer normale Nutzer wirklich relevant sind.
+Der Buddy fragt und prüft grundlegende Schutzthemen, die für normale Nutzer wirklich relevant sind.
 
-Prioritaet:
+Priorität:
 
-1. macOS-Firewall, FileVault und automatische Updates, weil sie lokal und verstaendlich sind
-2. Passwortmanager- und 2FA-Checklisten, weil echte automatische Pruefung oft kontenabhaengig ist
+1. macOS-Firewall, FileVault und automatische Updates, weil sie lokal und verständlich sind
+2. Passwortmanager- und 2FA-Checklisten, weil echte automatische Prüfung oft kontenabhängig ist
 3. Security-Tool-/Antivirus-Inventar, falls installierte Produkte sauber erkennbar sind
-4. VPN-Erklaerung und Entscheidungscheck, aber nur kontextbezogen
-5. Treiber, System Extensions und Network Extensions als spaeterer fortgeschrittener Sensor
+4. VPN-Erklärung und Entscheidungscheck, aber nur kontextbezogen
+5. Treiber, System Extensions und Network Extensions als späterer fortgeschrittener Sensor
 
 Akzeptanzkriterien:
 
-- Jede Aussage sagt klar, ob sie automatisch geprueft oder vom Nutzer beantwortet wurde.
+- Jede Aussage sagt klar, ob sie automatisch geprüft oder vom Nutzer beantwortet wurde.
 - Kein Schutzprodukt wird pauschal als gut oder schlecht bewertet, solange kein konkreter Beleg vorliegt.
 - VPN wird nicht als allgemeiner Sicherheitszauber dargestellt.
-- 2FA wird fuer wichtige Konten empfohlen, aber die App behauptet ohne Integration nicht, es wirklich verifiziert zu haben.
+- 2FA wird für wichtige Konten empfohlen, aber die App behauptet ohne Integration nicht, es wirklich verifiziert zu haben.
 
 ### Phase 3: App-Inventur
 
@@ -568,60 +568,60 @@ Der Buddy versteht installierte Apps besser.
 Aufgaben:
 
 - installierte Apps read-only erfassen
-- Bundle-ID, Version, Signaturstatus pruefen
-- spaeter Schwachstellen grob matchen
+- Bundle-ID, Version, Signaturstatus prüfen
+- später Schwachstellen grob matchen
 
-### Phase 4: LLM-Erklaerung optional
+### Phase 4: LLM-Erklärung optional
 
 Ziel:
-Der Buddy kann Belege menschlicher erklaeren.
+Der Buddy kann Belege menschlicher erklären.
 
 Optionen:
 
-- lokal: mehr Datenschutz, weniger Leistung und Aktualitaet
+- lokal: mehr Datenschutz, weniger Leistung und Aktualität
 - Cloud/OpenAI: bessere Sprache und Recherche, aber Netzwerk und Datenschutzfragen
-- hybrid: Regeln und lokale Daten bleiben Kern, LLM ist Erklaer- und Recherchehelfer
+- hybrid: Regeln und lokale Daten bleiben Kern, LLM ist Erklär- und Recherchehelfer
 
-### Phase 5: Staerkere Verteidigung
+### Phase 5: Stärkere Verteidigung
 
 Ziel:
 Mehr Punch, aber kontrolliert.
 
-Moegliche spaetere Bereiche:
+Mögliche spätere Bereiche:
 
 - Netzwerkhinweise
 - Prozess-/Verhaltenshinweise
 - Safe-Mode-Validierung
-- gefuehrte Haertung
-- optional staerkere Rechte, wenn der Nutzen klar ist
+- geführte Härtung
+- optional stärkere Rechte, wenn der Nutzen klar ist
 
-## Naechster konkreter Schritt
+## Nächster konkreter Schritt
 
-Der naechste Schritt ist nicht noch ein Sensor.
+Der nächste Schritt ist nicht noch ein Sensor.
 
-Der naechste Schritt ist ein echter visueller Redesign-Schnitt:
+Der nächste Schritt ist ein echter visueller Redesign-Schnitt:
 
 1. `BuddyHomeView` als Startseite bauen.
 2. Guardian-Status, Missionen und Buddy-Meldungen als erste Ebene zeigen.
 3. Die aktuelle Finding-Liste in einen Detailmodus verschieben.
 4. Autostart-Hinweise als Mission oder Sammelmeldung darstellen, nicht als 17 sichtbare Karten.
-5. Danach Screenshot pruefen.
+5. Danach Screenshot prüfen.
 6. Danach erst SOFA-/Update-Awareness als ersten Online-Intelligence-Baustein bauen.
 
 ## Sicherheitsleitplanken
 
-- keine stillen Systemaenderungen
+- keine stillen Systemänderungen
 - keine dramatischen Behauptungen ohne Beleg
-- jede neue groessere Funktion bekommt eine defensive Angreiferpruefung
+- jede neue größere Funktion bekommt eine defensive Angreiferprüfung
 - LLM nie als alleinige Wahrheit
 - externe Feeds transparent und cachebar
 - starke Rechte nur mit konkretem Nutzen
-- lokale Entscheidungen bleiben sichtbar und ruecksetzbar
-- adversarial thinking nur fuer Verteidigung und Produktqualitaet
+- lokale Entscheidungen bleiben sichtbar und rücksetzbar
+- adversarial thinking nur für Verteidigung und Produktqualität
 - keine Exploit-Automation, keine echten Angriffsketten gegen fremde Systeme
-- bei Schutzgewohnheiten klar trennen zwischen automatisch gesehen, Nutzerangabe und nicht pruefbar
+- bei Schutzgewohnheiten klar trennen zwischen automatisch gesehen, Nutzerangabe und nicht prüfbar
 
-## Referenzen fuer spaetere Integration
+## Referenzen für spätere Integration
 
 - [CISA Known Exploited Vulnerabilities](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
 - [NVD Vulnerability APIs](https://nvd.nist.gov/developers/vulnerabilities)

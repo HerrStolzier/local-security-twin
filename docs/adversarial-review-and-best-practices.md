@@ -2,66 +2,66 @@
 
 ## Zweck
 
-Diese Datei ergaenzt den Produktplan um zwei feste Perspektiven:
+Diese Datei ergänzt den Produktplan um zwei feste Perspektiven:
 
-1. Jede neue Idee wird aus Angreiferperspektive geprueft.
-2. Der Security Buddy soll spaeter wichtige Sicherheits-Best-Practices aktiv beobachten und erklaeren.
+1. Jede neue Idee wird aus Angreiferperspektive geprüft.
+2. Der Security Buddy soll später wichtige Sicherheits-Best-Practices aktiv beobachten und erklären.
 
 Das Ziel ist mehr Verteidigungsstaerke, nicht mehr Risiko.
 
 ## Black-Hat-Perspektive als Entwicklungsritual
 
-Jede groessere Produktidee bekommt vor der Umsetzung eine kurze Gegenpruefung:
+Jede größere Produktidee bekommt vor der Umsetzung eine kurze Gegenpruefung:
 
-> Wenn ein Angreifer diese Funktion sieht, wie koennte er sie gegen den Nutzer, den Mac oder die App selbst verwenden?
+> Wenn ein Angreifer diese Funktion sieht, wie könnte er sie gegen den Nutzer, den Mac oder die App selbst verwenden?
 
-Diese Pruefung gehoert in Designs, Pull Requests und groessere Implementierungsschritte.
+Diese Prüfung gehört in Designs, Pull Requests und größere Implementierungsschritte.
 
-## Fragen fuer jede neue Funktion
+## Fragen für jede neue Funktion
 
 ### 1. Missbrauch gegen den Nutzer
 
-- Koennte die Funktion Angst erzeugen und den Nutzer zu falschen Klicks treiben?
-- Koennte eine Meldung so formuliert sein, dass sie wie Social Engineering wirkt?
-- Koennte eine Empfehlung zu einer unsicheren Aktion fuehren?
+- Könnte die Funktion Angst erzeugen und den Nutzer zu falschen Klicks treiben?
+- Könnte eine Meldung so formuliert sein, dass sie wie Social Engineering wirkt?
+- Könnte eine Empfehlung zu einer unsicheren Aktion führen?
 
 ### 2. Missbrauch gegen das System
 
 - Fordert die Funktion neue Rechte an?
-- Koennte ein Fehler zu stillen Systemaenderungen fuehren?
-- Koennte ein Angreifer Eingabedaten manipulieren, damit die App falsche Sicherheit meldet?
+- Könnte ein Fehler zu stillen Systemänderungen führen?
+- Könnte ein Angreifer Eingabedaten manipulieren, damit die App falsche Sicherheit meldet?
 
 ### 3. Missbrauch gegen die App
 
-- Koennte ein lokaler Angreifer Baseline-, Policy- oder Cache-Dateien manipulieren?
-- Koennte ein externer Feed vergiftet oder veraltet sein?
-- Koennte ein LLM durch Prompt Injection oder manipulierte Belege zu falschen Aussagen gebracht werden?
+- Könnte ein lokaler Angreifer Baseline-, Policy- oder Cache-Dateien manipulieren?
+- Könnte ein externer Feed vergiftet oder veraltet sein?
+- Könnte ein LLM durch Prompt Injection oder manipulierte Belege zu falschen Aussagen gebracht werden?
 
 ### 4. Datenschutz und Vertrauen
 
-- Werden Daten lokal gehalten, wenn Cloud nicht noetig ist?
-- Ist Netzwerkzugriff sichtbar und begruendet?
-- Kann der Nutzer gespeicherte Entscheidungen sehen und rueckgaengig machen?
+- Werden Daten lokal gehalten, wenn Cloud nicht nötig ist?
+- Ist Netzwerkzugriff sichtbar und begründet?
+- Kann der Nutzer gespeicherte Entscheidungen sehen und rückgängig machen?
 
-## Ergebnis der Pruefung
+## Ergebnis der Prüfung
 
 Jede relevante Funktion soll eine kurze Antwort haben:
 
 - **Was kann missbraucht werden?**
 - **Wie begrenzen wir das?**
 - **Welche Rechte braucht die Funktion wirklich?**
-- **Welche Nutzerentscheidung ist noetig?**
+- **Welche Nutzerentscheidung ist nötig?**
 - **Was darf die Funktion ausdruecklich nicht tun?**
 
-## Sicherheitsgrenzen fuer Angreiferdenken
+## Sicherheitsgrenzen für Angreiferdenken
 
-Erlaubt und gewuenscht:
+Erlaubt und gewünscht:
 
 - Threat Modeling
 - defensive Missbrauchsanalyse
 - sichere Architekturentscheidungen
 - sichere Test-Fixtures
-- Erklaerung von Risiken in Alltagssprache
+- Erklärung von Risiken in Alltagssprache
 
 Nicht Ziel:
 
@@ -72,16 +72,16 @@ Nicht Ziel:
 
 ## Best-Practice-Monitoring
 
-Der Security Buddy soll spaeter nicht nur technische Findings zeigen, sondern ein Sicherheitsbild des Alltags aufbauen.
+Der Security Buddy soll später nicht nur technische Findings zeigen, sondern ein Sicherheitsbild des Alltags aufbauen.
 
 Wichtig:
-Nicht jede Best Practice ist direkt messbar. Manche Dinge kann die App pruefen, manche nur erfragen oder erklaeren.
+Nicht jede Best Practice ist direkt messbar. Manche Dinge kann die App prüfen, manche nur erfragen oder erklären.
 
 ## Kategorien
 
-### A. Direkt lokal pruefbar
+### A. Direkt lokal prüfbar
 
-Diese Checks sind gute fruehe Kandidaten, weil sie lokal und read-only moeglich sein koennen:
+Diese Checks sind gute frühe Kandidaten, weil sie lokal und read-only möglich sein können:
 
 - macOS-Version und Sicherheitsupdate-Stand
 - Gatekeeper
@@ -94,7 +94,7 @@ Diese Checks sind gute fruehe Kandidaten, weil sie lokal und read-only moeglich 
 - System Extensions und DriverKit-Erweiterungen
 - sichtbare Login Items
 
-### B. Teilweise lokal pruefbar
+### B. Teilweise lokal prüfbar
 
 Diese Checks brauchen vorsichtige Recherche, weil macOS-Sichtbarkeit, Sandbox und Rechte stark mitspielen:
 
@@ -105,20 +105,20 @@ Diese Checks brauchen vorsichtige Recherche, weil macOS-Sichtbarkeit, Sandbox un
 - Backup-Hinweise, z. B. Time Machine-Status
 - iCloud-/Apple-ID-Sicherheitsstatus, soweit lokal sichtbar
 
-### C. Nur gefuehrt erfragbar
+### C. Nur geführt erfragbar
 
 Diese Dinge kann die App oft nicht sicher messen. Sie sollte sie als Checkliste oder Buddy-Frage behandeln:
 
-- Ist Zwei-Faktor-Authentifizierung fuer wichtige Accounts aktiv?
+- Ist Zwei-Faktor-Authentifizierung für wichtige Accounts aktiv?
 - Nutzt der Nutzer einen Passwort-Manager wirklich?
-- Sind wichtige Accounts mit einzigartigen Passwoertern geschuetzt?
+- Sind wichtige Accounts mit einzigartigen Passwoertern geschützt?
 - Werden Recovery Codes sicher aufbewahrt?
 - Ist ein VPN in diesem konkreten Szenario sinnvoll oder eher Scheinsicherheit?
 - Gibt es ein aktuelles Backup, das der Nutzer wirklich wiederherstellen kann?
 
-## Priorisierung fuer die naechsten Schritte
+## Priorisierung für die nächsten Schritte
 
-### Phase A: Lokale Mac-Haertung
+### Phase A: Lokale Mac-Härtung
 
 Erster sinnvoller Block nach dem UI-Roten-Faden:
 
@@ -136,12 +136,12 @@ Das sind echte Systemschutzthemen und passen zum lokalen Verteidiger.
 Zweiter Block:
 
 - Passwort-Manager erkannt oder erfragt
-- 2FA-Checkliste fuer Apple ID, E-Mail, Banking, GitHub, Cloud
+- 2FA-Checkliste für Apple ID, E-Mail, Banking, GitHub, Cloud
 - Recovery-Code-Erinnerung
 
 Warum:
-Sehr grosser Sicherheitsnutzen, aber oft nicht sauber lokal messbar.
-Deshalb als gefuehrte Buddy-Frage statt falscher technischer Behauptung.
+Sehr großer Sicherheitsnutzen, aber oft nicht sauber lokal messbar.
+Deshalb als geführte Buddy-Frage statt falscher technischer Behauptung.
 
 ### Phase C: App- und Threat-Matching
 
@@ -159,13 +159,13 @@ Hier bekommt der Buddy echten Punch gegen aktuelle Bedrohungen.
 
 Vierter Block:
 
-- Firewall erklaeren
+- Firewall erklären
 - VPN sinnvoll einordnen
-- spaeter Netzwerkhinweise, falls Rechte und Nutzen klar sind
+- später Netzwerkhinweise, falls Rechte und Nutzen klar sind
 
 Wichtig:
 VPN ist nicht automatisch "mehr Sicherheit".
-Der Buddy soll erklaeren, wann VPN hilft und wann es nur das Vertrauen auf einen anderen Anbieter verschiebt.
+Der Buddy soll erklären, wann VPN hilft und wann es nur das Vertrauen auf einen anderen Anbieter verschiebt.
 
 ## Produktregel
 
@@ -173,24 +173,24 @@ Der Buddy soll Best Practices nicht als starre Checkliste verkaufen.
 
 Er soll sagen:
 
-- "Das schuetzt dich wahrscheinlich stark."
-- "Das ist fuer manche Situationen sinnvoll."
+- "Das schützt dich wahrscheinlich stark."
+- "Das ist für manche Situationen sinnvoll."
 - "Das kann ich lokal nicht sicher sehen."
 - "Das musst du mir einmal beantworten."
-- "Das sollten wir spaeter wieder pruefen."
+- "Das sollten wir später wieder prüfen."
 
-## Naechster konkreter Schritt
+## Nächster konkreter Schritt
 
-Vor dem naechsten technischen Sensor sollte ein kleiner Design-Schnitt entstehen:
+Vor dem nächsten technischen Sensor sollte ein kleiner Design-Schnitt entstehen:
 
 1. Welche Best-Practice-Kategorien zeigt die App im Buddy-UI?
 2. Welche davon sind lokal messbar?
 3. Welche sind nur Buddy-Fragen?
-4. Welche Rechte waeren noetig?
-5. Welche Angreifer-Missbrauchsfaelle gibt es?
+4. Welche Rechte wären nötig?
+5. Welche Angreifer-Missbrauchsfälle gibt es?
 
-Danach ist der naechste gute Sensor wahrscheinlich:
+Danach ist der nächste gute Sensor wahrscheinlich:
 
-- macOS-Update-/Security-Update-Status ueber SOFA
+- macOS-Update-/Security-Update-Status über SOFA
 - danach FileVault-/Firewall-Sichtbarkeit
 - danach App-Inventur und Versionen
