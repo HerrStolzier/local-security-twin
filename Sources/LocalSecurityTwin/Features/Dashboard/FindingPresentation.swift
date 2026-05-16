@@ -47,6 +47,10 @@ struct DashboardPresentation {
         findings(in: .review).count
     }
 
+    var updateAwarenessFinding: Finding? {
+        findings.first { $0.source.kind == .updateAwareness }
+    }
+
     var statusTitle: String {
         if startupChangeCount > 0 {
             return "Bitte kurz prüfen"
@@ -69,11 +73,19 @@ struct DashboardPresentation {
         }
 
         if knownStartupCount > 0 && reviewCount > 0 {
+            if updateAwarenessFinding != nil {
+                return "Ich habe den macOS-Update-Stand mit der SOFA-Quelle verglichen. Das ist eine wichtige Orientierung, aber kein vollständiges Sicherheitsurteil."
+            }
+
             return "Ich sehe bekannte Autostart-Hinweise und ein paar Systemsignale. Das ist vor allem Orientierung; wichtig wird es erst, wenn etwas neu oder unerwartet ist."
         }
 
         if knownStartupCount > 0 {
             return "Ich sehe bekannte Autostart-Hinweise. Sie sind nicht automatisch kritisch, aber sie erklären, was im Hintergrund starten kann."
+        }
+
+        if updateAwarenessFinding != nil {
+            return "Ich habe den macOS-Update-Stand mit der SOFA-Quelle verglichen. Das ist eine wichtige Orientierung, aber kein vollständiges Sicherheitsurteil."
         }
 
         return "Ich sehe lokale Systemsignale. Sie helfen uns, den Mac einzuordnen, ersetzen aber kein vollständiges Sicherheitsurteil."
@@ -171,6 +183,18 @@ struct DashboardPresentation {
         }
 
         if reviewCount > 0 {
+            if let updateAwarenessFinding {
+                items.append(
+                    BuddyActivityItem(
+                        id: "update-awareness",
+                        systemImage: "arrow.clockwise.shield",
+                        title: "macOS-Update-Stand eingeordnet",
+                        message: updateAwarenessFinding.summary,
+                        findingID: updateAwarenessFinding.id
+                    )
+                )
+            }
+
             items.append(
                 BuddyActivityItem(
                     id: "system-context",
@@ -274,7 +298,20 @@ struct DashboardPresentation {
     }
 
     private var systemMission: BuddyMission {
-        BuddyMission(
+        if let updateAwarenessFinding {
+            return BuddyMission(
+                id: "system",
+                title: "Mac-Schutzsignale",
+                status: "Update geprüft",
+                summary: "Der macOS-Update-Stand wurde mit SOFA eingeordnet. Das ist ein Schutzsignal, aber kein Gesamturteil.",
+                systemImage: "desktopcomputer",
+                progress: 0.72,
+                primaryActionTitle: "Update-Hinweis ansehen",
+                findingID: updateAwarenessFinding.id
+            )
+        }
+
+        return BuddyMission(
             id: "system",
             title: "Mac-Schutzsignale",
             status: reviewCount > 0 ? "\(reviewCount) sichtbar" : "Noch leer",

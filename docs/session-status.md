@@ -133,14 +133,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sichtbarer `SOFA-Stand aktualisieren`-Flow gebaut: Die Startseite zeigt eine bewusste Aktion, fragt vor dem Online-Abruf nach, lädt dann den SOFA-Stand über einen separaten Refresh-Pfad, speichert ihn lokal und zeigt eine kurze Quellen-Notiz.
 - `FindingStore` unterscheidet normalen lokalen Refresh von bewusstem Online-Update-Awareness-Refresh; Tests sichern ab, dass der unterstützte Update-Hinweis erst nach expliziter Aktion entsteht.
 - Der bewusste SOFA-Abruf läuft nicht mehr blockierend auf dem Main Actor; während des Abrufs zeigt die Topbar `SOFA wird geladen` und deaktiviert den Aktualisieren-Button.
+- Regressionstest ergänzt, der nach bewusstem SOFA-Refresh die Sichtbarkeit des aktualisierten Update-Hinweises in `DashboardPresentation` prüft.
+- Nutzerfeedback zum manuellen SOFA-Klick eingearbeitet: Nach dem Aktualisieren ist jetzt deutlicher sichtbar, dass der SOFA-Stand geladen, lokal gespeichert und mit der sichtbaren macOS-Version verglichen wurde.
+- Dashboard-Presentation hebt Update-Awareness jetzt als eigenen Aktivitätsfeed-Eintrag, System-Mission `Update geprüft` und Buddy-Text hervor, ohne daraus ein vollständiges Sicherheitsurteil zu machen.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, Kapitel 2b ist als Prototyp-Stand ausreichend, und Kapitel 3 `Update Awareness` hat jetzt einen sichtbaren Nutzerfluss für den bewusst ausgelösten SOFA-Abruf.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, Kapitel 2b ist als Prototyp-Stand ausreichend, und Kapitel 3 `Update Awareness` zeigt nach bewusstem SOFA-Abruf nun sichtbar, was aktualisiert und eingeordnet wurde.
 
 ## Nächster konkreter Schritt
 
-Kapitel 3 visuell prüfen: App starten, `SOFA-Stand aktualisieren` einmal manuell auslösen und beurteilen, ob Button, Bestätigung, Quellen-Notiz und Update-Finding verständlich genug sind.
+Kapitel 3 erneut visuell prüfen: App starten, `SOFA-Stand aktualisieren` einmal manuell auslösen und beurteilen, ob Banner, Mission `Update geprüft`, Aktivitätsfeed und Detailöffnung jetzt klar genug wirken.
 
 ## Danach sinnvoll
 
@@ -196,6 +199,10 @@ Kapitel 3 visuell prüfen: App starten, `SOFA-Stand aktualisieren` einmal manuel
 - `swift test` am 2026-05-16 nach sichtbarem SOFA-Aktualisieren-Flow; 44 Tests erfolgreich
 - `./scripts/checks.sh` am 2026-05-16 nach nicht-blockierendem SOFA-Aktualisieren-Flow
 - `./scripts/build-app-bundle.sh` am 2026-05-16 nach sichtbarem SOFA-Aktualisieren-Flow
+- `swift test --filter SensorPipelineTests` am 2026-05-16 nach SOFA-Dashboard-Regressionstest versucht; Build bricht vor Testausführung wegen fehlendem `return` in `FindingPresentation.systemMission` ab.
+- `swift test` am 2026-05-16 nach sichtbarerem SOFA-Refresh-Ergebnis; 46 Tests erfolgreich
+- `./scripts/checks.sh` am 2026-05-16 nach sichtbarerem SOFA-Refresh-Ergebnis
+- `./scripts/build-app-bundle.sh` am 2026-05-16 nach sichtbarerem SOFA-Refresh-Ergebnis
 - `swift test`
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`

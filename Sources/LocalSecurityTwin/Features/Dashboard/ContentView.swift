@@ -352,11 +352,22 @@ private struct UpdateAwarenessRefreshBanner: View {
                 .background(.cyan.opacity(0.14), in: RoundedRectangle(cornerRadius: 8))
 
             VStack(alignment: .leading, spacing: 5) {
-                Text("Update-Quelle geprüft")
+                Text("SOFA-Stand aktualisiert")
                     .font(.headline)
 
-                Text(note)
+                Text("Sento hat den öffentlichen macOS-Update-Stand geladen, lokal gespeichert und neu mit deiner sichtbaren macOS-Version verglichen.")
                     .font(.subheadline)
+                    .fontWeight(.medium)
+                    .foregroundStyle(.primary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text(note)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text("Es wurde nichts installiert und keine Systemeinstellung geändert.")
+                    .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }

@@ -162,4 +162,31 @@ struct FindingSchemaTests {
         #expect(presentation.missions.first?.findingID == nil)
         #expect(presentation.activityItems.first?.id == "startup-stable")
     }
+
+    @Test func dashboardPresentationHighlightsUpdateAwarenessAfterRefresh() throws {
+        let finding = Finding(
+            id: "update-awareness::macos-15",
+            title: "macOS wirkt nach Quellenstand aktuell",
+            source: FindingSource(
+                kind: .updateAwareness,
+                title: "macOS-Update-Stand",
+                detail: "Test"
+            ),
+            severity: .low,
+            confidence: .supported,
+            summary: "Die lokale Version 15.7.7 ist nach dem letzten SOFA-Stand nicht älter als 15.7.7.",
+            userImpact: "Das ist ein Schutzsignal, aber kein Gesamturteil.",
+            nextStep: "Behalte im Blick, von wann der Quellenstand ist.",
+            evidence: [],
+            recommendations: []
+        )
+
+        let presentation = DashboardPresentation(findings: [finding])
+
+        #expect(presentation.updateAwarenessFinding?.id == finding.id)
+        #expect(presentation.buddyMessageText.contains("macOS-Update-Stand"))
+        #expect(presentation.missions.first(where: { $0.id == "system" })?.status == "Update geprüft")
+        #expect(presentation.missions.first(where: { $0.id == "system" })?.findingID == finding.id)
+        #expect(presentation.activityItems.contains(where: { $0.id == "update-awareness" }))
+    }
 }

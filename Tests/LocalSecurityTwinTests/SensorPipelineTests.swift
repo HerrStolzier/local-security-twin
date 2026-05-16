@@ -454,6 +454,57 @@ struct SensorPipelineTests {
         }
     }
 
+    @Test func explicitUpdateAwarenessRefreshBecomesVisibleInDashboardPresentation() async throws {
+        let normalFinding = Self.updateFinding(
+            id: "update-awareness::source-unavailable",
+            title: "Update-Stand gerade nicht sicher prüfbar",
+            confidence: .tentative
+        )
+        let refreshedFinding = Self.updateFinding(
+            id: "update-awareness::macos-15",
+            title: "macOS wirkt nach Quellenstand aktuell",
+            confidence: .supported
+        )
+        let pipeline = SensorPipeline(
+            sensors: [
+                StubUpdateAwarenessRefreshingSensor(
+                    normalFinding: normalFinding,
+                    refreshedFinding: refreshedFinding
+                ),
+            ]
+        )
+        let store = await MainActor.run {
+            FindingStore(
+                pipeline: pipeline,
+                contextProvider: {
+                    SensorContext(
+                        homeDirectoryURL: URL(fileURLWithPath: "/tmp/test-home", isDirectory: true),
+                        now: Date(timeIntervalSince1970: 1_000)
+                    )
+                }
+            )
+        }
+
+        await MainActor.run {
+            store.refresh()
+        }
+
+        await store.refreshUpdateAwarenessSource()
+
+        try await MainActor.run {
+            let presentation = DashboardPresentation(findings: store.findings)
+            let visibleUpdateFinding = try #require(presentation.findings(in: .review).first)
+
+            #expect(presentation.statusTitle == "Zur Beobachtung")
+            #expect(presentation.reviewCount == 1)
+            #expect(presentation.headlineText == "1 lokale Systemhinweis(e) sichtbar")
+            #expect(visibleUpdateFinding.id == "update-awareness::macos-15")
+            #expect(visibleUpdateFinding.displayTitle == "macOS wirkt nach Quellenstand aktuell")
+            #expect(visibleUpdateFinding.displaySourceTitle == "macOS-Update-Stand")
+            #expect(visibleUpdateFinding.plainLanguageAssessment.contains("externen Quelle"))
+        }
+    }
+
     private static func updateFinding(
         id: String,
         title: String,
