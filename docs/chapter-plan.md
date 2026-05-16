@@ -71,7 +71,7 @@ Abnahme:
 
 ## Kapitel 2: Visual System
 
-Status: erster Schnitt umgesetzt.
+Status: erster Schnitt umgesetzt; Kapitel 2b `Sento Guard Shell` in Arbeit.
 
 Ziel:
 Die neue Startseite bekommt eine klare visuelle Sprache.
@@ -99,12 +99,46 @@ Umgesetzt:
 - Missionen haben eigene Icon-Badges, Status-Badges und dezente Fortschrittsbalken.
 - Buddy-Aktivitaet nutzt kompaktere, ruhigere Zeilen mit klarer visueller Gewichtung.
 - Die Gestaltung bleibt macOS-nativ und vermeidet Neon-/SIEM-Optik.
+- Der Arbeits-Brand fuer die App ist jetzt `Sento Guard`.
+- Die Startseite wird an das helle Mockup angelehnt: linke Navigation, freundlicher Buddy-Status, Missionen, Aktivitaetsfeed und spaetere Chat-/Hilfe-Andeutung.
+- Zwei geplante Missionsbereiche sind sichtbar: `Digitaler Fussabdruck` und `App-Risiken pruefen`, ohne schon echte Pruefungen zu behaupten.
 
 Abnahme:
 
 - UI wirkt staerker wie ein moderner Mac-Buddy, nicht wie ein Admin-Tool. Erster Code-Schnitt umgesetzt; manuelle Sichtpruefung folgt.
 - Missionen wirken motivierender, aber nicht kindisch. Erster Schnitt umgesetzt.
 - Keine Rohdaten-Kartenflut auf der Startseite. Weiterhin erfuellt durch Buddy-Home-Struktur.
+
+## Kapitel 2b: Sento Guard Shell
+
+Status: erster Code-Schnitt umgesetzt.
+
+Ziel:
+Die App bekommt eine erkennbare Produktidentitaet und einen klareren Einstieg, ohne in dunkle Cyberpunk-Optik oder falsche Sicherheitsversprechen zu kippen.
+
+Richtung:
+
+- Name im Prototyp: `Sento Guard`
+- hell, freundlich, macOS-nah
+- Buddy/Charakter als Orientierungsfigur
+- linke Navigation als ruhiger Produkt-Rahmen
+- Missionen als Hauptstruktur
+- Activity-Feed als roter Faden
+
+Umgesetzt:
+
+- Sidebar mit `Sento Guard` Branding und Mission-/Buddy-Navigation.
+- Hero-Bereich begruesst den Nutzer als Sento Guard.
+- Statuszahlen sind als ruhige Karten sichtbar.
+- Missionsraster enthaelt jetzt Autostart, Mac-Schutz, Security-Hygiene, Digitaler Fussabdruck und App-Risiken.
+- Lokale Datenschutzbotschaft ist als eigene Karte sichtbar.
+
+Noch offen:
+
+- echtes Maskottchen-/Charakter-Asset statt SF-Symbol-Platzhalter
+- finaler Markencheck fuer `Sento Guard`
+- visuelle manuelle Abnahme durch Nutzer
+- spaeter echte Navigation hinter den Sidebar-Punkten
 
 ## Kapitel 3: Update Awareness
 

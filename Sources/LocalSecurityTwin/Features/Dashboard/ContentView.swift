@@ -13,17 +13,22 @@ struct ContentView: View {
 
     var body: some View {
         HSplitView {
-            BuddyHomeView(
-                presentation: presentation,
-                lastBaselineRefreshError: lastBaselineRefreshError,
-                openFinding: { findingID in
-                    selection = findingID
-                },
-                rememberCurrentStartupState: {
-                    isShowingRememberConfirmation = true
-                }
-            )
-            .frame(minWidth: selection == nil ? 920 : 620)
+            SentoSidebar(presentation: presentation)
+                .frame(width: 220)
+
+            ZStack {
+                BuddyHomeView(
+                    presentation: presentation,
+                    lastBaselineRefreshError: lastBaselineRefreshError,
+                    openFinding: { findingID in
+                        selection = findingID
+                    },
+                    rememberCurrentStartupState: {
+                        isShowingRememberConfirmation = true
+                    }
+                )
+                .frame(minWidth: selection == nil ? 920 : 620)
+            }
 
             if selection != nil {
                 DetailPane(
@@ -36,7 +41,7 @@ struct ContentView: View {
                 .frame(minWidth: 520, idealWidth: 600)
             }
         }
-        .frame(minWidth: selection == nil ? 980 : 1180, minHeight: 700)
+        .frame(minWidth: selection == nil ? 1060 : 1240, minHeight: 720)
         .onChange(of: findings) { _, newFindings in
             if let selection, newFindings.contains(where: { $0.id == selection }) {
                 return
@@ -61,6 +66,155 @@ struct ContentView: View {
 
 }
 
+private struct SentoSidebar: View {
+    let presentation: DashboardPresentation
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 22) {
+            HStack(spacing: 12) {
+                SentoMark(size: 38)
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Sento Guard")
+                        .font(.headline)
+                    Text("Dein lokaler Schutzbuddy")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .padding(.top, 18)
+
+            SidebarPrimaryRow()
+
+            SidebarGroup(
+                title: "Missionen",
+                items: [
+                    SidebarItem(title: "Autostart", value: "\(presentation.knownStartupCount)", systemImage: "bolt.horizontal.circle", color: .orange),
+                    SidebarItem(title: "Mac-Schutz", value: "\(presentation.reviewCount)", systemImage: "desktopcomputer", color: .cyan),
+                    SidebarItem(title: "Security-Hygiene", value: "Plan", systemImage: "checklist.checked", color: .purple),
+                ]
+            )
+
+            SidebarGroup(
+                title: "Buddy",
+                items: [
+                    SidebarItem(title: "Aktivitaet", value: "\(presentation.activityItems.count)", systemImage: "sparkles", color: .blue),
+                    SidebarItem(title: "Hinweise", value: "\(presentation.findings.count)", systemImage: "bell", color: .indigo),
+                    SidebarItem(title: "Systemsignale", value: "\(presentation.reviewCount)", systemImage: "display", color: .cyan),
+                ]
+            )
+
+            Spacer()
+
+            SentoSidebarCard()
+        }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 18)
+        .background(.ultraThinMaterial)
+    }
+}
+
+private struct SentoMark: View {
+    let size: CGFloat
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(
+                    LinearGradient(
+                        colors: [.blue.opacity(0.85), .cyan.opacity(0.85), .purple.opacity(0.72)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+
+            Image(systemName: "shield.lefthalf.filled")
+                .font(.system(size: size * 0.46, weight: .bold))
+                .foregroundStyle(.white)
+        }
+        .frame(width: size, height: size)
+    }
+}
+
+private struct SidebarPrimaryRow: View {
+    var body: some View {
+        Label("Uebersicht", systemImage: "house")
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(.blue)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 11)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.blue.opacity(0.12), in: RoundedRectangle(cornerRadius: 8))
+    }
+}
+
+private struct SidebarGroup: View {
+    let title: String
+    let items: [SidebarItem]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title.uppercased())
+                .font(.caption2)
+                .fontWeight(.semibold)
+                .foregroundStyle(.secondary)
+
+            ForEach(items) { item in
+                HStack(spacing: 10) {
+                    Image(systemName: item.systemImage)
+                        .foregroundStyle(item.color)
+                        .frame(width: 20)
+
+                    Text(item.title)
+                        .font(.subheadline)
+                        .lineLimit(1)
+
+                    Spacer()
+
+                    Text(item.value)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(item.color)
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 3)
+                        .background(item.color.opacity(0.12), in: Capsule())
+                }
+                .padding(.vertical, 5)
+            }
+        }
+    }
+}
+
+private struct SidebarItem: Identifiable {
+    let id = UUID()
+    let title: String
+    let value: String
+    let systemImage: String
+    let color: Color
+}
+
+private struct SentoSidebarCard: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SentoCharacterBadge(size: 76)
+
+            Text("Ich bin Sento")
+                .font(.headline)
+
+            Text("Ich beobachte lokal und melde mich, wenn etwas deine Aufmerksamkeit braucht.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.blue.opacity(0.14))
+        )
+    }
+}
+
 private struct BuddyHomeView: View {
     let presentation: DashboardPresentation
     let lastBaselineRefreshError: String?
@@ -73,6 +227,8 @@ private struct BuddyHomeView: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
+                    SentoTopBar()
+
                     GuardianStatusCard(
                         presentation: presentation,
                         primaryAction: {
@@ -100,12 +256,41 @@ private struct BuddyHomeView: View {
                         openFinding: openFinding
                     )
 
+                    SentoLocalPromiseCard()
+
                     VisibilityNote(text: presentation.visibilityText)
                 }
                 .padding(32)
-                .frame(maxWidth: 1080, alignment: .leading)
+                .frame(maxWidth: 1180, alignment: .leading)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             }
+        }
+    }
+}
+
+private struct SentoTopBar: View {
+    var body: some View {
+        HStack {
+            Spacer()
+
+            Label("Lokaler Check bereit", systemImage: "circle.fill")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.blue)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+
+            Button {
+            } label: {
+                Image(systemName: "bell")
+            }
+            .buttonStyle(.bordered)
+            .disabled(true)
+
+            SettingsLink {
+                Image(systemName: "gearshape")
+            }
+            .buttonStyle(.bordered)
         }
     }
 }
@@ -114,9 +299,10 @@ private struct BuddyHomeBackground: View {
     var body: some View {
         LinearGradient(
             colors: [
-                Color.blue.opacity(0.10),
-                Color.green.opacity(0.08),
-                Color.orange.opacity(0.07),
+                Color.cyan.opacity(0.11),
+                Color.blue.opacity(0.08),
+                Color.purple.opacity(0.06),
+                Color.orange.opacity(0.05),
                 Color(nsColor: .windowBackgroundColor),
             ],
             startPoint: .topLeading,
@@ -183,86 +369,47 @@ private struct GuardianStatusCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            HStack(alignment: .center, spacing: 26) {
-                ZStack {
-                    Circle()
-                        .stroke(.quaternary, lineWidth: 12)
-                        .frame(width: 140, height: 140)
+        HStack(alignment: .center, spacing: 28) {
+            SentoCharacterBadge(size: 156)
 
-                    Circle()
-                        .trim(from: 0, to: presentation.guardianProgress)
-                        .stroke(
-                            AngularGradient(
-                                colors: [
-                                    toneColor,
-                                    .green,
-                                    .blue,
-                                    toneColor,
-                                ],
-                                center: .center
-                            ),
-                            style: StrokeStyle(lineWidth: 12, lineCap: .round)
-                        )
-                        .rotationEffect(.degrees(-90))
-                        .frame(width: 140, height: 140)
+            VStack(alignment: .leading, spacing: 16) {
+                StatusBadge(
+                    text: presentation.statusTitle,
+                    systemImage: presentation.startupChangeCount > 0 ? "exclamationmark.shield" : "checkmark.shield",
+                    color: toneColor
+                )
 
-                    VStack(spacing: 6) {
-                        Image(systemName: presentation.startupChangeCount > 0 ? "shield.righthalf.filled" : "shield.lefthalf.filled")
-                            .font(.system(size: 30, weight: .semibold))
-                            .foregroundStyle(
-                                LinearGradient(
-                                    colors: [toneColor, .blue],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
+                Text("Hallo! Ich bin Sento Guard.")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .lineSpacing(2)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                        Text(presentation.guardianTone)
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.secondary)
-                    }
-                }
+                Text(presentation.buddyMessageText)
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                VStack(alignment: .leading, spacing: 14) {
-                    StatusBadge(
-                        text: presentation.statusTitle,
-                        systemImage: presentation.startupChangeCount > 0 ? "exclamationmark.shield" : "checkmark.shield",
-                        color: toneColor
-                    )
+                HStack(alignment: .center, spacing: 14) {
+                    Button(presentation.primaryActionTitle, action: primaryAction)
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                        .tint(toneColor)
+                        .disabled(presentation.findings.isEmpty)
 
-                    Text(presentation.headlineText)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .lineSpacing(2)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Text(presentation.buddyMessageText)
-                        .font(.title3)
+                    Text(presentation.nextStepText)
+                        .font(.subheadline)
                         .foregroundStyle(.secondary)
+                        .lineLimit(3)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
 
-            Divider()
+            Spacer(minLength: 16)
 
-            HStack(alignment: .center, spacing: 14) {
-                Button(presentation.primaryActionTitle, action: primaryAction)
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .tint(toneColor)
-                    .disabled(presentation.findings.isEmpty)
-
-                Text(presentation.nextStepText)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                Spacer(minLength: 8)
-
-                DefenseMetric(value: presentation.startupChangeCount, label: "neu", color: .orange)
-                DefenseMetric(value: presentation.knownStartupCount, label: "bekannt", color: .cyan)
+            HStack(spacing: 12) {
+                DefenseMetric(value: presentation.startupChangeCount, label: "neu", color: .mint)
+                DefenseMetric(value: presentation.knownStartupCount, label: "Hinweise", color: .blue)
                 DefenseMetric(value: presentation.reviewCount, label: "System", color: .purple)
             }
         }
@@ -275,6 +422,51 @@ private struct GuardianStatusCard: View {
                 .stroke(toneColor.opacity(0.32), lineWidth: 1)
         )
         .shadow(color: toneColor.opacity(0.18), radius: 22, x: 0, y: 12)
+    }
+}
+
+private struct SentoCharacterBadge: View {
+    let size: CGFloat
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(.cyan.opacity(0.16))
+                .frame(width: size, height: size)
+
+            Circle()
+                .stroke(.blue.opacity(0.18), lineWidth: size * 0.055)
+                .frame(width: size * 0.88, height: size * 0.88)
+
+            Circle()
+                .trim(from: 0.05, to: 0.78)
+                .stroke(
+                    AngularGradient(
+                        colors: [.cyan, .blue, .purple, .cyan],
+                        center: .center
+                    ),
+                    style: StrokeStyle(lineWidth: size * 0.055, lineCap: .round)
+                )
+                .rotationEffect(.degrees(-86))
+                .frame(width: size * 0.88, height: size * 0.88)
+
+            VStack(spacing: size * 0.05) {
+                Image(systemName: "shield.lefthalf.filled")
+                    .font(.system(size: size * 0.28, weight: .bold))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [.cyan, .blue, .purple],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+
+                Text("Sento")
+                    .font(.system(size: max(10, size * 0.09), weight: .bold))
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .frame(width: size, height: size)
     }
 }
 
@@ -300,9 +492,9 @@ private struct DefenseMetric: View {
     let color: Color
 
     var body: some View {
-            VStack(alignment: .leading, spacing: 2) {
-                Text("\(value)")
-                    .font(.headline)
+        VStack(alignment: .leading, spacing: 4) {
+            Text("\(value)")
+                .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundStyle(color)
 
@@ -310,10 +502,11 @@ private struct DefenseMetric: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
-        .frame(width: 72, alignment: .leading)
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
-        .background(.background.opacity(0.72), in: RoundedRectangle(cornerRadius: 8))
+        .frame(width: 104, height: 82, alignment: .leading)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .background(color.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(color.opacity(0.16))
@@ -334,7 +527,7 @@ private struct MissionSection: View {
 
             LazyVGrid(
                 columns: [
-                    GridItem(.adaptive(minimum: 230), spacing: 14),
+                    GridItem(.adaptive(minimum: 210), spacing: 14),
                 ],
                 spacing: 14
             ) {
@@ -361,6 +554,10 @@ private struct MissionCard: View {
             return .cyan
         case "hygiene":
             return .purple
+        case "privacy":
+            return .teal
+        case "app-risk":
+            return .pink
         default:
             return .secondary
         }
@@ -412,7 +609,7 @@ private struct MissionCard: View {
             .disabled(mission.findingID == nil)
         }
         .padding(16)
-        .frame(maxWidth: .infinity, minHeight: 210, alignment: .topLeading)
+        .frame(maxWidth: .infinity, minHeight: 214, alignment: .topLeading)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
         .background(accentColor.opacity(0.07), in: RoundedRectangle(cornerRadius: 8))
         .overlay(
@@ -420,6 +617,41 @@ private struct MissionCard: View {
                 .stroke(accentColor.opacity(0.28))
         )
         .shadow(color: accentColor.opacity(0.08), radius: 12, x: 0, y: 8)
+    }
+}
+
+private struct SentoLocalPromiseCard: View {
+    var body: some View {
+        HStack(alignment: .center, spacing: 22) {
+            SentoCharacterBadge(size: 112)
+
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Ich bleibe lokal")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+
+                Text("Aktuell pruefe ich lokale Hinweise beim Start und zeige dir ruhig, was ich einordnen kann.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                VStack(alignment: .leading, spacing: 6) {
+                    Label("100% lokal im aktuellen Stand", systemImage: "checkmark.circle.fill")
+                    Label("Datenschutzfreundlich gedacht", systemImage: "checkmark.circle.fill")
+                    Label("Technische Details nur bei Bedarf", systemImage: "checkmark.circle.fill")
+                }
+                .font(.caption)
+                .foregroundStyle(.blue)
+            }
+
+            Spacer()
+        }
+        .padding(20)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.cyan.opacity(0.16))
+        )
     }
 }
 

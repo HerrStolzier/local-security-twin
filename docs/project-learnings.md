@@ -58,6 +58,9 @@ Kurzlebige To-dos gehoeren nicht hierher, sondern in `docs/session-status.md`.
 - Detailseiten sollen den Nutzer nicht zum Analysten machen. Erst muss die App selbst einordnen: kurze Bedeutung, naechster Schritt, wenige einfache Fakten; Rohdaten und Pfade gehoeren in nachrangige technische Details.
 - Digitaler Fussabdruck passt als spaeterer Produktarm zum Security Buddy, aber nur als gefuehrter Privacy-Cleanup: priorisieren, Vorlagen erstellen, Fortschritt lokal merken. Keine heimliche Personensuche, keine automatischen Loeschanfragen und keine Verarbeitung von Identitaetsdokumenten im MVP.
 - Fuer Privacy-Footprint-Cleanup sind vorhandene Quellen eher Verzeichnisse und APIs als fertige Loesung: Data-Broker-Opt-out-Listen, JustDeleteMe, Have I Been Pwned und SimpleLogin koennen helfen, aber die Buddy-Schicht und die sichere Zustimmung muessen wir selbst bauen.
+- Der aktuelle Arbeits-Brand ist `Sento Guard`. Der Name passt besser als `Kito Guard`, weil er im ersten Screening weniger offensichtlich belegt wirkte; trotzdem braucht er vor echter Veroeffentlichung eine tiefere Marken-/Domain-/App-Store-Pruefung.
+- Die helle Mockup-Richtung ist die neue Leitlinie: freundliche Sidebar, Sento als Buddy-Figur, Statuskarten, Missionen und Activity-Feed. Die dunkle Cyberpunk-Variante bleibt nur Inspirationsquelle, nicht Standardlook.
+- Geplante Missionen duerfen in der UI sichtbar sein, muessen aber klar als geplant erscheinen. Besonders `Digitaler Fussabdruck` und `App-Risiken pruefen` duerfen keine echten Pruefungen behaupten, solange dahinter keine Sensoren oder gefuehrte Flows gebaut sind.
 
 ## Workflow Gotchas
 

@@ -12,7 +12,7 @@ Sie beantwortet drei Fragen:
 
 ## Produktbild
 
-`local-security-twin` soll ein kraftvoller Security Buddy fuer normale Mac-Nutzer werden.
+`local-security-twin` soll als Produkt unter dem Arbeitsnamen `Sento Guard` zu einem kraftvollen Security Buddy fuer normale Mac-Nutzer werden.
 
 Er soll nicht nur eine Hinweis-Liste sein. Er soll wie ein Verteidiger arbeiten:
 
@@ -197,6 +197,9 @@ Die gewaehlte visuelle Richtung steht in `docs/visual-direction.md`.
 Kurzfassung:
 Die App soll wie eine Mischung aus freundlicher Mac-Health-App, nativem Command Center und dezent gamifiziertem Verteidiger wirken.
 Also: einfach genug fuer normale Nutzer, stark genug fuer einen Security Buddy, aber nicht wie ein Cyberpunk-SIEM.
+
+Aktuelle UI-Leitlinie:
+Die App orientiert sich an einem hellen `Sento Guard` Mockup mit Sidebar, Buddy-Figur, Statuskarten, Missionen und Aktivitaetsfeed. Der dunkle Neon-Look bleibt nur Referenz fuer Charakterenergie und Schutzsymbolik, nicht fuer den Standardmodus.
 
 ### Oben
 

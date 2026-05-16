@@ -147,6 +147,8 @@ struct FindingSchemaTests {
         #expect(presentation.guardianTone == "Beobachtet")
         #expect(presentation.missions.first?.title == "Autostart verstehen")
         #expect(presentation.missions.first?.findingID == first.id)
+        #expect(presentation.missions.map(\.title).contains("Digitaler Fussabdruck"))
+        #expect(presentation.missions.map(\.title).contains("App-Risiken pruefen"))
         #expect(presentation.activityItems.contains { $0.id == "known-startup" })
     }
 

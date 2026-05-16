@@ -66,6 +66,7 @@ Das bedeutet:
 Das naechste Kapitel ist deshalb:
 
 - Kapitel 2: `Visual System`
+- Kapitel 2b: `Sento Guard Shell`
 
 Der naechste Schnitt soll:
 
@@ -78,6 +79,7 @@ Der naechste Schnitt soll:
 7. Security-Hygiene-Themen wie 2FA, Passwortmanager, VPN, Antivirus/Security-Tools, Firewall, FileVault und System Extensions als eigene, ehrlich begrenzte Schicht planen
 8. eine feste adversarial Review-Perspektive nutzen: "Welche realistische Angriffskette wuerde ein Verteidiger hier sichtbar machen wollen?"
 9. spaeter digitalen Fussabdruck als gefuehrten Privacy-Cleanup aufnehmen, aber nicht als heimliche Vollautomatik
+10. die App als `Sento Guard` Produkt-Shell sichtbar machen, ohne schon finale Markenfreigabe zu behaupten
 
 Nicht-Ziel dieses Schnitts:
 

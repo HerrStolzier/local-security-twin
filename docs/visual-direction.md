@@ -34,6 +34,23 @@ Die App soll eine Mischung aus drei Gefuehlen bekommen:
    - sichtbarer Fortschritt fuer Best Practices
    - motivierend, aber nicht kindisch
 
+## Arbeits-Brand
+
+Der aktuelle Arbeitsname fuer die App ist:
+
+`Sento Guard`
+
+Warum diese Richtung passt:
+
+- kurz und merkbar
+- freundlich genug fuer normale Nutzer
+- wachsam genug fuer Security
+- weniger offensichtlich belegt als `Kito Guard` im ersten Screening
+- funktioniert auf Deutsch und Englisch ohne harte Aussprache-Huerde
+
+Wichtig:
+Das ist noch keine juristische Markenfreigabe. Vor echter Veroeffentlichung braucht `Sento Guard` einen tieferen Check in Markenregistern, App Stores, Domains und Produktdatenbanken.
+
 ## Inspirationsquellen
 
 Diese Quellen sind Inspiration, keine Kopiervorlagen:
@@ -69,6 +86,30 @@ Danach:
 - ein klarer naechster Schritt
 - wenige Missionen oder Schutzbereiche
 - technisches Material nur auf Wunsch
+
+## Helles Mockup als neue Leitlinie
+
+Das dunkle Cybersecurity-Mockup bleibt nur als Ideenquelle fuer Charakter, Missionen und Schutzstatus.
+Die eigentliche App soll in eine helle, freundliche Richtung gehen:
+
+- linke Sidebar mit Brand und Missionen
+- oben ein persoenlicher Buddy-Einstieg
+- klare Statuskarten
+- fuenf Missionskarten:
+  - Autostart verstehen
+  - Mac aktuell halten / Mac-Schutzsignale
+  - Security-Hygiene
+  - Digitaler Fussabdruck
+  - App-Risiken pruefen
+- Activity-Feed als roter Faden
+- spaeter ein Chat-/Hilfe-Einstieg, aber erst wenn dahinter echte Funktion steckt
+
+Nicht uebernehmen:
+
+- dunkler Hauptmodus als Standard
+- Neon-Ueberladung
+- "0 Bedrohungen" als harte Aussage, solange die App keine echte Bedrohungserkennung hat
+- visuelle Elemente, die mehr Sicherheitsgewissheit ausdruecken als die Daten hergeben
 
 ## Moegliche Startseiten-Struktur
 
@@ -163,9 +204,9 @@ Der erste konkrete UI-Schritt wurde umgesetzt:
 
 Naechster Schritt:
 
-1. App manuell ansehen.
-2. Pruefen, ob der Look moderner wirkt, ohne spielerisch oder alarmistisch zu werden.
-3. Danach entscheiden, ob weiterer Liquid-Glass-Feinschliff noetig ist oder Kapitel 3 `Update Awareness` starten kann.
+1. Kapitel 2b `Sento Guard Shell` manuell ansehen.
+2. Pruefen, ob die App jetzt eher wie ein freundlicher Security Buddy wirkt.
+3. Danach entscheiden, ob wir zuerst ein echtes Sento-Maskottchen-Asset erzeugen oder Kapitel 3 `Update Awareness` starten.
 
 ## Build-Skills fuer die Umsetzung
 

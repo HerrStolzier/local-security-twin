@@ -8,7 +8,7 @@ struct MenuBarView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Lokaler Sicherheitszwilling")
+            Text("Sento Guard")
                 .font(.headline)
 
             Text("\(findings.count) lokale Hinweise geladen")

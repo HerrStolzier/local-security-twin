@@ -128,6 +128,8 @@ struct DashboardPresentation {
             startupMission,
             systemMission,
             hygieneMission,
+            privacyMission,
+            appRiskMission,
         ]
     }
 
@@ -295,6 +297,32 @@ struct DashboardPresentation {
             systemImage: "checklist.checked",
             progress: 0.15,
             primaryActionTitle: "Noch nicht aktiv",
+            findingID: nil
+        )
+    }
+
+    private var privacyMission: BuddyMission {
+        BuddyMission(
+            id: "privacy",
+            title: "Digitaler Fussabdruck",
+            status: "Geplant",
+            summary: "Spaeter helfe ich dir, sichtbare Daten, alte Accounts und Datenbroker-Funde geordnet anzugehen.",
+            systemImage: "fingerprint",
+            progress: 0.1,
+            primaryActionTitle: "Spaeter",
+            findingID: nil
+        )
+    }
+
+    private var appRiskMission: BuddyMission {
+        BuddyMission(
+            id: "app-risk",
+            title: "App-Risiken pruefen",
+            status: "Geplant",
+            summary: "Hier soll spaeter sichtbar werden, welche Apps ungewoehnliche Rechte, alte Versionen oder riskante Muster zeigen.",
+            systemImage: "app.badge.checkmark",
+            progress: 0.12,
+            primaryActionTitle: "Spaeter",
             findingID: nil
         )
     }

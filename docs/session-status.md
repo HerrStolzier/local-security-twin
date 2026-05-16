@@ -9,8 +9,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-15
-- Bereich: Kapitel 2 Visual System
+- Datum: 2026-05-16
+- Bereich: Kapitel 2b Sento Guard Shell
 
 ## Zuletzt abgeschlossen
 
@@ -115,14 +115,18 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Off-topic Research-Runde zu digitalem Fussabdruck eingeordnet und dokumentiert
 - `docs/privacy-footprint-cleanup.md` angelegt
 - Roadmap, Kapitelplan und Produktfaden um spaeteres Modul `Digitaler Fussabdruck / Privacy Cleanup` erweitert
+- Arbeits-Brand fuer den Prototyp auf `Sento Guard` gesetzt
+- Kapitel 2b `Sento Guard Shell` umgesetzt: linke Brand-/Mission-Sidebar, persoenlicher Sento-Hero, fuenf Missionskarten, Statuskarten und lokale Datenschutzkarte
+- Dashboard-Presentation erweitert um geplante Missionen `Digitaler Fussabdruck` und `App-Risiken pruefen`, ohne echte Pruefungen zu behaupten
+- Presentation-Test ergaenzt, damit die neuen geplanten Missionen erhalten bleiben
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, und Kapitel 2 `Visual System` hat einen ersten Code-Schnitt.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, und Kapitel 2b fuehrt die helle `Sento Guard` Produkt-Shell ein.
 
 ## Naechster konkreter Schritt
 
-Zurueck zu Kapitel 2: rechte Detailseite in der App manuell pruefen und entscheiden, ob der Visual-System-Schnitt fuer diese Phase abgenommen ist.
+Kapitel 2b manuell in der App pruefen: Wir muessen sehen, ob Sidebar, Sento-Hero, Missionen und Activity-Feed ruhig, lesbar und passend zum hellen Mockup wirken.
 
 ## Danach sinnvoll
 
@@ -153,9 +157,15 @@ Zurueck zu Kapitel 2: rechte Detailseite in der App manuell pruefen und entschei
 - Kapitel 1 ist strukturell umgesetzt und vom Nutzer visuell positiv abgenommen; ein Screenshot-Artefakt wurde im Chat referenziert, war fuer Codex aber nicht lesbar.
 - Kapitel 2 muss die neue Struktur optisch deutlich staerker machen, damit sie nicht weiter wie ein schlichtes Admin-Tool wirkt.
 - Kapitel 2 ist technisch umgesetzt, aber noch nicht vom Nutzer visuell abgenommen.
+- `Sento Guard` ist nur ein Arbeits-Brand; vor echter Veroeffentlichung braucht der Name einen tieferen Marken-, Domain- und App-Store-Check.
+- Der Sento-Charakter ist aktuell noch ein SwiftUI-/SF-Symbol-Platzhalter, kein finales Maskottchen-Asset.
+- Die neuen Missionen `Digitaler Fussabdruck` und `App-Risiken pruefen` sind bewusst geplant/visuell vorhanden, aber noch keine echten Sensoren.
 
 ## Letzte Validierung
 
+- `swift test` am 2026-05-16 nach Kapitel 2b
+- `./scripts/checks.sh` am 2026-05-16 nach Kapitel 2b
+- `./scripts/app-bundle-smoke.sh` am 2026-05-16 nach Kapitel 2b
 - `swift test`
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`
