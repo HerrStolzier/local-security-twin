@@ -14,6 +14,21 @@ struct SensorPipeline {
         return runs
     }
 
+    func collectWithOnlineUpdateAwareness(in context: SensorContext = .live()) -> [SensorRun] {
+        var runs: [SensorRun] = []
+        runs.reserveCapacity(sensors.count)
+
+        for sensor in sensors {
+            if let refreshableSensor = sensor as? any UpdateAwarenessRefreshingSensor {
+                runs.append(refreshableSensor.runWithOnlineRefresh(in: context))
+            } else {
+                runs.append(sensor.run(in: context))
+            }
+        }
+
+        return runs
+    }
+
     func refreshRememberedStartupState(in context: SensorContext = .live()) throws {
         for sensor in sensors {
             guard let refreshableSensor = sensor as? any StartupBaselineRefreshingSensor else {
@@ -24,6 +39,8 @@ struct SensorPipeline {
         }
     }
 }
+
+extension SensorPipeline: @unchecked Sendable {}
 
 extension SensorPipeline {
     static func live(fileManager: FileManager = .default) -> SensorPipeline {

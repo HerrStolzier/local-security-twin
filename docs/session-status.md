@@ -129,18 +129,22 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Kapitel 3 erster Code-Schnitt umgesetzt: `UpdateAwarenessSensor` liest einen lokalen SOFA-Cache, dekodiert den Feed tolerant, vergleicht lokale macOS-Versionen gegen den Quellenstand und erzeugt ruhige Findings für aktuell, Update prüfen oder nicht sicher prüfbar.
 - Der Live-Sensor ist in `SensorPipeline.live()` registriert, lädt aber ohne sichtbare Nutzerentscheidung noch nicht heimlich aus dem Netzwerk; ohne Cache zeigt er eine ehrliche Sichtgrenze.
 - Tests für SOFA-Dekodierung, Versionsentscheidung, Cache-Nutzung ohne Netzwerk, fehlenden Quellenstand und Pipeline-Registrierung ergänzt.
+- Regressionstests für den bewusst erlaubten SOFA-Netzwerkabruf ergänzt: erfolgreicher Abruf schreibt den lokalen Cache, und ein fehlgeschlagener Abruf nutzt ruhig den vorhandenen Cache weiter.
+- Sichtbarer `SOFA-Stand aktualisieren`-Flow gebaut: Die Startseite zeigt eine bewusste Aktion, fragt vor dem Online-Abruf nach, lädt dann den SOFA-Stand über einen separaten Refresh-Pfad, speichert ihn lokal und zeigt eine kurze Quellen-Notiz.
+- `FindingStore` unterscheidet normalen lokalen Refresh von bewusstem Online-Update-Awareness-Refresh; Tests sichern ab, dass der unterstützte Update-Hinweis erst nach expliziter Aktion entsteht.
+- Der bewusste SOFA-Abruf läuft nicht mehr blockierend auf dem Main Actor; während des Abrufs zeigt die Topbar `SOFA wird geladen` und deaktiviert den Aktualisieren-Button.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, Kapitel 2b ist als Prototyp-Stand ausreichend, und Kapitel 3 `Update Awareness` hat den ersten lokalen Sensor-/Cache-Schnitt ohne stillen Netzwerkabruf.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, Kapitel 2b ist als Prototyp-Stand ausreichend, und Kapitel 3 `Update Awareness` hat jetzt einen sichtbaren Nutzerfluss für den bewusst ausgelösten SOFA-Abruf.
 
 ## Nächster konkreter Schritt
 
-Kapitel 3 fortsetzen: sichtbaren Nutzerfluss für `SOFA-Stand aktualisieren` bauen, damit der Netzwerkabruf bewusst ausgelöst, lokal gecacht und mit Quellenzeitpunkt in der UI erklärt wird.
+Kapitel 3 visuell prüfen: App starten, `SOFA-Stand aktualisieren` einmal manuell auslösen und beurteilen, ob Button, Bestätigung, Quellen-Notiz und Update-Finding verständlich genug sind.
 
 ## Danach sinnvoll
 
-- Update-Awareness stärker in Missionen und Detailtexte integrieren, sobald der Quellenstand bewusst aktualisiert werden kann
+- Update-Awareness stärker in Missionen und Detailtexte integrieren, falls die manuelle Sichtprüfung zeigt, dass der Quellenstand noch zu versteckt ist
 - später weitere Sensoren wie Privacy Permissions auf denselben Vertrag setzen
 - Security-Hygiene-Schnitt planen: zuerst entscheiden, welche Punkte automatisch belegbar sind und welche als geführte Checkliste starten
 - für neue Sensoren eine kurze adversarial Review-Frage dokumentieren: welche harmlose Verteidigungssicht entsteht aus einer realistischen Missbrauchskette?
@@ -171,7 +175,7 @@ Kapitel 3 fortsetzen: sichtbaren Nutzerfluss für `SOFA-Stand aktualisieren` bau
 - Der Sento-Charakter ist aktuell eine SwiftUI-Prototypfigur, noch kein finales Maskottchen-Asset.
 - Sento braucht später deutlich bessere Illustration und Animation, näher am Mockup; kurzfristig wurde nur die schlechte Überlagerung im aktuellen SwiftUI-Prototyp entschärft.
 - Die neuen Missionen `Digitaler Fußabdruck` und `App-Risiken prüfen` sind bewusst geplant/visuell vorhanden, aber noch keine echten Sensoren.
-- Update-Awareness ist als Sensor vorhanden, aber der echte SOFA-Netzwerkabruf ist in der Live-App noch nicht über eine sichtbare UI-Aktion freigeschaltet.
+- Update-Awareness hat jetzt eine sichtbare UI-Aktion für den SOFA-Netzwerkabruf; echte macOS-UI-Automation für den Klick fehlt weiterhin.
 
 ## Letzte Validierung
 
@@ -188,6 +192,10 @@ Kapitel 3 fortsetzen: sichtbaren Nutzerfluss für `SOFA-Stand aktualisieren` bau
 - `swift test` am 2026-05-16 nach erstem Update-Awareness-Sensor
 - `./scripts/checks.sh` am 2026-05-16 nach erstem Update-Awareness-Sensor
 - `./scripts/build-app-bundle.sh` am 2026-05-16 nach erstem Update-Awareness-Sensor
+- `swift test` am 2026-05-16 nach SOFA-Cache-Regressionstests; 43 Tests erfolgreich
+- `swift test` am 2026-05-16 nach sichtbarem SOFA-Aktualisieren-Flow; 44 Tests erfolgreich
+- `./scripts/checks.sh` am 2026-05-16 nach nicht-blockierendem SOFA-Aktualisieren-Flow
+- `./scripts/build-app-bundle.sh` am 2026-05-16 nach sichtbarem SOFA-Aktualisieren-Flow
 - `swift test`
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`

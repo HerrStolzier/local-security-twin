@@ -72,14 +72,18 @@ Wenn das Internet gerade fehlt, weiß Sento noch, was beim letzten erfolgreichen
 ## Geplanter erster Code-Schnitt
 
 1. Kleinen SOFA-Client bauen, der JSON lädt und dekodiert. Erledigt im ersten Schnitt.
-2. Lokalen Cache-Store ergänzen. Erster Cache-Pfad ist vorhanden; automatischer Netzwerkabruf ist im Live-Sensor noch deaktiviert.
+2. Lokalen Cache-Store ergänzen. Erster Cache-Pfad ist vorhanden; automatischer Netzwerkabruf bleibt beim normalen Start deaktiviert.
 3. Update-Awareness-Sensor an den bestehenden `FindingSensor`-Vertrag hängen. Erledigt im ersten Schnitt.
 4. `SensorPipeline.live()` um den neuen Sensor erweitern. Erledigt im ersten Schnitt.
 5. Presentation-Texte für Update-Awareness ergänzen. Erster ruhiger Review-Pfad ist vorhanden.
 6. Tests für Dekodierung, Cache-Fallback und einfache Versionsentscheidung schreiben. Erledigt im ersten Schnitt.
 
-Der nächste Code-Schnitt muss den Netzwerkabruf als sichtbare Nutzerentscheidung gestalten.
-Bis dahin darf die Live-App nicht heimlich beim Start den SOFA-Feed laden.
+Der sichtbare Netzwerkabruf ist jetzt als Nutzeraktion vorhanden.
+Die Live-App darf weiterhin nicht heimlich beim Start den SOFA-Feed laden.
+Der Abruf läuft abseits des Main Actors, damit die Oberfläche während langsamer Netzantworten nicht einfriert.
+
+Nächster Schritt:
+Den Flow visuell in der App prüfen und entscheiden, ob Update-Awareness als eigene Mission sichtbarer werden soll.
 
 ## Sicherheits- und UX-Grenzen
 

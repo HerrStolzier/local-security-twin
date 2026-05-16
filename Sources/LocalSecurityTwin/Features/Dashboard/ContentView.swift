@@ -3,9 +3,13 @@ import SwiftUI
 struct ContentView: View {
     let findings: [Finding]
     let lastBaselineRefreshError: String?
+    let lastUpdateAwarenessRefreshNote: String?
+    let isRefreshingUpdateAwarenessSource: Bool
     let rememberCurrentStartupState: () -> Void
+    let refreshUpdateAwarenessSource: () -> Void
     @State private var selection: Finding.ID?
     @State private var isShowingRememberConfirmation = false
+    @State private var isShowingUpdateAwarenessConfirmation = false
 
     private var presentation: DashboardPresentation {
         DashboardPresentation(findings: findings)
@@ -20,11 +24,16 @@ struct ContentView: View {
                 BuddyHomeView(
                     presentation: presentation,
                     lastBaselineRefreshError: lastBaselineRefreshError,
+                    lastUpdateAwarenessRefreshNote: lastUpdateAwarenessRefreshNote,
+                    isRefreshingUpdateAwarenessSource: isRefreshingUpdateAwarenessSource,
                     openFinding: { findingID in
                         selection = findingID
                     },
                     rememberCurrentStartupState: {
                         isShowingRememberConfirmation = true
+                    },
+                    refreshUpdateAwarenessSource: {
+                        isShowingUpdateAwarenessConfirmation = true
                     }
                 )
                 .frame(minWidth: selection == nil ? 920 : 620)
@@ -61,6 +70,19 @@ struct ContentView: View {
             Button("Abbrechen", role: .cancel) {}
         } message: {
             Text("Die App behandelt die aktuell sichtbaren Autostart-Hinweise danach als erwartet. Sie ändert dabei keine Systemeinstellungen.")
+        }
+        .confirmationDialog(
+            "SOFA-Stand online aktualisieren?",
+            isPresented: $isShowingUpdateAwarenessConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("SOFA-Stand aktualisieren") {
+                refreshUpdateAwarenessSource()
+            }
+
+            Button("Abbrechen", role: .cancel) {}
+        } message: {
+            Text("Sento Guard lädt einmalig den öffentlichen macOS-Update-Stand von SOFA, speichert ihn lokal und vergleicht ihn mit deiner sichtbaren macOS-Version. Die App installiert nichts und ändert keine Systemeinstellungen.")
         }
     }
 
@@ -218,8 +240,11 @@ private struct SentoSidebarCard: View {
 private struct BuddyHomeView: View {
     let presentation: DashboardPresentation
     let lastBaselineRefreshError: String?
+    let lastUpdateAwarenessRefreshNote: String?
+    let isRefreshingUpdateAwarenessSource: Bool
     let openFinding: (Finding.ID) -> Void
     let rememberCurrentStartupState: () -> Void
+    let refreshUpdateAwarenessSource: () -> Void
 
     var body: some View {
         ZStack {
@@ -227,7 +252,10 @@ private struct BuddyHomeView: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    SentoTopBar()
+                    SentoTopBar(
+                        isRefreshingUpdateAwarenessSource: isRefreshingUpdateAwarenessSource,
+                        refreshUpdateAwarenessSource: refreshUpdateAwarenessSource
+                    )
 
                     GuardianStatusCard(
                         presentation: presentation,
@@ -244,6 +272,10 @@ private struct BuddyHomeView: View {
                             error: lastBaselineRefreshError,
                             onConfirm: rememberCurrentStartupState
                         )
+                    }
+
+                    if let lastUpdateAwarenessRefreshNote {
+                        UpdateAwarenessRefreshBanner(note: lastUpdateAwarenessRefreshNote)
                     }
 
                     MissionSection(
@@ -269,6 +301,9 @@ private struct BuddyHomeView: View {
 }
 
 private struct SentoTopBar: View {
+    let isRefreshingUpdateAwarenessSource: Bool
+    let refreshUpdateAwarenessSource: () -> Void
+
     var body: some View {
         HStack {
             Spacer()
@@ -279,6 +314,16 @@ private struct SentoTopBar: View {
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
                 .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+
+            Button(action: refreshUpdateAwarenessSource) {
+                Label(
+                    isRefreshingUpdateAwarenessSource ? "SOFA wird geladen" : "SOFA-Stand aktualisieren",
+                    systemImage: isRefreshingUpdateAwarenessSource ? "hourglass" : "arrow.clockwise"
+                )
+            }
+            .buttonStyle(.bordered)
+            .disabled(isRefreshingUpdateAwarenessSource)
+            .help("Lädt den öffentlichen macOS-Update-Stand bewusst online und speichert ihn lokal.")
 
             Button {
             } label: {
@@ -292,6 +337,38 @@ private struct SentoTopBar: View {
             }
             .buttonStyle(.bordered)
         }
+    }
+}
+
+private struct UpdateAwarenessRefreshBanner: View {
+    let note: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 14) {
+            Image(systemName: "arrow.clockwise.circle.fill")
+                .font(.title3)
+                .foregroundStyle(.cyan)
+                .frame(width: 32, height: 32)
+                .background(.cyan.opacity(0.14), in: RoundedRectangle(cornerRadius: 8))
+
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Update-Quelle geprüft")
+                    .font(.headline)
+
+                Text(note)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer()
+        }
+        .padding(16)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.cyan.opacity(0.20))
+        )
     }
 }
 

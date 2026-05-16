@@ -15,8 +15,15 @@ struct LocalSecurityTwinApp: App {
             ContentView(
                 findings: findingStore.findings,
                 lastBaselineRefreshError: findingStore.lastBaselineRefreshError,
+                lastUpdateAwarenessRefreshNote: findingStore.lastUpdateAwarenessRefreshNote,
+                isRefreshingUpdateAwarenessSource: findingStore.isRefreshingUpdateAwarenessSource,
                 rememberCurrentStartupState: {
                     findingStore.rememberCurrentStartupState()
+                },
+                refreshUpdateAwarenessSource: {
+                    Task {
+                        await findingStore.refreshUpdateAwarenessSource()
+                    }
                 }
             )
                 .environmentObject(policyStore)

@@ -40,3 +40,7 @@ protocol FindingSensor {
 protocol StartupBaselineRefreshingSensor: FindingSensor {
     func refreshRememberedStartupState(in context: SensorContext) throws
 }
+
+protocol UpdateAwarenessRefreshingSensor: FindingSensor {
+    func runWithOnlineRefresh(in context: SensorContext) -> SensorRun
+}

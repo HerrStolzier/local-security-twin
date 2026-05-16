@@ -6,6 +6,8 @@ final class FindingStore: ObservableObject {
     @Published private(set) var sensorRuns: [SensorRun]
     @Published private(set) var lastRefreshAt: Date?
     @Published private(set) var lastBaselineRefreshError: String?
+    @Published private(set) var lastUpdateAwarenessRefreshNote: String?
+    @Published private(set) var isRefreshingUpdateAwarenessSource = false
 
     private let pipeline: SensorPipeline
     private let contextProvider: () -> SensorContext
@@ -32,11 +34,30 @@ final class FindingStore: ObservableObject {
 
     func refresh() {
         let runs = pipeline.collect(in: contextProvider())
-        sensorRuns = runs
-        findings = runs
-            .flatMap(\.findings)
-            .sorted(by: FindingStore.sortFindings)
-        lastRefreshAt = runs.map(\.completedAt).max()
+        apply(runs: runs)
+    }
+
+    func refreshUpdateAwarenessSource() async {
+        guard !isRefreshingUpdateAwarenessSource else {
+            return
+        }
+
+        isRefreshingUpdateAwarenessSource = true
+        defer {
+            isRefreshingUpdateAwarenessSource = false
+        }
+
+        let pipeline = pipeline
+        let context = contextProvider()
+        let runs = await Task.detached(priority: .utility) {
+            pipeline.collectWithOnlineUpdateAwareness(in: context)
+        }.value
+
+        apply(runs: runs)
+        lastUpdateAwarenessRefreshNote = runs
+            .first { $0.sensor.id == "update-awareness" }?
+            .notes
+            .first
     }
 
     func rememberCurrentStartupState() {
@@ -47,6 +68,14 @@ final class FindingStore: ObservableObject {
         } catch {
             lastBaselineRefreshError = error.localizedDescription
         }
+    }
+
+    private func apply(runs: [SensorRun]) {
+        sensorRuns = runs
+        findings = runs
+            .flatMap(\.findings)
+            .sorted(by: FindingStore.sortFindings)
+        lastRefreshAt = runs.map(\.completedAt).max()
     }
 
     private static func sortFindings(lhs: Finding, rhs: Finding) -> Bool {

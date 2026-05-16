@@ -66,6 +66,7 @@ Kurzlebige To-dos gehören nicht hierher, sondern in `docs/session-status.md`.
 - Deutsche Nutzertexte und Dokumentation sollen echte Umlaute verwenden. Umschreibungen wie `fuer`, `pruefen`, `moeglich`, `Aenderung` oder `Bestaetigung` sind nur in technischen Bezeichnern akzeptabel, nicht in sichtbaren Texten.
 - Für Kapitel 3 ist SOFA die erste sinnvolle externe Baseline-Quelle für macOS-Update-Awareness. Der Feed muss lokal gecacht werden, der Quellenstand muss sichtbar bleiben, und die UI darf daraus kein vollständiges Sicherheitsurteil ableiten.
 - Externe Update-Awareness darf im Live-Produkt nicht heimlich beim Start ins Netzwerk gehen. Bis ein sichtbarer Zustimmungs- oder Aktualisieren-Flow existiert, darf der Sensor nur lokalen Cache nutzen oder eine ehrliche Sichtgrenze anzeigen.
+- Der SOFA-Abruf ist als bewusste Nutzeraktion vertretbar: vorher erklären, einmalig online laden, lokal speichern, Quellenstand zeigen und keine Updates installieren oder Systemeinstellungen verändern.
 
 ## Workflow Gotchas
 

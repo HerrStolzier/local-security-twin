@@ -148,7 +148,7 @@ Abnahme:
 
 ## Kapitel 3: Update Awareness
 
-Status: erster Sensor-/Cache-Schnitt umgesetzt; sichtbarer Netzwerk-Aktualisieren-Flow offen.
+Status: erster Sensor-/Cache-Schnitt und sichtbarer Netzwerk-Aktualisieren-Flow umgesetzt; visuelle manuelle Abnahme offen.
 
 Ziel:
 Der Buddy erkennt, ob macOS-Sicherheitsupdates für diesen Mac relevant sind.
@@ -173,7 +173,8 @@ Umgesetzt:
 - SOFA-JSON kann dekodiert und gegen die lokale macOS-Version verglichen werden.
 - Lokaler Cache wird ohne Netzwerk genutzt, falls vorhanden.
 - Ohne Cache zeigt die App eine ruhige Sichtgrenze statt eines Alarms.
-- Der Live-Sensor lädt noch nicht automatisch aus dem Netzwerk, weil der Nutzerfluss für bewusste Aktualisierung fehlt.
+- Die Startseite bietet `SOFA-Stand aktualisieren` als bewusste Aktion mit Bestätigung vor dem Online-Abruf.
+- Normaler App-Start bleibt ohne stillen SOFA-Netzwerkabruf.
 
 Abnahme:
 

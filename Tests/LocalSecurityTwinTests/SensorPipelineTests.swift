@@ -406,6 +406,76 @@ struct SensorPipelineTests {
             #expect(store.lastBaselineRefreshError == nil)
         }
     }
+
+    @Test func findingStoreRefreshesUpdateAwarenessOnlyAfterExplicitAction() async throws {
+        let normalFinding = Self.updateFinding(
+            id: "update-awareness::source-unavailable",
+            title: "Update-Stand gerade nicht sicher prüfbar",
+            confidence: .tentative
+        )
+        let refreshedFinding = Self.updateFinding(
+            id: "update-awareness::macos-15",
+            title: "macOS wirkt nach Quellenstand aktuell",
+            confidence: .supported
+        )
+        let pipeline = SensorPipeline(
+            sensors: [
+                StubUpdateAwarenessRefreshingSensor(
+                    normalFinding: normalFinding,
+                    refreshedFinding: refreshedFinding
+                ),
+            ]
+        )
+        let store = await MainActor.run {
+            FindingStore(
+                pipeline: pipeline,
+                contextProvider: {
+                    SensorContext(
+                        homeDirectoryURL: URL(fileURLWithPath: "/tmp/test-home", isDirectory: true),
+                        now: Date(timeIntervalSince1970: 1_000)
+                    )
+                }
+            )
+        }
+
+        await MainActor.run {
+            store.refresh()
+            #expect(store.findings.map(\.id) == ["update-awareness::source-unavailable"])
+            #expect(store.findings.first?.confidence == .tentative)
+            #expect(store.lastUpdateAwarenessRefreshNote == nil)
+        }
+
+        await store.refreshUpdateAwarenessSource()
+
+        await MainActor.run {
+            #expect(store.findings.map(\.id) == ["update-awareness::macos-15"])
+            #expect(store.findings.first?.confidence == .supported)
+            #expect(store.lastUpdateAwarenessRefreshNote == "SOFA-Quellenstand wurde aktualisiert.")
+        }
+    }
+
+    private static func updateFinding(
+        id: String,
+        title: String,
+        confidence: FindingConfidence
+    ) -> Finding {
+        Finding(
+            id: id,
+            title: title,
+            source: FindingSource(
+                kind: .updateAwareness,
+                title: "macOS-Update-Stand",
+                detail: "Test"
+            ),
+            severity: .low,
+            confidence: confidence,
+            summary: "Test",
+            userImpact: "Test",
+            nextStep: "Test",
+            evidence: [],
+            recommendations: []
+        )
+    }
 }
 
 private struct StubSensor: FindingSensor {
@@ -417,6 +487,34 @@ private struct StubSensor: FindingSensor {
             sensor: descriptor,
             findings: findings,
             notes: [],
+            completedAt: context.now
+        )
+    }
+}
+
+private struct StubUpdateAwarenessRefreshingSensor: UpdateAwarenessRefreshingSensor {
+    let descriptor = SensorDescriptor(
+        id: "update-awareness",
+        title: "macOS-Update-Stand",
+        summary: "Test"
+    )
+    let normalFinding: Finding
+    let refreshedFinding: Finding
+
+    func run(in context: SensorContext) -> SensorRun {
+        SensorRun(
+            sensor: descriptor,
+            findings: [normalFinding],
+            notes: ["SOFA-Netzwerkabruf ist noch nicht aktiviert."],
+            completedAt: context.now
+        )
+    }
+
+    func runWithOnlineRefresh(in context: SensorContext) -> SensorRun {
+        SensorRun(
+            sensor: descriptor,
+            findings: [refreshedFinding],
+            notes: ["SOFA-Quellenstand wurde aktualisiert."],
             completedAt: context.now
         )
     }

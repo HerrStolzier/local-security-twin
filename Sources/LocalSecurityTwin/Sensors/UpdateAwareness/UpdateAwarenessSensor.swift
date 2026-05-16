@@ -1,6 +1,6 @@
 import Foundation
 
-struct UpdateAwarenessSensor: FindingSensor {
+struct UpdateAwarenessSensor: FindingSensor, UpdateAwarenessRefreshingSensor {
     let descriptor = SensorDescriptor(
         id: "update-awareness",
         title: "macOS-Update-Stand",
@@ -8,17 +8,28 @@ struct UpdateAwarenessSensor: FindingSensor {
     )
 
     private let provider: any UpdateAwarenessProviding
+    private let onlineRefreshProvider: any UpdateAwarenessProviding
     private let localVersionProvider: any LocalOSVersionProviding
 
     init(
         provider: any UpdateAwarenessProviding = CachedSOFAUpdateProvider(),
+        onlineRefreshProvider: any UpdateAwarenessProviding = CachedSOFAUpdateProvider(allowsNetworkFetch: true),
         localVersionProvider: any LocalOSVersionProviding = ProcessInfoLocalOSVersionProvider()
     ) {
         self.provider = provider
+        self.onlineRefreshProvider = onlineRefreshProvider
         self.localVersionProvider = localVersionProvider
     }
 
     func run(in context: SensorContext) -> SensorRun {
+        run(in: context, provider: provider)
+    }
+
+    func runWithOnlineRefresh(in context: SensorContext) -> SensorRun {
+        run(in: context, provider: onlineRefreshProvider)
+    }
+
+    private func run(in context: SensorContext, provider: any UpdateAwarenessProviding) -> SensorRun {
         let localVersion = localVersionProvider.localOSVersion()
         let result = provider.latestCatalog(in: context)
 

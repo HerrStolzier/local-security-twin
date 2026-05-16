@@ -111,6 +111,52 @@ struct UpdateAwarenessSensorTests {
         #expect(result.note == "Lokaler SOFA-Cache wurde genutzt.")
     }
 
+    @Test func cacheProviderFetchesAndStoresSOFAFeedWhenNetworkIsExplicitlyAllowed() throws {
+        let workspaceURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let provider = CachedSOFAUpdateProvider(
+            fetcher: StaticSOFAFetcher(data: Data(Self.sampleFeed(productVersion: "15.7.8").utf8)),
+            allowsNetworkFetch: true
+        )
+
+        let result = provider.latestCatalog(
+            in: SensorContext(homeDirectoryURL: workspaceURL, now: Date(timeIntervalSince1970: 2_000))
+        )
+
+        #expect(result.catalog?.release(forMajorVersion: 15)?.productVersion == "15.7.8")
+        #expect(result.catalog?.fetchedAt == Date(timeIntervalSince1970: 2_000))
+        #expect(result.note == "SOFA-Quellenstand wurde aktualisiert.")
+
+        let cachedData = try Data(contentsOf: Self.cacheURL(in: workspaceURL))
+        let cachedCatalog = try SOFAFeedDecoder.decode(cachedData, fetchedAt: Date(timeIntervalSince1970: 3_000))
+        #expect(cachedCatalog.release(forMajorVersion: 15)?.productVersion == "15.7.8")
+    }
+
+    @Test func cacheProviderFallsBackToLocalCacheWhenExplicitNetworkFetchFails() throws {
+        let workspaceURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let cacheURL = Self.cacheURL(in: workspaceURL)
+        try FileManager.default.createDirectory(at: cacheURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try Data(Self.sampleFeed(productVersion: "15.7.6").utf8).write(to: cacheURL)
+
+        let cacheDate = Date(timeIntervalSince1970: 1_500)
+        try FileManager.default.setAttributes([.modificationDate: cacheDate], ofItemAtPath: cacheURL.path)
+
+        let provider = CachedSOFAUpdateProvider(
+            fetcher: ThrowingSOFAFetcher(),
+            allowsNetworkFetch: true
+        )
+
+        let result = provider.latestCatalog(
+            in: SensorContext(homeDirectoryURL: workspaceURL, now: Date(timeIntervalSince1970: 2_000))
+        )
+
+        #expect(result.catalog?.release(forMajorVersion: 15)?.productVersion == "15.7.6")
+        #expect(abs((result.catalog?.fetchedAt.timeIntervalSince1970 ?? 0) - cacheDate.timeIntervalSince1970) < 1)
+        #expect(result.note == "Lokaler SOFA-Cache wurde genutzt.")
+        #expect(result.errorMessage == nil)
+    }
+
     @Test func livePipelineContainsUpdateAwarenessSensor() {
         let sensorIDs = SensorPipeline.live().sensors.map(\.descriptor.id)
 
@@ -166,6 +212,14 @@ struct UpdateAwarenessSensorTests {
         }
         """
     }
+
+    private static func cacheURL(in workspaceURL: URL) -> URL {
+        workspaceURL
+            .appendingPathComponent("Library", isDirectory: true)
+            .appendingPathComponent("Application Support", isDirectory: true)
+            .appendingPathComponent("Sento Guard", isDirectory: true)
+            .appendingPathComponent("sofa-macos-data-feed-cache.json", isDirectory: false)
+    }
 }
 
 private struct StubUpdateProvider: UpdateAwarenessProviding {
@@ -188,5 +242,19 @@ private struct FailingIfCalledFetcher: SOFADataFetching {
     func fetchSOFAData() throws -> Data {
         Issue.record("Netzwerk-Fetcher sollte ohne Zustimmung nicht aufgerufen werden.")
         return Data()
+    }
+}
+
+private struct StaticSOFAFetcher: SOFADataFetching {
+    let data: Data
+
+    func fetchSOFAData() throws -> Data {
+        data
+    }
+}
+
+private struct ThrowingSOFAFetcher: SOFADataFetching {
+    func fetchSOFAData() throws -> Data {
+        throw SOFAFetchError.invalidResponse
     }
 }
