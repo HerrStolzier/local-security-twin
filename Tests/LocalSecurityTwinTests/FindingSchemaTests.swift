@@ -191,6 +191,14 @@ struct FindingSchemaTests {
         #expect(notVerifiable.checkTitles.contains("System Extensions"))
     }
 
+    @Test func dashboardPresentationNamesHygieneMissionAsEvidenceWork() {
+        let presentation = DashboardPresentation(findings: [])
+        let hygieneMission = presentation.missions.first { $0.id == "hygiene" }
+
+        #expect(hygieneMission?.primaryActionTitle == "Noch begrenzt")
+        #expect(hygieneMission?.status == "Belegtypen geplant")
+    }
+
     @Test func dashboardPresentationHighlightsUpdateAwarenessAfterRefresh() throws {
         let finding = Finding(
             id: "update-awareness::macos-15",

@@ -26,7 +26,7 @@ enum SecurityHygieneEvidenceKind: String, Codable, Hashable, Sendable {
         case .inferredFromLocalSignal:
             return "Sento sieht einen lokalen Hinweis, aber nicht die ganze Wahrheit."
         case .userAnswered:
-            return "Diese Aussage stammt aus einer bewussten Antwort des Nutzers."
+            return "Diese Aussage stammt aus deiner bewussten Antwort."
         case .notVerifiable:
             return "Sento kann diesen Zustand aktuell nicht ehrlich automatisch prüfen."
         }

@@ -26,4 +26,8 @@ struct SecurityHygieneModelTests {
         let passwordManager = try #require(SecurityHygieneCheck.initialCatalog.first { $0.id == .passwordManager })
         #expect(passwordManager.boundary.contains("keine Passwörter"))
     }
+
+    @Test func userAnsweredEvidenceSpeaksDirectlyToTheUser() {
+        #expect(SecurityHygieneEvidenceKind.userAnswered.explanation.contains("deiner bewussten Antwort"))
+    }
 }

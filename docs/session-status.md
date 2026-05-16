@@ -144,6 +144,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Kapitel 4 `Security Hygiene` begonnen: `docs/security-hygiene-plan.md` legt Belegtypen, Startkategorien, Grenzen und Akzeptanzkriterien fest, damit automatisch prüfbare Signale und geführte Nutzerfragen sauber getrennt bleiben.
 - Erstes Hygiene-Modell ergänzt: `SecurityHygieneEvidenceKind`, `SecurityHygieneCategory`, `SecurityHygieneCheckID` und `SecurityHygieneCheck.initialCatalog` trennen lokale Signale, abgeleitete Hinweise, Nutzerangaben und nicht prüfbare Bereiche.
 - Hygiene-Modell in die Buddy-Home-Presentation eingebunden: Die Security-Hygiene-Mission zeigt jetzt vorbereitete Belegtypen statt nur `Geplant`, und eine kompakte Übersicht gruppiert lokale Schutzsignale, geführte Nutzerfragen und nicht automatisch prüfbare Punkte.
+- Kapitel 4 per lokaler App-Automation visuell geprüft: Die Hygiene-Übersicht ist sichtbar und trennt `Lokal gesehen`, `Von dir beantwortet` und `Nicht automatisch prüfbar`, ohne 2FA, Passwortmanager, FileVault, Firewall oder VPN als geprüft zu behaupten.
+- Kleiner Hygiene-UX-Feinschliff nach Sichtprüfung: Sidebar-Wert für Security-Hygiene lautet jetzt `Belege` statt `Plan`, und Nutzerantworten sprechen den Nutzer direkter an.
 
 ## Aktueller Stand in einem Satz
 
@@ -151,7 +153,7 @@ Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Gua
 
 ## Nächster konkreter Schritt
 
-Kapitel 4 visuell prüfen: App starten und beurteilen, ob die neue Security-Hygiene-Übersicht verständlich wirkt, ohne 2FA, Passwortmanager, FileVault, Firewall oder VPN als bereits geprüft erscheinen zu lassen.
+Kapitel 4 als nächsten Code-Schnitt fortsetzen: erste einfache lokale Hygiene-Zustände aus vorhandenen Findings ableiten, z. B. macOS-Update, Gatekeeper und SIP als `Lokal gesehen`, ohne FileVault, Firewall, 2FA, Passwortmanager oder VPN als geprüft zu behaupten.
 
 ## Danach sinnvoll
 
@@ -227,6 +229,12 @@ Kapitel 4 visuell prüfen: App starten und beurteilen, ob die neue Security-Hygi
 - `swift test` am 2026-05-16 nach Hygiene-Presentation-Schnitt; 53 Tests erfolgreich
 - `./scripts/checks.sh` am 2026-05-16 nach Hygiene-Presentation-Schnitt
 - `./scripts/build-app-bundle.sh` am 2026-05-16 nach Hygiene-Presentation-Schnitt
+- lokale App-Automation mit `cua-driver` am 2026-05-16 zur Hygiene-Sichtprüfung: Belegtypen-Übersicht sichtbar und nicht als fertige Prüfung formuliert
+- `swift test --filter SecurityHygieneModelTests` am 2026-05-16 nach Hygiene-UX-Feinschliff; 3 Tests erfolgreich
+- `swift test --filter FindingSchemaTests` am 2026-05-16 nach Hygiene-UX-Feinschliff; 10 Tests erfolgreich
+- `swift test` am 2026-05-16 nach Hygiene-UX-Feinschliff; 55 Tests erfolgreich
+- `./scripts/checks.sh` am 2026-05-16 nach Hygiene-UX-Feinschliff
+- `./scripts/build-app-bundle.sh` am 2026-05-16 nach Hygiene-UX-Feinschliff
 - `swift test` am 2026-05-16 nach Persistenz-Sichtbarkeits-Regressionen; 49 Tests erfolgreich
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`

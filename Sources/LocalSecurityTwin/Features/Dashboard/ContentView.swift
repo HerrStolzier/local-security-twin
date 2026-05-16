@@ -113,7 +113,7 @@ private struct SentoSidebar: View {
                 items: [
                     SidebarItem(title: "Autostart", value: "\(presentation.knownStartupCount)", systemImage: "bolt.horizontal.circle", color: .orange),
                     SidebarItem(title: "Mac-Schutz", value: "\(presentation.reviewCount)", systemImage: "desktopcomputer", color: .cyan),
-                    SidebarItem(title: "Security-Hygiene", value: "Plan", systemImage: "checklist.checked", color: .purple),
+                    SidebarItem(title: "Security-Hygiene", value: "Belege", systemImage: "checklist.checked", color: .purple),
                 ]
             )
 
