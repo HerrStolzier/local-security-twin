@@ -126,18 +126,21 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Nach weiterem Nutzerfeedback Sento deutlicher umgebaut: der dominante Schutzring ist aus dem Avatar verschwunden, Sento wirkt jetzt mehr wie eine eigenständige kleine Figur mit Körper, Kopf, Cape, Schild und kleinen Lichtdetails.
 - Kapitel 2b am 2026-05-16 lokal per App-Screenshot geprüft: Die helle Sento-Guard-Shell wirkt als Buddy-Home ausreichend tragfähig für den Prototyp; finales Character-/Asset-/Animationskapitel bleibt später offen.
 - Kapitel 3 `Update Awareness` vorbereitet: SOFA wurde als erste externe Baseline-Quelle ausgewählt und ein kleiner Umsetzungsplan in `docs/update-awareness-plan.md` dokumentiert.
+- Kapitel 3 erster Code-Schnitt umgesetzt: `UpdateAwarenessSensor` liest einen lokalen SOFA-Cache, dekodiert den Feed tolerant, vergleicht lokale macOS-Versionen gegen den Quellenstand und erzeugt ruhige Findings für aktuell, Update prüfen oder nicht sicher prüfbar.
+- Der Live-Sensor ist in `SensorPipeline.live()` registriert, lädt aber ohne sichtbare Nutzerentscheidung noch nicht heimlich aus dem Netzwerk; ohne Cache zeigt er eine ehrliche Sichtgrenze.
+- Tests für SOFA-Dekodierung, Versionsentscheidung, Cache-Nutzung ohne Netzwerk, fehlenden Quellenstand und Pipeline-Registrierung ergänzt.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, Kapitel 2b ist als Prototyp-Stand ausreichend, und Kapitel 3 `Update Awareness` ist als nächster fachlicher Schritt vorbereitet.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, Kapitel 2b ist als Prototyp-Stand ausreichend, und Kapitel 3 `Update Awareness` hat den ersten lokalen Sensor-/Cache-Schnitt ohne stillen Netzwerkabruf.
 
 ## Nächster konkreter Schritt
 
-Kapitel 3 beginnen: kleinen SOFA-Client, lokalen Cache und eine erste Update-Awareness-Entscheidung planen oder implementieren.
+Kapitel 3 fortsetzen: sichtbaren Nutzerfluss für `SOFA-Stand aktualisieren` bauen, damit der Netzwerkabruf bewusst ausgelöst, lokal gecacht und mit Quellenzeitpunkt in der UI erklärt wird.
 
 ## Danach sinnvoll
 
-- Update-Awareness-Sensor in die bestehende Sensor-Pipeline hängen und mit ehrlichen Cache-/Offline-Texten anzeigen
+- Update-Awareness stärker in Missionen und Detailtexte integrieren, sobald der Quellenstand bewusst aktualisiert werden kann
 - später weitere Sensoren wie Privacy Permissions auf denselben Vertrag setzen
 - Security-Hygiene-Schnitt planen: zuerst entscheiden, welche Punkte automatisch belegbar sind und welche als geführte Checkliste starten
 - für neue Sensoren eine kurze adversarial Review-Frage dokumentieren: welche harmlose Verteidigungssicht entsteht aus einer realistischen Missbrauchskette?
@@ -168,6 +171,7 @@ Kapitel 3 beginnen: kleinen SOFA-Client, lokalen Cache und eine erste Update-Awa
 - Der Sento-Charakter ist aktuell eine SwiftUI-Prototypfigur, noch kein finales Maskottchen-Asset.
 - Sento braucht später deutlich bessere Illustration und Animation, näher am Mockup; kurzfristig wurde nur die schlechte Überlagerung im aktuellen SwiftUI-Prototyp entschärft.
 - Die neuen Missionen `Digitaler Fußabdruck` und `App-Risiken prüfen` sind bewusst geplant/visuell vorhanden, aber noch keine echten Sensoren.
+- Update-Awareness ist als Sensor vorhanden, aber der echte SOFA-Netzwerkabruf ist in der Live-App noch nicht über eine sichtbare UI-Aktion freigeschaltet.
 
 ## Letzte Validierung
 
@@ -181,6 +185,9 @@ Kapitel 3 beginnen: kleinen SOFA-Client, lokalen Cache und eine erste Update-Awa
 - `swift build` und `./scripts/checks.sh` am 2026-05-16 nach deutlicherem Sento-Avatar-Umbau
 - `./scripts/build-app-bundle.sh` und lokale Screenshot-Prüfung am 2026-05-16 zur Kapitel-2b-Abnahme
 - `./scripts/checks.sh` am 2026-05-16 nach Kapitel-2b-Abnahme und Update-Awareness-Plan
+- `swift test` am 2026-05-16 nach erstem Update-Awareness-Sensor
+- `./scripts/checks.sh` am 2026-05-16 nach erstem Update-Awareness-Sensor
+- `./scripts/build-app-bundle.sh` am 2026-05-16 nach erstem Update-Awareness-Sensor
 - `swift test`
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`

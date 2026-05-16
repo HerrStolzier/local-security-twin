@@ -354,7 +354,7 @@ extension Finding {
             return .changes
         case .launchAgentInventory:
             return .knownStartupHints
-        case .privacyPermissions, .systemInventory:
+        case .privacyPermissions, .systemInventory, .updateAwareness:
             return .review
         }
     }
@@ -381,7 +381,7 @@ extension Finding {
             return "Autostart-Hinweis für diesen Benutzer"
         case .privacyPermissions:
             return "Datenschutz-Berechtigung"
-        case .systemInventory:
+        case .systemInventory, .updateAwareness:
             return title
         }
     }
@@ -396,7 +396,7 @@ extension Finding {
             return "\(displaySubject) ist seit dem gemerkten Zustand neu sichtbar."
         case .launchAgentInventory:
             return "\(displaySubject) liegt an einem Ort, den macOS für automatischen Hintergrundstart nutzen kann."
-        case .privacyPermissions, .systemInventory:
+        case .privacyPermissions, .systemInventory, .updateAwareness:
             return summary
         }
     }
@@ -409,7 +409,7 @@ extension Finding {
             return "Sichtbarer Autostart-Hinweis"
         case .privacyPermissions:
             return "Datenschutz"
-        case .systemInventory:
+        case .systemInventory, .updateAwareness:
             return source.title
         }
     }
@@ -450,6 +450,8 @@ extension Finding {
             return "Diese Berechtigung kann sensibel sein. Entscheidend ist, ob du die App kennst und ihr diesen Zugriff geben wolltest."
         case .systemInventory:
             return "Dieser Systemhinweis soll dir helfen, lokale Veränderungen besser einzuordnen."
+        case .updateAwareness:
+            return "Dieser Update-Hinweis verbindet den lokalen macOS-Stand mit einer externen Quelle. Er ist eine Orientierung, kein vollständiges Sicherheitsurteil."
         }
     }
 

@@ -65,6 +65,7 @@ enum FindingSourceKind: String, Codable, CaseIterable, Sendable {
     case launchAgentInventory
     case privacyPermissions
     case systemInventory
+    case updateAwareness
 
     var title: String {
         switch self {
@@ -76,6 +77,8 @@ enum FindingSourceKind: String, Codable, CaseIterable, Sendable {
             return "Privacy Permissions"
         case .systemInventory:
             return "System Inventory"
+        case .updateAwareness:
+            return "Update Awareness"
         }
     }
 }

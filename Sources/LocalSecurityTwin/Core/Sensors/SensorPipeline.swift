@@ -31,6 +31,7 @@ extension SensorPipeline {
             sensors: [
                 LaunchAgentInventorySensor(fileManager: fileManager),
                 SystemProfileSensor(),
+                UpdateAwarenessSensor(),
             ]
         )
     }

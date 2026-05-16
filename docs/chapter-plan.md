@@ -148,7 +148,7 @@ Abnahme:
 
 ## Kapitel 3: Update Awareness
 
-Status: als nächster fachlicher Schritt vorbereitet.
+Status: erster Sensor-/Cache-Schnitt umgesetzt; sichtbarer Netzwerk-Aktualisieren-Flow offen.
 
 Ziel:
 Der Buddy erkennt, ob macOS-Sicherheitsupdates für diesen Mac relevant sind.
@@ -166,6 +166,14 @@ Vorbereitung:
 - Detailplan liegt in `docs/update-awareness-plan.md`.
 - Erste Quelle soll der öffentliche SOFA-macOS-Feed der MacAdmins sein.
 - Die UI darf nur den Stand der letzten erfolgreichen Quelle erklären, nicht pauschal behaupten, der Mac sei vollständig geschützt.
+
+Umgesetzt:
+
+- `UpdateAwarenessSensor` hängt am vorhandenen Sensorvertrag.
+- SOFA-JSON kann dekodiert und gegen die lokale macOS-Version verglichen werden.
+- Lokaler Cache wird ohne Netzwerk genutzt, falls vorhanden.
+- Ohne Cache zeigt die App eine ruhige Sichtgrenze statt eines Alarms.
+- Der Live-Sensor lädt noch nicht automatisch aus dem Netzwerk, weil der Nutzerfluss für bewusste Aktualisierung fehlt.
 
 Abnahme:
 
