@@ -124,23 +124,25 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Deutsche Nutzertexte und Dokumentation auf echte Umlaute umgestellt; Umschreibungen wie `fuer`, `pruefen`, `moeglich` bleiben nur noch als technische Beispiele/Bezeichner zulässig.
 - Nutzerfeedback zu Sento und Missionskarten eingearbeitet: Sento sitzt jetzt ruhiger im Hero, das Schild überlagert die Figur weniger, und geplante Missionskarten nutzen robustere Symbole sowie sichtbarere Aktionsflächen.
 - Nach weiterem Nutzerfeedback Sento deutlicher umgebaut: der dominante Schutzring ist aus dem Avatar verschwunden, Sento wirkt jetzt mehr wie eine eigenständige kleine Figur mit Körper, Kopf, Cape, Schild und kleinen Lichtdetails.
+- Kapitel 2b am 2026-05-16 lokal per App-Screenshot geprüft: Die helle Sento-Guard-Shell wirkt als Buddy-Home ausreichend tragfähig für den Prototyp; finales Character-/Asset-/Animationskapitel bleibt später offen.
+- Kapitel 3 `Update Awareness` vorbereitet: SOFA wurde als erste externe Baseline-Quelle ausgewählt und ein kleiner Umsetzungsplan in `docs/update-awareness-plan.md` dokumentiert.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, und Kapitel 2b führt die helle `Sento Guard` Produkt-Shell mit sichtbarem, nachjustiertem Sento-Charakter ein.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, Kapitel 2b ist als Prototyp-Stand ausreichend, und Kapitel 3 `Update Awareness` ist als nächster fachlicher Schritt vorbereitet.
 
 ## Nächster konkreter Schritt
 
-Kapitel 2b erneut manuell in der App prüfen: Sento wurde sichtbar anders aufgebaut, bleibt aber bewusst ein Prototyp und braucht später ein finales Asset-/Animationskapitel.
+Kapitel 3 beginnen: kleinen SOFA-Client, lokalen Cache und eine erste Update-Awareness-Entscheidung planen oder implementieren.
 
 ## Danach sinnvoll
 
+- Update-Awareness-Sensor in die bestehende Sensor-Pipeline hängen und mit ehrlichen Cache-/Offline-Texten anzeigen
 - später weitere Sensoren wie Privacy Permissions auf denselben Vertrag setzen
 - Security-Hygiene-Schnitt planen: zuerst entscheiden, welche Punkte automatisch belegbar sind und welche als geführte Checkliste starten
 - für neue Sensoren eine kurze adversarial Review-Frage dokumentieren: welche harmlose Verteidigungssicht entsteht aus einer realistischen Missbrauchskette?
 - später modernen macOS-Background-Task-Management-Status als eigenen Research-Spike oder Sensor prüfen
 - Hardened Runtime und Sandbox-Auswirkungen gegen das lokale `.app`-Bundle testen
-- danach SOFA-/Update-Awareness als ersten Online-Intelligence-Baustein bauen
 
 ## Offene Punkte
 
@@ -177,6 +179,8 @@ Kapitel 2b erneut manuell in der App prüfen: Sento wurde sichtbar anders aufgeb
 - `./scripts/checks.sh` am 2026-05-16 nach finaler Umlaut-Nachkorrektur
 - `./scripts/checks.sh` am 2026-05-16 nach Sento-/Missionskarten-Nachjustierung
 - `swift build` und `./scripts/checks.sh` am 2026-05-16 nach deutlicherem Sento-Avatar-Umbau
+- `./scripts/build-app-bundle.sh` und lokale Screenshot-Prüfung am 2026-05-16 zur Kapitel-2b-Abnahme
+- `./scripts/checks.sh` am 2026-05-16 nach Kapitel-2b-Abnahme und Update-Awareness-Plan
 - `swift test`
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`

@@ -64,6 +64,7 @@ Kurzlebige To-dos gehören nicht hierher, sondern in `docs/session-status.md`.
 - Sento darf als SwiftUI-Prototypfigur sichtbar sein, solange die Figur nicht falsche Sicherheit ausdrückt. Der Charakter muss Produktlogik tragen: priorisieren, erklären, nachfragen und Entscheidungen lokal merken.
 - Die sieben Anti-Scheiter-Regeln sind Produktleitplanken: ehrliche Schutzversprechen, Kernloop vor Breite, einfache Handlung, echtes Threat-Matching, frühe macOS-Rechteplanung, Sento als Logik statt Deko und täglicher Nutzen vor Dashboard-Fülle.
 - Deutsche Nutzertexte und Dokumentation sollen echte Umlaute verwenden. Umschreibungen wie `fuer`, `pruefen`, `moeglich`, `Aenderung` oder `Bestaetigung` sind nur in technischen Bezeichnern akzeptabel, nicht in sichtbaren Texten.
+- Für Kapitel 3 ist SOFA die erste sinnvolle externe Baseline-Quelle für macOS-Update-Awareness. Der Feed muss lokal gecacht werden, der Quellenstand muss sichtbar bleiben, und die UI darf daraus kein vollständiges Sicherheitsurteil ableiten.
 
 ## Workflow Gotchas
 

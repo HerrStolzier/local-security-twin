@@ -111,7 +111,7 @@ Abnahme:
 
 ## Kapitel 2b: Sento Guard Shell
 
-Status: erster Code-Schnitt umgesetzt.
+Status: Prototyp-Stand für jetzt ausreichend; späteres Asset-/Animationskapitel bleibt offen.
 
 Ziel:
 Die App bekommt eine erkennbare Produktidentitaet und einen klareren Einstieg, ohne in dunkle Cyberpunk-Optik oder falsche Sicherheitsversprechen zu kippen.
@@ -138,12 +138,17 @@ Noch offen:
 
 - finales Maskottchen-/Character-Asset statt SwiftUI-Prototypfigur
 - finaler Markencheck für `Sento Guard`
-- visuelle manuelle Abnahme durch Nutzer
 - später echte Navigation hinter den Sidebar-Punkten
+
+Abnahme:
+
+- Lokale Sichtprüfung am 2026-05-16 bestätigt: Die helle Shell wirkt wie ein Buddy-Home statt wie eine rohe Finding-Liste.
+- Sento ist als Prototypfigur erkennbar und reicht für den aktuellen Produktfluss.
+- Für ein finales Produkt braucht Sento später ein eigenes Character-/Asset-/Animationskapitel.
 
 ## Kapitel 3: Update Awareness
 
-Status: geplant.
+Status: als nächster fachlicher Schritt vorbereitet.
 
 Ziel:
 Der Buddy erkennt, ob macOS-Sicherheitsupdates für diesen Mac relevant sind.
@@ -155,6 +160,12 @@ Inhalt:
 - lokale macOS-Version vergleichen
 - Offline-/Fehlerfall ehrlich anzeigen
 - Netzwerkzugriff als Produktentscheidung sichtbar machen
+
+Vorbereitung:
+
+- Detailplan liegt in `docs/update-awareness-plan.md`.
+- Erste Quelle soll der öffentliche SOFA-macOS-Feed der MacAdmins sein.
+- Die UI darf nur den Stand der letzten erfolgreichen Quelle erklären, nicht pauschal behaupten, der Mac sei vollständig geschützt.
 
 Abnahme:
 

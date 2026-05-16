@@ -224,11 +224,11 @@ Der erste konkrete UI-Schritt wurde umgesetzt:
 4. Detailansicht erscheint erst nach aktiver Auswahl.
 5. Kapitel 2 hat den ersten visuellen Feinschliff: systemadaptive Flächen, semantische Farben, stärkere Mission-Badges und ruhigere Aktivitätszeilen.
 
-Nächster Schritt:
+Aktueller Übergang:
 
-1. Kapitel 2b `Sento Guard Shell` mit sichtbarer SwiftUI-Figur manuell ansehen.
-2. Prüfen, ob Sento freundlich und wachsam wirkt, ohne kindisch oder zu dekorativ zu werden.
-3. Danach entscheiden, ob zuerst ein finales Character-Asset entsteht oder Kapitel 3 `Update Awareness` startet.
+1. Kapitel 2b `Sento Guard Shell` wurde am 2026-05-16 lokal sichtbar geprüft.
+2. Sento wirkt als Prototyp freundlich und wachsam genug für den aktuellen Produktfluss.
+3. Ein finales Character-Asset bleibt später nötig; als nächstes startet fachlich Kapitel 3 `Update Awareness`.
 
 ## Build-Skills für die Umsetzung
 
