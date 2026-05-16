@@ -122,14 +122,15 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Sento-Charakter als sichtbare SwiftUI-Prototypfigur gebaut: heller Körper, leuchtende Augen, Schild und ruhiger Schutzring
 - Sieben Anti-Scheiter-Regeln im Produktplan dokumentiert: ehrliche Schutzversprechen, Kernloop vor Breite, einfache Handlung, echtes Threat-Matching, frühe macOS-Rechteplanung, Sento als Logik statt Deko und täglicher Nutzen vor Dashboard-Fülle
 - Deutsche Nutzertexte und Dokumentation auf echte Umlaute umgestellt; Umschreibungen wie `fuer`, `pruefen`, `moeglich` bleiben nur noch als technische Beispiele/Bezeichner zulässig.
+- Nutzerfeedback zu Sento und Missionskarten eingearbeitet: Sento sitzt jetzt ruhiger im Hero, das Schild überlagert die Figur weniger, und geplante Missionskarten nutzen robustere Symbole sowie sichtbarere Aktionsflächen.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, und Kapitel 2b führt die helle `Sento Guard` Produkt-Shell mit sichtbarem Sento-Charakter ein.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home` ist positiv abgenommen, und Kapitel 2b führt die helle `Sento Guard` Produkt-Shell mit sichtbarem, nachjustiertem Sento-Charakter ein.
 
 ## Nächster konkreter Schritt
 
-Kapitel 2b manuell in der App prüfen: Wir müssen sehen, ob der neue Sento-Charakter freundlich, wachsam und nicht zu dekorativ wirkt.
+Kapitel 2b erneut manuell in der App prüfen: Sento-Positionierung und Missionskarten sind nachjustiert, aber der Charakter bleibt bewusst ein Prototyp und braucht später ein finales Asset-/Animationskapitel.
 
 ## Danach sinnvoll
 
@@ -162,6 +163,7 @@ Kapitel 2b manuell in der App prüfen: Wir müssen sehen, ob der neue Sento-Char
 - Kapitel 2 ist technisch umgesetzt, aber noch nicht vom Nutzer visuell abgenommen.
 - `Sento Guard` ist nur ein Arbeits-Brand; vor echter Veröffentlichung braucht der Name einen tieferen Marken-, Domain- und App-Store-Check.
 - Der Sento-Charakter ist aktuell eine SwiftUI-Prototypfigur, noch kein finales Maskottchen-Asset.
+- Sento braucht später deutlich bessere Illustration und Animation, näher am Mockup; kurzfristig wurde nur die schlechte Überlagerung im aktuellen SwiftUI-Prototyp entschärft.
 - Die neuen Missionen `Digitaler Fußabdruck` und `App-Risiken prüfen` sind bewusst geplant/visuell vorhanden, aber noch keine echten Sensoren.
 
 ## Letzte Validierung
@@ -172,6 +174,7 @@ Kapitel 2b manuell in der App prüfen: Wir müssen sehen, ob der neue Sento-Char
 - `./scripts/checks.sh` am 2026-05-16 nach sichtbarem Sento-Charakter
 - `./scripts/checks.sh` am 2026-05-16 nach Umlaut-Korrektur
 - `./scripts/checks.sh` am 2026-05-16 nach finaler Umlaut-Nachkorrektur
+- `./scripts/checks.sh` am 2026-05-16 nach Sento-/Missionskarten-Nachjustierung
 - `swift test`
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`

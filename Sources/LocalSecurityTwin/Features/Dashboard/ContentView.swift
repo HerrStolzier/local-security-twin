@@ -431,116 +431,128 @@ private struct SentoCharacterBadge: View {
     var body: some View {
         ZStack {
             Circle()
-                .fill(.cyan.opacity(0.12))
-                .frame(width: size, height: size)
+                .fill(
+                    RadialGradient(
+                        colors: [.cyan.opacity(0.22), .blue.opacity(0.10), .clear],
+                        center: .center,
+                        startRadius: size * 0.04,
+                        endRadius: size * 0.62
+                    )
+                )
+                .frame(width: size * 1.06, height: size * 1.06)
 
             Ellipse()
-                .fill(.blue.opacity(0.10))
-                .frame(width: size * 0.72, height: size * 0.16)
-                .offset(y: size * 0.34)
-
-            RoundedRectangle(cornerRadius: size * 0.16)
-                .fill(
-                    LinearGradient(
-                        colors: [.white.opacity(0.92), .cyan.opacity(0.24)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(width: size * 0.48, height: size * 0.50)
-                .overlay(
-                    RoundedRectangle(cornerRadius: size * 0.16)
-                        .stroke(.blue.opacity(0.22), lineWidth: max(1, size * 0.015))
-                )
-                .offset(y: size * 0.12)
-
-            SentoCape(size: size)
-                .fill(
-                    LinearGradient(
-                        colors: [.purple.opacity(0.45), .blue.opacity(0.22)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(width: size * 0.58, height: size * 0.50)
-                .offset(x: -size * 0.12, y: size * 0.18)
-
-            RoundedRectangle(cornerRadius: size * 0.20)
-                .fill(
-                    LinearGradient(
-                        colors: [.white.opacity(0.98), .blue.opacity(0.22)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(width: size * 0.55, height: size * 0.42)
-                .overlay(
-                    RoundedRectangle(cornerRadius: size * 0.20)
-                        .stroke(.cyan.opacity(0.42), lineWidth: max(1, size * 0.018))
-                )
-                .offset(y: -size * 0.12)
-
-            RoundedRectangle(cornerRadius: size * 0.14)
-                .fill(
-                    LinearGradient(
-                        colors: [.indigo.opacity(0.90), .black.opacity(0.75)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(width: size * 0.36, height: size * 0.22)
-                .offset(y: -size * 0.10)
-
-            HStack(spacing: size * 0.08) {
-                RoundedRectangle(cornerRadius: size * 0.015)
-                    .fill(.cyan)
-                    .frame(width: size * 0.055, height: size * 0.055)
-                    .shadow(color: .cyan.opacity(0.8), radius: size * 0.025)
-
-                RoundedRectangle(cornerRadius: size * 0.015)
-                    .fill(.cyan)
-                    .frame(width: size * 0.055, height: size * 0.055)
-                    .shadow(color: .cyan.opacity(0.8), radius: size * 0.025)
-            }
-            .offset(y: -size * 0.10)
-
-            Image(systemName: "shield.lefthalf.filled")
-                .font(.system(size: size * 0.16, weight: .bold))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [.cyan, .blue, .purple],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .offset(y: size * 0.12)
-
-            SentoShield(size: size)
-                .fill(
-                    LinearGradient(
-                        colors: [.cyan.opacity(0.92), .blue.opacity(0.88), .purple.opacity(0.72)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(width: size * 0.24, height: size * 0.30)
-                .overlay(
-                    SentoShield(size: size)
-                        .stroke(.white.opacity(0.72), lineWidth: max(1, size * 0.012))
-                )
-                .offset(x: size * 0.27, y: size * 0.10)
+                .fill(.blue.opacity(0.12))
+                .frame(width: size * 0.70, height: size * 0.13)
+                .offset(y: size * 0.37)
 
             Circle()
-                .trim(from: 0.02, to: 0.72)
+                .trim(from: 0.05, to: 0.78)
                 .stroke(
                     AngularGradient(
                         colors: [.cyan, .blue, .purple, .cyan],
                         center: .center
                     ),
-                    style: StrokeStyle(lineWidth: size * 0.055, lineCap: .round)
+                    style: StrokeStyle(lineWidth: size * 0.045, lineCap: .round)
                 )
-                .rotationEffect(.degrees(-86))
-                .frame(width: size * 0.88, height: size * 0.88)
+                .rotationEffect(.degrees(-96))
+                .frame(width: size * 0.86, height: size * 0.86)
+                .opacity(0.9)
+
+            ZStack {
+                SentoCape(size: size)
+                    .fill(
+                        LinearGradient(
+                            colors: [.purple.opacity(0.45), .blue.opacity(0.25)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: size * 0.62, height: size * 0.52)
+                    .offset(x: -size * 0.10, y: size * 0.19)
+
+                RoundedRectangle(cornerRadius: size * 0.16)
+                    .fill(
+                        LinearGradient(
+                            colors: [.white.opacity(0.94), .cyan.opacity(0.24)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: size * 0.42, height: size * 0.50)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: size * 0.16)
+                            .stroke(.blue.opacity(0.24), lineWidth: max(1, size * 0.014))
+                    )
+                    .offset(y: size * 0.14)
+
+                RoundedRectangle(cornerRadius: size * 0.20)
+                    .fill(
+                        LinearGradient(
+                            colors: [.white.opacity(0.98), .blue.opacity(0.22)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: size * 0.52, height: size * 0.40)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: size * 0.20)
+                            .stroke(.cyan.opacity(0.44), lineWidth: max(1, size * 0.018))
+                    )
+                    .offset(y: -size * 0.12)
+
+                RoundedRectangle(cornerRadius: size * 0.13)
+                    .fill(
+                        LinearGradient(
+                            colors: [.indigo.opacity(0.92), .black.opacity(0.76)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: size * 0.34, height: size * 0.20)
+                    .offset(y: -size * 0.10)
+
+                HStack(spacing: size * 0.08) {
+                    RoundedRectangle(cornerRadius: size * 0.015)
+                        .fill(.cyan)
+                        .frame(width: size * 0.055, height: size * 0.055)
+                        .shadow(color: .cyan.opacity(0.8), radius: size * 0.025)
+
+                    RoundedRectangle(cornerRadius: size * 0.015)
+                        .fill(.cyan)
+                        .frame(width: size * 0.055, height: size * 0.055)
+                        .shadow(color: .cyan.opacity(0.8), radius: size * 0.025)
+                }
+                .offset(y: -size * 0.10)
+
+                Image(systemName: "shield.lefthalf.filled")
+                    .font(.system(size: size * 0.15, weight: .bold))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [.cyan, .blue, .purple],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .offset(y: size * 0.13)
+
+                SentoShield(size: size)
+                    .fill(
+                        LinearGradient(
+                            colors: [.cyan.opacity(0.96), .blue.opacity(0.90), .purple.opacity(0.76)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: size * 0.22, height: size * 0.28)
+                    .overlay(
+                        SentoShield(size: size)
+                            .stroke(.white.opacity(0.75), lineWidth: max(1, size * 0.012))
+                    )
+                    .shadow(color: .blue.opacity(0.22), radius: size * 0.035, x: 0, y: size * 0.02)
+                    .offset(x: size * 0.22, y: size * 0.18)
+            }
+            .offset(x: -size * 0.02)
         }
         .frame(width: size, height: size)
     }
@@ -678,6 +690,10 @@ private struct MissionCard: View {
         }
     }
 
+    private var isActionable: Bool {
+        mission.findingID != nil
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top) {
@@ -685,7 +701,11 @@ private struct MissionCard: View {
                     .font(.title3)
                     .foregroundStyle(accentColor)
                     .frame(width: 34, height: 34)
-                    .background(accentColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 8))
+                    .background(accentColor.opacity(0.16), in: RoundedRectangle(cornerRadius: 8))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(accentColor.opacity(0.22))
+                    )
 
                 Spacer()
 
@@ -714,22 +734,35 @@ private struct MissionCard: View {
                 .controlSize(.small)
                 .tint(accentColor)
 
-            Button(mission.primaryActionTitle) {
-                if let findingID = mission.findingID {
-                    openFinding(findingID)
+            if isActionable {
+                Button(mission.primaryActionTitle) {
+                    if let findingID = mission.findingID {
+                        openFinding(findingID)
+                    }
                 }
+                .buttonStyle(.bordered)
+                .tint(accentColor)
+            } else {
+                Text(mission.primaryActionTitle)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(accentColor)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 7)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .background(accentColor.opacity(0.10), in: RoundedRectangle(cornerRadius: 8))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(accentColor.opacity(0.14))
+                    )
             }
-            .buttonStyle(.bordered)
-            .tint(accentColor)
-            .disabled(mission.findingID == nil)
         }
         .padding(16)
         .frame(maxWidth: .infinity, minHeight: 214, alignment: .topLeading)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
-        .background(accentColor.opacity(0.07), in: RoundedRectangle(cornerRadius: 8))
+        .background(accentColor.opacity(0.085), in: RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(accentColor.opacity(0.28))
+                .stroke(accentColor.opacity(0.34))
         )
         .shadow(color: accentColor.opacity(0.08), radius: 12, x: 0, y: 8)
     }

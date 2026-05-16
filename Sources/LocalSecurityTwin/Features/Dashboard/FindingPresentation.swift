@@ -294,7 +294,7 @@ struct DashboardPresentation {
             title: "Security-Hygiene",
             status: "Geplant",
             summary: "Hier landen später FileVault, Firewall, Updates, 2FA, Passwortmanager und VPN-Fragen.",
-            systemImage: "checklist.checked",
+            systemImage: "checklist",
             progress: 0.15,
             primaryActionTitle: "Noch nicht aktiv",
             findingID: nil
@@ -307,7 +307,7 @@ struct DashboardPresentation {
             title: "Digitaler Fußabdruck",
             status: "Geplant",
             summary: "Später helfe ich dir, sichtbare Daten, alte Accounts und Datenbroker-Funde geordnet anzugehen.",
-            systemImage: "fingerprint",
+            systemImage: "person.crop.circle",
             progress: 0.1,
             primaryActionTitle: "Später",
             findingID: nil
@@ -320,7 +320,7 @@ struct DashboardPresentation {
             title: "App-Risiken prüfen",
             status: "Geplant",
             summary: "Hier soll später sichtbar werden, welche Apps ungewöhnliche Rechte, alte Versionen oder riskante Muster zeigen.",
-            systemImage: "app.badge.checkmark",
+            systemImage: "square.grid.2x2",
             progress: 0.12,
             primaryActionTitle: "Später",
             findingID: nil
