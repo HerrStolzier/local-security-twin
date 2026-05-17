@@ -318,7 +318,8 @@ private struct BuddyHomeView: View {
 
                     VisibilityNote(text: presentation.visibilityText)
                 }
-                .padding(32)
+                .padding(.horizontal, 24)
+                .padding(.vertical, 28)
                 .frame(maxWidth: 1180, alignment: .leading)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             }
@@ -331,38 +332,80 @@ private struct SentoTopBar: View {
     let refreshUpdateAwarenessSource: () -> Void
 
     var body: some View {
+        ViewThatFits(in: .horizontal) {
+            regularLayout
+
+            compactLayout
+        }
+    }
+
+    private var regularLayout: some View {
         HStack {
             Spacer()
 
-            Label("Lokaler Check bereit", systemImage: "circle.fill")
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(.blue)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+            localCheckLabel("Lokaler Check bereit")
 
-            Button(action: refreshUpdateAwarenessSource) {
+            updateAwarenessButton(
                 Label(
                     isRefreshingUpdateAwarenessSource ? "SOFA wird geladen" : "SOFA-Stand aktualisieren",
                     systemImage: isRefreshingUpdateAwarenessSource ? "hourglass" : "arrow.clockwise"
                 )
-            }
-            .buttonStyle(.bordered)
-            .disabled(isRefreshingUpdateAwarenessSource)
-            .help("Lädt den öffentlichen macOS-Update-Stand bewusst online und speichert ihn lokal.")
+            )
 
-            Button {
-            } label: {
-                Image(systemName: "bell")
-            }
-            .buttonStyle(.bordered)
-            .disabled(true)
+            notificationButton
 
-            SettingsLink {
-                Image(systemName: "gearshape")
-            }
-            .buttonStyle(.bordered)
+            settingsButton
         }
+    }
+
+    private var compactLayout: some View {
+        HStack {
+            Spacer()
+
+            localCheckLabel("Lokal")
+
+            updateAwarenessButton(
+                Image(systemName: isRefreshingUpdateAwarenessSource ? "hourglass" : "arrow.clockwise")
+            )
+
+            notificationButton
+
+            settingsButton
+        }
+    }
+
+    private func localCheckLabel(_ text: String) -> some View {
+        Label(text, systemImage: "circle.fill")
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(.blue)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+    }
+
+    private func updateAwarenessButton<LabelContent: View>(_ label: LabelContent) -> some View {
+        Button(action: refreshUpdateAwarenessSource) {
+            label
+        }
+        .buttonStyle(.bordered)
+        .disabled(isRefreshingUpdateAwarenessSource)
+        .help("Lädt den öffentlichen macOS-Update-Stand bewusst online und speichert ihn lokal.")
+    }
+
+    private var notificationButton: some View {
+        Button {
+        } label: {
+            Image(systemName: "bell")
+        }
+        .buttonStyle(.bordered)
+        .disabled(true)
+    }
+
+    private var settingsButton: some View {
+        SettingsLink {
+            Image(systemName: "gearshape")
+        }
+        .buttonStyle(.bordered)
     }
 }
 
@@ -469,6 +512,7 @@ private struct DetailPane: View {
 private struct GuardianStatusCard: View {
     let presentation: DashboardPresentation
     let primaryAction: () -> Void
+    @State private var availableWidth: CGFloat = 0
 
     private var toneColor: Color {
         if presentation.startupChangeCount > 0 {
@@ -483,59 +527,115 @@ private struct GuardianStatusCard: View {
     }
 
     var body: some View {
-        HStack(alignment: .center, spacing: 28) {
-            SentoCharacterBadge(size: 156)
-
-            VStack(alignment: .leading, spacing: 16) {
-                StatusBadge(
-                    text: presentation.statusTitle,
-                    systemImage: presentation.startupChangeCount > 0 ? "exclamationmark.shield" : "checkmark.shield",
-                    color: toneColor
-                )
-
-                Text("Hallo! Ich bin Sento Guard.")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .lineSpacing(2)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                Text(presentation.buddyMessageText)
-                    .font(.title3)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                HStack(alignment: .center, spacing: 14) {
-                    Button(presentation.primaryActionTitle, action: primaryAction)
-                        .buttonStyle(.borderedProminent)
-                        .controlSize(.large)
-                        .tint(toneColor)
-                        .disabled(presentation.findings.isEmpty)
-
-                    Text(presentation.nextStepText)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(3)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-
-            Spacer(minLength: 16)
-
-            HStack(spacing: 12) {
-                DefenseMetric(value: presentation.startupChangeCount, label: "neu", color: .mint)
-                DefenseMetric(value: presentation.knownStartupCount, label: "Hinweise", color: .blue)
-                DefenseMetric(value: presentation.reviewCount, label: "System", color: .purple)
+        Group {
+            if availableWidth > 0 && availableWidth < 860 {
+                compactLayout
+            } else {
+                regularLayout
             }
         }
         .padding(28)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
         .background(toneColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
+        .background(
+            GeometryReader { proxy in
+                Color.clear
+                    .onAppear {
+                        availableWidth = proxy.size.width
+                    }
+                    .onChange(of: proxy.size.width) { _, newWidth in
+                        availableWidth = newWidth
+                    }
+            }
+        )
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(toneColor.opacity(0.32), lineWidth: 1)
         )
         .shadow(color: toneColor.opacity(0.18), radius: 22, x: 0, y: 12)
+    }
+
+    private var regularLayout: some View {
+        HStack(alignment: .center, spacing: 28) {
+            SentoCharacterBadge(size: 156)
+
+            heroCopy
+
+            Spacer(minLength: 16)
+
+            metricRow
+        }
+    }
+
+    private var compactLayout: some View {
+        VStack(alignment: .leading, spacing: 22) {
+            SentoCharacterBadge(size: 118)
+
+            heroCopy
+
+            metricRow
+        }
+    }
+
+    private var heroCopy: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            StatusBadge(
+                text: presentation.statusTitle,
+                systemImage: presentation.startupChangeCount > 0 ? "exclamationmark.shield" : "checkmark.shield",
+                color: toneColor
+            )
+
+            Text("Hallo! Ich bin Sento Guard.")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .lineSpacing(2)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(presentation.buddyMessageText)
+                .font(.title3)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .center, spacing: 14) {
+                    primaryButton
+
+                    nextStepText
+                }
+
+                VStack(alignment: .leading, spacing: 10) {
+                    primaryButton
+
+                    nextStepText
+                }
+            }
+        }
+        .frame(maxWidth: 480, alignment: .leading)
+    }
+
+    private var primaryButton: some View {
+        Button(presentation.primaryActionTitle, action: primaryAction)
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .tint(toneColor)
+            .disabled(presentation.findings.isEmpty)
+    }
+
+    private var nextStepText: some View {
+        Text(presentation.nextStepText)
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
+            .lineLimit(3)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var metricRow: some View {
+        HStack(spacing: 12) {
+            DefenseMetric(value: presentation.startupChangeCount, label: "neu", color: .mint)
+            DefenseMetric(value: presentation.knownStartupCount, label: "Hinweise", color: .blue)
+            DefenseMetric(value: presentation.reviewCount, label: "System", color: .purple)
+        }
     }
 }
 
@@ -788,7 +888,7 @@ private struct DefenseMetric: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
-        .frame(width: 104, height: 82, alignment: .leading)
+        .frame(minWidth: 92, maxWidth: .infinity, minHeight: 82, alignment: .leading)
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))

@@ -158,14 +158,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich; App danach mit `open -n .build/app/LocalSecurityTwin.app` gestartet.
 - VPN-Sinnhaftigkeit als weitere geführte Buddy-Frage ergänzt: Sento fragt jetzt nach einem konkreten VPN-Grund wie fremden WLANs oder beruflichen Vorgaben und hält die Grenze sichtbar, dass VPN kein magischer Rundumschutz ist.
 - Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich; App danach mit `open -n .build/app/LocalSecurityTwin.app` gestartet.
+- Responsive Dashboard-Fix nach Screenshot-Feedback umgesetzt: Hero-Bereich schaltet bei schmaleren Fenstern auf ein kompaktes Layout, damit Sento-Figur, Begrüßung, Erklärung, Button und Statuskarten nicht mehr in eine Ein-Wort-Spalte gedrückt werden; die Topbar hat zusätzlich eine kompakte Icon-Variante.
+- Visuelle Prüfung am 2026-05-17 mit schmal gesetztem App-Fenster und Screenshot `/tmp/sento-verify/responsive-1060-topbar.png`: Hero-Text bleibt lesbar, Statuskarten wandern sauberer unter bzw. neben den Inhalt.
+- Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, und Kapitel 4 `Security Hygiene` hat jetzt eine freundlichere Übersicht, lokal gespeicherte Buddy-Fragen inklusive VPN-Kontext sowie FileVault-/Firewall-Sichtbarkeit.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht, und das Dashboard reagiert bei schmaleren Fenstern deutlich robuster.
 
 ## Nächster konkreter Schritt
 
-Kapitel 4 visuell prüfen: App starten, eine Buddy-Frage inklusive VPN beantworten und prüfen, ob lokale Schutzsignale, Nutzerangaben und ehrliche Grenzen klar genug wirken.
+Dashboard erneut manuell in mehreren Fensterbreiten prüfen, besonders Missionen, Hygiene-Karten und Buddy-Fragen unterhalb des Hero-Bereichs.
 
 ## Danach sinnvoll
 
