@@ -146,6 +146,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Hygiene-Modell in die Buddy-Home-Presentation eingebunden: Die Security-Hygiene-Mission zeigt jetzt vorbereitete Belegtypen statt nur `Geplant`, und eine kompakte Übersicht gruppiert lokale Schutzsignale, geführte Nutzerfragen und nicht automatisch prüfbare Punkte.
 - Kapitel 4 per lokaler App-Automation visuell geprüft: Die Hygiene-Übersicht ist sichtbar und trennt `Lokal gesehen`, `Von dir beantwortet` und `Nicht automatisch prüfbar`, ohne 2FA, Passwortmanager, FileVault, Firewall oder VPN als geprüft zu behaupten.
 - Kleiner Hygiene-UX-Feinschliff nach Sichtprüfung: Sidebar-Wert für Security-Hygiene lautet jetzt `Belege` statt `Plan`, und Nutzerantworten sprechen den Nutzer direkter an.
+- Erste lokale Hygiene-Zustände aus vorhandenen Findings abgeleitet: macOS-Update, Gatekeeper und SIP erscheinen in der Hygiene-Übersicht nur dann als `lokal gesehen`, wenn passende lokale Findings/Belege vorhanden sind.
+- SIP hat im Systemprofil-Finding jetzt einen eigenen stabilen Evidence-Eintrag `sip-status`, damit die Hygiene-Presentation nicht aus Fließtext raten muss.
 
 ## Aktueller Stand in einem Satz
 
@@ -153,7 +155,7 @@ Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Gua
 
 ## Nächster konkreter Schritt
 
-Kapitel 4 als nächsten Code-Schnitt fortsetzen: erste einfache lokale Hygiene-Zustände aus vorhandenen Findings ableiten, z. B. macOS-Update, Gatekeeper und SIP als `Lokal gesehen`, ohne FileVault, Firewall, 2FA, Passwortmanager oder VPN als geprüft zu behaupten.
+Kapitel 4 visuell prüfen: App starten und beurteilen, ob die Hygiene-Übersicht mit Zuständen wie `lokal gesehen`, `noch nicht sichtbar` und `noch nicht eingeordnet` verständlich wirkt und nicht zu technisch wird.
 
 ## Danach sinnvoll
 
@@ -235,6 +237,11 @@ Kapitel 4 als nächsten Code-Schnitt fortsetzen: erste einfache lokale Hygiene-Z
 - `swift test` am 2026-05-16 nach Hygiene-UX-Feinschliff; 55 Tests erfolgreich
 - `./scripts/checks.sh` am 2026-05-16 nach Hygiene-UX-Feinschliff
 - `./scripts/build-app-bundle.sh` am 2026-05-16 nach Hygiene-UX-Feinschliff
+- `swift test --filter FindingSchemaTests` am 2026-05-17 nach lokalen Hygiene-Zuständen; 11 Tests erfolgreich
+- `swift test --filter SystemProfileSensorTests` am 2026-05-17 nach stabilem SIP-Beleg; 5 Tests erfolgreich
+- `swift test` am 2026-05-17 nach lokalen Hygiene-Zuständen; 56 Tests erfolgreich
+- `./scripts/checks.sh` am 2026-05-17 nach lokalen Hygiene-Zuständen
+- `./scripts/build-app-bundle.sh` am 2026-05-17 nach lokalen Hygiene-Zuständen
 - `swift test` am 2026-05-16 nach Persistenz-Sichtbarkeits-Regressionen; 49 Tests erfolgreich
 - `./scripts/security-checks.sh`
 - `./scripts/e2e-smoke.sh`

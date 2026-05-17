@@ -178,9 +178,9 @@ struct FindingSchemaTests {
         let presentation = DashboardPresentation(findings: [])
 
         let local = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.observedLocally.rawValue })
-        #expect(local.checkTitles.contains("macOS-Updates"))
-        #expect(local.checkTitles.contains("Gatekeeper"))
-        #expect(local.checkTitles.contains("System Integrity Protection"))
+        #expect(local.checkTitles.contains("macOS-Updates: noch nicht eingeordnet"))
+        #expect(local.checkTitles.contains("Gatekeeper: noch nicht sichtbar"))
+        #expect(local.checkTitles.contains("System Integrity Protection: noch nicht sichtbar"))
 
         let userAnswered = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.userAnswered.rawValue })
         #expect(userAnswered.checkTitles.contains("2FA für wichtige Konten"))
@@ -189,6 +189,22 @@ struct FindingSchemaTests {
         let notVerifiable = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.notVerifiable.rawValue })
         #expect(notVerifiable.checkTitles.contains("FileVault"))
         #expect(notVerifiable.checkTitles.contains("System Extensions"))
+    }
+
+    @Test func dashboardPresentationDerivesLocalHygieneStateFromExistingFindings() throws {
+        let presentation = DashboardPresentation(
+            findings: [
+                Self.updateAwarenessFinding(),
+                Self.systemProfileFindingWithSIP(),
+                Self.gatekeeperFinding(),
+            ]
+        )
+
+        let local = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.observedLocally.rawValue })
+
+        #expect(local.checkTitles.contains("macOS-Updates: lokal gesehen"))
+        #expect(local.checkTitles.contains("Gatekeeper: lokal gesehen"))
+        #expect(local.checkTitles.contains("System Integrity Protection: lokal gesehen"))
     }
 
     @Test func dashboardPresentationNamesHygieneMissionAsEvidenceWork() {
@@ -200,7 +216,19 @@ struct FindingSchemaTests {
     }
 
     @Test func dashboardPresentationHighlightsUpdateAwarenessAfterRefresh() throws {
-        let finding = Finding(
+        let finding = Self.updateAwarenessFinding()
+
+        let presentation = DashboardPresentation(findings: [finding])
+
+        #expect(presentation.updateAwarenessFinding?.id == finding.id)
+        #expect(presentation.buddyMessageText.contains("macOS-Update-Stand"))
+        #expect(presentation.missions.first(where: { $0.id == "system" })?.status == "Update geprüft")
+        #expect(presentation.missions.first(where: { $0.id == "system" })?.findingID == finding.id)
+        #expect(presentation.activityItems.contains(where: { $0.id == "update-awareness" }))
+    }
+
+    private static func updateAwarenessFinding() -> Finding {
+        Finding(
             id: "update-awareness::macos-15",
             title: "macOS wirkt nach Quellenstand aktuell",
             source: FindingSource(
@@ -216,13 +244,57 @@ struct FindingSchemaTests {
             evidence: [],
             recommendations: []
         )
+    }
 
-        let presentation = DashboardPresentation(findings: [finding])
+    private static func systemProfileFindingWithSIP() -> Finding {
+        Finding(
+            id: "system-profile::local-context",
+            title: "Mac-Grunddaten sind sichtbar",
+            source: FindingSource(
+                kind: .systemInventory,
+                title: "Mac-Systemprofil",
+                detail: "Test"
+            ),
+            severity: .low,
+            confidence: .supported,
+            summary: "Die App konnte lokale Basisdaten dieses Macs lesen.",
+            userImpact: "Test",
+            nextStep: "Test",
+            evidence: [
+                FindingEvidence(
+                    id: "sip-status",
+                    title: "System Integrity Protection",
+                    summary: "System Integrity Protection ist sichtbar aktiv.",
+                    detail: "Rohmeldung: System Integrity Protection status: enabled."
+                ),
+            ],
+            recommendations: []
+        )
+    }
 
-        #expect(presentation.updateAwarenessFinding?.id == finding.id)
-        #expect(presentation.buddyMessageText.contains("macOS-Update-Stand"))
-        #expect(presentation.missions.first(where: { $0.id == "system" })?.status == "Update geprüft")
-        #expect(presentation.missions.first(where: { $0.id == "system" })?.findingID == finding.id)
-        #expect(presentation.activityItems.contains(where: { $0.id == "update-awareness" }))
+    private static func gatekeeperFinding() -> Finding {
+        Finding(
+            id: "system-profile::gatekeeper-enabled",
+            title: "Mac-App-Prüfung ist aktiv",
+            source: FindingSource(
+                kind: .systemInventory,
+                title: "Mac-Systemprofil",
+                detail: "Test"
+            ),
+            severity: .low,
+            confidence: .supported,
+            summary: "macOS meldet, dass die App-Prüfung aktiv ist.",
+            userImpact: "Test",
+            nextStep: "Test",
+            evidence: [
+                FindingEvidence(
+                    id: "gatekeeper-status",
+                    title: "Gatekeeper-Status",
+                    summary: "Gatekeeper meldet: App-Prüfung aktiv.",
+                    detail: "Rohmeldung: assessments enabled"
+                ),
+            ],
+            recommendations: []
+        )
     }
 }

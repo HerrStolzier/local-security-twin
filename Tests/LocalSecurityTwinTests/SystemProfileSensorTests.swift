@@ -32,6 +32,7 @@ struct SystemProfileSensorTests {
         #expect(run.findings.allSatisfy { $0.source.kind == .systemInventory })
         #expect(run.findings.contains(where: { $0.id == "system-profile::local-context" }))
         #expect(run.findings.contains(where: { $0.id == "system-profile::gatekeeper-enabled" }))
+        #expect(run.findings.first { $0.id == "system-profile::local-context" }?.evidence.contains { $0.id == "sip-status" } == true)
         #expect(run.findings.allSatisfy { !$0.userImpact.contains("vollständig geschützt ist.") || $0.severity == .low })
         #expect(run.notes.contains(where: { $0.contains("Lokales Systemprofil gelesen") }))
     }

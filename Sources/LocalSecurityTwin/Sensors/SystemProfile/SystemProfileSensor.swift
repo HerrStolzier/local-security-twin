@@ -47,7 +47,7 @@ struct SystemProfileSensor: FindingSensor {
                     summary: "macOS \(snapshot.operatingSystemVersion), Architektur \(snapshot.architecture).",
                     detail: profileDetail(from: snapshot)
                 ),
-            ],
+            ] + sipEvidence(from: snapshot),
             recommendations: [
                 FindingRecommendation(
                     id: "review-system-profile",
@@ -163,6 +163,21 @@ struct SystemProfileSensor: FindingSensor {
             summary: status.summary,
             detail: "Rohmeldung: \(status.rawOutput)"
         )
+    }
+
+    private func sipEvidence(from snapshot: SystemProfileSnapshot) -> [FindingEvidence] {
+        guard let sipStatus = snapshot.sipStatus else {
+            return []
+        }
+
+        return [
+            FindingEvidence(
+                id: "sip-status",
+                title: "System Integrity Protection",
+                summary: sipStatus.summary,
+                detail: "Rohmeldung: \(sipStatus.rawOutput)"
+            ),
+        ]
     }
 
     private func makeNotes(from snapshot: SystemProfileSnapshot) -> [String] {

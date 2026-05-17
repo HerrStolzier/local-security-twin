@@ -166,7 +166,7 @@ struct DashboardPresentation {
                 id: kind.rawValue,
                 title: kind.title,
                 explanation: kind.explanation,
-                checkTitles: checks.map(\.title)
+                checkTitles: checks.map(hygieneCheckLabel)
             )
         }
     }
@@ -293,6 +293,41 @@ struct DashboardPresentation {
 
     func findings(in group: FindingGroup) -> [Finding] {
         findings.filter { $0.displayGroup == group }
+    }
+
+    private func hygieneCheckLabel(for check: SecurityHygieneCheck) -> String {
+        switch check.id {
+        case .macOSUpdates:
+            return updateAwarenessFinding == nil
+                ? "\(check.title): noch nicht eingeordnet"
+                : "\(check.title): lokal gesehen"
+        case .gatekeeper:
+            return gatekeeperFinding == nil
+                ? "\(check.title): noch nicht sichtbar"
+                : "\(check.title): lokal gesehen"
+        case .sip:
+            return sipIsVisible
+                ? "\(check.title): lokal gesehen"
+                : "\(check.title): noch nicht sichtbar"
+        default:
+            return check.title
+        }
+    }
+
+    private var gatekeeperFinding: Finding? {
+        findings.first { finding in
+            finding.source.kind == .systemInventory
+                && finding.evidence.contains { $0.id == "gatekeeper-status" }
+        }
+    }
+
+    private var sipIsVisible: Bool {
+        findings.contains { finding in
+            finding.source.kind == .systemInventory
+                && finding.evidence.contains { evidence in
+                    evidence.id == "sip-status"
+                }
+        }
     }
 
     private var startupMission: BuddyMission {
