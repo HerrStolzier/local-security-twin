@@ -156,14 +156,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - FileVault und macOS-Firewall als lokale Systemprofil-Schutzsignale ergänzt: Der Live-Sensor liest `fdesetup status` und `socketfilterfw --getglobalstate`, legt stabile Evidence-IDs `filevault-status` und `firewall-status` ab und zeigt beide Hygiene-Punkte nur bei sichtbarer Evidence als `Erkannt`.
 - Wichtig: Sento ändert weiterhin keine FileVault- oder Firewall-Einstellung und behandelt beide Werte nur als lokale Schutzsignale, nicht als Gesamturteil.
 - Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich; App danach mit `open -n .build/app/LocalSecurityTwin.app` gestartet.
+- VPN-Sinnhaftigkeit als weitere geführte Buddy-Frage ergänzt: Sento fragt jetzt nach einem konkreten VPN-Grund wie fremden WLANs oder beruflichen Vorgaben und hält die Grenze sichtbar, dass VPN kein magischer Rundumschutz ist.
+- Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich; App danach mit `open -n .build/app/LocalSecurityTwin.app` gestartet.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, und Kapitel 4 `Security Hygiene` hat jetzt eine freundlichere Übersicht, erste lokal gespeicherte Buddy-Fragen sowie FileVault-/Firewall-Sichtbarkeit.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, und Kapitel 4 `Security Hygiene` hat jetzt eine freundlichere Übersicht, lokal gespeicherte Buddy-Fragen inklusive VPN-Kontext sowie FileVault-/Firewall-Sichtbarkeit.
 
 ## Nächster konkreter Schritt
 
-Kapitel 4 visuell prüfen: App starten, eine Buddy-Frage beantworten und prüfen, ob FileVault/Firewall in der Hygiene-Übersicht verständlich als lokale Schutzsignale erscheinen.
+Kapitel 4 visuell prüfen: App starten, eine Buddy-Frage inklusive VPN beantworten und prüfen, ob lokale Schutzsignale, Nutzerangaben und ehrliche Grenzen klar genug wirken.
 
 ## Danach sinnvoll
 

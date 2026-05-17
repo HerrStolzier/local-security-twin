@@ -73,6 +73,7 @@ Kurzlebige To-dos gehören nicht hierher, sondern in `docs/session-status.md`.
 - Security-Hygiene darf nicht wie eine interne Belegliste klingen. Die Nutzeroberfläche soll nach praktischen Fähigkeiten gruppieren: was Sento lokal sehen kann, was später als bewusste Frage kommt und was ehrlich offen bleibt.
 - Geführte Hygiene-Fragen müssen als Nutzerangabe sichtbar bleiben. Auch lokal gespeicherte Antworten zu 2FA, Passwortmanager oder Recovery Codes sind keine Verifikation und dürfen nicht in einen geprüften Schutzstatus umgedeutet werden.
 - FileVault- und Firewall-Status sind geeignete lokale Hygiene-Schutzsignale, solange die App sie nur liest, nie still verändert und sie nicht als vollständige Sicherheitsbewertung verkauft.
+- VPN gehört in Sento Guard zuerst als Kontextfrage, nicht als Produktbewertung: Der sinnvolle Einsatz hängt von fremden Netzen, beruflichen Vorgaben und Vertrauensmodell ab, nicht von einem pauschalen Schutzversprechen.
 
 ## Workflow Gotchas
 

@@ -185,6 +185,7 @@ struct DashboardPresentation {
             .passwordManager,
             .twoFactorAuthentication,
             .recoveryCodes,
+            .vpnUsefulness,
         ]
 
         return questionIDs.compactMap { checkID in
@@ -407,6 +408,8 @@ struct DashboardPresentation {
             return "Hast du bei deinen wichtigsten Konten 2FA aktiviert?"
         case .recoveryCodes:
             return "Hast du Wiederherstellungscodes sicher abgelegt?"
+        case .vpnUsefulness:
+            return "Gibt es bei dir einen konkreten VPN-Grund, etwa fremde WLANs oder berufliche Vorgaben?"
         default:
             return "Kannst du diesen Punkt bewusst beantworten?"
         }

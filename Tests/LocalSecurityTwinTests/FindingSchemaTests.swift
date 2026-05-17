@@ -188,6 +188,7 @@ struct FindingSchemaTests {
         #expect(userAnswered.title == "Fragt Sento dich")
         #expect(userAnswered.checks.contains { $0.title == "2FA für wichtige Konten" && $0.status == "Später als Frage" })
         #expect(userAnswered.checks.contains { $0.title == "Passwortmanager" && $0.status == "Später als Frage" })
+        #expect(userAnswered.checks.contains { $0.title == "VPN-Sinnhaftigkeit" && $0.status == "Später als Frage" })
 
         let notVerifiable = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.notVerifiable.rawValue })
         #expect(notVerifiable.title == "Kann Sento noch nicht prüfen")
@@ -237,6 +238,10 @@ struct FindingSchemaTests {
 
         let question = try #require(presentation.guidedHygieneQuestions.first { $0.id == .passwordManager })
         #expect(question.answer == .yes)
+
+        let vpnQuestion = try #require(presentation.guidedHygieneQuestions.first { $0.id == .vpnUsefulness })
+        #expect(vpnQuestion.question.contains("konkreten VPN-Grund"))
+        #expect(vpnQuestion.boundary.contains("Rundumschutz"))
     }
 
     @Test func dashboardPresentationHighlightsUpdateAwarenessAfterRefresh() throws {
