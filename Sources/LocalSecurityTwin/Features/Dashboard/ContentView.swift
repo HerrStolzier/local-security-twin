@@ -20,51 +20,14 @@ struct ContentView: View {
     }
 
     var body: some View {
-        HSplitView {
-            SentoSidebar(presentation: presentation)
-                .frame(minWidth: 176, idealWidth: 220, maxWidth: 240)
-
-            ZStack {
-                BuddyHomeView(
-                    presentation: presentation,
-                    lastBaselineRefreshError: lastBaselineRefreshError,
-                    lastUpdateAwarenessRefreshNote: lastUpdateAwarenessRefreshNote,
-                    isRefreshingUpdateAwarenessSource: isRefreshingUpdateAwarenessSource,
-                    hygienePersistenceNote: hygienePersistenceNote,
-                    hygieneAnswerError: hygieneAnswerError,
-                    openFinding: { findingID in
-                        selection = findingID
-                    },
-                    recordHygieneAnswer: { answer, checkID in
-                        do {
-                            try recordHygieneAnswer(answer, checkID)
-                            hygieneAnswerError = nil
-                        } catch {
-                            hygieneAnswerError = "Diese Antwort konnte gerade nicht lokal gespeichert werden."
-                        }
-                    },
-                    rememberCurrentStartupState: {
-                        isShowingRememberConfirmation = true
-                    },
-                    refreshUpdateAwarenessSource: {
-                        isShowingUpdateAwarenessConfirmation = true
-                    }
-                )
-                .frame(minWidth: 0, maxWidth: .infinity)
-            }
-
-            if selection != nil {
-                DetailPane(
-                    findings: findings,
-                    selection: selection,
-                    close: {
-                        selection = nil
-                    }
-                )
-                .frame(minWidth: 360, idealWidth: 520)
+        GeometryReader { proxy in
+            if usesCompactShell(for: proxy.size.width) {
+                compactDashboardShell
+            } else {
+                regularDashboardShell
             }
         }
-        .frame(minWidth: selection == nil ? 740 : 960, minHeight: 640)
+        .frame(minWidth: selection == nil ? 560 : 960, minHeight: 620)
         .onChange(of: findings) { _, newFindings in
             if let selection, newFindings.contains(where: { $0.id == selection }) {
                 return
@@ -100,6 +63,70 @@ struct ContentView: View {
         }
     }
 
+    private func usesCompactShell(for width: CGFloat) -> Bool {
+        selection == nil && width < 760
+    }
+
+    private var regularDashboardShell: some View {
+        HSplitView {
+            SentoSidebar(presentation: presentation)
+                .frame(minWidth: 176, idealWidth: 220, maxWidth: 240)
+
+            ZStack {
+                buddyHome
+            }
+
+            if selection != nil {
+                DetailPane(
+                    findings: findings,
+                    selection: selection,
+                    close: {
+                        selection = nil
+                    }
+                )
+                .frame(minWidth: 360, idealWidth: 520)
+            }
+        }
+    }
+
+    private var compactDashboardShell: some View {
+        VStack(spacing: 0) {
+            CompactSentoNavigation(presentation: presentation)
+
+            Divider()
+
+            buddyHome
+        }
+    }
+
+    private var buddyHome: some View {
+        BuddyHomeView(
+            presentation: presentation,
+            lastBaselineRefreshError: lastBaselineRefreshError,
+            lastUpdateAwarenessRefreshNote: lastUpdateAwarenessRefreshNote,
+            isRefreshingUpdateAwarenessSource: isRefreshingUpdateAwarenessSource,
+            hygienePersistenceNote: hygienePersistenceNote,
+            hygieneAnswerError: hygieneAnswerError,
+            openFinding: { findingID in
+                selection = findingID
+            },
+            recordHygieneAnswer: { answer, checkID in
+                do {
+                    try recordHygieneAnswer(answer, checkID)
+                    hygieneAnswerError = nil
+                } catch {
+                    hygieneAnswerError = "Diese Antwort konnte gerade nicht lokal gespeichert werden."
+                }
+            },
+            rememberCurrentStartupState: {
+                isShowingRememberConfirmation = true
+            },
+            refreshUpdateAwarenessSource: {
+                isShowingUpdateAwarenessConfirmation = true
+            }
+        )
+        .frame(minWidth: 0, maxWidth: .infinity)
+    }
 }
 
 private struct SentoSidebar: View {
@@ -224,6 +251,85 @@ private struct SidebarItem: Identifiable {
     let value: String
     let systemImage: String
     let color: Color
+}
+
+private struct CompactSentoNavigation: View {
+    let presentation: DashboardPresentation
+
+    var body: some View {
+        HStack(spacing: 14) {
+            HStack(spacing: 10) {
+                SentoMark(size: 34)
+
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("Sento Guard")
+                        .font(.headline)
+                    Text("Lokaler Schutzbuddy")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            Spacer(minLength: 8)
+
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 8) {
+                    CompactNavBadge(value: "\(presentation.knownStartupCount)", label: "Autostart", systemImage: "bolt.horizontal.circle", color: .orange)
+                    CompactNavBadge(value: "\(presentation.reviewCount)", label: "System", systemImage: "display", color: .cyan)
+                    CompactNavBadge(value: "\(presentation.findings.count)", label: "Hinweise", systemImage: "bell", color: .indigo)
+                }
+
+                HStack(spacing: 8) {
+                    CompactIconBadge(value: "\(presentation.knownStartupCount)", systemImage: "bolt.horizontal.circle", color: .orange)
+                    CompactIconBadge(value: "\(presentation.reviewCount)", systemImage: "display", color: .cyan)
+                    CompactIconBadge(value: "\(presentation.findings.count)", systemImage: "bell", color: .indigo)
+                }
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(.ultraThinMaterial)
+    }
+}
+
+private struct CompactNavBadge: View {
+    let value: String
+    let label: String
+    let systemImage: String
+    let color: Color
+
+    var body: some View {
+        Label {
+            Text("\(value) \(label)")
+                .lineLimit(1)
+        } icon: {
+            Image(systemName: systemImage)
+        }
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(color)
+        .padding(.horizontal, 9)
+        .padding(.vertical, 6)
+        .background(color.opacity(0.12), in: Capsule())
+    }
+}
+
+private struct CompactIconBadge: View {
+    let value: String
+    let systemImage: String
+    let color: Color
+
+    var body: some View {
+        Label {
+            Text(value)
+        } icon: {
+            Image(systemName: systemImage)
+        }
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(color)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 6)
+        .background(color.opacity(0.12), in: Capsule())
+    }
 }
 
 private struct BuddyHomeView: View {

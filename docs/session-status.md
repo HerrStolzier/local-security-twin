@@ -165,14 +165,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Visuelle Prüfung am 2026-05-17 mit lokalem App-Bundle und schmalen Fenstern bei 900px und 760px Breite: Hauptinhalt verschwindet nicht mehr unter der Sidebar, Hero bleibt lesbar und Missionen brechen sichtbar in weniger Spalten um.
 - Sidebar nach Nutzerfeedback weiter beruhigt: Die zusätzliche Sento-Erklärkarten unten wurde entfernt, weil sie neben Brand, Hero und Navigation redundant wirkte.
 - Validierung am 2026-05-17: `swift build` und `./scripts/checks.sh` erfolgreich.
+- Sehr schmale Fenster bekommen jetzt eine kompakte Dashboard-Schale: Unterhalb der Breiten-Schwelle wird die linke Sidebar durch eine obere Sento-Navigation mit Brand und wichtigsten Zählern ersetzt.
+- Visuelle Prüfung am 2026-05-17 mit lokalem App-Bundle und 620px Fensterbreite: Die kompakte Kopfzeile erscheint, der Dashboard-Inhalt bleibt nutzbar und die linke Sidebar blockiert keinen Platz mehr.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht, und das Dashboard hat jetzt eine deutlich flexiblere responsive Schale mit ruhigerer Sidebar.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht, und das Dashboard hat jetzt eine flexible responsive Schale mit kompakter Navigation für sehr schmale Fenster.
 
 ## Nächster konkreter Schritt
 
-Dashboard erneut manuell in mehreren Fensterbreiten prüfen, besonders ob die Sidebar bei sehr schmalen Fenstern als feste linke Navigation ausreicht oder später eine echte kompakte Navigation braucht.
+Dashboard erneut manuell in mehreren Fensterbreiten prüfen, besonders den Detailbereich nach Auswahl eines Hinweises: Bei sehr schmalen Fenstern könnte später ein eigener kompakter Detailmodus nötig werden.
 
 ## Danach sinnvoll
 
