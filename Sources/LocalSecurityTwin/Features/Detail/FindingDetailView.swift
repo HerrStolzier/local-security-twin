@@ -3,6 +3,7 @@ import SwiftUI
 struct FindingDetailView: View {
     @EnvironmentObject private var policyStore: PolicyStore
     let finding: Finding
+    @State private var availableWidth: CGFloat = 0
 
     private var accentColor: Color {
         switch finding.displayGroup {
@@ -36,11 +37,26 @@ struct FindingDetailView: View {
                     )
                     TechnicalDetailSection(finding: finding, accentColor: accentColor)
                 }
-                .padding(28)
+                .padding(detailPadding)
                 .frame(maxWidth: 920, alignment: .leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
+        .background(
+            GeometryReader { proxy in
+                Color.clear
+                    .onAppear {
+                        availableWidth = proxy.size.width
+                    }
+                    .onChange(of: proxy.size.width) { _, newWidth in
+                        availableWidth = newWidth
+                    }
+            }
+        )
+    }
+
+    private var detailPadding: CGFloat {
+        availableWidth > 0 && availableWidth < 640 ? 18 : 28
     }
 }
 
@@ -102,11 +118,22 @@ private struct DetailStatusRow: View {
     let accentColor: Color
 
     var body: some View {
-        HStack(spacing: 8) {
-            DetailPill(text: finding.displaySourceTitle, systemImage: "dot.scope", color: accentColor)
-            DetailPill(text: finding.severity.displayTitle, systemImage: "shield", color: accentColor)
-            DetailPill(text: finding.confidence.displayTitle, systemImage: "checkmark.seal", color: accentColor)
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 8) {
+                detailPills
+            }
+
+            VStack(alignment: .leading, spacing: 8) {
+                detailPills
+            }
         }
+    }
+
+    @ViewBuilder
+    private var detailPills: some View {
+        DetailPill(text: finding.displaySourceTitle, systemImage: "dot.scope", color: accentColor)
+        DetailPill(text: finding.severity.displayTitle, systemImage: "shield", color: accentColor)
+        DetailPill(text: finding.confidence.displayTitle, systemImage: "checkmark.seal", color: accentColor)
     }
 }
 
@@ -264,17 +291,33 @@ private struct StartupDetailLine: View {
     let value: String
 
     var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 12) {
-            Text(label)
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .foregroundStyle(.secondary)
-                .frame(width: 150, alignment: .leading)
+        ViewThatFits(in: .horizontal) {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
+                labelText
+                    .frame(width: 150, alignment: .leading)
 
-            Text(value)
-                .font(.subheadline)
-                .textSelection(.enabled)
+                valueText
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                labelText
+                valueText
+            }
         }
+    }
+
+    private var labelText: some View {
+        Text(label)
+            .font(.subheadline)
+            .fontWeight(.semibold)
+            .foregroundStyle(.secondary)
+    }
+
+    private var valueText: some View {
+        Text(value)
+            .font(.subheadline)
+            .textSelection(.enabled)
+            .fixedSize(horizontal: false, vertical: true)
     }
 }
 
@@ -405,21 +448,19 @@ private struct RecommendationCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(recommendation.title)
-                        .font(.headline)
-                    Text(recommendation.explanation)
-                        .foregroundStyle(.secondary)
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .top, spacing: 12) {
+                    recommendationText
+
+                    Spacer()
+
+                    statusBadge
                 }
 
-                Spacer()
-
-                Text(statusText)
-                    .font(.caption)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
-                    .background(.quaternary, in: Capsule())
+                VStack(alignment: .leading, spacing: 8) {
+                    recommendationText
+                    statusBadge
+                }
             }
 
             Text(requirementText)
@@ -430,20 +471,13 @@ private struct RecommendationCard: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
-            HStack {
-                Button("Einmal erlauben") {
-                    pendingDecision = PendingPolicyDecision(decision: .allow, scope: .session)
-                    isShowingConfirmation = true
+            ViewThatFits(in: .horizontal) {
+                HStack {
+                    decisionButtons
                 }
 
-                Button("Merken: erlauben") {
-                    pendingDecision = PendingPolicyDecision(decision: .allow, scope: .remembered)
-                    isShowingConfirmation = true
-                }
-
-                Button("Merken: ablehnen") {
-                    pendingDecision = PendingPolicyDecision(decision: .deny, scope: .remembered)
-                    isShowingConfirmation = true
+                VStack(alignment: .leading, spacing: 8) {
+                    decisionButtons
                 }
             }
             .buttonStyle(.bordered)
@@ -480,6 +514,42 @@ private struct RecommendationCard: View {
             if let pendingDecision {
                 Text(confirmationMessage(for: pendingDecision))
             }
+        }
+    }
+
+    private var recommendationText: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(recommendation.title)
+                .font(.headline)
+            Text(recommendation.explanation)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private var statusBadge: some View {
+        Text(statusText)
+            .font(.caption)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 3)
+            .background(.quaternary, in: Capsule())
+    }
+
+    @ViewBuilder
+    private var decisionButtons: some View {
+        Button("Einmal erlauben") {
+            pendingDecision = PendingPolicyDecision(decision: .allow, scope: .session)
+            isShowingConfirmation = true
+        }
+
+        Button("Merken: erlauben") {
+            pendingDecision = PendingPolicyDecision(decision: .allow, scope: .remembered)
+            isShowingConfirmation = true
+        }
+
+        Button("Merken: ablehnen") {
+            pendingDecision = PendingPolicyDecision(decision: .deny, scope: .remembered)
+            isShowingConfirmation = true
         }
     }
 

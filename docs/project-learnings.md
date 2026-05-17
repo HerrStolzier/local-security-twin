@@ -78,6 +78,7 @@ Kurzlebige To-dos gehören nicht hierher, sondern in `docs/session-status.md`.
 - Responsiveness beginnt in der äußeren App-Schale: feste `HSplitView`-Mindestbreiten können alle inneren adaptiven Grids aushebeln und zu abgeschnittenem Inhalt führen. Erst wenn Sidebar, Hauptbereich und Detailbereich flexibel sind, können Karten, Hero und Hygiene-Abschnitte sauber umbrechen.
 - Sehr schmale macOS-Fenster brauchen einen echten Shell-Wechsel statt nur eine schmalere Sidebar. Eine kompakte obere Navigation gibt dem Buddy-Home mehr Raum und verhindert, dass die Sidebar zum Hauptproblem des Layouts wird.
 - In sehr schmalen Fenstern soll ein bewusst geöffneter Detailbereich die Übersicht ersetzen, statt als dritte Split-Spalte dazukommen. Für normale Nutzer ist ein klarer Zurück-/Schließen-Weg verständlicher als gequetschte Parallelansichten.
+- Detailseiten brauchen dieselbe responsive Sorgfalt wie das Dashboard: Innenabstände, Status-Pills, technische Label-Wert-Zeilen und Entscheidungsbuttons dürfen bei wenig Breite nicht starr horizontal bleiben.
 
 ## Workflow Gotchas
 

@@ -169,14 +169,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Visuelle Prüfung am 2026-05-17 mit lokalem App-Bundle und 620px Fensterbreite: Die kompakte Kopfzeile erscheint, der Dashboard-Inhalt bleibt nutzbar und die linke Sidebar blockiert keinen Platz mehr.
 - Kompakter Detailmodus ergänzt: Bei sehr schmalen Fenstern zeigt eine geöffnete Hinweis-Detailansicht nicht mehr Sidebar, Home und Detail nebeneinander, sondern ersetzt die Übersicht bis zum bewussten Schließen.
 - Visuelle Prüfung am 2026-05-17 mit lokalem App-Bundle und 620px Fensterbreite: `Hinweise ansehen` öffnet eine einspaltige Detailansicht mit `Schließen`-Aktion.
+- Detailinhalte für schmale Fenster nachgezogen: Innenabstand reduziert sich bei wenig Breite, Status-Pills, technische Faktenzeilen und Entscheidungsbuttons bekommen vertikale Ausweichlayouts.
+- Visuelle Prüfung am 2026-05-17 mit lokalem App-Bundle und 620px Fensterbreite: Die geöffnete Detailansicht wirkt ruhiger und drückt technische Zeilen nicht mehr in starre horizontale Reihen.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht, und das Dashboard hat jetzt eine flexible responsive Schale mit kompakter Navigation und einspaltigem Detailmodus für sehr schmale Fenster.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht, und Dashboard sowie Detailansicht reagieren jetzt deutlich robuster auf schmale Fenster.
 
 ## Nächster konkreter Schritt
 
-Dashboard erneut manuell in mehreren Fensterbreiten prüfen, besonders ob die Detailinhalte selbst bei sehr schmalen Fenstern noch zu viel Innenabstand oder zu breite Karten haben.
+Dashboard und Detailansicht erneut manuell in mehreren Fensterbreiten prüfen; falls nichts mehr bricht, mit dem nächsten Produktkapitel statt weiterer Responsive-Feinarbeit weitermachen.
 
 ## Danach sinnvoll
 
