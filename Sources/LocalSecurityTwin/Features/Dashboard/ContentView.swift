@@ -2,17 +2,21 @@ import SwiftUI
 
 struct ContentView: View {
     let findings: [Finding]
+    let hygieneAnswers: [SecurityHygieneAnswerRecord]
+    let hygienePersistenceNote: String?
     let lastBaselineRefreshError: String?
     let lastUpdateAwarenessRefreshNote: String?
     let isRefreshingUpdateAwarenessSource: Bool
+    let recordHygieneAnswer: (SecurityHygieneAnswer, SecurityHygieneCheckID) throws -> Void
     let rememberCurrentStartupState: () -> Void
     let refreshUpdateAwarenessSource: () -> Void
     @State private var selection: Finding.ID?
     @State private var isShowingRememberConfirmation = false
     @State private var isShowingUpdateAwarenessConfirmation = false
+    @State private var hygieneAnswerError: String?
 
     private var presentation: DashboardPresentation {
-        DashboardPresentation(findings: findings)
+        DashboardPresentation(findings: findings, hygieneAnswers: hygieneAnswers)
     }
 
     var body: some View {
@@ -26,8 +30,18 @@ struct ContentView: View {
                     lastBaselineRefreshError: lastBaselineRefreshError,
                     lastUpdateAwarenessRefreshNote: lastUpdateAwarenessRefreshNote,
                     isRefreshingUpdateAwarenessSource: isRefreshingUpdateAwarenessSource,
+                    hygienePersistenceNote: hygienePersistenceNote,
+                    hygieneAnswerError: hygieneAnswerError,
                     openFinding: { findingID in
                         selection = findingID
+                    },
+                    recordHygieneAnswer: { answer, checkID in
+                        do {
+                            try recordHygieneAnswer(answer, checkID)
+                            hygieneAnswerError = nil
+                        } catch {
+                            hygieneAnswerError = "Diese Antwort konnte gerade nicht lokal gespeichert werden."
+                        }
                     },
                     rememberCurrentStartupState: {
                         isShowingRememberConfirmation = true
@@ -242,7 +256,10 @@ private struct BuddyHomeView: View {
     let lastBaselineRefreshError: String?
     let lastUpdateAwarenessRefreshNote: String?
     let isRefreshingUpdateAwarenessSource: Bool
+    let hygienePersistenceNote: String?
+    let hygieneAnswerError: String?
     let openFinding: (Finding.ID) -> Void
+    let recordHygieneAnswer: (SecurityHygieneAnswer, SecurityHygieneCheckID) -> Void
     let rememberCurrentStartupState: () -> Void
     let refreshUpdateAwarenessSource: () -> Void
 
@@ -284,6 +301,13 @@ private struct BuddyHomeView: View {
                     )
 
                     HygieneOverviewSection(items: presentation.hygieneOverviewItems)
+
+                    GuidedHygieneQuestionSection(
+                        questions: presentation.guidedHygieneQuestions,
+                        persistenceNote: hygienePersistenceNote,
+                        answerError: hygieneAnswerError,
+                        recordAnswer: recordHygieneAnswer
+                    )
 
                     ActivityFeedSection(
                         items: presentation.activityItems,
@@ -1026,6 +1050,113 @@ private struct HygieneOverviewCard: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(accentColor.opacity(0.16))
         )
+    }
+}
+
+private struct GuidedHygieneQuestionSection: View {
+    let questions: [GuidedHygieneQuestion]
+    let persistenceNote: String?
+    let answerError: String?
+    let recordAnswer: (SecurityHygieneAnswer, SecurityHygieneCheckID) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(
+                title: "Erste Buddy-Fragen",
+                subtitle: "Deine Antworten bleiben lokal und sind Hinweise von dir, keine automatische Prüfung."
+            )
+
+            if let persistenceNote {
+                HygieneQuestionNote(text: persistenceNote, color: .orange)
+            }
+
+            if let answerError {
+                HygieneQuestionNote(text: answerError, color: .orange)
+            }
+
+            LazyVGrid(
+                columns: [
+                    GridItem(.adaptive(minimum: 310), spacing: 14),
+                ],
+                spacing: 14
+            ) {
+                ForEach(questions) { question in
+                    GuidedHygieneQuestionCard(
+                        question: question,
+                        recordAnswer: recordAnswer
+                    )
+                }
+            }
+        }
+    }
+}
+
+private struct GuidedHygieneQuestionCard: View {
+    let question: GuidedHygieneQuestion
+    let recordAnswer: (SecurityHygieneAnswer, SecurityHygieneCheckID) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top, spacing: 10) {
+                Image(systemName: "questionmark.bubble")
+                    .font(.headline)
+                    .foregroundStyle(.purple)
+                    .frame(width: 24)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(question.title)
+                        .font(.headline)
+
+                    Text(question.question)
+                        .font(.subheadline)
+                        .foregroundStyle(.primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
+            Text(question.boundary)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            HStack(spacing: 8) {
+                ForEach(SecurityHygieneAnswer.allCases, id: \.self) { answer in
+                    Button(answer.title) {
+                        recordAnswer(answer, question.id)
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .tint(question.answer == answer ? .purple : .secondary)
+                }
+            }
+
+            if let answer = question.answer {
+                Label(answer.statusTitle, systemImage: "checkmark.circle.fill")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.purple)
+            }
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.purple.opacity(0.16))
+        )
+    }
+}
+
+private struct HygieneQuestionNote: View {
+    let text: String
+    let color: Color
+
+    var body: some View {
+        Label(text, systemImage: "exclamationmark.circle")
+            .font(.caption)
+            .foregroundStyle(color)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(color.opacity(0.10), in: RoundedRectangle(cornerRadius: 8))
     }
 }
 

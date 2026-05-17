@@ -217,6 +217,25 @@ struct FindingSchemaTests {
         #expect(hygieneMission?.status == "Erste Orientierung")
     }
 
+    @Test func dashboardPresentationShowsSavedHygieneAnswersAsUserAnswers() throws {
+        let presentation = DashboardPresentation(
+            findings: [],
+            hygieneAnswers: [
+                SecurityHygieneAnswerRecord(
+                    checkID: .passwordManager,
+                    answer: .yes,
+                    updatedAt: Date(timeIntervalSince1970: 100)
+                ),
+            ]
+        )
+
+        let userAnswered = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.userAnswered.rawValue })
+        #expect(userAnswered.checks.contains { $0.title == "Passwortmanager" && $0.status == "Von dir bestätigt" })
+
+        let question = try #require(presentation.guidedHygieneQuestions.first { $0.id == .passwordManager })
+        #expect(question.answer == .yes)
+    }
+
     @Test func dashboardPresentationHighlightsUpdateAwarenessAfterRefresh() throws {
         let finding = Self.updateAwarenessFinding()
 

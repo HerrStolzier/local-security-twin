@@ -150,14 +150,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - SIP hat im Systemprofil-Finding jetzt einen eigenen stabilen Evidence-Eintrag `sip-status`, damit die Hygiene-Presentation nicht aus Fließtext raten muss.
 - Hygiene-Übersicht nach Screenshot-Feedback deutlich verständlicher gemacht: Der Bereich heißt jetzt `Sicherheitsgewohnheiten`, gruppiert nach `Kann Sento lokal sehen`, `Fragt Sento dich` und `Kann Sento noch nicht prüfen`, und zeigt pro Punkt klare Zustände wie `Erkannt`, `Noch nicht geprüft`, `Später als Frage` oder `Bleibt offen`.
 - Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich; App danach mit `open -n .build/app/LocalSecurityTwin.app` gestartet.
+- Erster geführter Hygiene-Fragen-Schnitt umgesetzt: Passwortmanager, 2FA und Recovery Codes erscheinen als `Erste Buddy-Fragen`; Antworten `Ja`, `Nein` und `Nicht sicher` werden lokal in `security-hygiene-answers.json` gespeichert und in der Hygiene-Übersicht als Nutzerangabe angezeigt.
+- Kaputte lokale Hygiene-Antwortdateien werden ruhig sichtbar gemacht; Sento fragt dann lieber erneut, statt alte Angaben still zu übernehmen.
+- Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich; App danach mit `open -n .build/app/LocalSecurityTwin.app` gestartet.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, und Kapitel 4 `Security Hygiene` hat jetzt eine erste freundlichere, ehrliche Übersicht statt technischer Beleglisten.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, und Kapitel 4 `Security Hygiene` hat jetzt eine freundlichere Übersicht plus erste lokal gespeicherte Buddy-Fragen.
 
 ## Nächster konkreter Schritt
 
-Kapitel 4 visuell prüfen: App starten und beurteilen, ob die neue Hygiene-Übersicht mit `Erkannt`, `Noch nicht geprüft`, `Später als Frage` und `Bleibt offen` für normale Nutzer klarer wirkt.
+Kapitel 4 visuell prüfen: App starten, eine Buddy-Frage beantworten und beurteilen, ob Antwortzustand, lokale Speicherlogik und ehrliche Grenze für normale Nutzer klar genug wirken.
 
 ## Danach sinnvoll
 

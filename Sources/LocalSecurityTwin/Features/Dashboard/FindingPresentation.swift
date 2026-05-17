@@ -34,6 +34,15 @@ enum FindingGroup: String, CaseIterable, Identifiable {
 
 struct DashboardPresentation {
     let findings: [Finding]
+    let hygieneAnswers: [SecurityHygieneAnswerRecord]
+
+    init(
+        findings: [Finding],
+        hygieneAnswers: [SecurityHygieneAnswerRecord] = []
+    ) {
+        self.findings = findings
+        self.hygieneAnswers = hygieneAnswers
+    }
 
     var startupChangeCount: Int {
         findings(in: .changes).count
@@ -167,6 +176,28 @@ struct DashboardPresentation {
                 title: hygieneOverviewTitle(for: kind),
                 explanation: hygieneOverviewExplanation(for: kind),
                 checks: checks.map(hygieneCheckStatus)
+            )
+        }
+    }
+
+    var guidedHygieneQuestions: [GuidedHygieneQuestion] {
+        let questionIDs: [SecurityHygieneCheckID] = [
+            .passwordManager,
+            .twoFactorAuthentication,
+            .recoveryCodes,
+        ]
+
+        return questionIDs.compactMap { checkID in
+            guard let check = SecurityHygieneCheck.initialCatalog.first(where: { $0.id == checkID }) else {
+                return nil
+            }
+
+            return GuidedHygieneQuestion(
+                id: check.id,
+                title: check.title,
+                question: hygieneQuestionText(for: check.id),
+                boundary: check.boundary,
+                answer: answer(for: check.id)
             )
         }
     }
@@ -341,7 +372,7 @@ struct DashboardPresentation {
         default:
             let status: String? = switch check.evidenceKind {
             case .userAnswered:
-                "Später als Frage"
+                answer(for: check.id)?.statusTitle ?? "Später als Frage"
             case .notVerifiable:
                 "Bleibt offen"
             case .inferredFromLocalSignal:
@@ -351,6 +382,23 @@ struct DashboardPresentation {
             }
 
             return HygieneCheckStatus(title: check.title, status: status)
+        }
+    }
+
+    private func answer(for checkID: SecurityHygieneCheckID) -> SecurityHygieneAnswer? {
+        hygieneAnswers.first { $0.checkID == checkID }?.answer
+    }
+
+    private func hygieneQuestionText(for checkID: SecurityHygieneCheckID) -> String {
+        switch checkID {
+        case .passwordManager:
+            return "Nutzt du für wichtige Passwörter einen Passwortmanager?"
+        case .twoFactorAuthentication:
+            return "Hast du bei deinen wichtigsten Konten 2FA aktiviert?"
+        case .recoveryCodes:
+            return "Hast du Wiederherstellungscodes sicher abgelegt?"
+        default:
+            return "Kannst du diesen Punkt bewusst beantworten?"
         }
     }
 
@@ -499,6 +547,14 @@ struct HygieneCheckStatus: Identifiable, Equatable {
     var id: String {
         "\(title)::\(status ?? "planned")"
     }
+}
+
+struct GuidedHygieneQuestion: Identifiable, Equatable {
+    let id: SecurityHygieneCheckID
+    let title: String
+    let question: String
+    let boundary: String
+    let answer: SecurityHygieneAnswer?
 }
 
 extension Finding {

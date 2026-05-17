@@ -160,3 +160,41 @@ struct SecurityHygieneCheck: Identifiable, Codable, Hashable, Sendable {
         ),
     ]
 }
+
+enum SecurityHygieneAnswer: String, Codable, CaseIterable, Hashable, Sendable {
+    case yes
+    case no
+    case notSure
+
+    var title: String {
+        switch self {
+        case .yes:
+            return "Ja"
+        case .no:
+            return "Nein"
+        case .notSure:
+            return "Nicht sicher"
+        }
+    }
+
+    var statusTitle: String {
+        switch self {
+        case .yes:
+            return "Von dir bestätigt"
+        case .no:
+            return "Von dir verneint"
+        case .notSure:
+            return "Noch unsicher"
+        }
+    }
+}
+
+struct SecurityHygieneAnswerRecord: Identifiable, Codable, Equatable, Sendable {
+    let checkID: SecurityHygieneCheckID
+    let answer: SecurityHygieneAnswer
+    let updatedAt: Date
+
+    var id: SecurityHygieneCheckID {
+        checkID
+    }
+}
