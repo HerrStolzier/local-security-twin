@@ -77,6 +77,7 @@ Kurzlebige To-dos gehören nicht hierher, sondern in `docs/session-status.md`.
 - Das Buddy-Home darf bei schmaleren macOS-Fenstern nicht nur Text umbrechen lassen. Hero, Topbar und spätere Banner brauchen explizite kompakte Layoutvarianten, damit normale Fenstergrößen nicht wie ein gequetschtes Dashboard wirken.
 - Responsiveness beginnt in der äußeren App-Schale: feste `HSplitView`-Mindestbreiten können alle inneren adaptiven Grids aushebeln und zu abgeschnittenem Inhalt führen. Erst wenn Sidebar, Hauptbereich und Detailbereich flexibel sind, können Karten, Hero und Hygiene-Abschnitte sauber umbrechen.
 - Sehr schmale macOS-Fenster brauchen einen echten Shell-Wechsel statt nur eine schmalere Sidebar. Eine kompakte obere Navigation gibt dem Buddy-Home mehr Raum und verhindert, dass die Sidebar zum Hauptproblem des Layouts wird.
+- In sehr schmalen Fenstern soll ein bewusst geöffneter Detailbereich die Übersicht ersetzen, statt als dritte Split-Spalte dazukommen. Für normale Nutzer ist ein klarer Zurück-/Schließen-Weg verständlicher als gequetschte Parallelansichten.
 
 ## Workflow Gotchas
 

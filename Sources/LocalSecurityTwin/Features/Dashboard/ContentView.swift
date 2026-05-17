@@ -27,7 +27,7 @@ struct ContentView: View {
                 regularDashboardShell
             }
         }
-        .frame(minWidth: selection == nil ? 560 : 960, minHeight: 620)
+        .frame(minWidth: 560, minHeight: 620)
         .onChange(of: findings) { _, newFindings in
             if let selection, newFindings.contains(where: { $0.id == selection }) {
                 return
@@ -64,7 +64,7 @@ struct ContentView: View {
     }
 
     private func usesCompactShell(for width: CGFloat) -> Bool {
-        selection == nil && width < 760
+        width < 760
     }
 
     private var regularDashboardShell: some View {
@@ -95,8 +95,22 @@ struct ContentView: View {
 
             Divider()
 
-            buddyHome
+            if selection != nil {
+                compactDetail
+            } else {
+                buddyHome
+            }
         }
+    }
+
+    private var compactDetail: some View {
+        DetailPane(
+            findings: findings,
+            selection: selection,
+            close: {
+                selection = nil
+            }
+        )
     }
 
     private var buddyHome: some View {
@@ -569,7 +583,7 @@ private struct DetailPane: View {
                     Text("Details")
                         .font(.headline)
                     Spacer()
-                    Button("Schliessen", action: close)
+                    Button("Schließen", action: close)
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 12)
