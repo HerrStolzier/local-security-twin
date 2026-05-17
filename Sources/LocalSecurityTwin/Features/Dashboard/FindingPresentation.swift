@@ -369,6 +369,16 @@ struct DashboardPresentation {
                 title: "SIP",
                 status: sipIsVisible ? "Erkannt" : "Noch nicht geprüft"
             )
+        case .fileVault:
+            return HygieneCheckStatus(
+                title: check.title,
+                status: isSystemEvidenceVisible("filevault-status") ? "Erkannt" : "Noch nicht geprüft"
+            )
+        case .firewall:
+            return HygieneCheckStatus(
+                title: check.title,
+                status: isSystemEvidenceVisible("firewall-status") ? "Erkannt" : "Noch nicht geprüft"
+            )
         default:
             let status: String? = switch check.evidenceKind {
             case .userAnswered:
@@ -410,10 +420,14 @@ struct DashboardPresentation {
     }
 
     private var sipIsVisible: Bool {
+        isSystemEvidenceVisible("sip-status")
+    }
+
+    private func isSystemEvidenceVisible(_ evidenceID: String) -> Bool {
         findings.contains { finding in
             finding.source.kind == .systemInventory
                 && finding.evidence.contains { evidence in
-                    evidence.id == "sip-status"
+                    evidence.id == evidenceID
                 }
         }
     }

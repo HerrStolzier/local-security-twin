@@ -187,7 +187,7 @@ Abnahme:
 
 ## Kapitel 4: Security Hygiene
 
-Status: geplant.
+Status: begonnen; erster Prototyp-Schnitt umgesetzt.
 
 Ziel:
 Der Buddy begleitet grundlegende Sicherheitsgewohnheiten.
@@ -211,6 +211,13 @@ Inhalt:
   - Passwortmanager
   - Recovery Codes
   - VPN-Sinnhaftigkeit
+
+Umgesetzt:
+
+- Hygiene-Katalog trennt automatisch sichtbare lokale Signale, Nutzerangaben, abgeleitete Hinweise und aktuell nicht prüfbare Punkte.
+- Buddy-Home zeigt `Sicherheitsgewohnheiten` mit klaren Zuständen wie `Erkannt`, `Noch nicht geprüft`, `Später als Frage` und `Bleibt offen`.
+- Erste Buddy-Fragen zu Passwortmanager, 2FA und Recovery Codes speichern Antworten lokal und markieren sie weiterhin als Nutzerangabe.
+- macOS-Updates, Gatekeeper, SIP, FileVault und Firewall werden als lokale Schutzsignale eingeordnet, sobald passende Evidence sichtbar ist.
 
 Abnahme:
 

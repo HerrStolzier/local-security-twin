@@ -47,7 +47,7 @@ struct SystemProfileSensor: FindingSensor {
                     summary: "macOS \(snapshot.operatingSystemVersion), Architektur \(snapshot.architecture).",
                     detail: profileDetail(from: snapshot)
                 ),
-            ] + sipEvidence(from: snapshot),
+            ] + protectionEvidence(from: snapshot),
             recommendations: [
                 FindingRecommendation(
                     id: "review-system-profile",
@@ -149,6 +149,14 @@ struct SystemProfileSensor: FindingSensor {
             lines.append("SIP: \(sipStatus.summary)")
         }
 
+        if let fileVaultStatus = snapshot.fileVaultStatus {
+            lines.append("FileVault: \(fileVaultStatus.summary)")
+        }
+
+        if let firewallStatus = snapshot.firewallStatus {
+            lines.append("Firewall: \(firewallStatus.summary)")
+        }
+
         if !snapshot.unavailableChecks.isEmpty {
             lines.append("Nicht verfügbar: \(snapshot.unavailableChecks.joined(separator: ", "))")
         }
@@ -165,19 +173,37 @@ struct SystemProfileSensor: FindingSensor {
         )
     }
 
-    private func sipEvidence(from snapshot: SystemProfileSnapshot) -> [FindingEvidence] {
-        guard let sipStatus = snapshot.sipStatus else {
-            return []
-        }
+    private func protectionEvidence(from snapshot: SystemProfileSnapshot) -> [FindingEvidence] {
+        var evidence: [FindingEvidence] = []
 
-        return [
-            FindingEvidence(
+        if let sipStatus = snapshot.sipStatus {
+            evidence.append(FindingEvidence(
                 id: "sip-status",
                 title: "System Integrity Protection",
                 summary: sipStatus.summary,
                 detail: "Rohmeldung: \(sipStatus.rawOutput)"
-            ),
-        ]
+            ))
+        }
+
+        if let fileVaultStatus = snapshot.fileVaultStatus {
+            evidence.append(FindingEvidence(
+                id: "filevault-status",
+                title: "FileVault",
+                summary: fileVaultStatus.summary,
+                detail: "Rohmeldung: \(fileVaultStatus.rawOutput)"
+            ))
+        }
+
+        if let firewallStatus = snapshot.firewallStatus {
+            evidence.append(FindingEvidence(
+                id: "firewall-status",
+                title: "Firewall",
+                summary: firewallStatus.summary,
+                detail: "Rohmeldung: \(firewallStatus.rawOutput)"
+            ))
+        }
+
+        return evidence
     }
 
     private func makeNotes(from snapshot: SystemProfileSnapshot) -> [String] {
@@ -203,6 +229,8 @@ struct SystemProfileSnapshot: Hashable, Sendable {
     let computerName: String?
     let gatekeeperStatus: GatekeeperStatus?
     let sipStatus: SystemProtectionStatus?
+    let fileVaultStatus: FileVaultStatus?
+    let firewallStatus: FirewallStatus?
     let unavailableChecks: [String]
 }
 
@@ -242,6 +270,78 @@ struct GatekeeperStatus: Hashable, Sendable {
     }
 }
 
+struct FileVaultStatus: Hashable, Sendable {
+    enum State: Hashable, Sendable {
+        case enabled
+        case disabled
+        case unknown
+    }
+
+    let state: State
+    let rawOutput: String
+
+    var summary: String {
+        switch state {
+        case .enabled:
+            return "FileVault meldet: Laufwerksverschlüsselung aktiv."
+        case .disabled:
+            return "FileVault meldet: Laufwerksverschlüsselung deaktiviert."
+        case .unknown:
+            return "FileVault meldet keinen eindeutig verstandenen Status."
+        }
+    }
+
+    static func parse(_ output: String) -> FileVaultStatus {
+        let normalized = output.lowercased()
+
+        if normalized.contains("filevault is on") {
+            return FileVaultStatus(state: .enabled, rawOutput: output)
+        }
+
+        if normalized.contains("filevault is off") {
+            return FileVaultStatus(state: .disabled, rawOutput: output)
+        }
+
+        return FileVaultStatus(state: .unknown, rawOutput: output)
+    }
+}
+
+struct FirewallStatus: Hashable, Sendable {
+    enum State: Hashable, Sendable {
+        case enabled
+        case disabled
+        case unknown
+    }
+
+    let state: State
+    let rawOutput: String
+
+    var summary: String {
+        switch state {
+        case .enabled:
+            return "Firewall meldet: eingehende Verbindungen werden gefiltert."
+        case .disabled:
+            return "Firewall meldet: Schutz für eingehende Verbindungen deaktiviert."
+        case .unknown:
+            return "Firewall meldet keinen eindeutig verstandenen Status."
+        }
+    }
+
+    static func parse(_ output: String) -> FirewallStatus {
+        let normalized = output.lowercased()
+
+        if normalized.contains("enabled") || normalized.contains("state = 1") || normalized.contains("global state: on") {
+            return FirewallStatus(state: .enabled, rawOutput: output)
+        }
+
+        if normalized.contains("disabled") || normalized.contains("state = 0") || normalized.contains("global state: off") {
+            return FirewallStatus(state: .disabled, rawOutput: output)
+        }
+
+        return FirewallStatus(state: .unknown, rawOutput: output)
+    }
+}
+
 struct SystemProtectionStatus: Hashable, Sendable {
     let summary: String
     let rawOutput: String
@@ -267,12 +367,33 @@ struct LiveSystemProfileSnapshotProvider: SystemProfileSnapshotProviding {
             unavailableChecks.append("SIP-Status")
         }
 
+        let fileVaultStatus: FileVaultStatus?
+        if let output = try? runCommand(path: "/usr/bin/fdesetup", arguments: ["status"]), !output.isEmpty {
+            fileVaultStatus = FileVaultStatus.parse(output)
+        } else {
+            fileVaultStatus = nil
+            unavailableChecks.append("FileVault-Status")
+        }
+
+        let firewallStatus: FirewallStatus?
+        if let output = try? runCommand(
+            path: "/usr/libexec/ApplicationFirewall/socketfilterfw",
+            arguments: ["--getglobalstate"]
+        ), !output.isEmpty {
+            firewallStatus = FirewallStatus.parse(output)
+        } else {
+            firewallStatus = nil
+            unavailableChecks.append("Firewall-Status")
+        }
+
         return SystemProfileSnapshot(
             operatingSystemVersion: ProcessInfo.processInfo.operatingSystemVersionString,
             architecture: machineArchitecture(),
             computerName: Host.current().localizedName,
             gatekeeperStatus: gatekeeperStatus,
             sipStatus: sipStatus,
+            fileVaultStatus: fileVaultStatus,
+            firewallStatus: firewallStatus,
             unavailableChecks: unavailableChecks
         )
     }

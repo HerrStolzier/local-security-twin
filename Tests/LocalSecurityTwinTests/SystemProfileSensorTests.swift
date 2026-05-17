@@ -15,6 +15,8 @@ struct SystemProfileSensorTests {
                         summary: "System Integrity Protection ist sichtbar aktiv.",
                         rawOutput: "System Integrity Protection status: enabled."
                     ),
+                    fileVaultStatus: FileVaultStatus.parse("FileVault is On."),
+                    firewallStatus: FirewallStatus.parse("Firewall is enabled. (State = 1)"),
                     unavailableChecks: []
                 )
             )
@@ -33,6 +35,8 @@ struct SystemProfileSensorTests {
         #expect(run.findings.contains(where: { $0.id == "system-profile::local-context" }))
         #expect(run.findings.contains(where: { $0.id == "system-profile::gatekeeper-enabled" }))
         #expect(run.findings.first { $0.id == "system-profile::local-context" }?.evidence.contains { $0.id == "sip-status" } == true)
+        #expect(run.findings.first { $0.id == "system-profile::local-context" }?.evidence.contains { $0.id == "filevault-status" } == true)
+        #expect(run.findings.first { $0.id == "system-profile::local-context" }?.evidence.contains { $0.id == "firewall-status" } == true)
         #expect(run.findings.allSatisfy { !$0.userImpact.contains("vollständig geschützt ist.") || $0.severity == .low })
         #expect(run.notes.contains(where: { $0.contains("Lokales Systemprofil gelesen") }))
     }
@@ -46,6 +50,8 @@ struct SystemProfileSensorTests {
                     computerName: nil,
                     gatekeeperStatus: GatekeeperStatus.parse("assessments disabled"),
                     sipStatus: nil,
+                    fileVaultStatus: nil,
+                    firewallStatus: nil,
                     unavailableChecks: ["SIP-Status"]
                 )
             )
@@ -78,6 +84,8 @@ struct SystemProfileSensorTests {
                     computerName: nil,
                     gatekeeperStatus: nil,
                     sipStatus: nil,
+                    fileVaultStatus: nil,
+                    firewallStatus: nil,
                     unavailableChecks: ["Gatekeeper-Status", "SIP-Status"]
                 )
             )
@@ -100,6 +108,16 @@ struct SystemProfileSensorTests {
 
         #expect(sensorIDs.contains("launch-agent-inventory"))
         #expect(sensorIDs.contains("system-profile"))
+    }
+
+    @Test func fileVaultAndFirewallParsersStayBounded() {
+        #expect(FileVaultStatus.parse("FileVault is On.").state == .enabled)
+        #expect(FileVaultStatus.parse("FileVault is Off.").state == .disabled)
+        #expect(FileVaultStatus.parse("Something else").state == .unknown)
+
+        #expect(FirewallStatus.parse("Firewall is enabled. (State = 1)").state == .enabled)
+        #expect(FirewallStatus.parse("Firewall is disabled. (State = 0)").state == .disabled)
+        #expect(FirewallStatus.parse("Something else").state == .unknown)
     }
 
     @Test func dashboardPresentationHandlesSystemOnlyFindings() {

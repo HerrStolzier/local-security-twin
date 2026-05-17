@@ -72,6 +72,7 @@ Kurzlebige To-dos gehören nicht hierher, sondern in `docs/session-status.md`.
 - Kaputte lokale Persistenz ist in einem Security-Produkt eine Sichtgrenze, kein Nebengeräusch. Policy-Dateien, Baselines und externe Quellen-Caches dürfen weiter robust fehlschlagen, sollen aber ruhig sichtbar machen, welcher Vergleich oder welche gespeicherte Entscheidung gerade nicht genutzt wurde.
 - Security-Hygiene darf nicht wie eine interne Belegliste klingen. Die Nutzeroberfläche soll nach praktischen Fähigkeiten gruppieren: was Sento lokal sehen kann, was später als bewusste Frage kommt und was ehrlich offen bleibt.
 - Geführte Hygiene-Fragen müssen als Nutzerangabe sichtbar bleiben. Auch lokal gespeicherte Antworten zu 2FA, Passwortmanager oder Recovery Codes sind keine Verifikation und dürfen nicht in einen geprüften Schutzstatus umgedeutet werden.
+- FileVault- und Firewall-Status sind geeignete lokale Hygiene-Schutzsignale, solange die App sie nur liest, nie still verändert und sie nicht als vollständige Sicherheitsbewertung verkauft.
 
 ## Workflow Gotchas
 

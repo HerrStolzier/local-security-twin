@@ -153,14 +153,17 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Erster geführter Hygiene-Fragen-Schnitt umgesetzt: Passwortmanager, 2FA und Recovery Codes erscheinen als `Erste Buddy-Fragen`; Antworten `Ja`, `Nein` und `Nicht sicher` werden lokal in `security-hygiene-answers.json` gespeichert und in der Hygiene-Übersicht als Nutzerangabe angezeigt.
 - Kaputte lokale Hygiene-Antwortdateien werden ruhig sichtbar gemacht; Sento fragt dann lieber erneut, statt alte Angaben still zu übernehmen.
 - Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich; App danach mit `open -n .build/app/LocalSecurityTwin.app` gestartet.
+- FileVault und macOS-Firewall als lokale Systemprofil-Schutzsignale ergänzt: Der Live-Sensor liest `fdesetup status` und `socketfilterfw --getglobalstate`, legt stabile Evidence-IDs `filevault-status` und `firewall-status` ab und zeigt beide Hygiene-Punkte nur bei sichtbarer Evidence als `Erkannt`.
+- Wichtig: Sento ändert weiterhin keine FileVault- oder Firewall-Einstellung und behandelt beide Werte nur als lokale Schutzsignale, nicht als Gesamturteil.
+- Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich; App danach mit `open -n .build/app/LocalSecurityTwin.app` gestartet.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, und Kapitel 4 `Security Hygiene` hat jetzt eine freundlichere Übersicht plus erste lokal gespeicherte Buddy-Fragen.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, und Kapitel 4 `Security Hygiene` hat jetzt eine freundlichere Übersicht, erste lokal gespeicherte Buddy-Fragen sowie FileVault-/Firewall-Sichtbarkeit.
 
 ## Nächster konkreter Schritt
 
-Kapitel 4 visuell prüfen: App starten, eine Buddy-Frage beantworten und beurteilen, ob Antwortzustand, lokale Speicherlogik und ehrliche Grenze für normale Nutzer klar genug wirken.
+Kapitel 4 visuell prüfen: App starten, eine Buddy-Frage beantworten und prüfen, ob FileVault/Firewall in der Hygiene-Übersicht verständlich als lokale Schutzsignale erscheinen.
 
 ## Danach sinnvoll
 

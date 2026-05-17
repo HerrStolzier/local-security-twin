@@ -106,17 +106,17 @@ struct SecurityHygieneCheck: Identifiable, Codable, Hashable, Sendable {
             id: .fileVault,
             title: "FileVault",
             category: .macProtection,
-            evidenceKind: .notVerifiable,
-            summary: "FileVault ist als wichtiger Schutzbereich geplant.",
-            boundary: "Sento behauptet den FileVault-Zustand erst, wenn ein stabiler lokaler Check gebaut ist."
+            evidenceKind: .observedLocally,
+            summary: "Sento kann den FileVault-Status lesen, wenn macOS die lokale Abfrage erlaubt.",
+            boundary: "FileVault schützt ruhende Daten, ist aber kein vollständiges Sicherheitsurteil."
         ),
         SecurityHygieneCheck(
             id: .firewall,
             title: "Firewall",
             category: .macProtection,
-            evidenceKind: .notVerifiable,
-            summary: "Die macOS-Firewall ist als späteres lokales Schutzsignal geplant.",
-            boundary: "Sento ändert keine Firewall-Einstellung still und bewertet sie erst nach einem eigenen Check."
+            evidenceKind: .observedLocally,
+            summary: "Sento kann den macOS-Firewall-Status lesen, wenn die lokale Abfrage verfügbar ist.",
+            boundary: "Sento ändert keine Firewall-Einstellung still und bewertet sie nur als lokales Schutzsignal."
         ),
         SecurityHygieneCheck(
             id: .twoFactorAuthentication,

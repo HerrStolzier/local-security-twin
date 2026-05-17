@@ -179,6 +179,8 @@ struct FindingSchemaTests {
         let local = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.observedLocally.rawValue })
         #expect(local.title == "Kann Sento lokal sehen")
         #expect(local.checks.contains { $0.title == "macOS-Updates" && $0.status == "Noch kein Vergleich" })
+        #expect(local.checks.contains { $0.title == "FileVault" && $0.status == "Noch nicht geprüft" })
+        #expect(local.checks.contains { $0.title == "Firewall" && $0.status == "Noch nicht geprüft" })
         #expect(local.checks.contains { $0.title == "Gatekeeper" && $0.status == "Noch nicht geprüft" })
         #expect(local.checks.contains { $0.title == "SIP" && $0.status == "Noch nicht geprüft" })
 
@@ -189,7 +191,6 @@ struct FindingSchemaTests {
 
         let notVerifiable = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.notVerifiable.rawValue })
         #expect(notVerifiable.title == "Kann Sento noch nicht prüfen")
-        #expect(notVerifiable.checks.contains { $0.title == "FileVault" && $0.status == "Bleibt offen" })
         #expect(notVerifiable.checks.contains { $0.title == "System Extensions" && $0.status == "Bleibt offen" })
     }
 
@@ -205,6 +206,8 @@ struct FindingSchemaTests {
         let local = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.observedLocally.rawValue })
 
         #expect(local.checks.contains { $0.title == "macOS-Updates" && $0.status == "Erkannt" })
+        #expect(local.checks.contains { $0.title == "FileVault" && $0.status == "Erkannt" })
+        #expect(local.checks.contains { $0.title == "Firewall" && $0.status == "Erkannt" })
         #expect(local.checks.contains { $0.title == "Gatekeeper" && $0.status == "Erkannt" })
         #expect(local.checks.contains { $0.title == "SIP" && $0.status == "Erkannt" })
     }
@@ -287,6 +290,18 @@ struct FindingSchemaTests {
                     title: "System Integrity Protection",
                     summary: "System Integrity Protection ist sichtbar aktiv.",
                     detail: "Rohmeldung: System Integrity Protection status: enabled."
+                ),
+                FindingEvidence(
+                    id: "filevault-status",
+                    title: "FileVault",
+                    summary: "FileVault meldet: Laufwerksverschlüsselung aktiv.",
+                    detail: "Rohmeldung: FileVault is On."
+                ),
+                FindingEvidence(
+                    id: "firewall-status",
+                    title: "Firewall",
+                    summary: "Firewall meldet: eingehende Verbindungen werden gefiltert.",
+                    detail: "Rohmeldung: Firewall is enabled. (State = 1)"
                 ),
             ],
             recommendations: []

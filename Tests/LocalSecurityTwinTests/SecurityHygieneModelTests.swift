@@ -10,7 +10,8 @@ struct SecurityHygieneModelTests {
         #expect(catalog.contains { $0.id == .gatekeeper && $0.evidenceKind == .observedLocally })
         #expect(catalog.contains { $0.id == .twoFactorAuthentication && $0.evidenceKind == .userAnswered })
         #expect(catalog.contains { $0.id == .passwordManager && $0.evidenceKind == .userAnswered })
-        #expect(catalog.contains { $0.id == .fileVault && $0.evidenceKind == .notVerifiable })
+        #expect(catalog.contains { $0.id == .fileVault && $0.evidenceKind == .observedLocally })
+        #expect(catalog.contains { $0.id == .firewall && $0.evidenceKind == .observedLocally })
         #expect(catalog.contains { $0.id == .systemExtensions && $0.evidenceKind == .notVerifiable })
     }
 
