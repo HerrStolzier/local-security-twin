@@ -163,10 +163,12 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich.
 - Zweiter Responsive-Schnitt nach erneutem Screenshot-Feedback umgesetzt: harte Mindestbreiten der Dashboard-Schale entfernt bzw. gesenkt, Sidebar flexibler gemacht, Missions-/Hygiene-/Frage-Grids enger umbrechbar gemacht und horizontale Zeilen mit vertikalen Ausweichlayouts ergänzt.
 - Visuelle Prüfung am 2026-05-17 mit lokalem App-Bundle und schmalen Fenstern bei 900px und 760px Breite: Hauptinhalt verschwindet nicht mehr unter der Sidebar, Hero bleibt lesbar und Missionen brechen sichtbar in weniger Spalten um.
+- Sidebar nach Nutzerfeedback weiter beruhigt: Die zusätzliche Sento-Erklärkarten unten wurde entfernt, weil sie neben Brand, Hero und Navigation redundant wirkte.
+- Validierung am 2026-05-17: `swift build` und `./scripts/checks.sh` erfolgreich.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht, und das Dashboard hat jetzt eine deutlich flexiblere responsive Schale.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht, und das Dashboard hat jetzt eine deutlich flexiblere responsive Schale mit ruhigerer Sidebar.
 
 ## Nächster konkreter Schritt
 

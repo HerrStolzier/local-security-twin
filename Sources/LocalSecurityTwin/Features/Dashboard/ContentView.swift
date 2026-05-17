@@ -141,8 +141,6 @@ private struct SentoSidebar: View {
             )
 
             Spacer()
-
-            SentoSidebarCard()
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 18)
@@ -226,29 +224,6 @@ private struct SidebarItem: Identifiable {
     let value: String
     let systemImage: String
     let color: Color
-}
-
-private struct SentoSidebarCard: View {
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            SentoCharacterBadge(size: 76)
-
-            Text("Ich bin Sento")
-                .font(.headline)
-
-            Text("Ich beobachte lokal und melde mich, wenn etwas deine Aufmerksamkeit braucht.")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(14)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(.blue.opacity(0.14))
-        )
-    }
 }
 
 private struct BuddyHomeView: View {
