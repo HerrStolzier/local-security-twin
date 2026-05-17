@@ -75,6 +75,7 @@ Kurzlebige To-dos gehören nicht hierher, sondern in `docs/session-status.md`.
 - FileVault- und Firewall-Status sind geeignete lokale Hygiene-Schutzsignale, solange die App sie nur liest, nie still verändert und sie nicht als vollständige Sicherheitsbewertung verkauft.
 - VPN gehört in Sento Guard zuerst als Kontextfrage, nicht als Produktbewertung: Der sinnvolle Einsatz hängt von fremden Netzen, beruflichen Vorgaben und Vertrauensmodell ab, nicht von einem pauschalen Schutzversprechen.
 - Das Buddy-Home darf bei schmaleren macOS-Fenstern nicht nur Text umbrechen lassen. Hero, Topbar und spätere Banner brauchen explizite kompakte Layoutvarianten, damit normale Fenstergrößen nicht wie ein gequetschtes Dashboard wirken.
+- Responsiveness beginnt in der äußeren App-Schale: feste `HSplitView`-Mindestbreiten können alle inneren adaptiven Grids aushebeln und zu abgeschnittenem Inhalt führen. Erst wenn Sidebar, Hauptbereich und Detailbereich flexibel sind, können Karten, Hero und Hygiene-Abschnitte sauber umbrechen.
 
 ## Workflow Gotchas
 

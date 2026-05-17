@@ -9,8 +9,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-16
-- Bereich: Persistenz-Sichtbarkeit und Regressionstests
+- Datum: 2026-05-17
+- Bereich: Dashboard-Responsiveness
 
 ## Zuletzt abgeschlossen
 
@@ -161,14 +161,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Responsive Dashboard-Fix nach Screenshot-Feedback umgesetzt: Hero-Bereich schaltet bei schmaleren Fenstern auf ein kompaktes Layout, damit Sento-Figur, Begrüßung, Erklärung, Button und Statuskarten nicht mehr in eine Ein-Wort-Spalte gedrückt werden; die Topbar hat zusätzlich eine kompakte Icon-Variante.
 - Visuelle Prüfung am 2026-05-17 mit schmal gesetztem App-Fenster und Screenshot `/tmp/sento-verify/responsive-1060-topbar.png`: Hero-Text bleibt lesbar, Statuskarten wandern sauberer unter bzw. neben den Inhalt.
 - Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich.
+- Zweiter Responsive-Schnitt nach erneutem Screenshot-Feedback umgesetzt: harte Mindestbreiten der Dashboard-Schale entfernt bzw. gesenkt, Sidebar flexibler gemacht, Missions-/Hygiene-/Frage-Grids enger umbrechbar gemacht und horizontale Zeilen mit vertikalen Ausweichlayouts ergänzt.
+- Visuelle Prüfung am 2026-05-17 mit lokalem App-Bundle und schmalen Fenstern bei 900px und 760px Breite: Hauptinhalt verschwindet nicht mehr unter der Sidebar, Hero bleibt lesbar und Missionen brechen sichtbar in weniger Spalten um.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht, und das Dashboard reagiert bei schmaleren Fenstern deutlich robuster.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht, und das Dashboard hat jetzt eine deutlich flexiblere responsive Schale.
 
 ## Nächster konkreter Schritt
 
-Dashboard erneut manuell in mehreren Fensterbreiten prüfen, besonders Missionen, Hygiene-Karten und Buddy-Fragen unterhalb des Hero-Bereichs.
+Dashboard erneut manuell in mehreren Fensterbreiten prüfen, besonders ob die Sidebar bei sehr schmalen Fenstern als feste linke Navigation ausreicht oder später eine echte kompakte Navigation braucht.
 
 ## Danach sinnvoll
 

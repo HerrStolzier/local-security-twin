@@ -22,7 +22,7 @@ struct ContentView: View {
     var body: some View {
         HSplitView {
             SentoSidebar(presentation: presentation)
-                .frame(width: 220)
+                .frame(minWidth: 176, idealWidth: 220, maxWidth: 240)
 
             ZStack {
                 BuddyHomeView(
@@ -50,7 +50,7 @@ struct ContentView: View {
                         isShowingUpdateAwarenessConfirmation = true
                     }
                 )
-                .frame(minWidth: selection == nil ? 920 : 620)
+                .frame(minWidth: 0, maxWidth: .infinity)
             }
 
             if selection != nil {
@@ -61,10 +61,10 @@ struct ContentView: View {
                         selection = nil
                     }
                 )
-                .frame(minWidth: 520, idealWidth: 600)
+                .frame(minWidth: 360, idealWidth: 520)
             }
         }
-        .frame(minWidth: selection == nil ? 1060 : 1240, minHeight: 720)
+        .frame(minWidth: selection == nil ? 740 : 960, minHeight: 640)
         .onChange(of: findings) { _, newFindings in
             if let selection, newFindings.contains(where: { $0.id == selection }) {
                 return
@@ -318,8 +318,8 @@ private struct BuddyHomeView: View {
 
                     VisibilityNote(text: presentation.visibilityText)
                 }
-                .padding(.horizontal, 24)
-                .padding(.vertical, 28)
+                .padding(.horizontal, 18)
+                .padding(.vertical, 24)
                 .frame(maxWidth: 1180, alignment: .leading)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             }
@@ -528,13 +528,13 @@ private struct GuardianStatusCard: View {
 
     var body: some View {
         Group {
-            if availableWidth > 0 && availableWidth < 860 {
+            if availableWidth > 0 && availableWidth < 780 {
                 compactLayout
             } else {
                 regularLayout
             }
         }
-        .padding(28)
+        .padding(24)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
         .background(toneColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
@@ -631,11 +631,22 @@ private struct GuardianStatusCard: View {
     }
 
     private var metricRow: some View {
-        HStack(spacing: 12) {
-            DefenseMetric(value: presentation.startupChangeCount, label: "neu", color: .mint)
-            DefenseMetric(value: presentation.knownStartupCount, label: "Hinweise", color: .blue)
-            DefenseMetric(value: presentation.reviewCount, label: "System", color: .purple)
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 12) {
+                metricCards
+            }
+
+            VStack(spacing: 10) {
+                metricCards
+            }
         }
+    }
+
+    @ViewBuilder
+    private var metricCards: some View {
+        DefenseMetric(value: presentation.startupChangeCount, label: "neu", color: .mint)
+        DefenseMetric(value: presentation.knownStartupCount, label: "Hinweise", color: .blue)
+        DefenseMetric(value: presentation.reviewCount, label: "System", color: .purple)
     }
 }
 
@@ -888,7 +899,7 @@ private struct DefenseMetric: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
-        .frame(minWidth: 92, maxWidth: .infinity, minHeight: 82, alignment: .leading)
+        .frame(minWidth: 82, maxWidth: .infinity, minHeight: 76, alignment: .leading)
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
@@ -913,7 +924,7 @@ private struct MissionSection: View {
 
             LazyVGrid(
                 columns: [
-                    GridItem(.adaptive(minimum: 210), spacing: 14),
+                    GridItem(.adaptive(minimum: 190), spacing: 14),
                 ],
                 spacing: 14
             ) {
@@ -1029,29 +1040,17 @@ private struct MissionCard: View {
 
 private struct SentoLocalPromiseCard: View {
     var body: some View {
-        HStack(alignment: .center, spacing: 22) {
-            SentoCharacterBadge(size: 112)
-
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Ich bleibe lokal")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-
-                Text("Aktuell prüfe ich lokale Hinweise beim Start und zeige dir ruhig, was ich einordnen kann.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                VStack(alignment: .leading, spacing: 6) {
-                    Label("100% lokal im aktuellen Stand", systemImage: "checkmark.circle.fill")
-                    Label("Datenschutzfreundlich gedacht", systemImage: "checkmark.circle.fill")
-                    Label("Technische Details nur bei Bedarf", systemImage: "checkmark.circle.fill")
-                }
-                .font(.caption)
-                .foregroundStyle(.blue)
+        ViewThatFits(in: .horizontal) {
+            HStack(alignment: .center, spacing: 22) {
+                SentoCharacterBadge(size: 112)
+                promiseText
+                Spacer()
             }
 
-            Spacer()
+            VStack(alignment: .leading, spacing: 14) {
+                SentoCharacterBadge(size: 92)
+                promiseText
+            }
         }
         .padding(20)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
@@ -1059,6 +1058,27 @@ private struct SentoLocalPromiseCard: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(.cyan.opacity(0.16))
         )
+    }
+
+    private var promiseText: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Ich bleibe lokal")
+                .font(.title3)
+                .fontWeight(.semibold)
+
+            Text("Aktuell prüfe ich lokale Hinweise beim Start und zeige dir ruhig, was ich einordnen kann.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Label("100% lokal im aktuellen Stand", systemImage: "checkmark.circle.fill")
+                Label("Datenschutzfreundlich gedacht", systemImage: "checkmark.circle.fill")
+                Label("Technische Details nur bei Bedarf", systemImage: "checkmark.circle.fill")
+            }
+            .font(.caption)
+            .foregroundStyle(.blue)
+        }
     }
 }
 
@@ -1074,7 +1094,7 @@ private struct HygieneOverviewSection: View {
 
             LazyVGrid(
                 columns: [
-                    GridItem(.adaptive(minimum: 250), spacing: 14),
+                    GridItem(.adaptive(minimum: 220), spacing: 14),
                 ],
                 spacing: 14
             ) {
@@ -1123,21 +1143,16 @@ private struct HygieneOverviewCard: View {
 
             VStack(alignment: .leading, spacing: 7) {
                 ForEach(item.checks) { check in
-                    HStack(alignment: .firstTextBaseline, spacing: 8) {
-                        Text(check.title)
-                            .font(.caption)
-                            .foregroundStyle(.primary)
+                    ViewThatFits(in: .horizontal) {
+                        HStack(alignment: .firstTextBaseline, spacing: 8) {
+                            checkTitle(check)
+                            Spacer(minLength: 8)
+                            statusBadge(check.status)
+                        }
 
-                        Spacer(minLength: 8)
-
-                        if let status = check.status {
-                            Text(status)
-                                .font(.caption2)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(accentColor)
-                                .padding(.horizontal, 7)
-                                .padding(.vertical, 3)
-                                .background(accentColor.opacity(0.12), in: Capsule())
+                        VStack(alignment: .leading, spacing: 4) {
+                            checkTitle(check)
+                            statusBadge(check.status)
                         }
                     }
                 }
@@ -1150,6 +1165,26 @@ private struct HygieneOverviewCard: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(accentColor.opacity(0.16))
         )
+    }
+
+    private func checkTitle(_ check: HygieneCheckStatus) -> some View {
+        Text(check.title)
+            .font(.caption)
+            .foregroundStyle(.primary)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+
+    @ViewBuilder
+    private func statusBadge(_ status: String?) -> some View {
+        if let status {
+            Text(status)
+                .font(.caption2)
+                .fontWeight(.semibold)
+                .foregroundStyle(accentColor)
+                .padding(.horizontal, 7)
+                .padding(.vertical, 3)
+                .background(accentColor.opacity(0.12), in: Capsule())
+        }
     }
 }
 
@@ -1176,7 +1211,7 @@ private struct GuidedHygieneQuestionSection: View {
 
             LazyVGrid(
                 columns: [
-                    GridItem(.adaptive(minimum: 310), spacing: 14),
+                    GridItem(.adaptive(minimum: 250), spacing: 14),
                 ],
                 spacing: 14
             ) {
@@ -1219,14 +1254,13 @@ private struct GuidedHygieneQuestionCard: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            HStack(spacing: 8) {
-                ForEach(SecurityHygieneAnswer.allCases, id: \.self) { answer in
-                    Button(answer.title) {
-                        recordAnswer(answer, question.id)
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
-                    .tint(question.answer == answer ? .purple : .secondary)
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 8) {
+                    answerButtons
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    answerButtons
                 }
             }
 
@@ -1243,6 +1277,18 @@ private struct GuidedHygieneQuestionCard: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(.purple.opacity(0.16))
         )
+    }
+
+    @ViewBuilder
+    private var answerButtons: some View {
+        ForEach(SecurityHygieneAnswer.allCases, id: \.self) { answer in
+            Button(answer.title) {
+                recordAnswer(answer, question.id)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
+            .tint(question.answer == answer ? .purple : .secondary)
+        }
     }
 }
 
@@ -1289,28 +1335,20 @@ private struct ActivityFeedRow: View {
     }
 
     var body: some View {
-        HStack(alignment: .top, spacing: 12) {
-            Image(systemName: item.systemImage)
-                .foregroundStyle(accentColor)
-                .frame(width: 28, height: 28)
-                .background(accentColor.opacity(0.1), in: RoundedRectangle(cornerRadius: 8))
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(item.title)
-                    .font(.headline)
-
-                Text(item.message)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+        ViewThatFits(in: .horizontal) {
+            HStack(alignment: .top, spacing: 12) {
+                rowIcon
+                rowText
+                Spacer()
+                detailsButton
             }
 
-            Spacer()
-
-            if let findingID = item.findingID {
-                Button("Details") {
-                    openFinding(findingID)
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(alignment: .top, spacing: 12) {
+                    rowIcon
+                    rowText
                 }
-                .buttonStyle(.bordered)
+                detailsButton
             }
         }
         .padding(14)
@@ -1320,6 +1358,35 @@ private struct ActivityFeedRow: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(accentColor.opacity(0.16))
         )
+    }
+
+    private var rowIcon: some View {
+        Image(systemName: item.systemImage)
+            .foregroundStyle(accentColor)
+            .frame(width: 28, height: 28)
+            .background(accentColor.opacity(0.1), in: RoundedRectangle(cornerRadius: 8))
+    }
+
+    private var rowText: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(item.title)
+                .font(.headline)
+
+            Text(item.message)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    @ViewBuilder
+    private var detailsButton: some View {
+        if let findingID = item.findingID {
+            Button("Details") {
+                openFinding(findingID)
+            }
+            .buttonStyle(.bordered)
+        }
     }
 }
 
@@ -1365,19 +1432,17 @@ private struct RememberStartupStateBanner: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .center, spacing: 12) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Autostart-Änderungen sichtbar")
-                        .font(.headline)
-                    Text("Wenn diese Änderungen erwartet sind, kannst du den aktuellen Zustand merken. Die App bleibt dann beim nächsten Lauf ruhiger.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .center, spacing: 12) {
+                    bannerText
+                    Spacer()
+                    confirmButton
                 }
 
-                Spacer()
-
-                Button("Als erwartet merken", action: onConfirm)
-                    .buttonStyle(.borderedProminent)
+                VStack(alignment: .leading, spacing: 10) {
+                    bannerText
+                    confirmButton
+                }
             }
 
             if let error {
@@ -1392,5 +1457,21 @@ private struct RememberStartupStateBanner: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.orange.opacity(0.2))
         )
+    }
+
+    private var bannerText: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Autostart-Änderungen sichtbar")
+                .font(.headline)
+            Text("Wenn diese Änderungen erwartet sind, kannst du den aktuellen Zustand merken. Die App bleibt dann beim nächsten Lauf ruhiger.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private var confirmButton: some View {
+        Button("Als erwartet merken", action: onConfirm)
+            .buttonStyle(.borderedProminent)
     }
 }
