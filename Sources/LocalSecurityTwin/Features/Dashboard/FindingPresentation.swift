@@ -164,9 +164,9 @@ struct DashboardPresentation {
 
             return HygieneOverviewItem(
                 id: kind.rawValue,
-                title: kind.title,
-                explanation: kind.explanation,
-                checkTitles: checks.map(hygieneCheckLabel)
+                title: hygieneOverviewTitle(for: kind),
+                explanation: hygieneOverviewExplanation(for: kind),
+                checks: checks.map(hygieneCheckStatus)
             )
         }
     }
@@ -295,22 +295,62 @@ struct DashboardPresentation {
         findings.filter { $0.displayGroup == group }
     }
 
-    private func hygieneCheckLabel(for check: SecurityHygieneCheck) -> String {
+    private func hygieneOverviewTitle(for kind: SecurityHygieneEvidenceKind) -> String {
+        switch kind {
+        case .observedLocally:
+            return "Kann Sento lokal sehen"
+        case .userAnswered:
+            return "Fragt Sento dich"
+        case .notVerifiable:
+            return "Kann Sento noch nicht prüfen"
+        case .inferredFromLocalSignal:
+            return "Nur vorsichtig ableitbar"
+        }
+    }
+
+    private func hygieneOverviewExplanation(for kind: SecurityHygieneEvidenceKind) -> String {
+        switch kind {
+        case .observedLocally:
+            return "Diese Punkte kann Sento aus lokalen Hinweisen einordnen."
+        case .userAnswered:
+            return "Diese Punkte brauchen später deine bewusste Antwort."
+        case .notVerifiable:
+            return "Diese Punkte bleiben offen, bis es einen verlässlichen lokalen Check gibt."
+        case .inferredFromLocalSignal:
+            return "Diese Punkte zeigen nur Hinweise, aber keine vollständige Prüfung."
+        }
+    }
+
+    private func hygieneCheckStatus(for check: SecurityHygieneCheck) -> HygieneCheckStatus {
         switch check.id {
         case .macOSUpdates:
-            return updateAwarenessFinding == nil
-                ? "\(check.title): noch nicht eingeordnet"
-                : "\(check.title): lokal gesehen"
+            return HygieneCheckStatus(
+                title: check.title,
+                status: updateAwarenessFinding == nil ? "Noch kein Vergleich" : "Erkannt"
+            )
         case .gatekeeper:
-            return gatekeeperFinding == nil
-                ? "\(check.title): noch nicht sichtbar"
-                : "\(check.title): lokal gesehen"
+            return HygieneCheckStatus(
+                title: check.title,
+                status: gatekeeperFinding == nil ? "Noch nicht geprüft" : "Erkannt"
+            )
         case .sip:
-            return sipIsVisible
-                ? "\(check.title): lokal gesehen"
-                : "\(check.title): noch nicht sichtbar"
+            return HygieneCheckStatus(
+                title: "SIP",
+                status: sipIsVisible ? "Erkannt" : "Noch nicht geprüft"
+            )
         default:
-            return check.title
+            let status: String? = switch check.evidenceKind {
+            case .userAnswered:
+                "Später als Frage"
+            case .notVerifiable:
+                "Bleibt offen"
+            case .inferredFromLocalSignal:
+                "Nur Hinweis"
+            case .observedLocally:
+                nil
+            }
+
+            return HygieneCheckStatus(title: check.title, status: status)
         }
     }
 
@@ -387,16 +427,11 @@ struct DashboardPresentation {
     }
 
     private var hygieneMission: BuddyMission {
-        let catalog = SecurityHygieneCheck.initialCatalog
-        let locallyObservedCount = catalog.count { $0.evidenceKind == .observedLocally }
-        let userAnsweredCount = catalog.count { $0.evidenceKind == .userAnswered }
-        let notVerifiableCount = catalog.count { $0.evidenceKind == .notVerifiable }
-
         return BuddyMission(
             id: "hygiene",
             title: "Security-Hygiene",
-            status: "Belegtypen geplant",
-            summary: "\(locallyObservedCount) lokale Schutzsignale, \(userAnsweredCount) geführte Nutzerfragen und \(notVerifiableCount) noch nicht automatisch prüfbare Punkte sind vorbereitet.",
+            status: "Erste Orientierung",
+            summary: "Sento sortiert erste Hygiene-Punkte: einiges sieht er lokal, anderes fragt er dich später bewusst.",
             systemImage: "checklist",
             progress: 0.28,
             primaryActionTitle: "Noch begrenzt",
@@ -454,7 +489,16 @@ struct HygieneOverviewItem: Identifiable, Equatable {
     let id: String
     let title: String
     let explanation: String
-    let checkTitles: [String]
+    let checks: [HygieneCheckStatus]
+}
+
+struct HygieneCheckStatus: Identifiable, Equatable {
+    let title: String
+    let status: String?
+
+    var id: String {
+        "\(title)::\(status ?? "planned")"
+    }
 }
 
 extension Finding {

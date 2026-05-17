@@ -148,14 +148,16 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Kleiner Hygiene-UX-Feinschliff nach Sichtprüfung: Sidebar-Wert für Security-Hygiene lautet jetzt `Belege` statt `Plan`, und Nutzerantworten sprechen den Nutzer direkter an.
 - Erste lokale Hygiene-Zustände aus vorhandenen Findings abgeleitet: macOS-Update, Gatekeeper und SIP erscheinen in der Hygiene-Übersicht nur dann als `lokal gesehen`, wenn passende lokale Findings/Belege vorhanden sind.
 - SIP hat im Systemprofil-Finding jetzt einen eigenen stabilen Evidence-Eintrag `sip-status`, damit die Hygiene-Presentation nicht aus Fließtext raten muss.
+- Hygiene-Übersicht nach Screenshot-Feedback deutlich verständlicher gemacht: Der Bereich heißt jetzt `Sicherheitsgewohnheiten`, gruppiert nach `Kann Sento lokal sehen`, `Fragt Sento dich` und `Kann Sento noch nicht prüfen`, und zeigt pro Punkt klare Zustände wie `Erkannt`, `Noch nicht geprüft`, `Später als Frage` oder `Bleibt offen`.
+- Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich; App danach mit `open -n .build/app/LocalSecurityTwin.app` gestartet.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, inklusive sichtbarem SOFA-Abruf und ehrlichen lokalen Persistenz-Notes.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, und Kapitel 4 `Security Hygiene` hat jetzt eine erste freundlichere, ehrliche Übersicht statt technischer Beleglisten.
 
 ## Nächster konkreter Schritt
 
-Kapitel 4 visuell prüfen: App starten und beurteilen, ob die Hygiene-Übersicht mit Zuständen wie `lokal gesehen`, `noch nicht sichtbar` und `noch nicht eingeordnet` verständlich wirkt und nicht zu technisch wird.
+Kapitel 4 visuell prüfen: App starten und beurteilen, ob die neue Hygiene-Übersicht mit `Erkannt`, `Noch nicht geprüft`, `Später als Frage` und `Bleibt offen` für normale Nutzer klarer wirkt.
 
 ## Danach sinnvoll
 

@@ -167,10 +167,9 @@ struct FindingSchemaTests {
         let presentation = DashboardPresentation(findings: [])
         let hygieneMission = try #require(presentation.missions.first { $0.id == "hygiene" })
 
-        #expect(hygieneMission.status == "Belegtypen geplant")
-        #expect(hygieneMission.summary.contains("lokale Schutzsignale"))
-        #expect(hygieneMission.summary.contains("geführte Nutzerfragen"))
-        #expect(hygieneMission.summary.contains("noch nicht automatisch prüfbare Punkte"))
+        #expect(hygieneMission.status == "Erste Orientierung")
+        #expect(hygieneMission.summary.contains("lokal"))
+        #expect(hygieneMission.summary.contains("bewusst"))
         #expect(hygieneMission.findingID == nil)
     }
 
@@ -178,17 +177,20 @@ struct FindingSchemaTests {
         let presentation = DashboardPresentation(findings: [])
 
         let local = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.observedLocally.rawValue })
-        #expect(local.checkTitles.contains("macOS-Updates: noch nicht eingeordnet"))
-        #expect(local.checkTitles.contains("Gatekeeper: noch nicht sichtbar"))
-        #expect(local.checkTitles.contains("System Integrity Protection: noch nicht sichtbar"))
+        #expect(local.title == "Kann Sento lokal sehen")
+        #expect(local.checks.contains { $0.title == "macOS-Updates" && $0.status == "Noch kein Vergleich" })
+        #expect(local.checks.contains { $0.title == "Gatekeeper" && $0.status == "Noch nicht geprüft" })
+        #expect(local.checks.contains { $0.title == "SIP" && $0.status == "Noch nicht geprüft" })
 
         let userAnswered = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.userAnswered.rawValue })
-        #expect(userAnswered.checkTitles.contains("2FA für wichtige Konten"))
-        #expect(userAnswered.checkTitles.contains("Passwortmanager"))
+        #expect(userAnswered.title == "Fragt Sento dich")
+        #expect(userAnswered.checks.contains { $0.title == "2FA für wichtige Konten" && $0.status == "Später als Frage" })
+        #expect(userAnswered.checks.contains { $0.title == "Passwortmanager" && $0.status == "Später als Frage" })
 
         let notVerifiable = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.notVerifiable.rawValue })
-        #expect(notVerifiable.checkTitles.contains("FileVault"))
-        #expect(notVerifiable.checkTitles.contains("System Extensions"))
+        #expect(notVerifiable.title == "Kann Sento noch nicht prüfen")
+        #expect(notVerifiable.checks.contains { $0.title == "FileVault" && $0.status == "Bleibt offen" })
+        #expect(notVerifiable.checks.contains { $0.title == "System Extensions" && $0.status == "Bleibt offen" })
     }
 
     @Test func dashboardPresentationDerivesLocalHygieneStateFromExistingFindings() throws {
@@ -202,9 +204,9 @@ struct FindingSchemaTests {
 
         let local = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.observedLocally.rawValue })
 
-        #expect(local.checkTitles.contains("macOS-Updates: lokal gesehen"))
-        #expect(local.checkTitles.contains("Gatekeeper: lokal gesehen"))
-        #expect(local.checkTitles.contains("System Integrity Protection: lokal gesehen"))
+        #expect(local.checks.contains { $0.title == "macOS-Updates" && $0.status == "Erkannt" })
+        #expect(local.checks.contains { $0.title == "Gatekeeper" && $0.status == "Erkannt" })
+        #expect(local.checks.contains { $0.title == "SIP" && $0.status == "Erkannt" })
     }
 
     @Test func dashboardPresentationNamesHygieneMissionAsEvidenceWork() {
@@ -212,7 +214,7 @@ struct FindingSchemaTests {
         let hygieneMission = presentation.missions.first { $0.id == "hygiene" }
 
         #expect(hygieneMission?.primaryActionTitle == "Noch begrenzt")
-        #expect(hygieneMission?.status == "Belegtypen geplant")
+        #expect(hygieneMission?.status == "Erste Orientierung")
     }
 
     @Test func dashboardPresentationHighlightsUpdateAwarenessAfterRefresh() throws {

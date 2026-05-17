@@ -944,8 +944,8 @@ private struct HygieneOverviewSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             SectionHeader(
-                title: "Security-Hygiene",
-                subtitle: "Diese Punkte sind vorbereitet, aber nicht alle automatisch geprüft."
+                title: "Sicherheitsgewohnheiten",
+                subtitle: "Sento sortiert, was er selbst sehen kann und wobei er dich später bewusst fragt."
             )
 
             LazyVGrid(
@@ -997,11 +997,27 @@ private struct HygieneOverviewCard: View {
                 }
             }
 
-            Text(item.checkTitles.joined(separator: " · "))
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .lineLimit(3)
-                .fixedSize(horizontal: false, vertical: true)
+            VStack(alignment: .leading, spacing: 7) {
+                ForEach(item.checks) { check in
+                    HStack(alignment: .firstTextBaseline, spacing: 8) {
+                        Text(check.title)
+                            .font(.caption)
+                            .foregroundStyle(.primary)
+
+                        Spacer(minLength: 8)
+
+                        if let status = check.status {
+                            Text(status)
+                                .font(.caption2)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(accentColor)
+                                .padding(.horizontal, 7)
+                                .padding(.vertical, 3)
+                                .background(accentColor.opacity(0.12), in: Capsule())
+                        }
+                    }
+                }
+            }
         }
         .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
