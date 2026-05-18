@@ -24,6 +24,9 @@ struct LocalSecurityTwinApp: App {
                 recordHygieneAnswer: { answer, checkID in
                     try hygieneAnswerStore.record(answer: answer, for: checkID)
                 },
+                clearHygieneAnswer: { checkID in
+                    try hygieneAnswerStore.clearAnswer(for: checkID)
+                },
                 rememberCurrentStartupState: {
                     findingStore.rememberCurrentStartupState()
                 },

@@ -187,7 +187,7 @@ Abnahme:
 
 ## Kapitel 4: Security Hygiene
 
-Status: begonnen; erster Prototyp-Schnitt umgesetzt.
+Status: erster geführter Buddy-Fragen-Flow umgesetzt; weitere Priorisierung offen.
 
 Ziel:
 Der Buddy begleitet grundlegende Sicherheitsgewohnheiten.
@@ -215,13 +215,16 @@ Inhalt:
 Umgesetzt:
 
 - Hygiene-Katalog trennt automatisch sichtbare lokale Signale, Nutzerangaben, abgeleitete Hinweise und aktuell nicht prüfbare Punkte.
-- Buddy-Home zeigt `Sicherheitsgewohnheiten` mit klaren Zuständen wie `Erkannt`, `Noch nicht geprüft`, `Später als Frage` und `Bleibt offen`.
+- Buddy-Home zeigt `Sicherheitsgewohnheiten` mit klaren Zuständen wie `Erkannt`, `Noch nicht geprüft`, `Fragt dich noch` und `Bleibt offen`.
 - Erste Buddy-Fragen zu Passwortmanager, 2FA, Recovery Codes und VPN-Sinnhaftigkeit speichern Antworten lokal und markieren sie weiterhin als Nutzerangabe.
+- Gespeicherte Buddy-Fragen-Antworten können durch eine andere Antwort geändert oder mit `Antwort zurücknehmen` wieder entfernt werden.
+- Beantwortete Fragen erklären sichtbar, dass die Antwort lokal gespeichert ist und keine automatische Prüfung darstellt.
 - macOS-Updates, Gatekeeper, SIP, FileVault und Firewall werden als lokale Schutzsignale eingeordnet, sobald passende Evidence sichtbar ist.
 
 Abnahme:
 
 - Die App behauptet keine 2FA, die sie nicht prüfen kann.
+- Nutzerantworten bleiben sichtbar als lokale Selbstauskunft und können geändert oder zurückgenommen werden.
 - VPN wird nicht als magischer Rundumschutz verkauft.
 - Security-Tools werden nicht pauschal bewertet, solange nur ihre Existenz sichtbar ist.
 

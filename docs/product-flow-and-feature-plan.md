@@ -562,6 +562,7 @@ Akzeptanzkriterien:
 - Kein Schutzprodukt wird pauschal als gut oder schlecht bewertet, solange kein konkreter Beleg vorliegt.
 - VPN wird nicht als allgemeiner Sicherheitszauber dargestellt.
 - 2FA wird für wichtige Konten empfohlen, aber die App behauptet ohne Integration nicht, es wirklich verifiziert zu haben.
+- Antworten auf Buddy-Fragen bleiben lokal, sind sichtbar als Nutzerangabe markiert und können später geändert oder zurückgenommen werden.
 
 ### Phase 3: App-Inventur
 

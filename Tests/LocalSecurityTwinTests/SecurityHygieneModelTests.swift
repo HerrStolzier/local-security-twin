@@ -52,6 +52,48 @@ struct SecurityHygieneModelTests {
     }
 
     @MainActor
+    @Test func answerStoreReplacesExistingGuidedAnswerForTheSameCheck() throws {
+        let storageURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+            .appendingPathComponent("answers.json", isDirectory: false)
+        let firstDate = Date(timeIntervalSince1970: 100)
+        let changedDate = Date(timeIntervalSince1970: 200)
+        let store = SecurityHygieneAnswerStore(
+            storageURL: storageURL,
+            now: { firstDate }
+        )
+
+        try store.record(answer: .yes, for: .passwordManager)
+        let changedStore = SecurityHygieneAnswerStore(
+            storageURL: storageURL,
+            now: { changedDate }
+        )
+        try changedStore.record(answer: .notSure, for: .passwordManager)
+
+        let reloadedStore = SecurityHygieneAnswerStore(storageURL: storageURL)
+        #expect(reloadedStore.answers.count == 1)
+        #expect(reloadedStore.answer(for: .passwordManager) == .notSure)
+        #expect(reloadedStore.answers.first?.updatedAt == changedDate)
+    }
+
+    @MainActor
+    @Test func answerStoreClearsOneGuidedAnswerLocally() throws {
+        let storageURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+            .appendingPathComponent("answers.json", isDirectory: false)
+        let store = SecurityHygieneAnswerStore(storageURL: storageURL)
+
+        try store.record(answer: .yes, for: .passwordManager)
+        try store.record(answer: .notSure, for: .twoFactorAuthentication)
+        try store.clearAnswer(for: .passwordManager)
+
+        let reloadedStore = SecurityHygieneAnswerStore(storageURL: storageURL)
+        #expect(reloadedStore.answer(for: .passwordManager) == nil)
+        #expect(reloadedStore.answer(for: .twoFactorAuthentication) == .notSure)
+        #expect(reloadedStore.answers.count == 1)
+    }
+
+    @MainActor
     @Test func unreadableAnswersCreateCalmLocalNote() throws {
         let storageURL = FileManager.default.temporaryDirectory
             .appendingPathComponent(UUID().uuidString, isDirectory: true)

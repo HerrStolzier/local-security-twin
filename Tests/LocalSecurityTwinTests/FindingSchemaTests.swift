@@ -245,6 +245,35 @@ struct FindingSchemaTests {
         #expect(vpnQuestion.boundary.contains("Rundumschutz"))
     }
 
+    @Test func dashboardPresentationUsesTheLatestSavedHygieneAnswerForAQuestion() throws {
+        let presentation = DashboardPresentation(
+            findings: [],
+            hygieneAnswers: [
+                SecurityHygieneAnswerRecord(
+                    checkID: .passwordManager,
+                    answer: .notSure,
+                    updatedAt: Date(timeIntervalSince1970: 200)
+                ),
+            ]
+        )
+
+        let userAnswered = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.userAnswered.rawValue })
+        #expect(userAnswered.checks.contains { $0.title == "Passwortmanager" && $0.status == "Noch unsicher" })
+
+        let question = try #require(presentation.guidedHygieneQuestions.first { $0.id == .passwordManager })
+        #expect(question.answer == .notSure)
+    }
+
+    @Test func dashboardPresentationShowsOpenHygieneQuestionAfterAnswerIsCleared() throws {
+        let presentation = DashboardPresentation(findings: [], hygieneAnswers: [])
+
+        let userAnswered = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.userAnswered.rawValue })
+        #expect(userAnswered.checks.contains { $0.title == "Passwortmanager" && $0.status == "Fragt dich noch" })
+
+        let question = try #require(presentation.guidedHygieneQuestions.first { $0.id == .passwordManager })
+        #expect(question.answer == nil)
+    }
+
     @Test func guidedHygieneQuestionsExplainWhySentoAsks() throws {
         let presentation = DashboardPresentation(findings: [])
 

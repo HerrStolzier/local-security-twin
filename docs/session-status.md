@@ -148,7 +148,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Kleiner Hygiene-UX-Feinschliff nach Sichtprüfung: Sidebar-Wert für Security-Hygiene lautet jetzt `Belege` statt `Plan`, und Nutzerantworten sprechen den Nutzer direkter an.
 - Erste lokale Hygiene-Zustände aus vorhandenen Findings abgeleitet: macOS-Update, Gatekeeper und SIP erscheinen in der Hygiene-Übersicht nur dann als `lokal gesehen`, wenn passende lokale Findings/Belege vorhanden sind.
 - SIP hat im Systemprofil-Finding jetzt einen eigenen stabilen Evidence-Eintrag `sip-status`, damit die Hygiene-Presentation nicht aus Fließtext raten muss.
-- Hygiene-Übersicht nach Screenshot-Feedback deutlich verständlicher gemacht: Der Bereich heißt jetzt `Sicherheitsgewohnheiten`, gruppiert nach `Kann Sento lokal sehen`, `Fragt Sento dich` und `Kann Sento noch nicht prüfen`, und zeigt pro Punkt klare Zustände wie `Erkannt`, `Noch nicht geprüft`, `Später als Frage` oder `Bleibt offen`.
+- Hygiene-Übersicht nach Screenshot-Feedback deutlich verständlicher gemacht: Der Bereich heißt jetzt `Sicherheitsgewohnheiten`, gruppiert nach `Kann Sento lokal sehen`, `Fragt Sento dich` und `Kann Sento noch nicht prüfen`, und zeigt pro Punkt klare Zustände wie `Erkannt`, `Noch nicht geprüft`, `Fragt dich noch` oder `Bleibt offen`.
 - Validierung am 2026-05-17: `swift test`, `./scripts/checks.sh`, `./scripts/build-app-bundle.sh` erfolgreich; App danach mit `open -n .build/app/LocalSecurityTwin.app` gestartet.
 - Erster geführter Hygiene-Fragen-Schnitt umgesetzt: Passwortmanager, 2FA und Recovery Codes erscheinen als `Erste Buddy-Fragen`; Antworten `Ja`, `Nein` und `Nicht sicher` werden lokal in `security-hygiene-answers.json` gespeichert und in der Hygiene-Übersicht als Nutzerangabe angezeigt.
 - Kaputte lokale Hygiene-Antwortdateien werden ruhig sichtbar gemacht; Sento fragt dann lieber erneut, statt alte Angaben still zu übernehmen.
@@ -176,14 +176,19 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Status für noch offene Nutzerangaben ist jetzt `Fragt dich noch` statt `Später als Frage`, damit die Hygiene-Übersicht weniger wie eine interne Checkliste wirkt.
 - Regressionstest ergänzt, der absichert, dass geführte Hygiene-Fragen ihren Fragegrund und ihre Grenze sichtbar aus der Presentation liefern.
 - Visuelle Prüfung am 2026-05-18 mit lokalem App-Bundle: normale Breite und ca. 620px Breite geprüft; kompakte Kopfzeile, Hygiene-Fragen und lokale Grenzen bleiben nutzbar und behaupten keine automatische Prüfung.
+- Nächstes Kapitelstück für Security-Hygiene umgesetzt: gespeicherte Buddy-Fragen-Antworten zeigen jetzt `Lokal gespeichert`, erklären den Änderungsweg und bieten `Antwort zurücknehmen` an.
+- `SecurityHygieneAnswerStore` kann einzelne Antworten lokal zurücknehmen; dabei werden keine Systemeinstellungen geändert und keine neuen Rechte benötigt.
+- Regressionstests für Antwort-Ersetzen, Antwort-Zurücknehmen und die offene Presentation nach zurückgenommener Antwort ergänzt.
+- Validierung am 2026-05-18: `swift test` erfolgreich mit 65 Tests; `./scripts/checks.sh` erfolgreich; `./scripts/build-app-bundle.sh` erfolgreich.
+- Visuelle Prüfung am 2026-05-18 mit lokalem App-Bundle: normale Breite, ca. 620px Breite und beantworteter Buddy-Fragen-Zustand geprüft; temporär gesetzte lokale Testantwort wurde danach wieder entfernt bzw. vorhandene Antwortdatei wiederhergestellt.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht plus begründete Buddy-Fragen, und Dashboard sowie Detailansicht reagieren jetzt deutlich robuster auf schmale Fenster.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht plus begründete, lokal änderbare Buddy-Fragen, und Dashboard sowie Detailansicht reagieren jetzt deutlich robuster auf schmale Fenster.
 
 ## Nächster konkreter Schritt
 
-Als nächsten kleinen Produktfluss die bewusste Antwort auf eine Buddy-Frage manuell prüfen: Antwort speichern, sichtbaren Zustand in der Hygiene-Übersicht ansehen und entscheiden, ob ein klarerer Änderungs-/Zurücknehmen-Flow nötig ist.
+Als nächsten kleinen Produktfluss prüfen, ob die beantworteten Buddy-Fragen in der Hygiene-Übersicht noch deutlicher priorisiert werden sollten, zum Beispiel mit einem kleinen `Noch offen`-/`Lokal beantwortet`-Filter oder einer kompakteren Zusammenfassung.
 
 ## Danach sinnvoll
 
@@ -209,7 +214,7 @@ Als nächsten kleinen Produktfluss die bewusste Antwort auf eine Buddy-Frage man
 - Der zweite Sensor ist der vorhandene Systemprofil-Sensor; weitere Sensoren sollten erst nach dem UX-Rote-Faden-Schnitt und der Update-Awareness-Planung folgen.
 - Aktuelles `.app`-Bundle ist für Entwicklung und lokale Spikes gut, aber noch kein distributionsnahes, notarized Build-Artefakt.
 - Die neue Phase-0-UI ist automatisiert über Presentation-/E2E-nahe Tests abgedeckt; echte visuelle macOS-UI-Automation fehlt weiterhin.
-- Security-Hygiene ist geplant, aber noch nicht implementiert; 2FA, Passwortmanager, VPN und Security-Tool-Status dürfen vorerst nicht als automatisch geprüft dargestellt werden.
+- Security-Hygiene ist als erster geführter Flow implementiert; 2FA, Passwortmanager, VPN und Security-Tool-Status dürfen weiterhin nicht als automatisch geprüft dargestellt werden.
 - Adversarial Review ist als Produkt-Routine dokumentiert, aber noch nicht als wiederholbare Vorlage oder Checkliste im Repo umgesetzt.
 - Kapitel 1 ist strukturell umgesetzt und vom Nutzer visuell positiv abgenommen; ein Screenshot-Artefakt wurde im Chat referenziert, war für Codex aber nicht lesbar.
 - Kapitel 2 muss die neue Struktur optisch deutlich stärker machen, damit sie nicht weiter wie ein schlichtes Admin-Tool wirkt.

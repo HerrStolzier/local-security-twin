@@ -45,6 +45,11 @@ final class SecurityHygieneAnswerStore: ObservableObject {
         try persistAnswers()
     }
 
+    func clearAnswer(for checkID: SecurityHygieneCheckID) throws {
+        answers.removeAll { $0.checkID == checkID }
+        try persistAnswers()
+    }
+
     private func loadAnswers() {
         guard fileManager.fileExists(atPath: storageURL.path) else {
             answers = []

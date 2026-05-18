@@ -8,6 +8,7 @@ struct ContentView: View {
     let lastUpdateAwarenessRefreshNote: String?
     let isRefreshingUpdateAwarenessSource: Bool
     let recordHygieneAnswer: (SecurityHygieneAnswer, SecurityHygieneCheckID) throws -> Void
+    let clearHygieneAnswer: (SecurityHygieneCheckID) throws -> Void
     let rememberCurrentStartupState: () -> Void
     let refreshUpdateAwarenessSource: () -> Void
     @State private var selection: Finding.ID?
@@ -130,6 +131,14 @@ struct ContentView: View {
                     hygieneAnswerError = nil
                 } catch {
                     hygieneAnswerError = "Diese Antwort konnte gerade nicht lokal gespeichert werden."
+                }
+            },
+            clearHygieneAnswer: { checkID in
+                do {
+                    try clearHygieneAnswer(checkID)
+                    hygieneAnswerError = nil
+                } catch {
+                    hygieneAnswerError = "Diese Antwort konnte gerade nicht lokal zurückgenommen werden."
                 }
             },
             rememberCurrentStartupState: {
@@ -355,6 +364,7 @@ private struct BuddyHomeView: View {
     let hygieneAnswerError: String?
     let openFinding: (Finding.ID) -> Void
     let recordHygieneAnswer: (SecurityHygieneAnswer, SecurityHygieneCheckID) -> Void
+    let clearHygieneAnswer: (SecurityHygieneCheckID) -> Void
     let rememberCurrentStartupState: () -> Void
     let refreshUpdateAwarenessSource: () -> Void
 
@@ -401,7 +411,8 @@ private struct BuddyHomeView: View {
                         questions: presentation.guidedHygieneQuestions,
                         persistenceNote: hygienePersistenceNote,
                         answerError: hygieneAnswerError,
-                        recordAnswer: recordHygieneAnswer
+                        recordAnswer: recordHygieneAnswer,
+                        clearAnswer: clearHygieneAnswer
                     )
 
                     ActivityFeedSection(
@@ -1288,6 +1299,7 @@ private struct GuidedHygieneQuestionSection: View {
     let persistenceNote: String?
     let answerError: String?
     let recordAnswer: (SecurityHygieneAnswer, SecurityHygieneCheckID) -> Void
+    let clearAnswer: (SecurityHygieneCheckID) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -1318,7 +1330,8 @@ private struct GuidedHygieneQuestionSection: View {
                 ForEach(questions) { question in
                     GuidedHygieneQuestionCard(
                         question: question,
-                        recordAnswer: recordAnswer
+                        recordAnswer: recordAnswer,
+                        clearAnswer: clearAnswer
                     )
                 }
             }
@@ -1329,6 +1342,7 @@ private struct GuidedHygieneQuestionSection: View {
 private struct GuidedHygieneQuestionCard: View {
     let question: GuidedHygieneQuestion
     let recordAnswer: (SecurityHygieneAnswer, SecurityHygieneCheckID) -> Void
+    let clearAnswer: (SecurityHygieneCheckID) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -1370,9 +1384,24 @@ private struct GuidedHygieneQuestionCard: View {
             }
 
             if let answer = question.answer {
-                Label(answer.statusTitle, systemImage: "checkmark.circle.fill")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.purple)
+                VStack(alignment: .leading, spacing: 8) {
+                    Label("Lokal gespeichert: \(answer.statusTitle)", systemImage: "checkmark.circle.fill")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.purple)
+
+                    Text("Zum Ändern wähle eine andere Antwort. Zum Zurücknehmen löscht Sento nur diese lokale Angabe.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Button("Antwort zurücknehmen") {
+                        clearAnswer(question.id)
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .tint(.secondary)
+                }
+                .padding(.top, 2)
             }
         }
         .padding(14)
@@ -1424,7 +1453,7 @@ private struct HygieneQuestionProgressNote: View {
             return "Noch keine Antwort gespeichert. Deine Antworten bleiben lokal und sind keine automatische Prüfung."
         }
 
-        return "\(answeredCount) von \(totalCount) Antworten lokal gespeichert. Du kannst später weiter ergänzen."
+        return "\(answeredCount) von \(totalCount) Antworten lokal gespeichert. Du kannst sie ändern oder zurücknehmen."
     }
 }
 
