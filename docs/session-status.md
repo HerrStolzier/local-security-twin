@@ -171,6 +171,7 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Visuelle Prüfung am 2026-05-17 mit lokalem App-Bundle und 620px Fensterbreite: `Hinweise ansehen` öffnet eine einspaltige Detailansicht mit `Schließen`-Aktion.
 - Detailinhalte für schmale Fenster nachgezogen: Innenabstand reduziert sich bei wenig Breite, Status-Pills, technische Faktenzeilen und Entscheidungsbuttons bekommen vertikale Ausweichlayouts.
 - Visuelle Prüfung am 2026-05-17 mit lokalem App-Bundle und 620px Fensterbreite: Die geöffnete Detailansicht wirkt ruhiger und drückt technische Zeilen nicht mehr in starre horizontale Reihen.
+- Validierung am 2026-05-18: `swift test`, `./scripts/checks.sh` und `./scripts/build-app-bundle.sh` erfolgreich; App bei ca. 620px Fensterbreite lokal geöffnet und geprüft.
 
 ## Aktueller Stand in einem Satz
 
