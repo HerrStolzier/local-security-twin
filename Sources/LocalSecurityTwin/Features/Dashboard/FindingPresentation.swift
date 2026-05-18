@@ -197,6 +197,7 @@ struct DashboardPresentation {
                 id: check.id,
                 title: check.title,
                 question: hygieneQuestionText(for: check.id),
+                reason: check.summary,
                 boundary: check.boundary,
                 answer: answer(for: check.id)
             )
@@ -383,7 +384,7 @@ struct DashboardPresentation {
         default:
             let status: String? = switch check.evidenceKind {
             case .userAnswered:
-                answer(for: check.id)?.statusTitle ?? "Später als Frage"
+                answer(for: check.id)?.statusTitle ?? "Fragt dich noch"
             case .notVerifiable:
                 "Bleibt offen"
             case .inferredFromLocalSignal:
@@ -570,6 +571,7 @@ struct GuidedHygieneQuestion: Identifiable, Equatable {
     let id: SecurityHygieneCheckID
     let title: String
     let question: String
+    let reason: String
     let boundary: String
     let answer: SecurityHygieneAnswer?
 }

@@ -1292,8 +1292,13 @@ private struct GuidedHygieneQuestionSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             SectionHeader(
-                title: "Erste Buddy-Fragen",
-                subtitle: "Deine Antworten bleiben lokal und sind Hinweise von dir, keine automatische Prüfung."
+                title: "Buddy-Fragen",
+                subtitle: "Sento fragt nur dort nach, wo er lokal nicht ehrlich prüfen kann."
+            )
+
+            HygieneQuestionProgressNote(
+                answeredCount: questions.filter { $0.answer != nil }.count,
+                totalCount: questions.count
             )
 
             if let persistenceNote {
@@ -1349,6 +1354,11 @@ private struct GuidedHygieneQuestionCard: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
+            Label(question.reason, systemImage: "lightbulb")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
             ViewThatFits(in: .horizontal) {
                 HStack(spacing: 8) {
                     answerButtons
@@ -1384,6 +1394,37 @@ private struct GuidedHygieneQuestionCard: View {
             .controlSize(.small)
             .tint(question.answer == answer ? .purple : .secondary)
         }
+    }
+}
+
+private struct HygieneQuestionProgressNote: View {
+    let answeredCount: Int
+    let totalCount: Int
+
+    var body: some View {
+        Label(progressText, systemImage: "lock.doc")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(.purple.opacity(0.12))
+            )
+    }
+
+    private var progressText: String {
+        if totalCount == 0 {
+            return "Aktuell gibt es keine offenen Buddy-Fragen."
+        }
+
+        if answeredCount == 0 {
+            return "Noch keine Antwort gespeichert. Deine Antworten bleiben lokal und sind keine automatische Prüfung."
+        }
+
+        return "\(answeredCount) von \(totalCount) Antworten lokal gespeichert. Du kannst später weiter ergänzen."
     }
 }
 

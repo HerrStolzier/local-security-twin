@@ -9,8 +9,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-17
-- Bereich: Dashboard-Responsiveness
+- Datum: 2026-05-18
+- Bereich: Security-Hygiene-Buddy-Fragen
 
 ## Zuletzt abgeschlossen
 
@@ -172,14 +172,18 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Detailinhalte für schmale Fenster nachgezogen: Innenabstand reduziert sich bei wenig Breite, Status-Pills, technische Faktenzeilen und Entscheidungsbuttons bekommen vertikale Ausweichlayouts.
 - Visuelle Prüfung am 2026-05-17 mit lokalem App-Bundle und 620px Fensterbreite: Die geöffnete Detailansicht wirkt ruhiger und drückt technische Zeilen nicht mehr in starre horizontale Reihen.
 - Validierung am 2026-05-18: `swift test`, `./scripts/checks.sh` und `./scripts/build-app-bundle.sh` erfolgreich; App bei ca. 620px Fensterbreite lokal geöffnet und geprüft.
+- Nächster Security-Hygiene-UX-Schnitt umgesetzt: Die geführten `Buddy-Fragen` erklären jetzt sichtbar, warum Sento fragt, und zeigen eine lokale Fortschrittsnotiz statt nur Antwortbuttons.
+- Status für noch offene Nutzerangaben ist jetzt `Fragt dich noch` statt `Später als Frage`, damit die Hygiene-Übersicht weniger wie eine interne Checkliste wirkt.
+- Regressionstest ergänzt, der absichert, dass geführte Hygiene-Fragen ihren Fragegrund und ihre Grenze sichtbar aus der Presentation liefern.
+- Visuelle Prüfung am 2026-05-18 mit lokalem App-Bundle: normale Breite und ca. 620px Breite geprüft; kompakte Kopfzeile, Hygiene-Fragen und lokale Grenzen bleiben nutzbar und behaupten keine automatische Prüfung.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht, und Dashboard sowie Detailansicht reagieren jetzt deutlich robuster auf schmale Fenster.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht plus begründete Buddy-Fragen, und Dashboard sowie Detailansicht reagieren jetzt deutlich robuster auf schmale Fenster.
 
 ## Nächster konkreter Schritt
 
-Dashboard und Detailansicht erneut manuell in mehreren Fensterbreiten prüfen; falls nichts mehr bricht, mit dem nächsten Produktkapitel statt weiterer Responsive-Feinarbeit weitermachen.
+Als nächsten kleinen Produktfluss die bewusste Antwort auf eine Buddy-Frage manuell prüfen: Antwort speichern, sichtbaren Zustand in der Hygiene-Übersicht ansehen und entscheiden, ob ein klarerer Änderungs-/Zurücknehmen-Flow nötig ist.
 
 ## Danach sinnvoll
 

@@ -186,9 +186,9 @@ struct FindingSchemaTests {
 
         let userAnswered = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.userAnswered.rawValue })
         #expect(userAnswered.title == "Fragt Sento dich")
-        #expect(userAnswered.checks.contains { $0.title == "2FA für wichtige Konten" && $0.status == "Später als Frage" })
-        #expect(userAnswered.checks.contains { $0.title == "Passwortmanager" && $0.status == "Später als Frage" })
-        #expect(userAnswered.checks.contains { $0.title == "VPN-Sinnhaftigkeit" && $0.status == "Später als Frage" })
+        #expect(userAnswered.checks.contains { $0.title == "2FA für wichtige Konten" && $0.status == "Fragt dich noch" })
+        #expect(userAnswered.checks.contains { $0.title == "Passwortmanager" && $0.status == "Fragt dich noch" })
+        #expect(userAnswered.checks.contains { $0.title == "VPN-Sinnhaftigkeit" && $0.status == "Fragt dich noch" })
 
         let notVerifiable = try #require(presentation.hygieneOverviewItems.first { $0.id == SecurityHygieneEvidenceKind.notVerifiable.rawValue })
         #expect(notVerifiable.title == "Kann Sento noch nicht prüfen")
@@ -241,7 +241,16 @@ struct FindingSchemaTests {
 
         let vpnQuestion = try #require(presentation.guidedHygieneQuestions.first { $0.id == .vpnUsefulness })
         #expect(vpnQuestion.question.contains("konkreten VPN-Grund"))
+        #expect(vpnQuestion.reason.contains("Kontextfrage"))
         #expect(vpnQuestion.boundary.contains("Rundumschutz"))
+    }
+
+    @Test func guidedHygieneQuestionsExplainWhySentoAsks() throws {
+        let presentation = DashboardPresentation(findings: [])
+
+        let passwordManager = try #require(presentation.guidedHygieneQuestions.first { $0.id == .passwordManager })
+        #expect(passwordManager.reason.contains("bewusste Nutzerangabe"))
+        #expect(passwordManager.boundary.contains("keine Passwortqualität"))
     }
 
     @Test func dashboardPresentationHighlightsUpdateAwarenessAfterRefresh() throws {
