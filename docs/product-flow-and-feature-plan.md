@@ -48,6 +48,27 @@ Sie kann nicht jede Ebene schützen:
 Die App soll ehrlich bleiben:
 Sie sieht nicht alles. Aber was sie sieht, soll sie sehr gut erklären und mit aktuellen Bedrohungsdaten verbinden.
 
+## Codex-Integration
+
+Codex App Server und Codex SDK werden vorerst nicht in Sento Guard eingebaut.
+
+Begründung:
+
+- Sento Guard soll im MVP lokal, verständlich und rechtearm bleiben.
+- Ein eingebetteter Agent-Server würde neue Auth-, Cloud-, Datei-, Shell- und Approval-Flächen öffnen.
+- Normale Nutzer brauchen zuerst klare lokale Hinweise, Hygiene-Flows und sichere nächste Schritte, keinen eingebauten Coding-Agenten.
+- Codex kann als internes Entwicklungs- und Review-Werkzeug nützlich sein, aber nicht als Produktbestandteil.
+
+Spätere sinnvolle Nutzung:
+
+- wiederholbarer interner Guardrail-Review für Commits
+- Prüfung auf falsche Sicherheitsversprechen
+- Prüfung auf neue macOS-Rechte oder stille Systemänderungen
+- Doku- und Übergabe-Konsistenzchecks
+
+Regel:
+Erst einen manuellen Codex-Review-Workflow beweisen, dann über SDK-Automation nachdenken.
+
 ## Sicherheitsmodell in Schichten
 
 ### 1. Gerät und Firmware

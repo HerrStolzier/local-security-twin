@@ -9,8 +9,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-18
-- Bereich: Security-Hygiene-Buddy-Fragen
+- Datum: 2026-05-19
+- Bereich: Codex-Integration-Entscheidung
 
 ## Zuletzt abgeschlossen
 
@@ -181,6 +181,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Regressionstests für Antwort-Ersetzen, Antwort-Zurücknehmen und die offene Presentation nach zurückgenommener Antwort ergänzt.
 - Validierung am 2026-05-18: `swift test` erfolgreich mit 65 Tests; `./scripts/checks.sh` erfolgreich; `./scripts/build-app-bundle.sh` erfolgreich.
 - Visuelle Prüfung am 2026-05-18 mit lokalem App-Bundle: normale Breite, ca. 620px Breite und beantworteter Buddy-Fragen-Zustand geprüft; temporär gesetzte lokale Testantwort wurde danach wieder entfernt bzw. vorhandene Antwortdatei wiederhergestellt.
+- Codex-App-Server-/SDK-Recherche als Produktentscheidung abgehakt: nicht in Sento Guard einbauen; Codex bleibt vorerst internes Entwicklungs- und Review-Werkzeug.
+- Produktplan und dauerhafte Learnings dokumentieren jetzt, dass ein eingebetteter Codex-Agent für den MVP zu viel Cloud-, Auth-, Rechte- und Vertrauensfläche öffnen würde.
 
 ## Aktueller Stand in einem Satz
 
@@ -188,7 +190,7 @@ Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Gua
 
 ## Nächster konkreter Schritt
 
-Als nächsten kleinen Produktfluss prüfen, ob die beantworteten Buddy-Fragen in der Hygiene-Übersicht noch deutlicher priorisiert werden sollten, zum Beispiel mit einem kleinen `Noch offen`-/`Lokal beantwortet`-Filter oder einer kompakteren Zusammenfassung.
+Zurück zum Produktplan: Als nächsten kleinen Produktfluss prüfen, ob die beantworteten Buddy-Fragen in der Hygiene-Übersicht noch deutlicher priorisiert werden sollten, zum Beispiel mit einem kleinen `Noch offen`-/`Lokal beantwortet`-Filter oder einer kompakteren Zusammenfassung.
 
 ## Danach sinnvoll
 
