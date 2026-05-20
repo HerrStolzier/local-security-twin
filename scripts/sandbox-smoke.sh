@@ -50,7 +50,9 @@ cat > "$BASELINE_DIR/startup-item-baseline.json" <<'JSON'
 JSON
 
 cleanup() {
-    pkill -f "$EXECUTABLE_PATH" >/dev/null 2>&1 || true
+    if [[ -n "${APP_PID:-}" ]]; then
+        kill "$APP_PID" >/dev/null 2>&1 || true
+    fi
 }
 
 trap cleanup EXIT

@@ -13,8 +13,6 @@ cd "$REPO_ROOT"
 
 "$SCRIPT_DIR/build-app-bundle.sh"
 
-pkill -f "$EXECUTABLE_PATH" >/dev/null 2>&1 || true
-
 mkdir -p "$LAUNCH_AGENTS_DIR" "$BASELINE_DIR"
 
 cat > "$LAUNCH_AGENTS_DIR/com.local-security-twin.demo-new-startup-item.plist" <<'PLIST'
@@ -48,6 +46,6 @@ echo "Starting Local Security Twin with prepared startup diff."
 echo "Temporary HOME: $DEMO_HOME"
 echo "Look for: com.local-security-twin.demo-new-startup-item.plist"
 echo "Expected UI: one visible startup change and the action 'Als erwartet merken'."
-echo "Stop it with: pkill -f '$EXECUTABLE_PATH'"
+echo "Stop it with Ctrl-C in this terminal, or close the app window."
 
 HOME="$DEMO_HOME" "$EXECUTABLE_PATH"

@@ -9,11 +9,13 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-19
-- Bereich: Codex-Integration-Entscheidung
+- Datum: 2026-05-20
+- Bereich: Security-Scan-Follow-up
 
 ## Zuletzt abgeschlossen
 
+- Repository-weiter Codex-Security-Scan abgeschlossen: keine reportable Findings; Scan-Bundle liegt unter `/tmp/codex-security-scans/local-security-twin/919bcc4_20260520T101232Z`
+- Security-Scan-Follow-up umgesetzt: Smoke-/Demo-Skripte nutzen kein breites `pkill -f` mehr, sondern beenden nur den gestarteten Prozess per PID oder erklären manuelles Stoppen
 - lokales Consent-/Policy-Modell mit Speicherung und Reset-Logik gebaut
 - Regressionstests ergänzt, damit kaputte lokale Policy- und SOFA-Cache-Dateien nicht still verschwinden, sondern als ruhige Sichtbarkeitsgrenze sichtbar bleiben
 - normalisiertes Findings-Schema mit Severity, Confidence, Evidence und Recommendations gebaut
