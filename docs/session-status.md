@@ -9,11 +9,13 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-20
-- Bereich: Security-Scan-Follow-up
+- Datum: 2026-05-21
+- Bereich: Vibe Workflow Guard
 
 ## Zuletzt abgeschlossen
 
+- Vibe Workflow Guard eingerichtet: `WORKFLOWS.md`, `CHECKS.md`, `KNOWN_ERRORS.md`, `scripts/workflow_check.py` und `scripts/agent_finish.py` angelegt und an das SwiftPM-/macOS-Projekt angepasst
+- `AGENTS.md` erweitert: nach nicht-trivialen Änderungen soll `python3 scripts/agent_finish.py` laufen, und Guard-Dateien werden bei Workflow-Änderungen mitgepflegt
 - Repository-weiter Codex-Security-Scan abgeschlossen: keine reportable Findings; Scan-Bundle liegt unter `/tmp/codex-security-scans/local-security-twin/919bcc4_20260520T101232Z`
 - Security-Scan-Follow-up umgesetzt: Smoke-/Demo-Skripte nutzen kein breites `pkill -f` mehr, sondern beenden nur den gestarteten Prozess per PID oder erklären manuelles Stoppen
 - lokales Consent-/Policy-Modell mit Speicherung und Reset-Logik gebaut

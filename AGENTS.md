@@ -104,10 +104,27 @@ Ein Schritt gilt in diesem Projekt erst dann als sauber abgeschlossen, wenn:
 2. die passenden Checks gelaufen sind
 3. `docs/session-status.md` auf den neuen Stand gebracht wurde
 4. bei neuen dauerhaften Erkenntnissen auch `docs/project-learnings.md` aktualisiert wurde
+5. nach nicht-trivialen Änderungen der lokale Workflow Guard gelaufen ist:
+
+   ```bash
+   python3 scripts/agent_finish.py
+   ```
 
 Wenn Zeit knapp ist, wird lieber der fachliche Schnitt kleiner gehalten.
 Wichtig ist nicht, möglichst viel in einer Session zu schaffen.
 Wichtig ist, dass nach jedem Stopp ein anderer Agent sauber weiterarbeiten kann.
+
+## Vibe Workflow Guard
+
+Dieses Projekt nutzt den lokalen Vibe Workflow Guard.
+
+- `WORKFLOWS.md` beschreibt startbare und prüfbare Projekt-Workflows.
+- `CHECKS.md` beschreibt Standard- und Spezialchecks.
+- `KNOWN_ERRORS.md` sammelt verstandene wiederkehrende Fehlerbilder.
+- `scripts/workflow_check.py` prüft die Guard-Struktur.
+- `scripts/agent_finish.py` führt Guard-Check plus Projektstandard `./scripts/checks.sh` aus.
+
+Wenn Startbefehle, Outputs, Abhängigkeiten oder bekannte Fehlerfälle geändert werden, müssen die Guard-Dateien im selben Arbeitsschritt aktualisiert werden.
 
 ## Nicht aus Versehen in die falsche Richtung laufen
 
