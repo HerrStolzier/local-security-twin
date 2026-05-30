@@ -9,8 +9,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-21
-- Bereich: Vibe Workflow Guard
+- Datum: 2026-05-30
+- Bereich: Defensive Review und Threat Context
 
 ## Zuletzt abgeschlossen
 
@@ -187,14 +187,18 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Visuelle Prüfung am 2026-05-18 mit lokalem App-Bundle: normale Breite, ca. 620px Breite und beantworteter Buddy-Fragen-Zustand geprüft; temporär gesetzte lokale Testantwort wurde danach wieder entfernt bzw. vorhandene Antwortdatei wiederhergestellt.
 - Codex-App-Server-/SDK-Recherche als Produktentscheidung abgehakt: nicht in Sento Guard einbauen; Codex bleibt vorerst internes Entwicklungs- und Review-Werkzeug.
 - Produktplan und dauerhafte Learnings dokumentieren jetzt, dass ein eingebetteter Codex-Agent für den MVP zu viel Cloud-, Auth-, Rechte- und Vertrauensfläche öffnen würde.
+- Externes Skill-Repo `mukul975/Anthropic-Cybersecurity-Skills` geprüft und als interne Inspirationsquelle eingeordnet, nicht als Runtime-Abhängigkeit oder ungefiltertes Produkt-Skill-Pack.
+- Wiederholbare defensive Review-Vorlage in `docs/adversarial-review-template.md` angelegt.
+- Ersten defensiven Review für sichtbare Autostart-Hinweise in `docs/adversarial-review-startup-autostart.md` dokumentiert.
+- Kleinen `ThreatContext`-Plan in `docs/threat-context-plan.md` angelegt, damit SOFA-/CVE-Kontext später quellenbewusst, lokal und ohne Schutzscore wachsen kann.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht plus begründete, lokal änderbare Buddy-Fragen, und Dashboard sowie Detailansicht reagieren jetzt deutlich robuster auf schmale Fenster.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht plus begründete, lokal änderbare Buddy-Fragen, Dashboard und Detailansicht reagieren robuster auf schmale Fenster, und defensive Reviews plus Threat-Context-Plan sind jetzt als nächster Produktarbeitsrahmen dokumentiert.
 
 ## Nächster konkreter Schritt
 
-Zurück zum Produktplan: Als nächsten kleinen Produktfluss prüfen, ob die beantworteten Buddy-Fragen in der Hygiene-Übersicht noch deutlicher priorisiert werden sollten, zum Beispiel mit einem kleinen `Noch offen`-/`Lokal beantwortet`-Filter oder einer kompakteren Zusammenfassung.
+Zurück zum Produktplan: Als nächsten kleinen Produktfluss prüfen, ob zuerst der dokumentierte `ThreatContext`-Schnitt für Update Awareness oder die bessere Priorisierung beantworteter Buddy-Fragen in der Hygiene-Übersicht umgesetzt werden soll.
 
 ## Danach sinnvoll
 
@@ -230,9 +234,12 @@ Zurück zum Produktplan: Als nächsten kleinen Produktfluss prüfen, ob die bean
 - Sento braucht später deutlich bessere Illustration und Animation, näher am Mockup; kurzfristig wurde nur die schlechte Überlagerung im aktuellen SwiftUI-Prototyp entschärft.
 - Die neuen Missionen `Digitaler Fußabdruck` und `App-Risiken prüfen` sind bewusst geplant/visuell vorhanden, aber noch keine echten Sensoren.
 - Update-Awareness hat jetzt eine sichtbare UI-Aktion für den SOFA-Netzwerkabruf; echte macOS-UI-Automation für den Klick fehlt weiterhin.
+- Defensive Reviews sind jetzt als Vorlage dokumentiert, aber noch nicht als Pflichtcheck im lokalen Workflow automatisiert.
+- `ThreatContext` ist geplant, aber noch kein Code-Modell.
 
 ## Letzte Validierung
 
+- `python3 scripts/agent_finish.py` am 2026-05-30 nach Defensive-Review-/Threat-Context-Doku; Guard-Check, `swift build`, 65 Tests, Security Checks und E2E-Smoke erfolgreich.
 - `swift test` am 2026-05-16 nach Kapitel 2b
 - `./scripts/checks.sh` am 2026-05-16 nach Kapitel 2b
 - `./scripts/app-bundle-smoke.sh` am 2026-05-16 nach Kapitel 2b

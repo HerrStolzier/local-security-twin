@@ -51,7 +51,20 @@ Jede relevante Funktion soll eine kurze Antwort haben:
 - **Wie begrenzen wir das?**
 - **Welche Rechte braucht die Funktion wirklich?**
 - **Welche Nutzerentscheidung ist nötig?**
-- **Was darf die Funktion ausdruecklich nicht tun?**
+- **Was darf die Funktion ausdrücklich nicht tun?**
+
+## Wiederholbare Vorlage
+
+Für neue Sensoren und größere Produktfunktionen wird die Review-Frage ab jetzt in einer festen Vorlage beantwortet:
+
+- `docs/adversarial-review-template.md`
+
+Der erste nachgezogene Review für den vorhandenen Autostart-Sensor liegt hier:
+
+- `docs/adversarial-review-startup-autostart.md`
+
+Die Vorlage ist bewusst defensiv.
+Sie soll aus Angreiferdenken nur sichere Outputs ableiten: read-only Sensorideen, Checklisten, Guided Actions, dokumentierte Grenzen oder die Entscheidung, etwas noch nicht zu bauen.
 
 ## Sicherheitsgrenzen für Angreiferdenken
 

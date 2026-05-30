@@ -93,6 +93,18 @@ Den Flow visuell in der App prüfen und entscheiden, ob Update-Awareness als eig
 - Netzwerkfehler sind kein Risiko-Finding, sondern ein ruhiger Hinweis: Der Quellenstand konnte nicht aktualisiert werden.
 - SOFA ist eine kuratierte externe Quelle, aber nicht Apple selbst; Apple-Advisories bleiben als Referenz wichtig.
 
+## Threat Context
+
+Update Awareness ist der erste sinnvolle Kandidat für einen kleinen `ThreatContext`-Baustein.
+
+Der separate Plan liegt in `docs/threat-context-plan.md`.
+Wichtig für diesen Sensor:
+
+- SOFA bleibt Zusatzquelle, nicht alleinige Wahrheit.
+- Apple Security Releases bleiben die Primärreferenz im technischen Detail.
+- aktiv ausgenutzte CVEs dürfen die Wichtigkeit erhöhen, aber nicht als Beweis für eine lokale Kompromittierung erscheinen.
+- jeder externe Quellenstand braucht Abrufzeitpunkt, sichtbare Grenze und Cache-Verhalten.
+
 ## Abnahmekriterien
 
 - Die App kann ohne Netzwerk mit einem alten Cache sinnvoll starten.

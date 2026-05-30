@@ -69,6 +69,18 @@ Spätere sinnvolle Nutzung:
 Regel:
 Erst einen manuellen Codex-Review-Workflow beweisen, dann über SDK-Automation nachdenken.
 
+## Defensive Review und Threat Context
+
+Sento Guard nutzt externe Security-Playbooks und Frameworks nur als interne Orientierung, nicht als Produktmotor.
+
+Für dieses Projekt heißt das:
+
+- defensive Reviews werden mit `docs/adversarial-review-template.md` wiederholbar gemacht
+- der erste konkrete Review für sichtbare Autostart-Hinweise liegt in `docs/adversarial-review-startup-autostart.md`
+- externe Bedrohungsinformationen werden über `docs/threat-context-plan.md` klein, lokal und quellenbewusst geplant
+- MITRE-, D3FEND-, SSVC-, EPSS- oder KEV-Bezüge helfen bei Priorisierung, dominieren aber nicht die Nutzeroberfläche
+- keine offensiven Playbooks, Exploit-Skripte oder Enterprise-SOC-Automation werden in die App übernommen
+
 ## Sicherheitsmodell in Schichten
 
 ### 1. Gerät und Firmware
