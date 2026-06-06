@@ -76,6 +76,33 @@ Nicht ausreichend:
 - nur CVE-Schwere ohne lokale Betroffenheit
 - nur Tool-Präsenz als Sicherheitsbeweis
 
+## Spätere Produktanwendung: AI-/MCP- und Developer-Tool-Kontext
+
+Schwachstellen wie BadHost zeigen eine Produktgrenze, die für Sento Guard wichtig bleibt: Externe Sicherheitsmeldungen sind erst dann nutzbar, wenn die App eine lokale Betroffenheit sauber belegen kann.
+
+Erst nach einer lokalen Inventur sinnvoll:
+
+1. konfigurierte AI-/MCP-/Developer-Tools lokal sehen
+2. Transportart unterscheiden, zum Beispiel `stdio`, `localhost` oder Netzwerkdienst
+3. lauschende Adresse und erreichbare Oberfläche nur read-only einordnen
+4. relevante Framework- oder Dependency-Version lokal belegen
+5. deklarierte Tool-Fähigkeiten von effektiv sichtbaren Berechtigungen trennen
+6. Quelle, Abrufzeitpunkt, Confidence und lokale Sichtgrenze anzeigen
+
+Nicht ausreichend:
+
+- Social-Media-Post oder CVE-Schwere ohne lokalen Bezug
+- Paket- oder Tool-Name ohne Version und konkrete Konfiguration
+- MCP-Tool-Beschreibung oder `readOnlyHint` als Sicherheitsbeweis
+- ein lauschender Port ohne Prozess-, Pfad- oder Konfigurationsbezug
+
+Nicht bauen:
+
+- automatische Exploit-Prüfung gegen lokale oder fremde MCP-Server
+- Remote-Scanning fremder Dienste
+- offensive Validierung von Auth-Bypasses
+- stilles Deaktivieren, Blockieren oder Entfernen von Developer-Tools
+
 ## Interne Framework-Mappings
 
 Frameworks wie MITRE ATT&CK, D3FEND, NIST CSF, SSVC, EPSS und KEV können helfen, Sensorideen und Priorität intern zu strukturieren.

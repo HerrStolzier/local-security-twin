@@ -9,8 +9,8 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 
 ## Letztes Update
 
-- Datum: 2026-05-30
-- Bereich: Defensive Review und Threat Context
+- Datum: 2026-06-06
+- Bereich: AI-/MCP-Developer-Tool-Grenze und Threat Context
 
 ## Zuletzt abgeschlossen
 
@@ -191,10 +191,11 @@ Ein neuer Agent soll nach `AGENTS.md` immer diese Datei lesen, bevor er weiterar
 - Wiederholbare defensive Review-Vorlage in `docs/adversarial-review-template.md` angelegt.
 - Ersten defensiven Review für sichtbare Autostart-Hinweise in `docs/adversarial-review-startup-autostart.md` dokumentiert.
 - Kleinen `ThreatContext`-Plan in `docs/threat-context-plan.md` angelegt, damit SOFA-/CVE-Kontext später quellenbewusst, lokal und ohne Schutzscore wachsen kann.
+- BadHost-/MCP-Einordnung als Produktgrenze dokumentiert: Sento prüft aktuell keine lokalen AI-/MCP-Konfigurationen, lauschenden Developer-Dienste oder Framework-CVEs; spätere Sensoren müssen deklarierte Tool-Fähigkeiten von effektiv sichtbaren lokalen Belegen trennen.
 
 ## Aktueller Stand in einem Satz
 
-Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht plus begründete, lokal änderbare Buddy-Fragen, Dashboard und Detailansicht reagieren robuster auf schmale Fenster, und defensive Reviews plus Threat-Context-Plan sind jetzt als nächster Produktarbeitsrahmen dokumentiert.
+Die sieben Sprints sind umgesetzt; Kapitel 1 `Buddy Home`, Kapitel 2b `Sento Guard Shell` und Kapitel 3 `Update Awareness` sind als Prototyp-Schnitte ausreichend, Kapitel 4 `Security Hygiene` hat eine freundlichere Übersicht plus begründete, lokal änderbare Buddy-Fragen, Dashboard und Detailansicht reagieren robuster auf schmale Fenster, defensive Reviews plus Threat-Context-Plan sind als nächster Produktarbeitsrahmen dokumentiert, und AI-/MCP-Developer-Tool-Risiken sind vorerst als ehrliche Sichtgrenze statt als Feature-Scope eingeordnet.
 
 ## Nächster konkreter Schritt
 
@@ -239,6 +240,7 @@ Zurück zum Produktplan: Als nächsten kleinen Produktfluss prüfen, ob zuerst d
 
 ## Letzte Validierung
 
+- `python3 scripts/agent_finish.py` am 2026-06-06 zum Abschluss der BadHost-/MCP-Produktgrenzen-Doku; Guard-Check, `swift build`, 65 Tests, Security Checks und E2E-Smoke erfolgreich.
 - `python3 scripts/agent_finish.py` am 2026-05-30 nach Defensive-Review-/Threat-Context-Doku; Guard-Check, `swift build`, 65 Tests, Security Checks und E2E-Smoke erfolgreich.
 - `swift test` am 2026-05-16 nach Kapitel 2b
 - `./scripts/checks.sh` am 2026-05-16 nach Kapitel 2b

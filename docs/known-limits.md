@@ -97,6 +97,19 @@ Sie soll nicht:
 - versteckte Änderungen vornehmen
 - mehr Systemzugriff verlangen als nötig
 
+## Lokale AI-/MCP-/Developer-Tool-Grenzen
+
+Die App prüft aktuell keine lokalen AI- oder MCP-Konfigurationen, keine lauschenden Developer-Dienste und keine Framework-CVEs installierter Servertools.
+
+Was das praktisch bedeutet:
+
+- Sento kann aktuell nicht beurteilen, ob ein lokaler MCP-Server, ein FastAPI-/Starlette-Dienst, ein vLLM-/LiteLLM-Proxy oder ein ähnliches Developer-Tool von einer konkreten Schwachstelle betroffen ist.
+- Eine Tool-Beschreibung wie `read-only`, `summarize` oder `safe` wäre für sich allein kein Sicherheitsbeweis.
+- Ein späterer Sensor müsste deklarierte Fähigkeiten von effektiv sichtbaren Belegen trennen: Konfigurationsdateien, Transportart, lauschende Adresse, Dependency-Versionen, Berechtigungen und nachvollziehbare Quelle.
+- Social-Media-Warnungen oder CVE-Schwere allein dürfen kein lokales Finding erzeugen, solange keine lokale Betroffenheit sichtbar ist.
+
+Spätere Prüfungen in diesem Bereich brauchen eine eigene Rechte-, Datenschutz-, Fehlalarm- und Safe-Mode-Bewertung.
+
 ## Security-Hygiene-Grenzen
 
 Einige wichtige Schutzthemen sind für normale Nutzer sehr relevant, aber lokal nicht immer sicher automatisch prüfbar.
