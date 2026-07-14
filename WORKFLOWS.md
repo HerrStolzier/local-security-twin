@@ -1,5 +1,10 @@
 # Workflow Register
 
+> **Zweck:** Register des Sento-Guard-Workflows fuer lokale macOS-Security-Pruefung.
+> **Scope:** Start, Input, Output und Pruefung des lokalen macOS-Checks.
+> **Suchbegriffe:** macos, security, sento, guard, policy, sofa, notarization, sandbox
+> **Stand:** 2026-07-14
+
 ## Sento Guard Local macOS Workflow
 
 ### Zweck
@@ -34,7 +39,7 @@ open -n .build/app/LocalSecurityTwin.app
 
 ### Wichtige Dateien
 
-- `AGENTS.md`: stabile Projektregeln und Arbeitsweise für Agenten
+- `CLAUDE.md`: stabile Projektregeln und Arbeitsweise für Agenten (`AGENTS.md` verweist nur noch darauf)
 - `docs/session-status.md`: aktueller Übergabestand nach jedem abgeschlossenen Schritt
 - `docs/project-learnings.md`: dauerhafte Erkenntnisse
 - `scripts/checks.sh`: Standardcheck für Build, Tests, Security-Checks und E2E-Smokes

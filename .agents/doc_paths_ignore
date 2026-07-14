@@ -1,0 +1,3 @@
+# Swift-Build-Output, entsteht erst bei swift build
+.build/
+.build/app/LocalSecurityTwin.app

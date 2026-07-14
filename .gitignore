@@ -3,4 +3,7 @@
 .swiftpm/
 Package.resolved
 DerivedData/
-.agents/
+.agents/*
+!.agents/.gitignore
+!.agents/project_check
+!.agents/doc_paths_ignore

@@ -1,5 +1,10 @@
 # Workflow Checks
 
+> **Zweck:** Checks fuer local-security-twin: Standardabschluss und direkte Projektchecks.
+> **Scope:** scripts/checks.sh als technischer Projektcheck.
+> **Suchbegriffe:** checks.sh, projektcheck, standardabschluss, pflichtdateien
+> **Stand:** 2026-07-14
+
 ## Standard Check
 
 Nach nicht-trivialen Änderungen:
@@ -51,3 +56,16 @@ Ein Agent soll nach abgeschlossenen Änderungen:
 - `docs/project-learnings.md` nur bei dauerhaften Erkenntnissen aktualisieren
 - Guard-Dokumente aktualisieren, wenn Startbefehle, Outputs, Abhängigkeiten oder Fehlerfälle geändert wurden
 - Fehlschläge konkret berichten, statt Erfolg zu behaupten
+
+## Standardabschluss
+
+```bash
+python3 scripts/agent_finish.py --auto-claims
+```
+
+Fuehrt aus:
+1. Struktur-Guard (`scripts/workflow_check.py`) - kanonisch, in allen Repos identisch
+2. Technischer Projektcheck aus `.agents/project_check`
+3. Claim-Check (`scripts/claim_check.py`)
+
+Exit 2 blockiert ueber den Stop-Hook den Abschluss.

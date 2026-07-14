@@ -1,5 +1,10 @@
 # Known Errors
 
+> **Zweck:** Bekannte Fehler des Security-Twins mit Symptom, Ursache und Loesung.
+> **Scope:** Lokale Policy-/Cache-Dateien und riskante Smoke-Skripte.
+> **Suchbegriffe:** policy, sofa, cache, pkill, smoke, korrupt
+> **Stand:** 2026-07-14
+
 ## Kaputte lokale Policy-Datei
 
 ### Symptom
